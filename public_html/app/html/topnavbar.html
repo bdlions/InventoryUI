@@ -1,0 +1,18 @@
+<nav *ngIf='showNavBar' class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">RingMarket</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li [ngClass]="{'active': activeMenu == 'home' }">
+                <a href="#" (click)="goHome($event)" >Home</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'products' }">
+                <a href="#" (click)="goProduct($event)">Products</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'profile' }">
+                <a href="#" (click)="goProfile($event)">Profile</a>
+            </li>
+        </ul>
+    </div>
+</nav>

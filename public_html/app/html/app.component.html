@@ -1,0 +1,53 @@
+
+<div class="vertical-center col-md-4">
+    <div class="well">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Login Type:</label>
+                <div class="col-sm-10">
+                    <!--<input type="email" class="form-control" id="email" placeholder="Enter email">-->
+                    <!--<div class="btn-group" dropdown>-->
+                    <!--                            <button dropdownToggle type="button" class="btn dropdown-toggle">
+                                                    Select Login Type<span class="caret"></span>
+                                                </button>-->
+                    <!--                            <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                                    <li role="menuitem"><a class="dropdown-item" href="#">Seller</a></li>
+                                                    <li role="menuitem"><a class="dropdown-item" href="#">Buyer</a></li>
+                                                    <li role="menuitem"><a class="dropdown-item" href="#">Ring store agent</a></li>
+                                                </ul>-->
+                    <select class="selectpicker btn dropdown-toggle" #selectedUserIndex (change)="getSelectedUsers(selectedUserIndex.value)">
+                        <option class="dropdown-item" *ngFor="let userType of userTypes; let i=index" [value]="i" value="{{userType.type}}"><span class="caret">{{userType.typeName}}</span></option>
+                    </select>
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="pwd">Login User:</label>
+                <div class="col-sm-10"> 
+                    <!--                        <div class="btn-group" dropdown>
+                                                <button dropdownToggle type="button" class="btn dropdown-toggle">
+                                                    Select Login User<span class="caret"></span>
+                                                </button>
+                                                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                                    <li role="menuitem"><a class="dropdown-item" href="#">User 1</a></li>
+                                                    <li role="menuitem"><a class="dropdown-item" href="#">User 2</a></li>
+                                                    <li role="menuitem"><a class="dropdown-item" href="#">User 3</a></li>
+                                                </ul>
+                                            </div>-->
+                    <select class="selectpicker btn dropdown-toggle" #selectedUser>
+                        <option class="dropdown-item" *ngFor="let user of selectedUsers" value="{{user.userId}}">
+                    <span class="caret">{{user.userName}}</span>
+                    </option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="form-group"> 
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default" (click)="goHome($event)" >Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+</div>

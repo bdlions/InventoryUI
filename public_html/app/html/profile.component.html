@@ -1,3 +1,32 @@
 <div style="color:white">
     profile
 </div>
+
+<div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+        <button type="button" class="btn btn-default" (click)="showModal($event)" >Click Me</button>
+    </div>
+</div>
+
+<div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+        <button type="button" class="btn btn-default" (click)="pingServer($event)" >Ping</button>
+    </div>
+</div>
+
+<div bsModal #sampleModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left" style="color: #FFF;">Account Settings</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                Hello World!
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>

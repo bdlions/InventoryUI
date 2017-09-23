@@ -5,9 +5,10 @@
  */
 
 
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
 import {MarketAPI} from './services/MarketAPI.service';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     selector: 'app',
@@ -15,13 +16,28 @@ import {MarketAPI} from './services/MarketAPI.service';
 })
 
 export class ProfileComponent { 
+    @ViewChild('sampleModal') public sampleModal:ModalDirective;
     
-    constructor(
-        private marketAPI: MarketAPI, 
-        private router: Router
-    ) {}
+    constructor(private marketAPI: MarketAPI, private router: Router) 
+    {
+        setInterval(() => { this.sampleModal.hide(); }, 1000 * 20);
+        
+        
+    }
+    
+    public hideChildModal(): void {
+        this.sampleModal.hide();
+    }
 
     ngOnInit() {
+        
+    }
+    
+    public showModal(event: Event){
+        this.sampleModal.show();
+    }
+    
+    public pingServer(event: Event){
         
     }
     

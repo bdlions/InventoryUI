@@ -8,6 +8,9 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import {MarketAPI} from './services/MarketAPI.service';
+import { FileUploader } from 'ng2-file-upload';
+
+const URL = window.SITE_URL + 'FileUploadServlet';
 
 @Component({
     selector: 'app',
@@ -15,11 +18,14 @@ import {MarketAPI} from './services/MarketAPI.service';
 })
 
 export class ProductComponent { 
+    public uploader:FileUploader = new FileUploader({url: URL});
     
-    constructor(
-        private marketAPI: MarketAPI, 
-        private router: Router
-    ) {}
+    constructor(private marketAPI: MarketAPI, private router: Router) 
+    {
+        this.uploader.onCompleteItem = (item: any, response: any, status: any, headers:any)=>  {
+            
+        };
+    }
 
     ngOnInit() {
         

@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {BsDropdownModule, CarouselModule, TypeaheadModule, DatepickerModule, ModalModule} from 'ngx-bootstrap';
-//import {FileUploadModule } from 'ng2-file-upload';
+import {FileUploadModule } from 'ng2-file-upload';
 import {enableProdMode} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
@@ -54,7 +54,7 @@ enableProdMode();
         TypeaheadModule.forRoot(),
         DatepickerModule.forRoot(),
         ModalModule.forRoot(),
-        //FileUploadModule,
+        FileUploadModule,
         RouterModule.forRoot(appRoutes)
     ],
     declarations: [

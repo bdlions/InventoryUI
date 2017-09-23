@@ -1,3 +1,17 @@
 <div style="color: white; font: 20">
     Home
 </div>
+
+<div class="row form-group">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <h5 class="create-ad-label">Available From</h5>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+        <input name="sampleDate" class="form-control input-custom-field" type="text" 
+            [ngModel]="sampleDate | date:'dd-MM-yyyy'" (ngModelChange)="sampleDate = $event;"
+            (focus)="showDatePicker = true" >
+        <div class="start-date" *ngIf="showDatePicker" >
+            <datepicker name="showDatePicker" [(ngModel)]="sampleDate" [minDate]="minDate" [showWeeks]="false" (selectionDone) ="showDatePicker = false"  ></datepicker>
+        </div>
+    </div>
+</div>

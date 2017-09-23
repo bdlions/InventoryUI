@@ -15,6 +15,10 @@ import {MarketAPI} from './services/MarketAPI.service';
 })
 
 export class HomeComponent { 
+    public showDatePicker: boolean = false;
+    public sampleDate: Date = new Date();
+    public minDate: Date = void 0;
+    
     constructor(private marketAPI: MarketAPI, private router: Router) 
     {
         

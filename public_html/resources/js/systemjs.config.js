@@ -30,8 +30,9 @@
             '@angular/http/testing': 'npm:@angular/http/bundles/http-testing.umd.js',
             '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
-             'ngx-bootstrap': 'npm:ngx-bootstrap/bundles/ngx-bootstrap.umd.js',
-
+            'ng2-file-upload': 'npm:ng2-file-upload/bundles/ng2-file-upload.umd.js',
+            'ngx-bootstrap': 'npm:ngx-bootstrap/bundles/ngx-bootstrap.umd.js',
+            
             // other libraries
             'rxjs': 'npm:rxjs'
         },

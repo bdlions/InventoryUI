@@ -13,15 +13,15 @@ var core_1 = require("@angular/core");
 var AppTemplate = (function () {
     function AppTemplate() {
     }
+    AppTemplate = __decorate([
+        core_1.Component({
+            selector: 'app',
+            template: '<navbar></navbar>' +
+                '<router-outlet>/<router-outlet>',
+        }),
+        __metadata("design:paramtypes", [])
+    ], AppTemplate);
     return AppTemplate;
 }());
-AppTemplate = __decorate([
-    core_1.Component({
-        selector: 'app',
-        template: '<navbar></navbar>' +
-            '<router-outlet>/<router-outlet>',
-    }),
-    __metadata("design:paramtypes", [])
-], AppTemplate);
 exports.AppTemplate = AppTemplate;
 //# sourceMappingURL=app.template.js.map

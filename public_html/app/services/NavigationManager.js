@@ -24,11 +24,11 @@ var NavigationManager = (function () {
     NavigationManager.prototype.setActiveMenu = function (activeMenu) {
         this._currentActivatedMenu.next(activeMenu);
     };
+    NavigationManager = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [])
+    ], NavigationManager);
     return NavigationManager;
 }());
-NavigationManager = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [])
-], NavigationManager);
 exports.NavigationManager = NavigationManager;
 //# sourceMappingURL=NavigationManager.js.map

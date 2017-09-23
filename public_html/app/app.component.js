@@ -56,16 +56,16 @@ var AppComponent = (function () {
         this.selectedUsers = this.userTypes[value].users;
         console.log(this.selectedUsers);
     };
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: 'data-content',
+            templateUrl: 'app/html/app.component.html'
+        }),
+        __metadata("design:paramtypes", [MarketAPI_service_1.MarketAPI,
+            router_1.Router,
+            NavigationManager_1.NavigationManager])
+    ], AppComponent);
     return AppComponent;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'data-content',
-        templateUrl: 'app/html/app.component.html'
-    }),
-    __metadata("design:paramtypes", [MarketAPI_service_1.MarketAPI,
-        router_1.Router,
-        NavigationManager_1.NavigationManager])
-], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

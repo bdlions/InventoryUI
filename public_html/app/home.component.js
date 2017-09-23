@@ -24,15 +24,14 @@ var HomeComponent = (function () {
     }
     HomeComponent.prototype.ngOnInit = function () {
     };
+    HomeComponent = __decorate([
+        core_1.Component({
+            selector: 'app',
+            templateUrl: 'app/html/home.component.html'
+        }),
+        __metadata("design:paramtypes", [MarketAPI_service_1.MarketAPI, router_1.Router])
+    ], HomeComponent);
     return HomeComponent;
 }());
-HomeComponent = __decorate([
-    core_1.Component({
-        selector: 'app',
-        templateUrl: 'app/html/home.component.html'
-    }),
-    __metadata("design:paramtypes", [MarketAPI_service_1.MarketAPI,
-        router_1.Router])
-], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

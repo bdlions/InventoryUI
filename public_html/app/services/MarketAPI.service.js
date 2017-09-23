@@ -41,11 +41,11 @@ var MarketAPI = (function () {
             .toPromise()
             .catch(function (error) { return Rx_1.Observable.throw(error.json().error || 'Server error'); });
     };
+    MarketAPI = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
+    ], MarketAPI);
     return MarketAPI;
 }());
-MarketAPI = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
-], MarketAPI);
 exports.MarketAPI = MarketAPI;
 //# sourceMappingURL=MarketAPI.service.js.map

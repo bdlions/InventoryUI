@@ -11,9 +11,9 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var ngx_bootstrap_1 = require("ngx-bootstrap");
+//import {FileUploadModule } from 'ng2-file-upload';
 var core_2 = require("@angular/core");
 var router_1 = require("@angular/router");
-var common_1 = require("@angular/common");
 var MarketAPI_service_1 = require("./services/MarketAPI.service");
 var app_component_1 = require("./app.component");
 var home_component_1 = require("./home.component");
@@ -22,6 +22,7 @@ var profile_component_1 = require("./profile.component");
 var app_template_1 = require("./app.template");
 var topnavbar_component_1 = require("./topnavbar.component");
 var NavigationManager_1 = require("./services/NavigationManager");
+var common_1 = require("@angular/common");
 var appRoutes = [
     {
         path: '',
@@ -48,39 +49,45 @@ core_2.enableProdMode();
 var AppModule = (function () {
     function AppModule() {
     }
+    AppModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                platform_browser_1.BrowserModule,
+                forms_1.FormsModule,
+                http_1.HttpModule,
+                ngx_bootstrap_1.BsDropdownModule.forRoot(),
+                ngx_bootstrap_1.CarouselModule.forRoot(),
+                ngx_bootstrap_1.TypeaheadModule.forRoot(),
+                ngx_bootstrap_1.DatepickerModule.forRoot(),
+                ngx_bootstrap_1.ModalModule.forRoot(),
+                //FileUploadModule,
+                router_1.RouterModule.forRoot(appRoutes)
+            ],
+            declarations: [
+                /**
+                 * This is for templating
+                 */
+                app_template_1.AppTemplate,
+                /**
+                 * All are components of the template
+                 */
+                app_component_1.AppComponent,
+                home_component_1.HomeComponent,
+                product_component_1.ProductComponent,
+                profile_component_1.ProfileComponent,
+                topnavbar_component_1.TopNavbarComponent,
+            ],
+            providers: [
+                MarketAPI_service_1.MarketAPI,
+                NavigationManager_1.NavigationManager,
+                //        {provide: APP_BASE_HREF, useValue: '/InventoryUI'}
+                { provide: common_1.LocationStrategy, useValue: '/InventoryUI/', useClass: common_1.HashLocationStrategy }
+            ],
+            bootstrap: [app_template_1.AppTemplate]
+            //    bootstrap: [HomeComponent]
+        })
+    ], AppModule);
     return AppModule;
 }());
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            platform_browser_1.BrowserModule,
-            forms_1.FormsModule,
-            http_1.HttpModule,
-            ngx_bootstrap_1.BsDropdownModule.forRoot(),
-            router_1.RouterModule.forRoot(appRoutes)
-        ],
-        declarations: [
-            /**
-             * This is for templating
-             */
-            app_template_1.AppTemplate,
-            /**
-             * All are components of the template
-             */
-            app_component_1.AppComponent,
-            home_component_1.HomeComponent,
-            product_component_1.ProductComponent,
-            profile_component_1.ProfileComponent,
-            topnavbar_component_1.TopNavbarComponent,
-        ],
-        providers: [
-            MarketAPI_service_1.MarketAPI,
-            NavigationManager_1.NavigationManager,
-            { provide: common_1.APP_BASE_HREF, useValue: '/MarketClient' }
-        ],
-        bootstrap: [app_template_1.AppTemplate]
-        //    bootstrap: [HomeComponent]
-    })
-], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

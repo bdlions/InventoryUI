@@ -50,14 +50,14 @@ var TopNavbarComponent = (function () {
         this.navigationManager.setActiveMenu("profile");
         this.router.navigate(["profile"]);
     };
+    TopNavbarComponent = __decorate([
+        core_1.Component({
+            selector: "navbar",
+            templateUrl: "app/html/topnavbar.html"
+        }),
+        __metadata("design:paramtypes", [router_1.Router, NavigationManager_1.NavigationManager])
+    ], TopNavbarComponent);
     return TopNavbarComponent;
 }());
-TopNavbarComponent = __decorate([
-    core_1.Component({
-        selector: "navbar",
-        templateUrl: "app/html/topnavbar.html"
-    }),
-    __metadata("design:paramtypes", [router_1.Router, NavigationManager_1.NavigationManager])
-], TopNavbarComponent);
 exports.TopNavbarComponent = TopNavbarComponent;
 //# sourceMappingURL=topnavbar.component.js.map

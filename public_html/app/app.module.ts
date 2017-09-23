@@ -17,6 +17,7 @@ import {ProfileComponent} from './profile.component';
 import {AppTemplate} from './app.template';
 import {TopNavbarComponent} from './topnavbar.component';
 import {NavigationManager} from './services/NavigationManager';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 const appRoutes: Routes = [
     {
@@ -75,7 +76,9 @@ enableProdMode();
         MarketAPI, 
         NavigationManager,
         
-        {provide: APP_BASE_HREF, useValue: '/MarketClient'}
+//        {provide: APP_BASE_HREF, useValue: '/InventoryUI'}
+          {provide: LocationStrategy, useValue: '/InventoryUI/', useClass: HashLocationStrategy}
+
 
     ],
     bootstrap: [AppTemplate]

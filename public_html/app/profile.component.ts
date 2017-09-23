@@ -40,6 +40,7 @@ export class ProfileComponent {
     }
     
     public showModal(event: Event){
+        this.sampleModal.config.backdrop = false; 
         this.sampleModal.show();
     }
     

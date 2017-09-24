@@ -149,6 +149,7 @@ body{
     margin: 0;
     padding: 0;
     line-height: 150%;
+    overflow-x: hidden;
 }
 .margin-top-100px{
     margin-top: 100px;
@@ -176,6 +177,47 @@ body{
     -ms-user-select: none;
     background-image: none;
     border: 1px solid transparent;
+}
+/*----------------------------- Main Menu ----------------------------------*/
+.logo{
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+}
+.navbar-custom{
+    background-color: #0E77B8!important;
+    border-color: #0E77B8!important;
+    border: none!important;
+    border-radius: 0px!important;
+}
+.navbar-default .navbar-brand {
+    color: #fff!important;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #fff!important;
+    padding: 15px 35px!important;
+}
+.navbar-default .navbar-nav>.active>a {
+    background-color: #3092C0!important;
+    color: #fff!important;
+    padding: 15px 35px!important;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    color: #fff!important;
+    padding: 15px 35px!important;
+    background-color: #3092C0!important;
+}
+.dropdown-menu > li > a{
+    padding: 15px 35px!important;
+}
+.dropdown-menu > li > a:hover{
+    background-color: #3092C0!important;
+    color: #fff!important;
+}
+.navbar-toggle {
+    background-color: #fff!important;
+    border: 1px solid #fff!important;
+    border-radius: 0px!important; 
 }
 /*----------------------------- Login ----------------------------------*/
 .login-pagelet{
@@ -211,10 +253,22 @@ body{
     font-family: cursive;
 }
 @media (max-width: 480px) {
-
+    
 }
-@media (min-width: 481px)and (max-width: 767px) {
-
+@media(max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+        color: #fff!important;
+        border-bottom: 1px solid #fff!important;
+    }
+    .navbar-default .navbar-nav>li>a:hover {
+        background-color: #3092C0!important;
+        color: #fff!important;
+        padding: 15px 35px!important;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu>.active>a, .navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus, .navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover {
+         background-color: #3092C0!important;
+        color: #fff!important;
+    }
 }
 
 @media (min-width: 768px)and (max-width: 991px) {

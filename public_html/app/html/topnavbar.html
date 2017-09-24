@@ -1,11 +1,44 @@
 <nav *ngIf='showNavBar' class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">RingMarket</a>
+            <a class="navbar-brand" href="#">Inventory</a>
         </div>
         <ul class="nav navbar-nav">
             <li [ngClass]="{'active': activeMenu == 'home' }">
                 <a href="#" (click)="goHome($event)" >Home</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'manageproduct' }">
+                <a href="#" (click)="goManageProduct($event)" >Manage Product</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'productlist' }">
+                <a href="#" (click)="goProductList($event)" >Product List</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'managecustomer' }">
+                <a href="#" (click)="goManageCustomer($event)" >Manage Customer</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'customerlist' }">
+                <a href="#" (click)="goCustomerList($event)" >Customer List</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'managesupplier' }">
+                <a href="#" (click)="goManageSupplier($event)" >Manage Supplier</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'supplierlist' }">
+                <a href="#" (click)="goSupplierList($event)" >Supplier List</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'managepurchase' }">
+                <a href="#" (click)="goManagePurchase($event)" >Manage Purchase</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'purchaselist' }">
+                <a href="#" (click)="goPurchaseList($event)" >Purchase List</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'managesale' }">
+                <a href="#" (click)="goManageSale($event)" >Manage Sale</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'salelist' }">
+                <a href="#" (click)="goSaleList($event)" >Sale List</a>
+            </li>
+            <li [ngClass]="{'active': activeMenu == 'currentstock' }">
+                <a href="#" (click)="goCurrentStock($event)" >Current Stock</a>
             </li>
             <li [ngClass]="{'active': activeMenu == 'products' }">
                 <a href="#" (click)="goProduct($event)">Products</a>

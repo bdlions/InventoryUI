@@ -6,36 +6,42 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Angular 2 User Registration and Login Example</title>
+        <title>Inventory</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="resources/images/favicon.ico" />
+        <meta name="description" content="">
 
-         <!--bootstrap css--> 
-        <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+        <!--bootstrap css--> 
+        <link rel="stylesheet" href="resources/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="resources/css/bootstrap.min.css" />
 
-         <!--application css--> 
-        <link href="resources/css/app.css" rel="stylesheet" />
+        <!--application css--> 
+        <link rel="stylesheet" href="resources/css/app.css" rel="stylesheet" />
 
         <!--polyfill(s) for older browsers--> 
-        <script src="resources/js/shim.min.js"></script>
-        <script src="resources/js/zone.js"></script>
-        
-        <script src="resources/js/global.js"></script>
+        <script type="text/javascript" src="resources/js/jquery.min.js"></script>
+        <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="resources/js/shim.min.js"></script>
+        <script type="text/javascript" src="resources/js/zone.js"></script>
 
-         <!--for production-->
+        <script type="text/javascript" src="resources/js/global.js"></script>
+
+        <!--for production-->
         <!--<script src="resources/js/bundle.js"></script>-->
 
         <!--for dev build-->
 
-        <script src="resources/js/system.src.js"></script>
-        <script src="resources/js/systemjs.config.js"></script>
-        <script>
+        <script type="text/javascript" src="resources/js/system.src.js"></script>
+        <script type="text/javascript" src="resources/js/systemjs.config.js"></script>
+        <script type="text/javascript">
             System.import('app').catch(function (err) {
                 console.error(err);
             });
         </script>
 
-        for dev build end
+        <!--for dev build end-->
 
     </head>
     <body>

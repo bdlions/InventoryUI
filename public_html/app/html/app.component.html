@@ -1,30 +1,77 @@
+<div class="container">
+    <div class="row form-group">
+        <div class=" col-xs-offset-1 col-xs-10  col-sm-offset-2 col-sm-8  col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
+            <div class="login-layout margin-top-100px">
+                <div class="login-form-header-pagelet">
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <h1 class="text-center">Login</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="login-form-body-pagelet margin-top-60px">
+                    <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label class="control-label">Login Type:</label>
+                            </div>
+                        </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <select class="selectpicker dropdown-toggle form-control" #selectedUserIndex (change)="getSelectedUsers(selectedUserIndex.value)">
+                                <option class="dropdown-item" *ngFor="let userType of userTypes; let i=index" [value]="i" value="{{userType.type}}"><span class="caret">{{userType.typeName}}</span></option>
+                            </select>
+                        </div>
+                         </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label class="control-label">Login User:</label>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <select class="selectpicker dropdown-toggle form-control" #selectedUser>
+                                    <option class="dropdown-item" *ngFor="let user of selectedUsers" value="{{user.userId}}"><span class="caret">{{user.userName}}</span> </option>
+                            </select>
+                        </div>
+                    </div>
+                      <div class="row form-group">
+                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="submit" class="form-control custom-button" (click)="goHome($event)" >Submit</button>
+                        </div>
+                    </div>
+               
+            </div>
 
-<div class="vertical-center col-md-4">
+        </div>
+    </div>
+</div>
+</div>
+<!--<div class="vertical-center col-md-4">
     <div class="well">
         <form class="form-horizontal">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="email">Login Type:</label>
                 <div class="col-sm-10">
-                    <!--<input type="email" class="form-control" id="email" placeholder="Enter email">-->
-                    <!--<div class="btn-group" dropdown>-->
-                    <!--                            <button dropdownToggle type="button" class="btn dropdown-toggle">
+                    <input type="email" class="form-control" id="email" placeholder="Enter email">
+                    <div class="btn-group" dropdown>
+                                                <button dropdownToggle type="button" class="btn dropdown-toggle">
                                                     Select Login Type<span class="caret"></span>
-                                                </button>-->
-                    <!--                            <ul *dropdownMenu class="dropdown-menu" role="menu">
+                                                </button>
+                                                <ul *dropdownMenu class="dropdown-menu" role="menu">
                                                     <li role="menuitem"><a class="dropdown-item" href="#">Seller</a></li>
                                                     <li role="menuitem"><a class="dropdown-item" href="#">Buyer</a></li>
                                                     <li role="menuitem"><a class="dropdown-item" href="#">Ring store agent</a></li>
-                                                </ul>-->
+                                                </ul>
                     <select class="selectpicker btn dropdown-toggle" #selectedUserIndex (change)="getSelectedUsers(selectedUserIndex.value)">
                         <option class="dropdown-item" *ngFor="let userType of userTypes; let i=index" [value]="i" value="{{userType.type}}"><span class="caret">{{userType.typeName}}</span></option>
                     </select>
-                    <!--</div>-->
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="pwd">Login User:</label>
                 <div class="col-sm-10"> 
-                    <!--                        <div class="btn-group" dropdown>
+                                            <div class="btn-group" dropdown>
                                                 <button dropdownToggle type="button" class="btn dropdown-toggle">
                                                     Select Login User<span class="caret"></span>
                                                 </button>
@@ -33,7 +80,7 @@
                                                     <li role="menuitem"><a class="dropdown-item" href="#">User 2</a></li>
                                                     <li role="menuitem"><a class="dropdown-item" href="#">User 3</a></li>
                                                 </ul>
-                                            </div>-->
+                                            </div>
                     <select class="selectpicker btn dropdown-toggle" #selectedUser>
                         <option class="dropdown-item" *ngFor="let user of selectedUsers" value="{{user.userId}}">
                     <span class="caret">{{user.userName}}</span>
@@ -50,4 +97,4 @@
         </div>
     </form>
 </div>
-</div>
+</div>-->

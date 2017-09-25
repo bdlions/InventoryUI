@@ -10,25 +10,28 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="resources/images/favicon.ico" />
 
-         <!--bootstrap css--> 
+        <!--bootstrap css--> 
         <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 
-         <!--application css--> 
+        <!--application css--> 
         <link href="resources/css/app.css" rel="stylesheet" />
+
+        <link href="resources/css/title-bar.css" rel="stylesheet" />
 
         <!--polyfill(s) for older browsers--> 
         <script src="resources/js/shim.min.js"></script>
         <script src="resources/js/zone.js"></script>
-        
+
         <script src="resources/js/global.js"></script>
 
-         <!--for production-->
+        <!--for production-->
         <!--<script src="resources/js/bundle.js"></script>-->
 
         <!--for dev build-->
 
         <script src="resources/js/system.src.js"></script>
         <script src="resources/js/systemjs.config.js"></script>
+        <script src="resources/js/title-bar.js"></script>
         <script>
             System.import('app').catch(function (err) {
                 console.error(err);
@@ -39,6 +42,14 @@ and open the template in the editor.
 
     </head>
     <body>
+        <div id="title-bar">
+            <div id="title">Inventory Management System</div>
+            <div id="title-bar-btns">
+                <button id="min-btn">-</button>
+                <button id="max-btn">+</button>
+                <button id="close-btn">x</button>
+            </div>
+        </div>
     <app>
         <div class="vertical-center">
             <div class="sk-fading-circle">

@@ -11,6 +11,17 @@ import {APP_BASE_HREF} from '@angular/common';
 
 import {MarketAPI} from './services/MarketAPI.service';
 import {AppComponent} from './app.component';
+import {ManageProductComponent} from './product/manageproduct.component';
+import {ProductListComponent} from './product/productlist.component';
+import {ManageCustomerComponent} from './customer/managecustomer.component';
+import {CustomerListComponent} from './customer/customerlist.component';
+import {ManageSupplierComponent} from './supplier/managesupplier.component';
+import {SupplierListComponent} from './supplier/supplierlist.component';
+import {ManagePurchaseComponent} from './purchase/managepurchase.component';
+import {PurchaseListComponent} from './purchase/purchaselist.component';
+import {ManageSaleComponent} from './sale/managesale.component';
+import {SaleListComponent} from './sale/salelist.component';
+import {CurrentStockComponent} from './stock/currentstock.component';
 import {HomeComponent} from './home.component';
 import {ProductComponent} from './product.component';
 import {ProfileComponent} from './profile.component';
@@ -27,6 +38,50 @@ const appRoutes: Routes = [
     {
         path: 'home',
         component: HomeComponent
+    },
+    {
+        path: 'manageproduct',
+        component: ManageProductComponent
+    },
+    {
+        path: 'productlist',
+        component: ProductListComponent
+    },
+    {
+        path: 'managecustomer',
+        component: ManageCustomerComponent
+    },
+    {
+        path: 'customerlist',
+        component: CustomerListComponent
+    },
+    {
+        path: 'managesupplier',
+        component: ManageSupplierComponent
+    },
+    {
+        path: 'supplierlist',
+        component: SupplierListComponent
+    },
+    {
+        path: 'managepurchase',
+        component: ManagePurchaseComponent
+    },
+    {
+        path: 'purchaselist',
+        component: PurchaseListComponent
+    },
+    {
+        path: 'managesale',
+        component: ManageSaleComponent
+    },
+    {
+        path: 'salelist',
+        component: SaleListComponent
+    },
+    {
+        path: 'currentstock',
+        component: CurrentStockComponent
     },
     {
         path: 'products',
@@ -68,6 +123,17 @@ enableProdMode();
          */
         AppComponent,
         HomeComponent,
+        ManageProductComponent,
+        ProductListComponent,
+        ManageCustomerComponent,
+        CustomerListComponent,
+        ManageSupplierComponent,
+        SupplierListComponent,
+        ManagePurchaseComponent,
+        PurchaseListComponent,
+        ManageSaleComponent,
+        SaleListComponent,
+        CurrentStockComponent,
         ProductComponent,
         ProfileComponent,
         TopNavbarComponent,

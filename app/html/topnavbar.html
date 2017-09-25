@@ -16,9 +16,10 @@
                     <li [ngClass]="{'active': activeMenu == 'home' }">
                         <a href="#" (click)="goHome($event)" >Home</a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sale <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                    <li dropdown triggers="mouseover" #dpSale="bs-dropdown">
+                        <a dropdownToggle class="dropdown-toggle" (mouseleave)="dpSale.hide()">
+                            Sale <span class="caret"></span></a>
+                        <ul class="dropdown-menu" (mouseleave)="dpSale.hide()">
                             <li [ngClass]="{'active': activeMenu == 'managesale' }">
                                 <a href="#" (click)="goManageSale($event)" >Manage Sale</a>
                             </li>
@@ -33,9 +34,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Purchase <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
+                    <li dropdown triggers="mouseover" #dpPurchase="bs-dropdown">
+                        <a dropdownToggle class="dropdown-toggle" (mouseleave)="dpPurchase.hide()">
+                            Purchase <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" (mouseleave)="dpPurchase.hide()">
                             <li [ngClass]="{'active': activeMenu == 'managepurchase' }">
                                 <a href="#" (click)="goManagePurchase($event)" >Manage Purchase</a>
                             </li>
@@ -50,19 +53,21 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inventory <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li [ngClass]="{'active': activeMenu == 'manageproduct' }">
+                    <li dropdown triggers="mouseover" #dpInventory="bs-dropdown">
+                         <a dropdownToggle class="dropdown-toggle" (mouseleave)="dpInventory.hide()">
+                            Inventory <span class="caret"></span>
+                        </a>
+                        <ul *dropdownMenu class="dropdown-menu" role="menu" (mouseleave)="dpInventory.hide()">
+                            <li role="menuitem" [ngClass]="{'active': activeMenu == 'manageproduct' }">
                                 <a href="#" (click)="goManageProduct($event)" >Manage Product</a>
                             </li>
-                            <li [ngClass]="{'active': activeMenu == 'productlist' }">
+                            <li role="menuitem" [ngClass]="{'active': activeMenu == 'productlist' }">
                                 <a href="#" (click)="goProductList($event)" >Product List</a>
                             </li>
-                            <li [ngClass]="{'active': activeMenu == 'currentstock' }">
+                            <li role="menuitem" [ngClass]="{'active': activeMenu == 'currentstock' }">
                                 <a href="#" (click)="goCurrentStock($event)" >Current Stock</a>
                             </li>
-                            <li [ngClass]="{'active': activeMenu == 'products' }">
+                            <li role="menuitem" [ngClass]="{'active': activeMenu == 'products' }">
                                 <a href="#" (click)="goProduct($event)">Products</a>
                             </li>
                         </ul>

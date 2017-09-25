@@ -51,4 +51,6 @@ Temporary Items
 /nbproject/
 /nbproject/private/
 /app/*.js
+/app/*/*.js
 /app/*.js.map
+/app/*/*.js.map

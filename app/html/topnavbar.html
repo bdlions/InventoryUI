@@ -1,18 +1,77 @@
-<nav *ngIf='showNavBar' class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">RingMarket</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li [ngClass]="{'active': activeMenu == 'home' }">
-                <a href="#" (click)="goHome($event)" >Home</a>
-            </li>
-            <li [ngClass]="{'active': activeMenu == 'products' }">
-                <a href="#" (click)="goProduct($event)">Products</a>
-            </li>
-            <li [ngClass]="{'active': activeMenu == 'profile' }">
-                <a href="#" (click)="goProfile($event)">Profile</a>
-            </li>
-        </ul>
+<div class="row form-group">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <nav *ngIf='showNavBar' class="navbar navbar-custom navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Inventory</a>
+                <img class="img-responsive logo" src="resources/images/inventory.png"/>
+            </div>
+            <div class="collapse navbar-collapse" id="main-menu">
+                <ul class="nav navbar-nav">
+                    <li [ngClass]="{'active': activeMenu == 'home' }">
+                        <a href="#" (click)="goHome($event)" >Home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sale <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li [ngClass]="{'active': activeMenu == 'managesale' }">
+                                <a href="#" (click)="goManageSale($event)" >Manage Sale</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenu == 'salelist' }">
+                                <a href="#" (click)="goSaleList($event)" >Sale List</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenu == 'managecustomer' }">
+                                <a href="#" (click)="goManageCustomer($event)" >Manage Customer</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenu == 'customerlist' }">
+                                <a href="#" (click)="goCustomerList($event)" >Customer List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Purchase <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li [ngClass]="{'active': activeMenu == 'managepurchase' }">
+                                <a href="#" (click)="goManagePurchase($event)" >Manage Purchase</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenu == 'purchaselist' }">
+                                <a href="#" (click)="goPurchaseList($event)" >Purchase List</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenu == 'managesupplier' }">
+                                <a href="#" (click)="goManageSupplier($event)" >Manage Supplier</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenu == 'supplierlist' }">
+                                <a href="#" (click)="goSupplierList($event)" >Supplier List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inventory <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li [ngClass]="{'active': activeMenu == 'manageproduct' }">
+                                <a href="#" (click)="goManageProduct($event)" >Manage Product</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenu == 'productlist' }">
+                                <a href="#" (click)="goProductList($event)" >Product List</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenu == 'currentstock' }">
+                                <a href="#" (click)="goCurrentStock($event)" >Current Stock</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenu == 'products' }">
+                                <a href="#" (click)="goProduct($event)">Products</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li [ngClass]="{'active': activeMenu == 'profile' }">
+                        <a href="#" (click)="goProfile($event)">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
-</nav>
+</div>

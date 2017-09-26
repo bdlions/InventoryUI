@@ -1,6 +1,7 @@
 export class EntityProduct {
     id: number;
     categoryId: number;
+    categoryTitle: string;
     name: string;
     code: string;
     width: string;
@@ -9,6 +10,7 @@ export class EntityProduct {
     unitPrice: number;
     length: string;
     typeId: number;
+    typeTitle: string;
     standardUOMId: number;
     saleUOMId: number;
     purchaseUOMId: number;

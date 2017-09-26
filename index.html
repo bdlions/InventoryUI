@@ -8,22 +8,25 @@
     <meta name="description" content="">
 
     <!--application css--> 
-    <link rel="stylesheet" href="resources/css/app.css" rel="stylesheet" />
+    <link rel="stylesheet" href="resources/css/app.css"/>
+    <link rel="stylesheet" href="resources/css/loader.css"/>
     <link rel="stylesheet" href="resources/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="resources/css/bootstrap.min.css" />
-    <link href="resources/css/title-bar.css" rel="stylesheet" />
+    <link rel="stylesheet" href="resources/css/title-bar.css" />
 
     <!--polyfill(s) for older browsers--> 
     <script src="resources/js/shim.min.js"></script>
     <script src="resources/js/zone.js"></script>
     <script src="resources/js/global.js"></script>
-    <script src="resources/js/title-bar.js"></script>
+    <!--<script src="resources/js/title-bar.js"></script>-->
 
     <!--for production-->
     <!--<script src="resources/js/bundle.js"></script>-->
 
     <!--for dev build-->
 
+    <script src="resources/js/jquery.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
     <script src="resources/js/angular.js"></script>
     <script src="resources/js/custom.js"></script>
     <script src="resources/js/system.src.js"></script>
@@ -41,31 +44,45 @@
 
 </head>
 <body>
-    <div id="title-bar">
-        <div id="title">Inventory Management System</div>
-        <div id="title-bar-btns">
-            <button id="min-btn">-</button>
-            <button id="max-btn">+</button>
-            <button id="close-btn">x</button>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-7 col-sm-8 col-md-9 col-lg-9">
+                <div id="title-bar">
+                    <div id="title">Inventory Management System</div>
+                </div>  
+            </div>
+            <div class="col-xs-5 col-sm-4 col-md-3 col-lg-3">
+                <div id="title-bar">
+                    <div id="title-bar-btns" class="pull-right">
+                        <button id="min-btn">-</button>
+                        <button id="max-btn">+</button>
+                        <button id="close-btn">x</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <app>
+                    <div class="vertical-center">
+                        <div class="sk-fading-circle">
+                            <div class="sk-circle1 sk-circle"></div>
+                            <div class="sk-circle2 sk-circle"></div>
+                            <div class="sk-circle3 sk-circle"></div>
+                            <div class="sk-circle4 sk-circle"></div>
+                            <div class="sk-circle5 sk-circle"></div>
+                            <div class="sk-circle6 sk-circle"></div>
+                            <div class="sk-circle7 sk-circle"></div>
+                            <div class="sk-circle8 sk-circle"></div>
+                            <div class="sk-circle9 sk-circle"></div>
+                            <div class="sk-circle10 sk-circle"></div>
+                            <div class="sk-circle11 sk-circle"></div>
+                            <div class="sk-circle12 sk-circle"></div>
+                        </div>
+                    </div>
+                </app>
+            </div>
         </div>
     </div>
-<app>
-    <div class="vertical-center">
-        <div class="sk-fading-circle">
-            <div class="sk-circle1 sk-circle"></div>
-            <div class="sk-circle2 sk-circle"></div>
-            <div class="sk-circle3 sk-circle"></div>
-            <div class="sk-circle4 sk-circle"></div>
-            <div class="sk-circle5 sk-circle"></div>
-            <div class="sk-circle6 sk-circle"></div>
-            <div class="sk-circle7 sk-circle"></div>
-            <div class="sk-circle8 sk-circle"></div>
-            <div class="sk-circle9 sk-circle"></div>
-            <div class="sk-circle10 sk-circle"></div>
-            <div class="sk-circle11 sk-circle"></div>
-            <div class="sk-circle12 sk-circle"></div>
-        </div>
-    </div>
-</app>
 </body>
 </html>

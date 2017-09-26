@@ -18,16 +18,18 @@ and open the template in the editor.
 }
 
 #title {
-    position: fixed;
+    /*position: fixed;*/
     top: 0px;
-    left: 12px;	
+    margin-left: 10px;	
     line-height: 32px;
-    font-size: 14px;
+    font-size: 12px;
+    color: #703684;
+    font-weight: bold;
 }
 
 #title-bar-btns {
     -webkit-app-region: no-drag;
-    position: fixed;
+    /*position: fixed;*/
     top: 1px;
     right: 0px;	
 }
@@ -41,6 +43,16 @@ and open the template in the editor.
     font-size: 16px;
 }
 
-#title-bar-btns button:hover {
+#title-bar-btns button {
     background-color: #3F3F41;
+}
+
+#min-btn:hover{
+    background-color: #f0ad4e;
+}
+#max-btn:hover{
+    background-color: #5cb85c;
+}
+#close-btn:hover{
+    background-color: #d9534f;
 }

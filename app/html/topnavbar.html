@@ -8,8 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Inventory</a>
-                <img class="img-responsive logo" src="resources/images/inventory.png"/>
+                <img class="img-responsive logo" src="resources/images/inventory.png" alt="Inventory"/>
             </div>
             <div class="collapse navbar-collapse" id="main-menu">
                 <ul class="nav navbar-nav">
@@ -20,9 +19,11 @@
                         <a dropdownToggle class="dropdown-toggle" (mouseleave)="dpSale.hide()">
                             Sale <span class="caret"></span></a>
                         <ul class="dropdown-menu" (mouseleave)="dpSale.hide()">
+
                             <li [ngClass]="{'active': activeMenu == 'managesale' }">
                                 <a href="#" (click)="goManageSale($event)" >Manage Sale</a>
                             </li>
+
                             <li [ngClass]="{'active': activeMenu == 'salelist' }">
                                 <a href="#" (click)="goSaleList($event)" >Sale List</a>
                             </li>
@@ -54,12 +55,12 @@
                         </ul>
                     </li>
                     <li dropdown triggers="mouseover" #dpInventory="bs-dropdown">
-                         <a dropdownToggle class="dropdown-toggle" (mouseleave)="dpInventory.hide()">
+                        <a dropdownToggle class="dropdown-toggle" (mouseleave)="dpInventory.hide()">
                             Inventory <span class="caret"></span>
                         </a>
                         <ul *dropdownMenu class="dropdown-menu" role="menu" (mouseleave)="dpInventory.hide()">
                             <li role="menuitem" [ngClass]="{'active': activeMenu == 'manageproduct' }">
-                                <a href="#" (click)="goManageProduct($event)" >Manage Product</a>
+                                <a href="#" (click)="goManageProduct($event)" >New Product</a>
                             </li>
                             <li role="menuitem" [ngClass]="{'active': activeMenu == 'productlist' }">
                                 <a href="#" (click)="goProductList($event)" >Product List</a>
@@ -68,7 +69,7 @@
                                 <a href="#" (click)="goCurrentStock($event)" >Current Stock</a>
                             </li>
                             <li role="menuitem" [ngClass]="{'active': activeMenu == 'products' }">
-                                <a href="#" (click)="goProduct($event)">Products</a>
+                                <a href="#" (click)="goProduct($event)">Adjust Stock</a>
                             </li>
                         </ul>
                     </li>

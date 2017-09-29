@@ -4,7 +4,10 @@ export class EntityPurchaseOrder {
     supplierUserId: number;
     orderDate: number;
     requestedShipDate: number;
+    subtotal: number;
     discount: number;
+    total: number;
+    paid: number;
     createdOn: number;
     modifiedOn: number;
 }

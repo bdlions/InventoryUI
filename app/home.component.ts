@@ -59,7 +59,7 @@ export class HomeComponent {
         event.preventDefault();
         this.navigationManager.showNavBar(true);
         this.navigationManager.setActiveMenu("manageproduct");
-        this.router.navigate(["manageproduct"]);
+        this.router.navigate(["manageproduct", {productId: 0 }]);
     }
     goProductList(event: Event) {
         event.preventDefault();

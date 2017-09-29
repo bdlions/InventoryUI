@@ -1,4 +1,4 @@
-export class EntityAccountStatus {
+export class EntityUOM {
     id: number;
     title: string;
     createdOn: number;

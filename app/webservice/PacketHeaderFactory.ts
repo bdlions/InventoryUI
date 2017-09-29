@@ -17,138 +17,85 @@ export class PacketHeaderFactory {
         packetHeader.action = action;
         packetHeader.packetId = UUID.UUID();
         switch(action){
-            case ACTION.SIGN_UP:
-                packetHeader.requestType = REQUEST_TYPE.AUTH
-                break;
             case ACTION.SIGN_IN:
                 packetHeader.requestType = REQUEST_TYPE.AUTH
                 break;
             case ACTION.SIGN_OUT:
                 packetHeader.requestType = REQUEST_TYPE.AUTH
-                break;
-            case ACTION.FETCH_MEMBER_ROLES:
+                break;    
+            case ACTION.SIGN_UP:
+                packetHeader.requestType = REQUEST_TYPE.AUTH
+                break;    
+                
+            case ACTION.FETCH_USER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;
-            case ACTION.FETCH_USER_LIST:
+            case ACTION.FETCH_ALL_PRODUCT_CATEGORIES:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;    
+            case ACTION.FETCH_ALL_PRODUCT_TYPES:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;
-            case ACTION.FETCH_PRODUCT_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_CLOSING_PRODUCT_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_MY_PRODUCT_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_SAVED_PRODUCT_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_LOCATION_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_RADIUS_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_PRODUCT_TYPE_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_PRODUCT_SIZE_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_PRODUCT_CATEGORY_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_PRODUCT_AMENITY_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_AVAILABILITY_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_STAY_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_SMOKING_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_PET_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_OCCUPATION_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_GENDER_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_ROOM_SIZE_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_DURATION_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_MIN_PRICE_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_MAX_PRICE_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_BID_LIST:
+            case ACTION.FETCH_ALL_UOMS:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;
             case ACTION.FETCH_PRODUCT_INFO:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;
-            case ACTION.FETCH_USER_INFO:
+            case ACTION.FETCH_PRODUCTS:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;    
+            case ACTION.FETCH_CUSTOMER_INFO:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;    
+            case ACTION.FETCH_CUSTOMERS:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;    
+            case ACTION.FETCH_SUPPLIER_INFO:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;    
+            case ACTION.FETCH_SUPPLIERS:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;
-            case ACTION.FETCH_ACCOUNT_SETTING_FA:
+            case ACTION.FETCH_PURCHASE_ORDER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_MESSAGE_INBOX_LIST:
+                break;    
+            case ACTION.FETCH_PURCHASE_ORDERS:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_MESSAGE_INFO:
+                break;    
+            case ACTION.FETCH_SALE_ORDER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_MESSAGE_SENT_LIST:
+                break;    
+            case ACTION.FETCH_SALE_ORDERS:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.FETCH_STAT_LIST:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
-            case ACTION.UPDATE_USER_INFO:
+                break;  
+                
+            case ACTION.ADD_PRODUCT_INFO:
+                packetHeader.requestType = REQUEST_TYPE.UPDATE
+                break;    
+            case ACTION.ADD_CUSTOMER_INFO:
+                packetHeader.requestType = REQUEST_TYPE.UPDATE
+                break;   
+            case ACTION.ADD_SUPPLIER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
                 break;
-            case ACTION.UPDATE_USER_PROFILE_PICTURE:
+            case ACTION.ADD_PURCHASE_ORDER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
-                break;
-            case ACTION.UPDATE_USER_DOCUMENT:
+                break;    
+            case ACTION.ADD_SALE_ORDER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
-                break;
-            case ACTION.UPDATE_USER_LOGO:
-                packetHeader.requestType = REQUEST_TYPE.UPDATE
-                break;
+                break;    
+            
             case ACTION.UPDATE_PRODUCT_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
                 break;
-            case ACTION.ADD_PRODUCT:
+            case ACTION.UPDATE_CUSTOMER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
-                break;
-            case ACTION.ADD_SAVED_PRODUCT:
+                break;    
+            case ACTION.UPDATE_SUPPLIER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
-                break;
-            case ACTION.ADD_PRODUCT_BID:
-                packetHeader.requestType = REQUEST_TYPE.UPDATE
-                break;
-            case ACTION.ADD_MESSAGE_TEXT:
-                packetHeader.requestType = REQUEST_TYPE.UPDATE
-                break;
-            case ACTION.ADD_MESSAGE_INFO:
-                packetHeader.requestType = REQUEST_TYPE.UPDATE
-                break;
-            case ACTION.SAVE_ACCOUNT_SETTING_FA:
-                packetHeader.requestType = REQUEST_TYPE.UPDATE
-                break;
+                break;        
+                        
             default:
                 packetHeader.requestType = REQUEST_TYPE.NONE
         }

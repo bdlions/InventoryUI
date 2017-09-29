@@ -9,7 +9,7 @@ import {PacketHeader} from './PacketHeader'
 
 @Injectable()
 export class WebAPIService {
-    private actionUrl = window.SITE_URL + 'RequestServlet';
+    private actionUrl = window.SITE_URL + 'request';
     constructor(private http: Http) {}
 
     getResponse(packetHeader:PacketHeader, packetBody:string = null) {

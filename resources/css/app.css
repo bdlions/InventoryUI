@@ -4,20 +4,54 @@ Author: A.K.M. Nazmul Islam
 Version: 1.0
 */
 /*----------------------------- Common ----------------------------------*/
+@font-face {
+    font-family: 'fira_sanslight';
+    src: url('../fonts/firasans-light-webfont.woff2') format('woff2'),
+        url('../fonts/firasans-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'fira_sanslight_italic';
+    src: url('../fonts/firasans-lightitalic-webfont.woff2') format('woff2'),
+        url('../fonts/firasans-lightitalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 html,body{
     margin: 0;
     padding: 0;
-
 }
 body{
+    font-family: 'fira_sanslight';
     position: relative;
     height: 100%;
     line-height: 150%!important;
     overflow-x: hidden;
+    color: #666!important;
+}
+h1,h2,h3,h4,h5,h6{
+    line-height: 150%;
+    margin-top: 10px!important;
+    margin-bottom: 10px!important;
+}
+p{
+    line-height: 150%;
+}
+label{
+    font-size: 17px;
+}
+a{
+    font-size: 15px;
+}
+a:hover{
+    text-decoration: none;
+    cursor: pointer;
 }
 .container-fluid {
-    padding-right:0!important;
-    padding-left:0!important;
+/*    padding-right:0!important;
+    padding-left:0!important;*/
+    
 }
 .margin-top-150px{
     margin-top: 150px;
@@ -28,12 +62,20 @@ body{
 .margin-top-60px{
     margin-top: 60px;
 }
+input{
+    border: 1px solid #ccc!important;
+    padding: 6px 12px !important;
+    border-radius: 0px!important;
+}
+input:focus{
+    border: 1px solid #4568b2!important;
+}
 .custom-button {
     color: #fff!important;
     background-color: #0072C6!important;
     border-color: #ccc;
-    border-radius: 4px;
-    padding: 0px 32px;
+    border-radius: 0px;
+    padding: 3px 32px;
     display: inline-block;
     margin-bottom: 0;
     font-size: 14px;
@@ -55,6 +97,75 @@ body{
     left:50%;
     transform: translate(-50%,-50%);
     /*border: 1px dashed deeppink;*/
+}
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+    color: #484848;
+}
+table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+table tr {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: .35em;
+}
+table th,
+table td {
+    padding: .625em;
+    text-align: center;
+}
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #216db1;
+}
+table tr:hover{
+    color: #484848;
+}
+@media screen and (max-width: 767px) {
+    table {
+        border: 0;
+    }
+    table caption {
+        font-size: 1.3em;
+    }
+    table thead {
+        border: none;
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    table tr {
+        border: 3px solid #ccc;
+        display: block;
+        margin-bottom: .625em;
+    }
+    table td {
+        border-bottom: 1px solid #ccc;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+    table td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    table td:last-child {
+        border-bottom: 0;
+    }
 }
 /*----------------------------- Main Menu ----------------------------------*/
 
@@ -269,6 +380,10 @@ body{
     cursor: pointer;
 }
 
+/*----------------------------- Home ----------------------------------*/
+.common-table tr:hover{
+    color: #484848;
+}
 @media (max-width: 480px) {
 
 }
@@ -375,6 +490,10 @@ body{
         top: 778px;
         margin-left: 15px;
     }
+}
+/*----------------------------- Manage Product ----------------------------------*/
+.product-category-title{
+    font-size: 12px;
 }
 
 @media (min-width: 768px)and (max-width: 991px) {

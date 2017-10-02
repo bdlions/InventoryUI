@@ -1,3 +1,42 @@
-<div style="font: 20">
-    Product List
+<div class="container">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h1>Search</h1>
+        </div>
+    </div>
+    <div class="row form-group" *ngFor="let productCategory of productCategoryList">
+         <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+            <h4>{{productCategory.title}}</h4>
+        </div>
+        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+            <input id="{{productCategory.id}}" class="form-control">
+        </div>
+    </div>
+     <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button id="search-product-btn" class="custom-button pull-right">Refresh</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <table class="common-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Type</th>
+                        <th>Category</th>
+                        <th>Normal Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of productList">
+                        <td data-label="Item">{{product.name}}</td>
+                        <td data-label="Type">{{product.typeTitle}}</td>
+                        <td data-label="Category">{{product.categoryTitle}}</td>
+                        <td data-label="Normal Price">{{product.unitPrice}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

@@ -41,7 +41,6 @@ export class ProductListComponent {
 
     }
     searchProduct(event: Event) {
-        // console.log("Search ProductList");
         console.log(this.searchEntityProduct.name);
     }
     public fetchProductList() {

@@ -12,7 +12,7 @@
                         <span class="supplier-title">Name</span>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                        <input [(ngModel)]="searchEntitySupplier.userId" name="searchEntitySupplier.userId" class="form-control">
+                        <input [(ngModel)]="searchDTOSupplier.entityUser.firstName" name="name" class="form-control">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -70,7 +70,7 @@
                                                 <span class="supplier-title">First Name</span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="entitySupplier.entityUser.firstName" id="{{entitySupplier.entityUser.id}}" name="{{entitySupplier.entityUser.id}}" class="form-control">
+                                                <input [(ngModel)]="dtoSupplier.entityUser.firstName" id="{{dtoSupplier.entityUser.id}}" name="{{dtoSupplier.entityUser.id}}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -78,7 +78,7 @@
                                                 <span class="supplier-title">Last Name</span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="entitySupplier.entityUser.lastName" id="{{entitySupplier.entityUser.id}}" name="{{entitySupplier.entityUser.id}}" class="form-control">
+                                                <input [(ngModel)]="dtoSupplier.entityUser.lastName" id="{{dtoSupplier.entityUser.id}}" name="{{dtoSupplier.entityUser.id}}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -86,7 +86,7 @@
                                                 <span class="supplier-title">Balance</span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="entitySupplier.entitySupplier.balance" id="{{entitySupplier.entitySupplier.id}}" name="{{entitySupplier.entitySupplier.id}}" class="form-control">
+                                                <input [(ngModel)]="dtoSupplier.entitySupplier.balance" id="{{dtoSupplier.entitySupplier.id}}" name="{{dtoSupplier.entitySupplier.id}}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -99,7 +99,7 @@
                                                 <span class="supplier-title">Name</span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="entitySupplier.entityUser.firstName" id="{{entitySupplier.entitySupplier.id}}" name="{{entitySupplier.entitySupplier.id}}" class="form-control">
+                                                <input [(ngModel)]="dtoSupplier.entityUser.firstName" id="{{dtoSupplier.entitySupplier.id}}" name="{{dtoSupplier.entitySupplier.id}}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -107,7 +107,7 @@
                                                 <span class="supplier-title">Phone</span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="entitySupplier.entityUser.cell" id="{{entitySupplier.entitySupplier.id}}" name="{{entitySupplier.entitySupplier.id}}" class="form-control">
+                                                <input [(ngModel)]="dtoSupplier.entityUser.cell" id="{{dtoSupplier.entitySupplier.id}}" name="{{dtoSupplier.entitySupplier.id}}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -115,7 +115,7 @@
                                                 <span class="supplier-title">Email</span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="entitySupplier.entityUser.email" id="{{entitySupplier.entitySupplier.id}}" name="{{entitySupplier.entitySupplier.id}}" class="form-control">
+                                                <input [(ngModel)]="dtoSupplier.entityUser.email" id="{{dtoSupplier.entitySupplier.id}}" name="{{dtoSupplier.entitySupplier.id}}" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <textarea  [(ngModel)]="entitySupplier.entitySupplier.remarks" id="weight" name="weight" class="form-control" rows="5"></textarea>
+                                        <textarea  [(ngModel)]="dtoSupplier.entitySupplier.remarks" id="weight" name="weight" class="form-control" rows="5"></textarea>
                                     </div>
                                 </div>
                             </div> 

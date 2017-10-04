@@ -51,7 +51,6 @@ export class ManageProductComponent {
     }
 
     searchProduct(event: Event) {
-        //console.log("Search Product");
         console.log(this.searchEntityProduct.name);
     }
     newProduct(event: Event) {

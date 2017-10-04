@@ -4,20 +4,32 @@
             <h1>Search</h1>
         </div>
     </div>
-    <div class="row form-group" *ngFor="let productCategory of productCategoryList">
-         <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
-            <h4>{{productCategory.title}}</h4>
+    <form role="form" (submit)="search($event)">
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+                <span class="product-title">Item Name/Code</span>
+            </div>
+            <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                <input [(ngModel)]="entityProduct.name" id="name" name="name" class="form-control">
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
-            <input id="{{productCategory.id}}" class="form-control">
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+                <span class="product-title">Category</span>
+            </div>
+            <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                <select class="form-control" >
+                    <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
+                </select>
+            </div>
         </div>
-    </div>
-     <div class="row form-group">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <button id="search-product-btn" class="custom-button pull-right">Refresh</button>
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+            </div>
         </div>
-    </div>
-    <div class="row">
+    </form>
+    <div class="row form-group">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <table class="common-table">
                 <thead>
@@ -25,7 +37,7 @@
                         <th>Item</th>
                         <th>Type</th>
                         <th>Category</th>
-                        <th>Normal Price</th>
+                        <th>Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,7 +45,7 @@
                         <td data-label="Item">{{product.name}}</td>
                         <td data-label="Type">{{product.typeTitle}}</td>
                         <td data-label="Category">{{product.categoryTitle}}</td>
-                        <td data-label="Normal Price">{{product.unitPrice}}</td>
+                        <td data-label="Price">{{product.unitPrice}}</td>
                     </tr>
                 </tbody>
             </table>

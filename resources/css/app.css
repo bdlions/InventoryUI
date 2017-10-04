@@ -59,15 +59,18 @@ a:hover{
 .margin-top-100px{
     margin-top: 100px;
 }
+.margin-top-50px{
+    margin-top: 50px;
+}
 .margin-top-60px{
     margin-top: 60px;
 }
-input{
+input, select{
     border: 1px solid #ccc!important;
     padding: 6px 12px !important;
     border-radius: 0px!important;
 }
-input:focus{
+input:focus,select:focus{
     border: 1px solid #4568b2!important;
 }
 .custom-button {
@@ -492,9 +495,53 @@ table tr:hover{
     }
 }
 /*----------------------------- Manage Product ----------------------------------*/
-.product-category-title{
+.product-category-title,.product-title{
     font-size: 12px;
 }
+
+/*.tabs-below > .nav-tabs {
+  border-bottom: 0;
+}
+
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+  display: none;
+}
+
+.tab-content > .active,
+.pill-content > .active {
+  display: block;
+}
+
+.tabs-bottom > .nav-tabs {
+  border-top: 1px solid #ddd;
+}
+
+.tabs-bottom > .nav-tabs > li {
+  margin-top: -1px;
+  margin-bottom: 0;
+}
+
+.tabs-bottom > .nav-tabs > li > a {
+  -webkit-border-radius: 0 0 4px 4px;
+     -moz-border-radius: 0 0 4px 4px;
+          border-radius: 0 0 4px 4px;
+}
+
+.tabs-below > .nav-tabs > li > a:hover,
+.tabs-below > .nav-tabs > li > a:focus {
+  border-top-color: #ddd;
+  border-bottom-color: transparent;
+}
+
+.tabs-bottom > .nav-tabs > .active > a,
+.tabs-bottom > .nav-tabs > .active > a:hover,
+.tabs-bottom > .nav-tabs > .active > a:focus {
+  border-color: transparent #ddd #ddd #ddd;
+}*/
+
+
+
 
 @media (min-width: 768px)and (max-width: 991px) {
     .home-animation-margin-top{

@@ -6,13 +6,13 @@
                     <h3>Search</h3>
                 </div>
             </div>
-            <form role="form" (submit)="search($event)">
+            <form role="form" (submit)="searchProduct($event)">
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                         <span class="product-title">Item Name/Code</span>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                        <input [(ngModel)]="entityProduct.name" id="name" name="name" class="form-control">
+                        <input [(ngModel)]="searchEntityProduct.name" id="name" name="name" class="form-control">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -236,3 +236,4 @@
             </div>
         </div>
     </div>
+</div>

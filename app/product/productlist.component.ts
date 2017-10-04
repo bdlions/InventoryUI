@@ -17,6 +17,7 @@ import {DTOProduct} from '../dto/DTOProduct';
 export class ProductListComponent {
     private webAPIService: WebAPIService;
     private entityProduct: EntityProduct;
+    private searchEntityProduct: EntityProduct;
     private productList: EntityProduct[];
     private productCategoryList: EntityProductCategory[];
     private reqDTOProduct: DTOProduct;
@@ -24,6 +25,7 @@ export class ProductListComponent {
 
     constructor(private marketAPI: MarketAPI, private router: Router, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
+        this.searchEntityProduct = new EntityProduct();
         this.reqDTOProduct = new DTOProduct();
         this.reqEntityProduct = new EntityProduct();
         this.entityProduct = JSON.parse("{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}");
@@ -38,8 +40,9 @@ export class ProductListComponent {
     ngOnInit() {
 
     }
-    search(event: Event) {
-        console.log("Search ProductList");
+    searchProduct(event: Event) {
+        // console.log("Search ProductList");
+        console.log(this.searchEntityProduct.name);
     }
     public fetchProductList() {
         this.reqDTOProduct.limit = 10;

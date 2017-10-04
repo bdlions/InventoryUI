@@ -1,3 +1,159 @@
-<div style="font: 20">
-    Manage Supplier
+<div class="container-fluid">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3>Search</h3>
+                </div>
+            </div>
+            <form role="form" (submit)="searchSupplier($event)">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="supplier-title">Name</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input [(ngModel)]="searchEntitySupplier.userId" name="searchEntitySupplier.userId" class="form-control">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="submit" id="search-product" class="custom-button pull-right">Refresh</button>
+                    </div>
+                </div>
+            </form> 
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <table class="common-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let supplier of supplierList" (dblclick)="selectedSupplier($event, supplier.entityUser.id)">
+                                <td data-label="Name">{{supplier.entityUser.firstName}} {{supplier.entityUser.lastName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button (click)="newSupplier($event)" type="button" class="btn btn-default"><i class="fa fa-file"></i> New</button>
+                        <button (click)="saveSupplier($event)"  type="button" class="btn btn-default"><i class="fa fa-floppy-o"></i> Save</button>
+                        <!--<button type="button" class="btn btn-default"><i class="fa fa-paperclip"></i> Attachment</button>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tabbable tabs-bottom">
+                        <div class="tab-content">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#supplier-info" data-toggle="tab">Supplier Info</a></li>
+                                <li><a href="#extra-info" data-toggle="tab">Extra Info</a></li>
+                            </ul>
+                            <div class="tab-pane active" id="supplier-info">                
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Basic</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">First Name</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="entitySupplier.entityUser.firstName" id="{{entitySupplier.entityUser.id}}" name="{{entitySupplier.entityUser.id}}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Last Name</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="entitySupplier.entityUser.lastName" id="{{entitySupplier.entityUser.id}}" name="{{entitySupplier.entityUser.id}}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Balance</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="entitySupplier.entitySupplier.balance" id="{{entitySupplier.entitySupplier.id}}" name="{{entitySupplier.entitySupplier.id}}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Contact</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Name</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="entitySupplier.entityUser.firstName" id="{{entitySupplier.entitySupplier.id}}" name="{{entitySupplier.entitySupplier.id}}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Phone</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="entitySupplier.entityUser.cell" id="{{entitySupplier.entitySupplier.id}}" name="{{entitySupplier.entitySupplier.id}}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Email</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="entitySupplier.entityUser.email" id="{{entitySupplier.entitySupplier.id}}" name="{{entitySupplier.entitySupplier.id}}" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+
+                                    </div>
+                                </div> 
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <h3>Remarks</h3>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <textarea  [(ngModel)]="entitySupplier.entitySupplier.remarks" id="weight" name="weight" class="form-control" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="tab-pane" id="extra-info"> 
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Preferences</h3>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

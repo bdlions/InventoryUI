@@ -5,24 +5,53 @@
  */
 
 
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {MarketAPI} from './../services/MarketAPI.service';
+import {WebAPIService} from './../webservice/web-api-service';
+import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
+import {ACTION} from './../webservice/ACTION';
+import {EntityCustomer} from '../dto/EntityCustomer';
+import {DTOCustomer} from '../dto/DTOCustomer';
 
 @Component({
     selector: 'app',
-    templateUrl: 'app/html/customer/managecustomer.component.html'
+    templateUrl: 'app/html/customer/managecustomer.component.html',
+    providers: [WebAPIService]
 })
 
-export class ManageCustomerComponent { 
-    
-    constructor(private marketAPI: MarketAPI, private router: Router) 
-    {
-        
+export class ManageCustomerComponent {
+    private webAPIService: WebAPIService;
+    private reqDTOCustomer: DTOCustomer;
+    private entityCustomer: EntityCustomer;
+    private customerList: DTOCustomer[];
+    private searchEntityCustomer: EntityCustomer;
+
+    constructor(private marketAPI: MarketAPI, private router: Router, webAPIService: WebAPIService) {
+        this.webAPIService = webAPIService;
+        this.searchEntityCustomer = new EntityCustomer();
+        this.reqDTOCustomer = new DTOCustomer();
+        this.entityCustomer = JSON.parse("{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"remarks\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}");
+        this.customerList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"remarks\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}]");
+        console.log(this.customerList);
     }
 
     ngOnInit() {
-        
+
+    }
+
+    searchCustomer(event: Event) {
+        //        console.log("Search Customer");
+        console.log(this.searchEntityCustomer.userId);
+    }
+    newCustomer(event: Event) {
+        console.log("New Customer");
+    }
+    saveCustomer(event: Event) {
+        console.log("Save Customer");
+    }
+    selectedCustomer(event: Event, id: number) {
+        console.log(id);
     }
 }
 

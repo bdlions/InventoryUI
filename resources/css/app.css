@@ -495,7 +495,7 @@ table tr:hover{
     }
 }
 /*----------------------------- Manage Product ----------------------------------*/
-.product-category-title,.product-title{
+.product-category-title,.product-title, .supplier-title{
     font-size: 12px;
 }
 

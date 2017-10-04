@@ -1,3 +1,54 @@
-<div style="font: 20">
-    Customer List
+<div class="container-fluid">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h1>Search</h1>
+        </div>
+    </div>
+    <form role="form" (submit)="searchCustomer($event)">
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+                <span class="product-title">Name</span>
+            </div>
+            <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                <input [(ngModel)]="searchEntityCustomer.userId" name="searchEntityCustomer.userId" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+            </div>
+        </div>
+    </form>
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <table class="common-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Website</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Zip/Postal Code</th>
+                        <th>Discount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let customer of customerList">
+                        <td data-label="Name">{{customer.entityUser.firstName}} {{customer.entityUser.lastName}}</td>
+                        <td data-label="Contact"></td>
+                        <td data-label="Phone">{{customer.entityUser.cell}}</td>
+                        <td data-label="Email">{{customer.entityUser.email}}</td>
+                        <td data-label="Website"></td>
+                        <td data-label="Address"></td>
+                        <td data-label="City"></td>
+                        <td data-label="Zip/Postal Code"></td>
+                        <td data-label="Discount"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

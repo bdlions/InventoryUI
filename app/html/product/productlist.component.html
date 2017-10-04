@@ -4,13 +4,13 @@
             <h1>Search</h1>
         </div>
     </div>
-    <form role="form" (submit)="search($event)">
+    <form role="form" (submit)="searchProduct($event)">
         <div class="row form-group">
             <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
                 <span class="product-title">Item Name/Code</span>
             </div>
             <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
-                <input [(ngModel)]="entityProduct.name" id="name" name="name" class="form-control">
+                <input [(ngModel)]="searchEntityProduct.name" id="name" name="name" class="form-control">
             </div>
         </div>
         <div class="row form-group">

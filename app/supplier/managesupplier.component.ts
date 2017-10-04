@@ -5,24 +5,53 @@
  */
 
 
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {MarketAPI} from './../services/MarketAPI.service';
+import {WebAPIService} from './../webservice/web-api-service';
+import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
+import {ACTION} from './../webservice/ACTION';
+import {EntitySupplier} from '../dto/EntitySupplier';
+import {DTOSupplier} from '../dto/DTOSupplier';
+
 
 @Component({
     selector: 'app',
-    templateUrl: 'app/html/supplier/managesupplier.component.html'
+    templateUrl: 'app/html/supplier/managesupplier.component.html',
+    providers: [WebAPIService]
 })
 
-export class ManageSupplierComponent { 
-    
-    constructor(private marketAPI: MarketAPI, private router: Router) 
-    {
-        
+export class ManageSupplierComponent {
+    private webAPIService: WebAPIService;
+    private reqDTOSupplier: DTOSupplier;
+    private entitySupplier: EntitySupplier;
+    private supplierList: DTOSupplier[];
+    private searchEntitySupplier: EntitySupplier;
+
+    constructor(private marketAPI: MarketAPI, private router: Router, webAPIService: WebAPIService) {
+        this.webAPIService = webAPIService;
+        this.searchEntitySupplier = new EntitySupplier();
+        this.reqDTOSupplier = new DTOSupplier();
+        this.entitySupplier = JSON.parse("{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":1,\"userId\":3,\"remarks\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":3,\"firstName\":\"Nazmul\",\"lastName\":\"Hasan\",\"email\":\"supplier1@gmail.com\",\"cell\":\"01612341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}");
+        this.supplierList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":1,\"userId\":3,\"remarks\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":3,\"firstName\":\"Nazmul\",\"lastName\":\"Hasan\",\"email\":\"supplier1@gmail.com\",\"cell\":\"01612341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}]");
+        //console.log(this.supplierList);
     }
 
     ngOnInit() {
-        
+
+    }
+    searchSupplier(event: Event) {
+        console.log(this.searchEntitySupplier.userId);
+        //console.log("Search Supplier");
+    }
+    newSupplier(event: Event) {
+        console.log("New Supplier");
+    }
+    saveSupplier(event: Event) {
+        console.log("Save Supplier");
+    }
+    selectedSupplier(event: Event, id: number) {
+        console.log(id);
     }
 }
 

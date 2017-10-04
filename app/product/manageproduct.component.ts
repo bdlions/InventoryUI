@@ -22,6 +22,7 @@ import {EntityUOM} from '../dto/EntityUOM';
 export class ManageProductComponent {
     private subscribe: Subscription;
     private entityProduct: EntityProduct;
+    private searchEntityProduct: EntityProduct;
     private productCategoryList: EntityProductCategory[];
     private productTypeList: EntityProductType[];
     private uomList: EntityUOM[];
@@ -29,6 +30,7 @@ export class ManageProductComponent {
     private productId: number;
 
     constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute) {
+        this.searchEntityProduct = new EntityProduct();
         this.entityProduct = JSON.parse("{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"length\":\"10 cm\",\"width\":\"20 cm\",\"height\":\"30 cm\",\"weight\":\"40 cm\",\"remark\":\"This is a good product...\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}");
         this.productCategoryList = JSON.parse("[{\"id\":1,\"title\":\"Product category1\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"title\":\"Product category2\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
         this.productTypeList = JSON.parse("[{\"id\":1,\"title\":\"Product type1\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"title\":\"Product type2\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
@@ -48,8 +50,9 @@ export class ManageProductComponent {
         });
     }
 
-    search(event: Event) {
-        console.log("Search Product");
+    searchProduct(event: Event) {
+        //console.log("Search Product");
+        console.log(this.searchEntityProduct.name);
     }
     newProduct(event: Event) {
         console.log(this.entityProduct.name);

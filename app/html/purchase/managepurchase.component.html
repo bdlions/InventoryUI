@@ -1,3 +1,360 @@
-<div style="font: 20">
-    Manage Purchase
+<div class="container-fluid">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3>Search</h3>
+                </div>
+            </div>
+            <form role="form" (submit)="searchPurchaseOrder($event)">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="purchase-order-title">Order</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input [(ngModel)]="reqDTOPurchaseOrder.entityPurchaseOrder.orderNo" name="orderNo" id="orderNo" class="form-control">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="submit" id="search-product" class="custom-button pull-right">Refresh</button>
+                    </div>
+                </div>
+            </form> 
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <table class="common-table">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let purchaseOrder of purchaseOrderList" (dblclick)="selectedPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.id)">
+                                <td data-label="Name" id="{{purchaseOrder.entityPurchaseOrder.id}}">{{purchaseOrder.entityPurchaseOrder.orderNo}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button (click)="newPurchaseOrder($event)" type="button" class="btn btn-default"><i class="fa fa-file"></i> New</button>
+                        <button (click)="savePurchaseOrder($event)"  type="button" class="btn btn-default"><i class="fa fa-floppy-o"></i> Save</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group margin-top-20px">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            <span class="purchase-order-title">Supplier</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            <!--<button type="button" class="btn btn-default" (click)="showPurchaseOrderSupplierModal($event)" >Click Me</button>-->
+                            <input [(ngModel)]="dtoSupplier.entityUser.firstName"  name="firstName" class="form-control" (dblclick)="showPurchaseOrderSupplierModal($event)">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            <span class="purchase-order-title">Phone</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            <input [(ngModel)]="dtoSupplier.entityUser.cell" name="cell" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            <span class="purchase-order-title">Email</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            <input [(ngModel)]="dtoSupplier.entityUser.email" name="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            <span class="purchase-order-title">Address</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            <textarea [(ngModel)]="dtoSupplier.entityUser.address" name="address" rows="3" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"></div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            <span class="purchase-order-title">Order</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            <input [(ngModel)]="reqDTOPurchaseOrder.entityPurchaseOrder.orderNo" name="orderNo" class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tabbable tabs-bottom">
+                        <div class="tab-content">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#purchase" data-toggle="tab">Purchase</a></li>
+                                <li><a href="#receive" data-toggle="tab">Receive</a></li>
+                            </ul>
+                            <div class="tab-pane active" id="purchase">                
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <table class="common-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Supplier Product Code</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Discount</th>
+                                                    <th>Sub-Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="cursor-pointer" *ngFor="let product of dtoPurchaseOrder.products" (dblclick)="showPurchaseOrderProductModal($event)">
+                                                    <td data-label="Item">{{product.entityProduct.name}}</td>
+                                                    <td data-label="Supplier Product Code">{{product.entityProduct.code}}</td>
+                                                    <td data-label="Quantity">{{product.quantity}}</td>
+                                                    <td data-label="Unit Price">{{product.entityProduct.unitPrice}}</td>
+                                                    <td data-label="Discount"></td>
+                                                    <td data-label="Sub-Total"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row form-group margin-top-20px">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="purchase-order-title">Remarks</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <textarea rows="3" [(ngModel)]="dtoPurchaseOrder.dtoSupplier.entitySupplier.remarks" name="remarks"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="purchase-order-title">Sub-total</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <label name="subtotal">{{dtoPurchaseOrder.entityPurchaseOrder.subtotal}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="purchase-order-title">Total</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <label name="total">{{dtoPurchaseOrder.entityPurchaseOrder.total}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="purchase-order-title">Balance</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <label name="balance">{{dtoPurchaseOrder.dtoSupplier.entitySupplier.balance}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="tab-pane" id="receive"> 
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Next Phase</h3>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div bsModal #purchaseOrderSupplierModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-11">
+                        <h4 class="modal-title">Supplier</h4>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-1">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h3>Search</h3>
+                    </div>
+                </div>
+                <form role="form" (submit)="searchPurchaseOrderSupplier($event)">
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Name</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <input [(ngModel)]="searchDTOSupplier.entityUser.firstName" name="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Phone</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <input [(ngModel)]="searchDTOSupplier.entityUser.cell" name="cell" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Email</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <input [(ngModel)]="searchDTOSupplier.entityUser.email" name="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <table class="common-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let supplier of supplierList">
+                                    <td data-label="Name">{{supplier.entityUser.firstName}} {{supplier.entityUser.lastName}}</td>
+                                    <td data-label="Phone">{{supplier.entityUser.cell}}</td>
+                                    <td data-label="Phone">{{supplier.entityUser.email}}</td>
+                                    <td data-label="View"><a href="#">view</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div bsModal #purchaseOrderProductModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-11">
+                        <h4 class="modal-title">Product</h4>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-1">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h3>Search</h3>
+                    </div>
+                </div>
+                <form role="form" (submit)="searchPurchaseOrderProduct($event)">
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Name</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <input [(ngModel)]="searchEntityProduct.name" id="name" name="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Type</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <select class="form-control" >
+                                <option *ngFor="let productType of productTypeList" id="{{productType.id}}" value="{{productType.title}}">{{productType.title}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Category</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <select class="form-control" >
+                                <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <table class="common-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Category</th>
+                                    <th>Normal Price</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of productList">
+                                    <td data-label="Item">{{product.name}}</td>
+                                    <td data-label="Category">{{product.categoryTitle}}</td>
+                                    <td data-label="Normal Price">{{product.unitPrice}}</td>
+                                    <td data-label="Details"><a href="#">details</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,3 +1,60 @@
-<div style="font: 20">
-    Sale List
+<div class="container-fluid">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h1>Search</h1>
+        </div>
+    </div>
+    <form role="form" (submit)="searchSaleOrder($event)">
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+                <span class="sale-order-list-title">Order</span>
+            </div>
+            <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                <input [(ngModel)]="reqDTOSaleOrder.entitySaleOrder.orderNo" id="orderNo" name="orderNo" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+            </div>
+        </div>
+    </form>
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <table class="common-table">
+                <thead>
+                    <tr>
+                        <th>Order</th>
+                        <th>Order Date</th>
+                        <th>Inventory Status</th>
+                        <th>Payment Status</th>
+                        <th>Customer</th>
+                        <th>Customer Order</th>
+                        <th>Location</th>
+                        <th>Requester Ship Date</th>
+                        <th>Due Date</th>
+                        <th>Total</th>
+                        <th>Paid</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let saleOrder of saleOrderList">
+                        <td data-label="Order">{{saleOrder.entitySaleOrder.orderNo}}</td>
+                        <td data-label="Order Date">{{saleOrder.entitySaleOrder.saleDate}}</td>
+                        <td data-label="Inventory Status"></td>
+                        <td data-label="Payment Status"></td>
+                        <td data-label="Customer"></td>
+                        <td data-label="Customer Order"></td>
+                        <td data-label="Location"></td>
+                        <td data-label="Requester Ship Date">{{saleOrder.entitySaleOrder.requestedShipDate}}</td>
+                        <td data-label="Due Date"></td>
+                        <td data-label="Total">{{saleOrder.entitySaleOrder.total}}</td>
+                        <td data-label="Paid">{{saleOrder.entitySaleOrder.paid}}</td>
+                        <td data-label="Balance"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

@@ -26,6 +26,7 @@ body{
     font-family: 'fira_sanslight';
     position: relative;
     height: 100%;
+    font-size: 13px!important;
     line-height: 150%!important;
     overflow-x: hidden;
     color: #666!important;
@@ -49,9 +50,9 @@ a:hover{
     cursor: pointer;
 }
 .container-fluid {
-/*    padding-right:0!important;
-    padding-left:0!important;*/
-    
+    /*    padding-right:0!important;
+        padding-left:0!important;*/
+
 }
 .margin-top-150px{
     margin-top: 150px;
@@ -62,8 +63,14 @@ a:hover{
 .margin-top-50px{
     margin-top: 50px;
 }
+.margin-top-20px{
+    margin-top: 20px;
+}
 .margin-top-60px{
     margin-top: 60px;
+}
+input, select,textArea{
+    font-size: 13px!important;
 }
 input, select{
     border: 1px solid #ccc!important;
@@ -169,6 +176,9 @@ table tr:hover{
     table td:last-child {
         border-bottom: 0;
     }
+}
+.cursor-pointer{
+    cursor: pointer;
 }
 /*----------------------------- Main Menu ----------------------------------*/
 
@@ -387,6 +397,16 @@ table tr:hover{
 .common-table tr:hover{
     color: #484848;
 }
+/*----------------------------- Common Title ----------------------------------*/
+.product-category-title,.product-title, .supplier-title,.purchase-order-title,.purchase-order-list-title,.sale-order-list-title,.current-stock-title{
+    font-size: 12px;
+}
+/*----------------------------- Modal ----------------------------------*/
+.modal-title{
+    color: #666; 
+    text-align: center;
+}
+
 @media (max-width: 480px) {
 
 }
@@ -493,10 +513,6 @@ table tr:hover{
         top: 778px;
         margin-left: 15px;
     }
-}
-/*----------------------------- Manage Product ----------------------------------*/
-.product-category-title,.product-title, .supplier-title{
-    font-size: 12px;
 }
 
 /*.tabs-below > .nav-tabs {

@@ -4,7 +4,7 @@ import {DTOProduct} from "./DTOProduct";
 export class DTOSaleOrder {
     limit: number;
     offset: number;
-    entityPurchaseOrder: EntitySaleOrder;
+    entitySaleOrder: EntitySaleOrder;
     dtoSupplier: DTOCustomer;
     products: Array<DTOProduct>;
 }

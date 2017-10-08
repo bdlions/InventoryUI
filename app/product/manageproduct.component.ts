@@ -1,10 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import {Component} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -54,7 +47,10 @@ export class ManageProductComponent {
         console.log(this.searchEntityProduct.name);
     }
     newProduct(event: Event) {
-        console.log(this.entityProduct.name);
+        //console.log(this.entityProduct.name);
+        this.entityProduct = new EntityProduct();
+        this.productTypeList = null;
+        this.productCategoryList = null;
     }
     saveProduct(event: Event) {
         console.log(this.entityProduct.name);

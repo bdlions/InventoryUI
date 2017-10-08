@@ -1,10 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {MarketAPI} from './../services/MarketAPI.service';
@@ -12,8 +5,9 @@ import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
 import {EntityCustomer} from '../dto/EntityCustomer';
-import {EntityUser} from '../dto/EntityUser';
 import {DTOCustomer} from '../dto/DTOCustomer';
+import {EntityUser} from '../dto/EntityUser';
+import {EntityUserRole} from "../dto/EntityUserRole";
 
 @Component({
     selector: 'app',
@@ -46,7 +40,10 @@ export class ManageCustomerComponent {
         console.log(this.searchDTOCustomer.entityUser.firstName);
     }
     newCustomer(event: Event) {
-        console.log("New Customer");
+        //console.log("New Customer");
+        this.dtoCustomer.entityCustomer = new EntityCustomer();
+        this.dtoCustomer.entityUser = new EntityUser();
+        this.dtoCustomer.entityUserRole = new EntityUserRole();
     }
     saveCustomer(event: Event) {
         console.log("Save Customer");

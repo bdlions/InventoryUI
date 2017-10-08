@@ -35,6 +35,9 @@ export class SupplierListComponent {
     searchSupplier(event: Event) {
         console.log(this.searchDTOSupplier.entityUser.firstName);
     }
+    showSupplier(event: Event, id: number) {
+        console.log(id);
+    }
     public fetchSupplierList() {
         this.reqDTOSupplier.limit = 10;
         this.reqDTOSupplier.offset = 0;

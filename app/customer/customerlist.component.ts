@@ -35,6 +35,9 @@ export class CustomerListComponent {
     searchCustomer(event: Event) {
         console.log(this.searchDTOCustomer.entityUser.firstName);
     }
+    showCustomer(event: Event, id: number) {
+        console.log(id);
+    }
 }
 
 

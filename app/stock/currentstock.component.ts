@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
@@ -14,14 +14,13 @@ import {EntityProductCategory} from '../dto/EntityProductCategory';
     providers: [WebAPIService]
 })
 
-export class CurrentStockComponent { 
+export class CurrentStockComponent {
     private webAPIService: WebAPIService;
     private reqDTOProduct: DTOProduct;
     private productList: DTOProduct[];
     private productCategoryList: EntityProductCategory[];
-    
-    constructor(private marketAPI: MarketAPI, private router: Router, webAPIService: WebAPIService) 
-    {
+
+    constructor(private marketAPI: MarketAPI, private router: Router, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
@@ -32,11 +31,14 @@ export class CurrentStockComponent {
     }
 
     ngOnInit() {
-        
+
     }
-    
-     searchCurrentStock(event: Event) {
-         console.log(this.reqDTOProduct.entityProduct.name);
+
+    searchCurrentStock(event: Event) {
+        console.log(this.reqDTOProduct.entityProduct.name);
+    }
+    showCurrentStock(event: Event, id: number) {
+        console.log(id);
     }
 }
 

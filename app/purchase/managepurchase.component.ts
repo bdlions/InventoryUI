@@ -10,6 +10,8 @@ import {DTOPurchaseOrder} from '../dto/DTOPurchaseOrder';
 import {EntityPurchaseOrder} from '../dto/EntityPurchaseOrder';
 
 import {EntityUser} from '../dto/EntityUser';
+import {EntitySupplier} from "../dto/EntitySupplier";
+import {EntityUserRole} from "../dto/EntityUserRole";
 import {DTOSupplier} from '../dto/DTOSupplier';
 
 import {EntityProduct} from '../dto/EntityProduct';
@@ -51,8 +53,8 @@ export class ManagePurchaseComponent {
         this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
         this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
         this.purchaseOrderList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entityPurchaseOrder\":{\"id\":1,\"orderNo\":\"order1\",\"supplierUserId\":3,\"orderDate\":0,\"requestedShipDate\":0,\"subtotal\":0.0,\"discount\":0.0,\"total\":0.0,\"paid\":0.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoSupplier\":{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":0,\"userId\":0,\"remarks\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":0,\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false}]");
-        setInterval(() => {this.purchaseOrderSupplierModal.hide();}, 1000 * 20);
-        setInterval(() => {this.purchaseOrderProductModal.hide();}, 1000 * 20);
+        //        setInterval(() => {this.purchaseOrderSupplierModal.hide();}, 1000 * 20);
+        //        setInterval(() => {this.purchaseOrderProductModal.hide();}, 1000 * 20);
         console.log(this.purchaseOrderList);
 
         this.searchDTOSupplier = new DTOSupplier();
@@ -89,12 +91,27 @@ export class ManagePurchaseComponent {
         console.log(this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo);
     }
     newPurchaseOrder(event: Event) {
-        console.log("New Purchase Order");
+        //        console.log("New Purchase Order");
+        this.dtoPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
+        this.dtoPurchaseOrder.dtoSupplier.entitySupplier = new EntitySupplier();
+        this.dtoPurchaseOrder.dtoSupplier.entityUser = new EntityUser();
+        this.dtoPurchaseOrder.dtoSupplier.entityUserRole = new EntityUserRole();
+        this.dtoPurchaseOrder.products = null;
+
+        this.dtoSupplier.entitySupplier = new EntitySupplier();
+        this.dtoSupplier.entityUser = new EntityUser();
+        this.dtoSupplier.entityUserRole = new EntityUserRole();
     }
     savePurchaseOrder(event: Event) {
         console.log("Save Purchase Order");
     }
     selectedPurchaseOrder(event: Event, id: number) {
+        console.log(id);
+    }
+    selectedPurchaseOrderSupplier(event: Event, id: number) {
+        console.log(id);
+    }
+    selectedPurchaseOrderProduct(event: Event, id: number) {
         console.log(id);
     }
 

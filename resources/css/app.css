@@ -397,6 +397,10 @@ table tr:hover{
 .common-table tr:hover{
     color: #484848;
 }
+.table-scroll {
+    height: 300px;
+    overflow: auto;
+}
 /*----------------------------- Common Title ----------------------------------*/
 .product-category-title,.product-title, .supplier-title,.purchase-order-title,.purchase-order-list-title,.sale-order-list-title,.current-stock-title{
     font-size: 12px;

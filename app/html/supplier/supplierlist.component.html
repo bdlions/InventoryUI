@@ -36,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let supplier of supplierList">
+                    <tr class="cursor-pointer" *ngFor="let supplier of supplierList" (dblclick)="showSupplier($event, supplier.entitySupplier.id)">
                         <td data-label="Name">{{supplier.entityUser.firstName}} {{supplier.entityUser.lastName}}</td>
                         <td data-label="Contact"></td>
                         <td data-label="Phone">{{supplier.entityUser.cell}}</td>

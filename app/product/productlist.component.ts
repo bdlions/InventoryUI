@@ -43,6 +43,9 @@ export class ProductListComponent {
     searchProduct(event: Event) {
         console.log(this.searchEntityProduct.name);
     }
+    showProduct(event: Event, id: number) {
+        console.log(id);
+    }
     public fetchProductList() {
         this.reqDTOProduct.limit = 10;
         this.reqDTOProduct.offset = 0;

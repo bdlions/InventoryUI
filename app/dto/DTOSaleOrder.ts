@@ -5,6 +5,6 @@ export class DTOSaleOrder {
     limit: number;
     offset: number;
     entitySaleOrder: EntitySaleOrder;
-    dtoSupplier: DTOCustomer;
+    dtoCustomer: DTOCustomer;
     products: Array<DTOProduct>;
 }

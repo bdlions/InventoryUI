@@ -10,6 +10,8 @@ import {DTOSaleOrder} from '../dto/DTOSaleOrder';
 import {EntitySaleOrder} from '../dto/EntitySaleOrder';
 
 import {EntityUser} from '../dto/EntityUser';
+import {EntityCustomer} from "../dto/EntityCustomer";
+import {EntityUserRole} from "../dto/EntityUserRole";
 import {DTOCustomer} from '../dto/DTOCustomer';
 
 import {EntityProduct} from '../dto/EntityProduct';
@@ -51,8 +53,8 @@ export class ManageSaleComponent {
         this.reqDTOSaleOrder = new DTOSaleOrder();
         this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
         this.saleOrderList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entitySaleOrder\":{\"id\":1,\"orderNo\":\"order1\",\"customerUserId\":4,\"statusId\":0,\"saleDate\":0,\"discount\":0.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoCustomer\":{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":0,\"userId\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":0,\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false}]");
-        setInterval(() => {this.saleOrderCustomerModal.hide();}, 1000 * 20);
-        setInterval(() => {this.saleOrderProductModal.hide();}, 1000 * 20);
+        //        setInterval(() => {this.saleOrderCustomerModal.hide();}, 1000 * 20);
+        //        setInterval(() => {this.saleOrderProductModal.hide();}, 1000 * 20);
         console.log(this.saleOrderList);
 
         this.searchDTOCustomer = new DTOCustomer();
@@ -88,7 +90,16 @@ export class ManageSaleComponent {
         console.log(this.reqDTOSaleOrder.entitySaleOrder.orderNo);
     }
     newSaleOrder(event: Event) {
-        console.log("New Sale Order");
+        //        console.log("New Sale Order");
+        this.dtoSaleOrder.entitySaleOrder = new EntitySaleOrder();
+        this.dtoSaleOrder.dtoCustomer.entityCustomer = new EntityCustomer();
+        this.dtoSaleOrder.dtoCustomer.entityUser = new EntityUser();
+        this.dtoSaleOrder.dtoCustomer.entityUserRole = new EntityUserRole();
+        this.dtoSaleOrder.products = null;
+
+        this.dtoCustomer.entityCustomer = new EntityCustomer();
+        this.dtoCustomer.entityUser = new EntityUser();
+        this.dtoCustomer.entityUserRole = new EntityUserRole();
     }
     savePurchaseOrder(event: Event) {
         console.log("Save Sale Order");
@@ -96,7 +107,12 @@ export class ManageSaleComponent {
     selectedSaleOrder(event: Event, id: number) {
         console.log(id);
     }
-
+    selectedSaleOrderCustomer(event: Event, id: number) {
+        console.log(id);
+    }
+    selectedSaleOrderProduct(event: Event, id: number) {
+        console.log(id);
+    }
     public hideChildModal(): void {
         this.saleOrderCustomerModal.hide();
         this.saleOrderProductModal.hide();

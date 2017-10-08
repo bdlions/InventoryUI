@@ -39,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let purchaseOrder of purchaseOrderList">
+                    <tr class="cursor-pointer" *ngFor="let purchaseOrder of purchaseOrderList" (dblclick)="showPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.id)">
                         <td data-label="Order">{{purchaseOrder.entityPurchaseOrder.orderNo}}</td>
                         <td data-label="Order Date">{{purchaseOrder.entityPurchaseOrder.orderDate}}</td>
                         <td data-label="Inventory Status"></td>
@@ -51,7 +51,7 @@
                         <td data-label="Due Date"></td>
                         <td data-label="Total">{{purchaseOrder.entityPurchaseOrder.total}}</td>
                         <td data-label="Paid">{{purchaseOrder.entityPurchaseOrder.paid}}</td>
-                        <td data-label="Balance"></td>
+                        <td data-label="Balance">{{purchaseOrder.dtoSupplier.entitySupplier.balance}}</td>
                     </tr>
                 </tbody>
             </table>

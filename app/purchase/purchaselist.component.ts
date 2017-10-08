@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
@@ -13,13 +13,12 @@ import {EntityPurchaseOrder} from '../dto/EntityPurchaseOrder';
     providers: [WebAPIService]
 })
 
-export class PurchaseListComponent { 
+export class PurchaseListComponent {
     private webAPIService: WebAPIService;
     private reqDTOPurchaseOrder: DTOPurchaseOrder;
     private purchaseOrderList: DTOPurchaseOrder[];
-    
-    constructor(private marketAPI: MarketAPI, private router: Router, webAPIService: WebAPIService) 
-    {
+
+    constructor(private marketAPI: MarketAPI, private router: Router, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
         this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
         this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
@@ -28,10 +27,13 @@ export class PurchaseListComponent {
     }
 
     ngOnInit() {
-        
+
     }
     searchPurchaseOrder(event: Event) {
         console.log(this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo);
+    }
+    showPurchaseOrder(event: Event, id: number) {
+        console.log(id);
     }
 }
 

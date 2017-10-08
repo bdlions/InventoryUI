@@ -39,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="cursor-pointer" *ngFor="let purchaseOrder of purchaseOrderList" (dblclick)="showPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.id)">
+                    <tr class="cursor-pointer" *ngFor="let purchaseOrder of purchaseOrderList" (dblclick)="showPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.orderNo)">
                         <td data-label="Order">{{purchaseOrder.entityPurchaseOrder.orderNo}}</td>
                         <td data-label="Order Date">{{purchaseOrder.entityPurchaseOrder.orderDate}}</td>
                         <td data-label="Inventory Status"></td>

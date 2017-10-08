@@ -80,9 +80,8 @@ input, select{
 input:focus,select:focus{
     border: 1px solid #4568b2!important;
 }
-.custom-button {
+.custom-button,.custom-red-button {
     color: #fff!important;
-    background-color: #0072C6!important;
     border-color: #ccc;
     border-radius: 0px;
     padding: 3px 32px;
@@ -100,6 +99,12 @@ input:focus,select:focus{
     -ms-user-select: none;
     background-image: none;
     border: 1px solid transparent;
+}
+.custom-button{
+     background-color: #0072C6!important;
+}
+.custom-red-button {
+    background-color: #d43f3a!important;
 }
 .vertical-center {
     position: absolute;
@@ -398,7 +403,7 @@ table tr:hover{
     color: #484848;
 }
 .table-scroll {
-    height: 300px;
+    max-height: 300px;
     overflow: auto;
 }
 /*----------------------------- Common Title ----------------------------------*/

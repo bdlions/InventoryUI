@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {NavigationManager} from "../services/NavigationManager";
 import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
@@ -22,8 +23,20 @@ export class ProductListComponent {
     private productCategoryList: EntityProductCategory[];
     private reqDTOProduct: DTOProduct;
     private reqEntityProduct: EntityProduct;
+    private showNavBar: boolean = false;
+    private activeMenu: string = "productlist";
 
-    constructor(private marketAPI: MarketAPI, private router: Router, webAPIService: WebAPIService) {
+    constructor(private marketAPI: MarketAPI, private router: Router, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
+        this.navigationManager.showNavBarEmitter.subscribe((mode) => {
+            if (mode !== null) {
+                this.showNavBar = mode;
+            }
+        });
+        this.navigationManager.menuActivationEmitter.subscribe((menuName) => {
+            if (menuName !== null) {
+                this.activeMenu = menuName;
+            }
+        });
         this.webAPIService = webAPIService;
         this.searchEntityProduct = new EntityProduct();
         this.reqDTOProduct = new DTOProduct();
@@ -44,7 +57,11 @@ export class ProductListComponent {
         console.log(this.searchEntityProduct.name);
     }
     showProduct(event: Event, id: number) {
-        console.log(id);
+
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("manageproduct");
+        this.router.navigate(["manageproduct", {productId: id}]);
     }
     public fetchProductList() {
         this.reqDTOProduct.limit = 10;

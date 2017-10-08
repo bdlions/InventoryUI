@@ -124,6 +124,7 @@
                                                         <td data-label="Unit Price"><input class="form-control" value="{{product.entityProduct.unitPrice}}"></td>
                                                         <td data-label="Discount"><input class="form-control" value=""></td>
                                                         <td data-label="Sub-Total"><label></label></td>
+                                                         <td data-label="Delete"><i class="cursor-pointer fa fa-times" (click)="deleteSelectedSaleOrderProduct($event, product.entityProduct.id)"></i></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

@@ -54,7 +54,6 @@
                             <span class="purchase-order-title">Supplier</span>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                            <!--<button type="button" class="btn btn-default" (click)="showPurchaseOrderSupplierModal($event)" >Click Me</button>-->
                             <input [(ngModel)]="dtoSupplier.entityUser.firstName"  name="firstName" class="form-control" (dblclick)="showPurchaseOrderSupplierModal($event)">
                         </div>
                     </div>
@@ -117,16 +116,18 @@
                                                         <th>Unit Price</th>
                                                         <th>Discount</th>
                                                         <th>Sub-Total</th>
+                                                        <th>Delete</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr class="cursor-pointer" *ngFor="let product of dtoPurchaseOrder.products">
+                                                    <tr *ngFor="let product of dtoPurchaseOrder.products">
                                                         <td data-label="Item" (dblclick)="showPurchaseOrderProductModal($event)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
                                                         <td data-label="Supplier Product Code"><input class="form-control" value="{{product.entityProduct.code}}"></td>
                                                         <td data-label="Quantity"><input class="form-control" value="{{product.quantity}}"></td>
                                                         <td data-label="Unit Price"><input class="form-control" value="{{product.entityProduct.unitPrice}}"></td>
                                                         <td data-label="Discount"><input class="form-control" value=""></td>
                                                         <td data-label="Sub-Total"><label></label></td>
+                                                        <td data-label="Delete"><i class="cursor-pointer fa fa-times" (click)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -197,8 +198,6 @@
         </div>
     </div>
 </div>
-
-
 
 <div bsModal #purchaseOrderSupplierModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
      <div class="modal-dialog modal-lg" role="document">
@@ -280,6 +279,7 @@
         </div>
     </div>
 </div>
+
 <div bsModal #purchaseOrderProductModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -358,6 +358,45 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div bsModal #selectedPurchaseOrderProductDeleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-11">
+                        <h4 class="modal-title">Selected Purchase Product Delete</h4>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-1">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="text-center">Do you want to Delete this Product? </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideChildModal()">No</button>
+                        <button type="button" class="custom-button">Yes</button>
                     </div>
                 </div>
             </div>

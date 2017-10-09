@@ -10,41 +10,66 @@
                     </div>
                 </div>
                 <div class="login-form-body-pagelet margin-top-60px">
-                    <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <label class="control-label">Login Type:</label>
-                            </div>
-                        </div>
-                    <div class="row form-group">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <select class="selectpicker dropdown-toggle form-control" #selectedUserIndex (change)="getSelectedUsers(selectedUserIndex.value)">
-                                <option class="dropdown-item" *ngFor="let userType of userTypes; let i=index" [value]="i" value="{{userType.type}}"><span class="caret">{{userType.typeName}}</span></option>
-                            </select>
-                        </div>
-                         </div>
+                    <form role="form" (submit)="login($event)">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <label class="control-label">Login User:</label>
+                                <label class="control-label">User Name</label>
                             </div>
                         </div>
                         <div class="row form-group">
-                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <select class="selectpicker dropdown-toggle form-control" #selectedUser>
-                                    <option class="dropdown-item" *ngFor="let user of selectedUsers" value="{{user.userId}}"><span class="caret">{{user.userName}}</span> </option>
-                            </select>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <input type="text" [(ngModel)]="dtoUser.userName" name="userName" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                      <div class="row form-group">
-                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <button type="submit" class="form-control custom-button" (click)="goHome($event)" >Submit</button>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label class="control-label">Password</label>
+                            </div>
                         </div>
-                    </div>
-               
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <input type="password" [(ngModel)]="dtoUser.password" name="password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <button type="submit" class="form-control custom-button" >Submit</button>
+                            </div>
+                        </div>
+                        <!--                        <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="control-label">Login Type:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <select class="selectpicker dropdown-toggle form-control" #selectedUserIndex (change)="getSelectedUsers(selectedUserIndex.value)">
+                                                            <option class="dropdown-item" *ngFor="let userType of userTypes; let i=index" [value]="i" value="{{userType.type}}"><span class="caret">{{userType.typeName}}</span></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="control-label">Login User:</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <select class="selectpicker dropdown-toggle form-control" #selectedUser>
+                                                            <option class="dropdown-item" *ngFor="let user of selectedUsers" value="{{user.userId}}"><span class="caret">{{user.userName}}</span> </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <button type="submit" class="form-control custom-button" >Submit</button>
+                                                    </div>
+                                                </div>-->
+                    </form>
+                </div>
             </div>
-
         </div>
     </div>
-</div>
 </div>
 <!--<div class="vertical-center col-md-4">
     <div class="well">

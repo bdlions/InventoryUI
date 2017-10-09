@@ -50,6 +50,8 @@ export class ManageCustomerComponent {
         console.log("Save Customer");
     }
     selectedCustomer(event: Event, customerId: number) {
+         event.preventDefault();
+        this.router.navigate(["managecustomer", {customerId: customerId}]);
         let customerCounter: number;
         for (customerCounter = 0; customerCounter < this.customerList.length; customerCounter++)
         {

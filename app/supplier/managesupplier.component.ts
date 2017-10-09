@@ -49,11 +49,11 @@ export class ManageSupplierComponent {
         console.log("Save Supplier");
     }
     selectedSupplier(event: Event, supplierId: number) {
+        event.preventDefault();
+        this.router.navigate(["managesupplier", {productId: supplierId}]);
         let supplierCounter: number;
-        for (supplierCounter = 0; supplierCounter < this.supplierList.length; supplierCounter++)
-        {
-            if (this.supplierList[supplierCounter].entitySupplier.id == supplierId)
-            {
+        for (supplierCounter = 0; supplierCounter < this.supplierList.length; supplierCounter++) {
+            if (this.supplierList[supplierCounter].entitySupplier.id == supplierId) {
                 this.dtoSupplier = this.supplierList[supplierCounter];
             }
         }

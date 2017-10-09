@@ -30,7 +30,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let saleOrder of saleOrderList" (dblclick)="selectedSaleOrder($event, saleOrder.entitySaleOrder.orderNo)">
+                            <tr class="cursor-pointer" *ngFor="let saleOrder of saleOrderList" (dblclick)="selectedSaleOrder($event, saleOrder.entitySaleOrder.orderNo)">
                                 <td data-label="Name" id="{{saleOrder.entitySaleOrder.id}}">{{saleOrder.entitySaleOrder.orderNo}}</td>
                             </tr>
                         </tbody>
@@ -115,6 +115,7 @@
                                                         <th>Unit Price</th>
                                                         <th>Discount</th>
                                                         <th>Sub-Total</th>
+                                                        <th>Delete</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -124,7 +125,16 @@
                                                         <td data-label="Unit Price"><input class="form-control" value="{{product.entityProduct.unitPrice}}"></td>
                                                         <td data-label="Discount"><input class="form-control" value=""></td>
                                                         <td data-label="Sub-Total"><label></label></td>
-                                                         <td data-label="Delete"><i class="cursor-pointer fa fa-times" (click)="deleteSelectedSaleOrderProduct($event, product.entityProduct.id)"></i></td>
+                                                          <td data-label="Delete"><i class="cursor-pointer fa fa-times" (click)="showSelectedSaleOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
+                                                    </tr>
+                                                     <tr class="cursor-pointer" (dblclick)="showSaleOrderEmptyRowProductModal($event)">
+                                                        <td><i class="fa fa-plus"></i></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -347,7 +357,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let product of productList">
+                                    <tr *ngFor="let product of productList" (dblclick)="selectedSaleOrderProductFromModal($event, product.id)">
                                         <td data-label="Item">{{product.name}}</td>
                                         <td data-label="Category">{{product.categoryTitle}}</td>
                                         <td data-label="Normal Price">{{product.unitPrice}}</td>
@@ -362,3 +372,38 @@
         </div>
     </div>
 </div>
+
+<div bsModal #selectedSaleOrderProductDeleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-11">
+                        <h4 class="modal-title">Selected Purchase Product Delete</h4>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-1">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="text-center">Do you want to Delete this Product? </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideChildModal()">No</button>
+                        <button type="button" class="custom-button">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

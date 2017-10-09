@@ -29,6 +29,7 @@ export class ManageSaleComponent {
     private subscribe: Subscription;
     @ViewChild('saleOrderCustomerModal') public saleOrderCustomerModal: ModalDirective;
     @ViewChild('saleOrderProductModal') public saleOrderProductModal: ModalDirective;
+     @ViewChild('selectedSaleOrderProductDeleteModal') public selectedSaleOrderProductDeleteModal: ModalDirective;
     private webAPIService: WebAPIService;
     private dtoSaleOrder: DTOSaleOrder;
     private orderNo: string;
@@ -108,8 +109,9 @@ export class ManageSaleComponent {
         console.log("Save Sale Order");
     }
     
-    selectedSaleOrder(event: Event, orderNo: string) 
-    {
+    selectedSaleOrder(event: Event, orderNo: string){
+        event.preventDefault();
+        this.router.navigate(["managesale", {orderNo: orderNo}]);
         let saleCounter: number;
         for (saleCounter = 0; saleCounter < this.saleOrderList.length; saleCounter++)
         {
@@ -127,12 +129,27 @@ export class ManageSaleComponent {
     selectedSaleOrderProduct(event: Event, id: number) {
         console.log(id);
     }
-    deleteSelectedSaleOrderProduct(event: Event, id: number) {
+    selectedSaleOrderProductFromModal(event: Event, id: number) {
         console.log(id);
+    }
+    selectedSaleOrderProductDetails(event: Event, id: number) {
+        console.log(id);
+    }
+    selectedSaleOrderProductDelete(event: Event, id: number) {
+        console.log(id);
+    }
+    searchSaleOrderCustomer(event: Event) {
+        console.log(this.searchDTOCustomer.entityUser.firstName);
+        console.log(this.searchDTOCustomer.entityUser.cell);
+        console.log(this.searchDTOCustomer.entityUser.email);
+    }
+    searchSaleOrderProduct(event: Event) {
+        console.log(this.searchEntityProduct.name);
     }
     public hideChildModal(): void {
         this.saleOrderCustomerModal.hide();
         this.saleOrderProductModal.hide();
+        this.selectedSaleOrderProductDeleteModal.hide();
     }
     public showSaleOrderCustomerModal(event: Event) {
         this.saleOrderCustomerModal.config.backdrop = false;
@@ -142,13 +159,14 @@ export class ManageSaleComponent {
         this.saleOrderProductModal.config.backdrop = false;
         this.saleOrderProductModal.show();
     }
-    searchSaleOrderCustomer(event: Event) {
-        console.log(this.searchDTOCustomer.entityUser.firstName);
-        console.log(this.searchDTOCustomer.entityUser.cell);
-        console.log(this.searchDTOCustomer.entityUser.email);
+    public showSaleOrderEmptyRowProductModal(event: Event) {
+        this.saleOrderProductModal.config.backdrop = false;
+        this.saleOrderProductModal.show();
     }
-    searchSaleOrderProduct(event: Event) {
-        console.log(this.searchEntityProduct.name);
+    public showSelectedSaleOrderProductDeleteModal(event: Event, id: number) {
+        this.selectedSaleOrderProductDeleteModal.config.backdrop = false;
+        this.selectedSaleOrderProductDeleteModal.show();
+         console.log(id);
     }
 }
 

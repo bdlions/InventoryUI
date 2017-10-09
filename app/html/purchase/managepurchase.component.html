@@ -30,7 +30,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let purchaseOrder of purchaseOrderList" (dblclick)="selectedPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.id)">
+                            <tr *ngFor="let purchaseOrder of purchaseOrderList" (dblclick)="selectedPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.orderNo)">
                                 <td data-label="Name" id="{{purchaseOrder.entityPurchaseOrder.id}}">{{purchaseOrder.entityPurchaseOrder.orderNo}}</td>
                             </tr>
                         </tbody>

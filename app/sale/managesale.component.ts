@@ -91,12 +91,15 @@ export class ManageSaleComponent {
     }
     newSaleOrder(event: Event) {
         //        console.log("New Sale Order");
+        this.dtoSaleOrder = new DTOSaleOrder();
         this.dtoSaleOrder.entitySaleOrder = new EntitySaleOrder();
+        this.dtoSaleOrder.dtoCustomer = new DTOCustomer();
         this.dtoSaleOrder.dtoCustomer.entityCustomer = new EntityCustomer();
         this.dtoSaleOrder.dtoCustomer.entityUser = new EntityUser();
         this.dtoSaleOrder.dtoCustomer.entityUserRole = new EntityUserRole();
-        this.dtoSaleOrder.products = null;
+        this.dtoSaleOrder.products = Array();
 
+        this.dtoCustomer = new DTOCustomer();
         this.dtoCustomer.entityCustomer = new EntityCustomer();
         this.dtoCustomer.entityUser = new EntityUser();
         this.dtoCustomer.entityUserRole = new EntityUserRole();
@@ -104,8 +107,19 @@ export class ManageSaleComponent {
     savePurchaseOrder(event: Event) {
         console.log("Save Sale Order");
     }
-    selectedSaleOrder(event: Event, id: number) {
-        console.log(id);
+    
+    selectedSaleOrder(event: Event, orderNo: string) 
+    {
+        let saleCounter: number;
+        for (saleCounter = 0; saleCounter < this.saleOrderList.length; saleCounter++)
+        {
+            if (this.saleOrderList[saleCounter].entitySaleOrder.orderNo == orderNo)
+            {
+                this.dtoCustomer = JSON.parse("{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"remarks\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}");
+                this.dtoSaleOrder = this.saleOrderList[saleCounter];
+                this.dtoSaleOrder.products = JSON.parse("[{\"limit\":10, \"offset\":0, \"quantity\":50, \"entityProduct\":{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}},{\"limit\":10, \"offset\":0, \"quantity\":100, \"entityProduct\":{\"id\":2,\"name\":\"product2\",\"code\":\"code2\",\"categoryId\":2,\"categoryTitle\":\"Product category2\",\"typeId\":2,\"typeTitle\":\"Product type2\",\"unitPrice\":20.0,\"standardUOMId\":20,\"saleUOMId\":20,\"purchaseUOMId\":20,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}}]");
+            }
+        }
     }
     selectedSaleOrderCustomer(event: Event, id: number) {
         console.log(id);

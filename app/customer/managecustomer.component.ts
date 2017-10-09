@@ -41,6 +41,7 @@ export class ManageCustomerComponent {
     }
     newCustomer(event: Event) {
         //console.log("New Customer");
+        this.dtoCustomer = new DTOCustomer();
         this.dtoCustomer.entityCustomer = new EntityCustomer();
         this.dtoCustomer.entityUser = new EntityUser();
         this.dtoCustomer.entityUserRole = new EntityUserRole();
@@ -48,8 +49,15 @@ export class ManageCustomerComponent {
     saveCustomer(event: Event) {
         console.log("Save Customer");
     }
-    selectedCustomer(event: Event, id: number) {
-        console.log(id);
+    selectedCustomer(event: Event, customerId: number) {
+        let customerCounter: number;
+        for (customerCounter = 0; customerCounter < this.customerList.length; customerCounter++)
+        {
+            if (this.customerList[customerCounter].entityCustomer.id == customerId)
+            {
+                this.dtoCustomer = this.customerList[customerCounter];
+            }
+        }
     }
 }
 

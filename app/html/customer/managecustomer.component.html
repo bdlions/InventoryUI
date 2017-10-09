@@ -30,7 +30,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let customer of customerList" (dblclick)="selectedCustomer($event, customer.entityUser.id)">
+                            <tr *ngFor="let customer of customerList" (dblclick)="selectedCustomer($event, customer.entityCustomer.id)">
                                 <td data-label="Name">{{customer.entityUser.firstName}} {{customer.entityUser.lastName}}</td>
                             </tr>
                         </tbody>

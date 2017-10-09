@@ -49,13 +49,19 @@ export class ManageProductComponent {
     newProduct(event: Event) {
         //console.log(this.entityProduct.name);
         this.entityProduct = new EntityProduct();
-        this.productTypeList = null;
-        this.productCategoryList = null;
     }
     saveProduct(event: Event) {
         console.log(this.entityProduct.name);
     }
-    selectedProduct(event: Event, id: number) {
-        console.log(id);
+    selectedProduct(event: Event, productId: number) {
+        let productCounter: number;
+        for (productCounter = 0; productCounter < this.productList.length; productCounter++)
+        {
+            if (this.productList[productCounter].id == productId)
+            {
+                this.entityProduct = this.productList[productCounter];
+                //set product type and category dropdown
+            }
+        }
     }
 }

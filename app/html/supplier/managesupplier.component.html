@@ -30,7 +30,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="cursor-pointer" *ngFor="let supplier of supplierList" (dblclick)="selectedSupplier($event, supplier.entityUser.id)">
+                            <tr class="cursor-pointer" *ngFor="let supplier of supplierList" (dblclick)="selectedSupplier($event, supplier.entitySupplier.id)">
                                 <td data-label="Name">{{supplier.entityUser.firstName}} {{supplier.entityUser.lastName}}</td>
                             </tr>
                         </tbody>

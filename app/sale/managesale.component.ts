@@ -30,6 +30,7 @@ export class ManageSaleComponent {
     @ViewChild('saleOrderCustomerModal') public saleOrderCustomerModal: ModalDirective;
     @ViewChild('saleOrderProductModal') public saleOrderProductModal: ModalDirective;
      @ViewChild('selectedSaleOrderProductDeleteModal') public selectedSaleOrderProductDeleteModal: ModalDirective;
+     @ViewChild('addSaleOrderProduct') public addSaleOrderProduct: ModalDirective;
     private webAPIService: WebAPIService;
     private dtoSaleOrder: DTOSaleOrder;
     private orderNo: string;
@@ -150,6 +151,7 @@ export class ManageSaleComponent {
         this.saleOrderCustomerModal.hide();
         this.saleOrderProductModal.hide();
         this.selectedSaleOrderProductDeleteModal.hide();
+        this.addSaleOrderProduct.hide();
     }
     public showSaleOrderCustomerModal(event: Event) {
         this.saleOrderCustomerModal.config.backdrop = false;
@@ -158,6 +160,10 @@ export class ManageSaleComponent {
     public showSaleOrderProductModal(event: Event) {
         this.saleOrderProductModal.config.backdrop = false;
         this.saleOrderProductModal.show();
+    }
+     public showAddSaleOrderProductModal(event: Event) {
+        this.addSaleOrderProduct.config.backdrop = false;
+        this.addSaleOrderProduct.show();
     }
     public showSaleOrderEmptyRowProductModal(event: Event) {
         this.saleOrderProductModal.config.backdrop = false;

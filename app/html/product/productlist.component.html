@@ -1,54 +1,58 @@
-<div class="container">
-    <div class="row form-group">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h1>Search</h1>
-        </div>
-    </div>
-    <form role="form" (submit)="searchProduct($event)">
-        <div class="row form-group">
-            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
-                <span class="product-title">Item Name/Code</span>
-            </div>
-            <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
-                <input [(ngModel)]="searchEntityProduct.name" id="name" name="name" class="form-control">
+<div class="wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h4>Search</h4>
             </div>
         </div>
-        <div class="row form-group">
-            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
-                <span class="product-title">Category</span>
+        <form role="form" (submit)="searchProduct($event)">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+                    <span class="product-title">Item Name/Code</span>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                    <input [(ngModel)]="searchEntityProduct.name" id="name" name="name" class="form-control">
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
-                <select class="form-control" >
-                    <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
-                </select>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+                    <span class="product-title">Category</span>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                    <select class="form-control" >
+                        <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
+                    </select>
+                </div>
             </div>
-        </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+                </div>
+            </div>
+        </form>
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+                <div class="table-wrapper">
+                    <table class="common-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cursor-pointer" *ngFor="let product of productList" (click)="showProduct($event, product.id)">
+                                <td data-label="Item">{{product.name}}</td>
+                                <td data-label="Type">{{product.typeTitle}}</td>
+                                <td data-label="Category">{{product.categoryTitle}}</td>
+                                <td data-label="Price">{{product.unitPrice}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </form>
-    <div class="row form-group">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <table class="common-table">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Type</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="cursor-pointer" *ngFor="let product of productList" (dblclick)="showProduct($event, product.id)">
-                        <td data-label="Item">{{product.name}}</td>
-                        <td data-label="Type">{{product.typeTitle}}</td>
-                        <td data-label="Category">{{product.categoryTitle}}</td>
-                        <td data-label="Price">{{product.unitPrice}}</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 </div>

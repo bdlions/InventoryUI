@@ -1,60 +1,64 @@
-<div class="container-fluid">
-    <div class="row form-group">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h1>Search</h1>
-        </div>
-    </div>
-    <form role="form" (submit)="searchPurchaseOrder($event)">
-        <div class="row form-group">
-            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
-                <span class="purchase-order-list-title">Order</span>
-            </div>
-            <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
-                <input [(ngModel)]="reqDTOPurchaseOrder.entityPurchaseOrder.orderNo" id="orderNo" name="orderNo" class="form-control">
+<div class="wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h4>Search</h4>
             </div>
         </div>
+        <form role="form" (submit)="searchPurchaseOrder($event)">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+                    <span class="purchase-order-list-title">Order</span>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                    <input [(ngModel)]="reqDTOPurchaseOrder.entityPurchaseOrder.orderNo" id="orderNo" name="orderNo" class="form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+                </div>
+            </div>
+        </form>
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+                <div class="table-wrapper">
+                    <table class="common-table">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Order Date</th>
+                                <th>Inventory Status</th>
+                                <th>Payment Status</th>
+                                <th>Supplier</th>
+                                <th>Supplier Order</th>
+                                <th>Location</th>
+                                <th>Requester Ship Date</th>
+                                <th>Due Date</th>
+                                <th>Total</th>
+                                <th>Paid</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cursor-pointer" *ngFor="let purchaseOrder of purchaseOrderList" (click)="showPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.orderNo)">
+                                <td data-label="Order">{{purchaseOrder.entityPurchaseOrder.orderNo}}</td>
+                                <td data-label="Order Date">{{purchaseOrder.entityPurchaseOrder.orderDate}}</td>
+                                <td data-label="Inventory Status"></td>
+                                <td data-label="Payment Status"></td>
+                                <td data-label="Supplier"></td>
+                                <td data-label="Supplier Order"></td>
+                                <td data-label="Location"></td>
+                                <td data-label="Requester Ship Date">{{purchaseOrder.entityPurchaseOrder.requestedShipDate}}</td>
+                                <td data-label="Due Date"></td>
+                                <td data-label="Total">{{purchaseOrder.entityPurchaseOrder.total}}</td>
+                                <td data-label="Paid">{{purchaseOrder.entityPurchaseOrder.paid}}</td>
+                                <td data-label="Balance">{{purchaseOrder.dtoSupplier.entitySupplier.balance}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </form>
-    <div class="row form-group">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <table class="common-table">
-                <thead>
-                    <tr>
-                        <th>Order</th>
-                        <th>Order Date</th>
-                        <th>Inventory Status</th>
-                        <th>Payment Status</th>
-                        <th>Supplier</th>
-                        <th>Supplier Order</th>
-                        <th>Location</th>
-                        <th>Requester Ship Date</th>
-                        <th>Due Date</th>
-                        <th>Total</th>
-                        <th>Paid</th>
-                        <th>Balance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="cursor-pointer" *ngFor="let purchaseOrder of purchaseOrderList" (dblclick)="showPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.orderNo)">
-                        <td data-label="Order">{{purchaseOrder.entityPurchaseOrder.orderNo}}</td>
-                        <td data-label="Order Date">{{purchaseOrder.entityPurchaseOrder.orderDate}}</td>
-                        <td data-label="Inventory Status"></td>
-                        <td data-label="Payment Status"></td>
-                        <td data-label="Supplier"></td>
-                        <td data-label="Supplier Order"></td>
-                        <td data-label="Location"></td>
-                        <td data-label="Requester Ship Date">{{purchaseOrder.entityPurchaseOrder.requestedShipDate}}</td>
-                        <td data-label="Due Date"></td>
-                        <td data-label="Total">{{purchaseOrder.entityPurchaseOrder.total}}</td>
-                        <td data-label="Paid">{{purchaseOrder.entityPurchaseOrder.paid}}</td>
-                        <td data-label="Balance">{{purchaseOrder.dtoSupplier.entitySupplier.balance}}</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 </div>

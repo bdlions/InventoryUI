@@ -5,31 +5,32 @@ Version: 1.0
 */
 /*----------------------------- Common ----------------------------------*/
 @font-face {
-    font-family: 'fira_sanslight';
-    src: url('../fonts/firasans-light-webfont.woff2') format('woff2'),
-        url('../fonts/firasans-light-webfont.woff') format('woff');
+    font-family: 'roboto';
+    src: url('../fonts/roboto-regular-webfont.woff2') format('woff2'),
+        url('../fonts/roboto-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
-@font-face {
-    font-family: 'fira_sanslight_italic';
-    src: url('../fonts/firasans-lightitalic-webfont.woff2') format('woff2'),
-        url('../fonts/firasans-lightitalic-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+
 html,body{
     margin: 0;
     padding: 0;
 }
 body{
-    font-family: 'fira_sanslight';
+    font-family: 'roboto';
     position: relative;
     height: 100%;
-    font-size: 13px!important;
+    font-size: 14px!important;
     line-height: 150%!important;
     overflow-x: hidden;
     color: #666!important;
+}
+.container-fluid {
+    padding-right:0!important;
+    padding-left:0!important;
+}
+.wrapper{
+    padding: 15px;
 }
 h1,h2,h3,h4,h5,h6{
     line-height: 150%;
@@ -39,9 +40,7 @@ h1,h2,h3,h4,h5,h6{
 p{
     line-height: 150%;
 }
-label{
-    font-size: 17px;
-}
+
 a{
     font-size: 15px;
 }
@@ -49,26 +48,29 @@ a:hover{
     text-decoration: none;
     cursor: pointer;
 }
-.container-fluid {
-    /*    padding-right:0!important;
-        padding-left:0!important;*/
-
+label{
+    font-size: 11px;
+    font-weight: bold;
 }
-.margin-top-150px{
-    margin-top: 150px;
-}
-.margin-top-100px{
-    margin-top: 100px;
-}
-.margin-top-50px{
-    margin-top: 50px;
+.margin-top-10px{
+    margin-top: 10px;
 }
 .margin-top-20px{
     margin-top: 20px;
 }
+.margin-top-50px{
+    margin-top: 50px;
+}
 .margin-top-60px{
     margin-top: 60px;
 }
+.margin-top-100px{
+    margin-top: 100px;
+}
+.margin-top-150px{
+    margin-top: 150px;
+}
+
 input, select,textArea{
     font-size: 13px!important;
 }
@@ -101,7 +103,10 @@ input:focus,select:focus{
     border: 1px solid transparent;
 }
 .custom-button{
-     background-color: #0072C6!important;
+    background-color: #0072C6!important;
+}
+.custom-button > i{
+    margin-right: 3px;
 }
 .custom-red-button {
     background-color: #d43f3a!important;
@@ -111,8 +116,11 @@ input:focus,select:focus{
     top: 50%;
     left:50%;
     transform: translate(-50%,-50%);
-    /*border: 1px dashed deeppink;*/
 }
+.cursor-pointer{
+    cursor: pointer;
+}
+
 table {
     border: 1px solid #ccc;
     border-collapse: collapse;
@@ -134,14 +142,17 @@ table tr {
 table th,
 table td {
     padding: .625em;
-    text-align: center;
+    text-align: center; 
 }
 table th {
     font-size: .85em;
     letter-spacing: .1em;
-    text-transform: uppercase;
-    color: #216db1;
+    color: #fff;
+    background-color: #CC9966;
 }
+/*table tbody tr{
+    background-color: #E6E6FA;
+}*/
 table tr:hover{
     color: #484848;
 }
@@ -162,7 +173,7 @@ table tr:hover{
         width: 1px;
     }
     table tr {
-        border: 3px solid #ccc;
+        border: 2px solid #aaa;
         display: block;
         margin-bottom: .625em;
     }
@@ -182,9 +193,26 @@ table tr:hover{
         border-bottom: 0;
     }
 }
-.cursor-pointer{
-    cursor: pointer;
+
+
+.common-table > thead > tr > th, .common-table > tbody > tr > td {
+    border: 1px solid #ddd;
 }
+.common-table tr:hover{
+    color: #484848;
+}
+.common-table input.form-control{
+    width: 100%;
+}
+.table-row-border-adjust > td{
+    border: none!important;
+}
+
+
+
+
+
+/*#CC9966*/
 /*----------------------------- Main Menu ----------------------------------*/
 
 .logo{
@@ -197,6 +225,7 @@ table tr:hover{
     border-color: #0E77B8!important;
     border: none!important;
     border-radius: 0px!important;
+    margin-bottom: 0px!important;
 }
 .navbar-default .navbar-brand {
     color: #fff!important;
@@ -399,13 +428,9 @@ table tr:hover{
 }
 
 /*----------------------------- Home ----------------------------------*/
-.common-table tr:hover{
-    color: #484848;
-}
-.table-scroll {
-    max-height: 300px;
-    overflow: auto;
-}
+
+
+
 /*----------------------------- Common Title ----------------------------------*/
 .product-category-title,.product-title, .supplier-title,.purchase-order-title,.purchase-order-list-title,.sale-order-list-title,.current-stock-title{
     font-size: 12px;
@@ -415,7 +440,26 @@ table tr:hover{
     color: #666; 
     text-align: center;
 }
-
+.modal::before {
+    content: "";	  
+    display: inline-block;
+    height: 100%;	 
+    vertical-align: middle;
+}
+.modal-dialog {	
+    display: inline-block;	
+    text-align: left;	
+    vertical-align: middle;
+}
+.modal{
+    text-align:center;
+}
+.modal-body,.modal-header{
+    padding: 5px 15px;
+}
+.modal-header .close {
+    margin-top: 5px;
+}
 @media (max-width: 480px) {
 
 }
@@ -524,50 +568,6 @@ table tr:hover{
     }
 }
 
-/*.tabs-below > .nav-tabs {
-  border-bottom: 0;
-}
-
-.tab-content > .tab-pane,
-.pill-content > .pill-pane {
-  display: none;
-}
-
-.tab-content > .active,
-.pill-content > .active {
-  display: block;
-}
-
-.tabs-bottom > .nav-tabs {
-  border-top: 1px solid #ddd;
-}
-
-.tabs-bottom > .nav-tabs > li {
-  margin-top: -1px;
-  margin-bottom: 0;
-}
-
-.tabs-bottom > .nav-tabs > li > a {
-  -webkit-border-radius: 0 0 4px 4px;
-     -moz-border-radius: 0 0 4px 4px;
-          border-radius: 0 0 4px 4px;
-}
-
-.tabs-below > .nav-tabs > li > a:hover,
-.tabs-below > .nav-tabs > li > a:focus {
-  border-top-color: #ddd;
-  border-bottom-color: transparent;
-}
-
-.tabs-bottom > .nav-tabs > .active > a,
-.tabs-bottom > .nav-tabs > .active > a:hover,
-.tabs-bottom > .nav-tabs > .active > a:focus {
-  border-color: transparent #ddd #ddd #ddd;
-}*/
-
-
-
-
 @media (min-width: 768px)and (max-width: 991px) {
     .home-animation-margin-top{
         margin-top: 50px;
@@ -651,6 +651,10 @@ table tr:hover{
     .home-customer-list-anchor{
         top: 1020px;
         margin-left: 30px;
+    }
+    .table-wrapper{
+        max-height: 300px;
+        overflow: auto;
     }
 }
 @media (min-width: 992px)and (max-width: 1199px) {
@@ -738,6 +742,10 @@ table tr:hover{
         left: 792px;
         bottom: -50px;
     }
+    .table-wrapper{
+        max-height: 300px;
+        overflow: auto;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -821,4 +829,12 @@ table tr:hover{
         left: 910px;
         bottom: -50px;
     }
+    .table-wrapper{
+        max-height: 300px;
+        overflow: auto;
+    }
 }
+
+
+
+

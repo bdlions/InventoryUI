@@ -1,56 +1,60 @@
-<div class="container-fluid">
-    <div class="row form-group">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h1>Search</h1>
-        </div>
-    </div>
-    <form role="form" (submit)="searchCurrentStock($event)">
-        <div class="row form-group">
-            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
-                <span class="current-stock-title">Name</span>
-            </div>
-            <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
-                <input [(ngModel)]="reqDTOProduct.entityProduct.name" id="name" name="name" class="form-control">
+<div class="wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h4>Search</h4>
             </div>
         </div>
-        <div class="row form-group">
-            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
-                <span class="current-stock-title">Category</span>
+        <form role="form" (submit)="searchCurrentStock($event)">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+                    <span class="current-stock-title">Name</span>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                    <input [(ngModel)]="reqDTOProduct.entityProduct.name" id="name" name="name" class="form-control">
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
-                <select class="form-control" >
-                    <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
-                </select>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+                    <span class="current-stock-title">Category</span>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                    <select class="form-control" >
+                        <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
+                    </select>
+                </div>
             </div>
-        </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+                </div>
+            </div>
+        </form>
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+                <div class="table-wrapper">
+                    <table class="common-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Category</th>
+                                <th>Last Supplier</th>
+                                <th>Location</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cursor-pointer" *ngFor="let product of productList" (click)="showCurrentStock($event, product.entityProduct.id)">
+                                <td data-label="Item">{{product.entityProduct.name}}</td>
+                                <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
+                                <td data-label="Last Supplier"></td>
+                                <td data-label="Location"></td>
+                                <td data-label="Quantity"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </form>
-    <div class="row form-group">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <table class="common-table">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Category</th>
-                        <th>Last Supplier</th>
-                        <th>Location</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="cursor-pointer" *ngFor="let product of productList" (dblclick)="showCurrentStock($event, product.entityProduct.id)">
-                        <td data-label="Item">{{product.entityProduct.name}}</td>
-                        <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
-                        <td data-label="Last Supplier"></td>
-                        <td data-label="Location"></td>
-                        <td data-label="Quantity"></td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 </div>

@@ -57,7 +57,6 @@ export class ProductListComponent {
         console.log(this.searchEntityProduct.name);
     }
     showProduct(event: Event, id: number) {
-
         event.preventDefault();
         this.navigationManager.showNavBar(true);
         this.navigationManager.setActiveMenu("manageproduct");

@@ -9,8 +9,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="login-form-body-pagelet margin-top-60px">
+                <div class="login-form-body-pagelet margin-top-25px">
                     <form role="form" (submit)="login($event)">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label class="errorMessage">{{errorMessage}}</label>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <label class="control-label">Email</label>

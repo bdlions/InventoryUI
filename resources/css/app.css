@@ -58,6 +58,9 @@ label{
 .margin-top-20px{
     margin-top: 20px;
 }
+.margin-top-25px{
+    margin-top: 25px;
+}
 .margin-top-50px{
     margin-top: 50px;
 }
@@ -76,8 +79,9 @@ input, select,textArea{
 }
 input, select{
     border: 1px solid #ccc!important;
-    padding: 6px 12px !important;
+    padding: 3px 6px !important;
     border-radius: 0px!important;
+    height: 32px!important;
 }
 input:focus,select:focus{
     border: 1px solid #4568b2!important;
@@ -208,11 +212,9 @@ table tr:hover{
     border: none!important;
 }
 
-
-
-
-
-/*#CC9966*/
+.errorMessage{
+    color: red;
+}
 /*----------------------------- Main Menu ----------------------------------*/
 
 .logo{

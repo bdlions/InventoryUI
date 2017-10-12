@@ -6,19 +6,34 @@ import {UserType} from './user.type';
 import {User} from './user';
 import {FormControl} from '@angular/forms';
 import {EntityUser} from './dto/EntityUser';
+import {WebAPIService} from './webservice/web-api-service';
+import {PacketHeaderFactory} from './webservice/PacketHeaderFactory';
+import {ACTION} from './webservice/ACTION';
 
 @Component({
     selector: 'data-content',
-    templateUrl: 'app/html/app.component.html'
+    templateUrl: 'app/html/app.component.html',
+    providers: [WebAPIService]
 })
 
 export class AppComponent {
+    private webAPIService: WebAPIService;
     private serviceResult: string;
     private userTypes: UserType[];
     private selectedUsers: User[];
-    private dtoUser: EntityUser;
-    constructor(private marketAPI: MarketAPI, private router: Router, private navigationManager: NavigationManager) {
-        this.dtoUser = new EntityUser();
+    private entityUser: EntityUser;
+    private errorMessage:string;
+    private message:string;
+    constructor(private marketAPI: MarketAPI, private router: Router, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
+        this.webAPIService = webAPIService;
+        this.entityUser = new EntityUser();
+        
+        let username = localStorage.getItem("username");
+        let password = localStorage.getItem("password");
+        
+        if (username != null && username != "" && password != null && password != ""){
+            this.loginUser(username,password);
+        }
     }
 
 
@@ -60,10 +75,42 @@ export class AppComponent {
     }
 
     login(event: Event) {
-        this.navigationManager.showNavBar(true);
-        this.navigationManager.setActiveMenu("home");
-        this.router.navigate(["home"]);
-        console.log(this.dtoUser.userName);
-        console.log(this.dtoUser.password);
+        
+        if (this.entityUser.userName == null || this.entityUser.userName == "")
+        {
+            this.errorMessage = "Username is required.";
+            return;
+        }
+        if (this.entityUser.password == null || this.entityUser.password == "")
+        {
+            this.errorMessage = "Password is required.";
+        }
+        
+        this.loginUser(this.entityUser.userName, this.entityUser.password);
+    }
+    
+    loginUser(username:string, password:string){
+        let requestBody: string = "{\"userName\": \"" + username + "\", \"password\": \"" + password+"\"}";
+        
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.SIGN_IN), requestBody).then(result =>{
+            if (result != null && result.success){
+                if (result.sessionId != null && result.sessionId != ""){
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("password", password);
+                    localStorage.setItem("sessionId", result.sessionId);
+                    
+                    this.navigationManager.showNavBar(true);
+                    this.navigationManager.setActiveMenu("home");
+                    this.router.navigate(["home"]);
+                }
+                else{
+                    localStorage.removeItem("sessionId");
+                    this.errorMessage = "Invalid session.";
+                }
+            }
+            else{
+                this.errorMessage = result.message;
+            }
+        });
     }
 }

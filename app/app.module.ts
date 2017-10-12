@@ -11,6 +11,7 @@ import {APP_BASE_HREF} from '@angular/common';
 
 import {MarketAPI} from './services/MarketAPI.service';
 import {AppComponent} from './app.component';
+import {LogoutComponent} from './logout.component';
 import {ManageProductComponent} from './product/manageproduct.component';
 import {ProductListComponent} from './product/productlist.component';
 import {ManageCustomerComponent} from './customer/managecustomer.component';
@@ -34,6 +35,14 @@ const appRoutes: Routes = [
     {
         path: '',
         component: AppComponent
+    },
+    {
+        path: 'login',
+        component: AppComponent
+    },
+    {
+        path: 'logout',
+        component: LogoutComponent
     },
     {
         path: 'home',
@@ -122,6 +131,7 @@ enableProdMode();
          * All are components of the template
          */
         AppComponent,
+        LogoutComponent,
         HomeComponent,
         ManageProductComponent,
         ProductListComponent,

@@ -13,12 +13,12 @@
                     <form role="form" (submit)="login($event)">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <label class="control-label">User Name</label>
+                                <label class="control-label">Email</label>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <input type="text" [(ngModel)]="dtoUser.userName" name="userName" class="form-control">
+                                <input type="text" [(ngModel)]="entityUser.userName" name="userName" class="form-control">
                             </div>
                         </div>
                         <div class="row">
@@ -28,7 +28,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <input type="password" [(ngModel)]="dtoUser.password" name="password" class="form-control">
+                                <input type="password" [(ngModel)]="entityUser.password" name="password" class="form-control">
                             </div>
                         </div>
                         <div class="row form-group">

@@ -73,8 +73,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li [ngClass]="{'active': activeMenu == 'profile' }">
+<!--                    <li [ngClass]="{'active': activeMenu == 'profile' }">
                         <a href="#" (click)="goProfile($event)">Profile</a>
+                    </li>-->
+                    <li [ngClass]="{'active': activeMenu == 'logout' }">
+                        <a href="#" (click)="goLogout($event)">Logout</a>
                     </li>
                 </ul>
             </div>

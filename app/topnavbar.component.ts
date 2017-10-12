@@ -112,6 +112,12 @@ export class TopNavbarComponent {
         this.navigationManager.setActiveMenu("profile");
         this.router.navigate(["profile"]);
     }
+    goLogout(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("logout");
+        this.router.navigate(["logout"]);
+    }
 
 
 }

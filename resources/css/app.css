@@ -422,7 +422,7 @@ table tr:hover{
 }
 .home-manage-supplier-anchor,.home-supplier-list-anchor,
 .home-manage-purchase-anchor,.home-purchase-list-anchor,
-.home-current-stock-anchor,.home-adjust-stock-anchor,.home-new-product-anchor,.home-product-list-anchor,
+.home-adjust-stock-anchor,.home-current-stock-anchor,.home-new-product-anchor,.home-product-list-anchor,
 .home-manage-sale-anchor,.home-sale-list-anchor,
 .home-manage-customer-anchor,.home-customer-list-anchor{
     position: absolute;
@@ -536,11 +536,11 @@ table tr:hover{
         top: 220px;
         margin-left: 15px;
     }
-    .home-current-stock-anchor{
+    .home-adjust-stock-anchor{
         top: 382px;
         margin-left: -110px;
     }
-    .home-adjust-stock-anchor{
+    .home-current-stock-anchor{
         top: 415px;
         margin-left: -107px;
     }
@@ -622,11 +622,11 @@ table tr:hover{
         top: 300px;
         margin-left: 30px;
     }
-    .home-current-stock-anchor{
+    .home-adjust-stock-anchor{
         top: 525px;
         margin-left: -130px;
     }
-    .home-adjust-stock-anchor{
+    .home-current-stock-anchor{
         top: 550px;
         margin-left: -125px;
     }
@@ -712,11 +712,11 @@ table tr:hover{
         left: 210px;
         bottom: -50px;
     }
-    .home-current-stock-anchor{
+    .home-adjust-stock-anchor{
         left: 408px;
         top: -100px;
     }
-    .home-adjust-stock-anchor{
+    .home-current-stock-anchor{
         left: 410px;
         top: -40px; 
     }
@@ -799,11 +799,11 @@ table tr:hover{
         left: 240px;
         bottom: -50px;
     }
-    .home-current-stock-anchor{
+    .home-adjust-stock-anchor{
         left: 466px;
         top: -100px;
     }
-    .home-adjust-stock-anchor{
+    .home-current-stock-anchor{
         left: 470px;
         top: -40px; 
     }

@@ -9,7 +9,7 @@ import {NavigationManager} from "./services/NavigationManager";
 })
 
 export class TopNavbarComponent {
-    private showNavBar: boolean = false;
+    private showNavBar: boolean = true;
     private activeMenu: string = "home";
 
     constructor(private router:Router, private navigationManager: NavigationManager) {

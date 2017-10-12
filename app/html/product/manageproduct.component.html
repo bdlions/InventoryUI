@@ -13,7 +13,7 @@
                             <span class="product-title">Item</span>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                            <input [(ngModel)]="searchEntityProduct.name" id="name" name="name" class="form-control">
+                            <input [(ngModel)]="reqDTOProduct.entityProduct.name" id="name" name="name" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -84,7 +84,7 @@
                                                     <span class="product-title">Item</span>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="entityProduct.name" id="name" name="name" class="form-control">
+                                                    <input [(ngModel)]="dtoProduct.entityProduct.name" id="name" name="name" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -92,8 +92,8 @@
                                                     <span class="product-title">Type</span>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <select class="form-control" >
-                                                        <option *ngFor="let productType of productTypeList" id="{{productType.id}}" value="{{productType.title}}">{{productType.title}}</option>
+                                                    <select [(ngModel)]="dtoProduct.entityProductType" name="entityProductType" class="form-control" >
+                                                        <option *ngFor="let productType of productTypeList" [ngValue]="productType">{{productType.title}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -102,8 +102,8 @@
                                                     <span class="product-title">Category</span>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <select class="form-control" >
-                                                        <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
+                                                    <select [(ngModel)]="dtoProduct.entityProductCategory" name="entityProductCategory" class="form-control" >
+                                                        <option *ngFor="let productCategory of productCategoryList" [ngValue]="productCategory">{{productCategory.title}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -117,7 +117,7 @@
                                                     <span class="product-title">Price</span>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="entityProduct.unitPrice" id="product-type" class="form-control">
+                                                    <input [(ngModel)]="dtoProduct.entityProduct.unitPrice" id="unitPrice" name="unitPrice" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -177,7 +177,7 @@
                                                     <span class="product-title">Length</span>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="entityProduct.length" id="length" name="length" class="form-control">
+                                                    <input [(ngModel)]="dtoProduct.entityProduct.length" id="length" name="length" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -185,7 +185,7 @@
                                                     <span class="product-title">Width</span>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="entityProduct.width" id="width" name="width" class="form-control">
+                                                    <input [(ngModel)]="dtoProduct.entityProduct.width" id="width" name="width" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -193,7 +193,7 @@
                                                     <span class="product-title">Height</span>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="entityProduct.height" id="height" name="height" class="form-control">
+                                                    <input [(ngModel)]="dtoProduct.entityProduct.height" id="height" name="height" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -201,7 +201,7 @@
                                                     <span class="product-title">Weight</span>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="entityProduct.weight" id="weight" name="weight" class="form-control">
+                                                    <input [(ngModel)]="dtoProduct.entityProduct.weight" id="weight" name="weight" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -218,7 +218,7 @@
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <textarea [(ngModel)]="entityProduct.remark" id="weight" name="weight" class="form-control" rows="5"></textarea>
+                                                    <textarea [(ngModel)]="dtoProduct.entityProduct.remark" id="weight" name="weight" class="form-control" rows="5"></textarea>
                                                 </div>
                                             </div>
                                         </div>

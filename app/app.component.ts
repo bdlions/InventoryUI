@@ -25,6 +25,7 @@ export class AppComponent {
     private errorMessage:string;
     private message:string;
     constructor(private marketAPI: MarketAPI, private router: Router, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
+        this.navigationManager.showNavBar(false);
         this.webAPIService = webAPIService;
         this.entityUser = new EntityUser();
         
@@ -78,7 +79,7 @@ export class AppComponent {
         
         if (this.entityUser.userName == null || this.entityUser.userName == "")
         {
-            this.errorMessage = "Username is required.";
+            this.errorMessage = "Email is required.";
             return;
         }
         if (this.entityUser.password == null || this.entityUser.password == "")

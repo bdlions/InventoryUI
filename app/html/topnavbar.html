@@ -1,3 +1,4 @@
+<!--Web Starts-->
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <nav *ngIf='showNavBar' class="navbar navbar-custom navbar-default">
@@ -68,14 +69,11 @@
                             <li role="menuitem" [ngClass]="{'active': activeMenu == 'currentstock' }">
                                 <a href="#" (click)="goCurrentStock($event)" >Current Stock</a>
                             </li>
-<!--                            <li role="menuitem" [ngClass]="{'active': activeMenu == 'products' }">
+                            <li role="menuitem" [ngClass]="{'active': activeMenu == 'products' }">
                                 <a href="#" (click)="goProduct($event)">Adjust Stock</a>
-                            </li>-->
+                            </li>
                         </ul>
                     </li>
-<!--                    <li [ngClass]="{'active': activeMenu == 'profile' }">
-                        <a href="#" (click)="goProfile($event)">Profile</a>
-                    </li>-->
                     <li [ngClass]="{'active': activeMenu == 'logout' }">
                         <a href="#" (click)="goLogout($event)">Logout</a>
                     </li>
@@ -84,3 +82,51 @@
         </nav>
     </div>
 </div>
+<!--Web Ends-->
+
+<!--Desktop Starts-->
+<!--<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="title-bar">
+            <div id="title-bar-btns" class="pull-right">
+                <button id="min-btn">-</button>
+                <button id="max-btn">+</button>
+                <button id="close-btn">x</button>
+            </div>
+        </div>  
+    </div>
+</div>
+<div class="menu-wrapper">
+    <div class="row">
+        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div dropdown triggers="mouseover" #dpPurchase="bs-dropdown">
+                        <a dropdownToggle class="dropdown-toggle" (mouseleave)="dpPurchase.hide()">
+                            <div class="bar"></div> 
+                            <div class="bar"></div> 
+                            <div class="bar"></div> 
+                        </a>
+                        <ul class="dropdown-menu" (mouseleave)="dpPurchase.hide()">
+                            <li [ngClass]="{'active': activeMenu == 'purchaselist' }">
+                                <a href="#" (click)="goPurchaseList($event)" >Purchase List</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenu == 'managesupplier' }">
+                                <a href="#" (click)="goManageSupplier($event)" >Manage Supplier</a>
+                            </li>
+                            <li [ngClass]="{'active': activeMenu == 'supplierlist' }">
+                                <a href="#" (click)="goSupplierList($event)" >Supplier List</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-7 col-md-7 col-lg-7">
+            <div id="title-bar">
+                <div id="title" class="text-center">Inventory Management System</div>
+            </div>  
+        </div>
+    </div>
+</div>-->
+<!--Desktop Ends-->

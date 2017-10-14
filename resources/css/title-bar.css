@@ -35,24 +35,23 @@ and open the template in the editor.
 }
 
 #title-bar-btns button {
-    height: 32px;
-    width: 32px;
-    background-color: transparent;
+    height: 28px;
+    width: 28px;
+    background-color: #703684;
     border: none;
     color: #F1F1F1;
     font-size: 16px;
 }
 
-#title-bar-btns button {
-    background-color: #3F3F41;
+#min-btn:hover,#min-btn:active,#min-btn:focus,#min-btn:visited{
+    background-color: #EC971F;
+    border: 1px solid #EC971F;
 }
-
-#min-btn:hover{
-    background-color: #f0ad4e;
+#max-btn:hover,#max-btn:active,#max-btn:focus,#max-btn:visited{
+    background-color: #449D44;
+    border: 1px solid #449D44;
 }
-#max-btn:hover{
-    background-color: #5cb85c;
-}
-#close-btn:hover{
-    background-color: #d9534f;
+#close-btn:hover,#close-btn:active,#close-btn:focus,#close-btn:visited{
+    background-color: #C9302C;
+    border: 1px solid #C9302C;
 }

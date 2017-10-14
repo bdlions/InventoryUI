@@ -2,6 +2,7 @@
     <div class="container-fluid">
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
+                <!--Search a Supplier Starts-->
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h4>Search</h4>
@@ -40,6 +41,7 @@
                         </div>
                     </div>
                 </div>
+                <!--Search a Supplier Ends-->
             </div>
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
                 <div class="row form-group">
@@ -53,107 +55,105 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="tabbable tabs-bottom">
-                            <div class="tab-content">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#supplier-info" data-toggle="tab">Supplier Info</a></li>
-                                    <li><a href="#extra-info" data-toggle="tab">Extra Info</a></li>
-                                </ul>
-                                <div class="tab-pane active" id="supplier-info">                
-                                    <div class="row form-group">
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <h3>Basic</h3>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="supplier-title">First Name</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoSupplier.entityUser.firstName" name="firstName" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="supplier-title">Last Name</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoSupplier.entityUser.lastName" name="lastName" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="supplier-title">Balance</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoSupplier.entitySupplier.balance" name="balance" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <h3>Contact</h3>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="supplier-title">Name</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoSupplier.entityUser.firstName"  name="firstName" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="supplier-title">Phone</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoSupplier.entityUser.cell" name="cell" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="supplier-title">Email</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoSupplier.entityUser.email" name="email" class="form-control">
-                                                </div>
+
+                        <tabset>
+                            <!--Supplier Info Tab Starts-->
+                            <tab heading="Supplier Info">
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Basic</h3>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">First Name</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoSupplier.entityUser.firstName" name="firstName" class="form-control">
+                                            </div>
                                         </div>
-                                    </div> 
-                                    <div class="row form-group">
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <h3>Remarks</h3>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Last Name</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoSupplier.entityUser.lastName" name="lastName" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Balance</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoSupplier.entitySupplier.balance" name="balance" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Contact</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Name</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoSupplier.entityUser.firstName"  name="firstName" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Phone</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoSupplier.entityUser.cell" name="cell" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Email</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoSupplier.entityUser.email" name="email" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row form-group">
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <textarea  [(ngModel)]="dtoSupplier.entitySupplier.remarks" name="remarks" class="form-control" rows="5"></textarea>
-                                        </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        
                                     </div>
                                 </div> 
-                                <div class="tab-pane" id="extra-info"> 
-                                    <div class="row form-group">
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <h3>Preferences</h3>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                                        </div>
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <h3>Remarks</h3>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <textarea  [(ngModel)]="dtoSupplier.entitySupplier.remarks" name="remarks" class="form-control" rows="5"></textarea>
+                                    </div>
+                                </div> 
+                            </tab>
+                            <!--Supplier Info Tab Ends-->
+
+                            <!--Supplier Extra Info Tab Starts-->
+                            <tab heading="Extra Info">
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Preferences</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        
+                                    </div>
+                                </div>
+                            </tab>
+                            <!--Supplier Extra Info Tab Ends-->
+                        </tabset>
                     </div>
                 </div>
             </div>

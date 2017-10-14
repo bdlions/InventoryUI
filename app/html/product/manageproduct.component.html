@@ -2,6 +2,7 @@
     <div class="container-fluid">
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
+                  <!--Search a Product Starts-->
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h4>Search</h4>
@@ -52,6 +53,7 @@
                         </div>
                     </div>
                 </div>
+                   <!--Search a Product Ends-->
             </div>
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
                 <div class="row form-group">
@@ -65,70 +67,69 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="tabbable tabs-bottom">
-                            <div class="tab-content">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#product-info" data-toggle="tab">Product Info</a></li>
-                                    <li><a href="#extra-info" data-toggle="tab">Extra Info</a></li>
-                                </ul>
-                                <div class="tab-pane active" id="product-info">                
-                                    <div class="row form-group">
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <h3>Basic</h3>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="product-title">Item</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoProduct.entityProduct.name" id="name" name="name" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="product-title">Type</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <select [(ngModel)]="dtoProduct.entityProductType" name="entityProductType" class="form-control" >
-                                                        <option *ngFor="let productType of productTypeList" [ngValue]="productType">{{productType.title}}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="product-title">Category</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <select [(ngModel)]="dtoProduct.entityProductCategory" name="entityProductCategory" class="form-control" >
-                                                        <option *ngFor="let productCategory of productCategoryList" [ngValue]="productCategory">{{productCategory.title}}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <h3>Price</h3>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="product-title">Price</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoProduct.entityProduct.unitPrice" id="unitPrice" name="unitPrice" class="form-control">
-                                                </div>
+                        <tabset>
+                            <!--Product Info Tab Starts-->
+                            <tab heading="Product Info">
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Basic</h3>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="product-title">Item</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoProduct.entityProduct.name" id="name" name="name" class="form-control">
+                                            </div>
                                         </div>
-                                    </div> 
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="product-title">Type</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <select [(ngModel)]="dtoProduct.entityProductType" name="entityProductType" class="form-control" >
+                                                    <option *ngFor="let productType of productTypeList" [ngValue]="productType">{{productType.title}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="product-title">Category</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <select [(ngModel)]="dtoProduct.entityProductCategory" name="entityProductCategory" class="form-control" >
+                                                    <option *ngFor="let productCategory of productCategoryList" [ngValue]="productCategory">{{productCategory.title}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Price</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="product-title">Price</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoProduct.entityProduct.unitPrice" id="unitPrice" name="unitPrice" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+
+                                    </div>
                                 </div> 
-                                <div class="tab-pane" id="extra-info"> 
-                                    <div class="row form-group">
+                            </tab>
+                             <!--Product Info Tab Ends-->
+                             
+                             <!--Extra Info Tab Starts-->
+                             <tab heading="Extra Info">
+                                 <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="row form-group">
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -223,9 +224,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                             </tab>
+                             <!--Extra Info Tab Ends-->
+                        </tabset>
                     </div>
                 </div>
             </div>

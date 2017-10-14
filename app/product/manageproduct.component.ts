@@ -6,6 +6,7 @@ import {NavigationManager} from "../services/NavigationManager";
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
+import { TabsetComponent } from 'ngx-bootstrap';
 import {DTOProduct} from '../dto/DTOProduct';
 import {EntityProduct} from '../dto/EntityProduct';
 import {EntityProductCategory} from '../dto/EntityProductCategory';

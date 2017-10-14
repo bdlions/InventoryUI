@@ -4,6 +4,7 @@ import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
+import { TabsetComponent } from 'ngx-bootstrap';
 import {EntityUser} from '../dto/EntityUser';
 import {EntitySupplier} from "../dto/EntitySupplier";
 import {EntityUserRole} from "../dto/EntityUserRole";

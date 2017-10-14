@@ -6,6 +6,8 @@ import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
+import { TabsetComponent } from 'ngx-bootstrap';
+
 import {DTOSaleOrder} from '../dto/DTOSaleOrder';
 import {EntitySaleOrder} from '../dto/EntitySaleOrder';
 

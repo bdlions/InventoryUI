@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {BsDropdownModule, CarouselModule, TypeaheadModule, DatepickerModule, ModalModule} from 'ngx-bootstrap';
-import {FileUploadModule } from 'ng2-file-upload';
+import {BsDropdownModule, CarouselModule, TypeaheadModule, DatepickerModule, ModalModule, TabsModule} from 'ngx-bootstrap';
+import {FileUploadModule} from 'ng2-file-upload';
 import {enableProdMode} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
@@ -118,6 +118,7 @@ enableProdMode();
         TypeaheadModule.forRoot(),
         DatepickerModule.forRoot(),
         ModalModule.forRoot(),
+        TabsModule.forRoot(),
         FileUploadModule,
         RouterModule.forRoot(appRoutes)
     ],
@@ -149,16 +150,16 @@ enableProdMode();
         TopNavbarComponent,
     ],
     providers: [
-        MarketAPI, 
+        MarketAPI,
         NavigationManager,
-        
-//        {provide: APP_BASE_HREF, useValue: '/InventoryUI'}
-          {provide: LocationStrategy, useValue: '/InventoryUI/', useClass: HashLocationStrategy}
+
+        //        {provide: APP_BASE_HREF, useValue: '/InventoryUI'}
+        {provide: LocationStrategy, useValue: '/InventoryUI/', useClass: HashLocationStrategy}
 
 
     ],
     bootstrap: [AppTemplate]
-//    bootstrap: [HomeComponent]
+    //    bootstrap: [HomeComponent]
 })
 
 export class AppModule {}

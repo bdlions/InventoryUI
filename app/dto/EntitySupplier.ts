@@ -1,6 +1,6 @@
 export class EntitySupplier {
     id: number;
     userId: number;
-    remarks: number;
+    remarks: string;
     balance: number;
 }

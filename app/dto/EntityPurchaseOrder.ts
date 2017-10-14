@@ -8,6 +8,7 @@ export class EntityPurchaseOrder {
     discount: number;
     total: number;
     paid: number;
+    remarks: string;
     createdOn: number;
     modifiedOn: number;
 }

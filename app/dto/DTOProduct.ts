@@ -4,7 +4,9 @@ import {EntityProductType} from "./EntityProductType";
 export class DTOProduct {
     limit: number;
     offset: number;
-    quantity: number;
+    quantity: number = 1;
+    discount: number = 0;
+    total: number = 0;
     entityProduct: EntityProduct;
     entityProductCategory: EntityProductCategory;
     entityProductType: EntityProductType;

@@ -120,7 +120,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td data-label="Item"><input class="form-control" ></td>
+                                                    <td data-label="Item" (click)="showPurchaseOrderProductModal($event, 0)"><input class="form-control" ></td>
                                                     <td data-label="Quantity"><input class="form-control" ></td>
                                                     <td data-label="Unit Price"><input class="form-control" ></td>
                                                     <td data-label="Discount"><input class="form-control"></td>
@@ -128,14 +128,14 @@
                                                     <td data-label="Action" class="text-center" (click)="showAddPurchaseOrderProductModal($event)"><i class="cursor-pointer fa fa-plus"></i></td>
                                                 </tr>
                                                 <tr *ngFor="let product of dtoPurchaseOrder.products">
-                                                    <td data-label="Item" (click)="showPurchaseOrderProductModal($event)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
-                                                    <td data-label="Quantity"><input class="form-control" value="{{product.quantity}}"></td>
-                                                    <td data-label="Unit Price"><input class="form-control" value="{{product.entityProduct.unitPrice}}"></td>
-                                                    <td data-label="Discount"><input class="form-control" value=""></td>
-                                                    <td data-label="Sub-Total"><label></label></td>
+                                                    <td data-label="Item" (click)="showPurchaseOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
+                                                    <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance($event)"></td>
+                                                    <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance($event)"></td>
+                                                    <td data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance($event)"></td>
+                                                    <td data-label="Total"><label>{{product.total}}</label></td>
                                                     <td data-label="Action"><i class="cursor-pointer fa fa-times" (click)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                 </tr>
-                                                <tr class="cursor-pointer" (click)="showPurchaseOrderProductModal($event)">
+                                                <tr class="cursor-pointer" (click)="showPurchaseOrderProductModal($event, 0)">
                                                     <td><i class="fa fa-plus"></i></td>
                                                     <td></td>
                                                     <td></td>
@@ -185,19 +185,19 @@
                                                 <span class="purchase-order-title">Remarks</span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <textarea class="form-control" rows="3" [(ngModel)]="dtoPurchaseOrder.dtoSupplier.entitySupplier.remarks" name="remarks"></textarea>
+                                                <textarea class="form-control" rows="3" [(ngModel)]="dtoPurchaseOrder.entityPurchaseOrder.remarks" name="remarks"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                        <div class="row form-group">
+<!--                                        <div class="row form-group">
                                             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                                 <span class="purchase-order-title">Sub-total</span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                                 <label name="subtotal">{{dtoPurchaseOrder.entityPurchaseOrder.subtotal}}</label>
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <div class="row form-group">
                                             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                                 <span class="purchase-order-title">Total</span>
@@ -206,14 +206,14 @@
                                                 <label name="total">{{dtoPurchaseOrder.entityPurchaseOrder.total}}</label>
                                             </div>
                                         </div>
-                                        <div class="row form-group">
+<!--                                        <div class="row form-group">
                                             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                                 <span class="purchase-order-title">Balance</span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                                 <label name="balance">{{dtoPurchaseOrder.dtoSupplier.entitySupplier.balance}}</label>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </tab>
@@ -271,7 +271,7 @@
                             <span class="product-title">Name</span>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                            <input [(ngModel)]="searchDTOSupplier.entityUser.firstName" name="name" class="form-control">
+                            <input [(ngModel)]="reqDTOSupplier.entityUser.firstName" name="firstName" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -279,7 +279,7 @@
                             <span class="product-title">Phone</span>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                            <input [(ngModel)]="searchDTOSupplier.entityUser.cell" name="cell" class="form-control">
+                            <input [(ngModel)]="reqDTOSupplier.entityUser.cell" name="cell" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -287,7 +287,7 @@
                             <span class="product-title">Email</span>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                            <input [(ngModel)]="searchDTOSupplier.entityUser.email" name="email" class="form-control">
+                            <input [(ngModel)]="reqDTOSupplier.entityUser.email" name="email" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -309,7 +309,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let supplier of supplierList" >
+                                    <tr *ngFor="let supplier of supplierList" (click)="selectedSupplier($event, supplier.entitySupplier.id)">
                                         <td data-label="Name">{{supplier.entityUser.firstName}} {{supplier.entityUser.lastName}}</td>
                                         <td data-label="Phone">{{supplier.entityUser.cell}}</td>
                                         <td data-label="Phone">{{supplier.entityUser.email}}</td>
@@ -354,7 +354,7 @@
                             <span class="product-title">Name</span>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                            <input [(ngModel)]="searchEntityProduct.name" id="name" name="name" class="form-control">
+                            <input [(ngModel)]="reqDTOProduct.entityProduct.name" id="name" name="name" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -476,7 +476,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideChildModal()">No</button>
-                        <button type="button" class="custom-button">Yes</button>
+                        <button type="button" class="custom-button" (click)="deleteSelectedProductFromModal($event)">Yes</button>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
@@ -8,6 +8,8 @@ import {EntityCustomer} from '../dto/EntityCustomer';
 import {DTOCustomer} from '../dto/DTOCustomer';
 import {EntityUser} from '../dto/EntityUser';
 import {EntityUserRole} from "../dto/EntityUserRole";
+import {NavigationManager} from "../services/NavigationManager";
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app',
@@ -17,28 +19,56 @@ import {EntityUserRole} from "../dto/EntityUserRole";
 
 export class ManageCustomerComponent {
     private webAPIService: WebAPIService;
+    private subscribe: Subscription;
     private reqDTOCustomer: DTOCustomer;
     private dtoCustomer: DTOCustomer;
     private customerList: DTOCustomer[];
-    private searchDTOCustomer: DTOCustomer;
+    //private searchDTOCustomer: DTOCustomer;
+    private showNavBar: boolean = false;
+    private activeMenu: string = "managecustomer";
 
-    constructor(private marketAPI: MarketAPI, private router: Router, webAPIService: WebAPIService) {
+    constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
+        this.navigationManager.showNavBarEmitter.subscribe((mode) => {
+            if (mode !== null) {
+                this.showNavBar = mode;
+            }
+        });
+        this.navigationManager.menuActivationEmitter.subscribe((menuName) => {
+            if (menuName !== null) {
+                this.activeMenu = menuName;
+            }
+        });
         this.webAPIService = webAPIService;
-        this.searchDTOCustomer = new DTOCustomer();
-        this.searchDTOCustomer.entityUser = new EntityUser();
+        //this.searchDTOCustomer = new DTOCustomer();
+        //this.searchDTOCustomer.entityUser = new EntityUser();
+        
         this.reqDTOCustomer = new DTOCustomer();
-        this.dtoCustomer = JSON.parse("{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"remarks\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}");
-        this.customerList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true},{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":2,\"userId\":2,\"balance\":10.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":1,\"firstName\":\"Mohiuddin\",\"lastName\":\"Mishu\",\"email\":\"customer2@gmail.com\",\"cell\":\"01511223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":2,\"userId\":2,\"roleId\":2},\"reasonCode\":1000,\"success\":true}]");
-        console.log(this.customerList);
+        this.reqDTOCustomer.entityCustomer = new EntityCustomer();
+        this.reqDTOCustomer.entityUser = new EntityUser();
+        this.reqDTOCustomer.entityUserRole = new EntityUserRole();
+        
+        this.dtoCustomer = new DTOCustomer();
+        this.dtoCustomer.entityCustomer = new EntityCustomer();
+        this.dtoCustomer.entityUser = new EntityUser();
+        this.dtoCustomer.entityUserRole = new EntityUserRole();
+        //this.dtoCustomer = JSON.parse("{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"remarks\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}");
+        //this.customerList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true},{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":2,\"userId\":2,\"balance\":10.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":1,\"firstName\":\"Mohiuddin\",\"lastName\":\"Mishu\",\"email\":\"customer2@gmail.com\",\"cell\":\"01511223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":2,\"userId\":2,\"roleId\":2},\"reasonCode\":1000,\"success\":true}]");
+        //console.log(this.customerList);
+        this.fetchCustomerList();
     }
 
     ngOnInit() {
-
+        this.subscribe = this.route.params.subscribe(params => {
+            let customerId: number = params['customerId'];
+            this.reqDTOCustomer.entityCustomer.id = customerId;
+            this.fetchCustomerInfo();
+        });
     }
 
     searchCustomer(event: Event) {
-        console.log(this.searchDTOCustomer.entityUser.firstName);
+        console.log(this.reqDTOCustomer.entityUser.firstName);
     }
+    
     newCustomer(event: Event) {
         //console.log("New Customer");
         this.dtoCustomer = new DTOCustomer();
@@ -46,12 +76,39 @@ export class ManageCustomerComponent {
         this.dtoCustomer.entityUser = new EntityUser();
         this.dtoCustomer.entityUserRole = new EntityUserRole();
     }
+    
     saveCustomer(event: Event) {
-        console.log("Save Customer");
+        this.dtoCustomer.entityUser.password = "pass";
+        let requestBody: string = JSON.stringify(this.dtoCustomer);
+        if (this.dtoCustomer.entityCustomer.id > 0)
+        {
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_CUSTOMER_INFO), requestBody).then(result => {
+                console.log(result);
+                if (result.success) {
+                    
+                }
+                else {
+                    
+                }
+            });
+        }
+        else
+        {
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_CUSTOMER_INFO), requestBody).then(result => {
+                console.log(result);
+                if (result.success) {
+                    
+                }
+                else {
+                    
+                }
+            });
+        }
+        //reset this customer, fetch customer list again
     }
     selectedCustomer(event: Event, customerId: number) {
          event.preventDefault();
-        this.router.navigate(["managecustomer", {customerId: customerId}]);
+        //this.router.navigate(["managecustomer", {customerId: customerId}]);
         let customerCounter: number;
         for (customerCounter = 0; customerCounter < this.customerList.length; customerCounter++)
         {
@@ -60,6 +117,28 @@ export class ManageCustomerComponent {
                 this.dtoCustomer = this.customerList[customerCounter];
             }
         }
+    }
+    
+    public fetchCustomerList() {
+        this.reqDTOCustomer.limit = 10;
+        this.reqDTOCustomer.offset = 0;
+        let requestBody: string = JSON.stringify(this.reqDTOCustomer);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMERS), requestBody).then(result => {
+            //console.log(result);
+            if (result.success && result.customers != null) {
+                this.customerList = result.customers;
+            }
+        });
+    }
+    
+    public fetchCustomerInfo() {
+        let requestBody: string = JSON.stringify(this.reqDTOCustomer);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMER_INFO), requestBody).then(result => {
+            //console.log(result);
+            if (result.success) {
+                this.dtoCustomer = result;
+            }
+        });
     }
 }
 

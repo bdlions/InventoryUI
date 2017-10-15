@@ -6,6 +6,7 @@ export class EntitySaleOrder {
     saleDate: number;
     discount: number;
     remarks: string;
+    total: number;
     createdOn: number;
     modifiedOn: number;
 }

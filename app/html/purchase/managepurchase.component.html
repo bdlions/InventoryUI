@@ -129,9 +129,9 @@
                                                 </tr>
                                                 <tr *ngFor="let product of dtoPurchaseOrder.products">
                                                     <td data-label="Item" (click)="showPurchaseOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
-                                                    <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance($event)"></td>
-                                                    <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance($event)"></td>
-                                                    <td data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance($event)"></td>
+                                                    <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
+                                                    <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance()"></td>
+                                                    <td data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
                                                     <td data-label="Total"><label>{{product.total}}</label></td>
                                                     <td data-label="Action"><i class="cursor-pointer fa fa-times" (click)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                 </tr>

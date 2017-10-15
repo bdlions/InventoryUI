@@ -95,7 +95,7 @@
                                 <span class="purchase-order-title">Order</span>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                <input [(ngModel)]="dtoSaleOrder.entitySaleOrder.orderNo" name="orderNo" class="form-control" disabled>
+                                <input [(ngModel)]="dtoSaleOrder.entitySaleOrder.orderNo" name="orderNo" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td data-label="Item"><input class="form-control"></td>
+                                                    <td data-label="Item" (click)="showSaleOrderProductModal($event, 0)"><input class="form-control"></td>
                                                     <td data-label="Quantity"><input class="form-control"></td>
                                                     <td data-label="Unit Price"><input class="form-control"></td>
                                                     <td data-label="Discount"><input class="form-control"></td>
@@ -133,11 +133,11 @@
                                             <table class="common-table">
                                                 <tbody>
                                                     <tr class="cursor-pointer" *ngFor="let product of dtoSaleOrder.products" >
-                                                        <td data-label="Item" (click)="showSaleOrderProductModal($event)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
-                                                        <td data-label="Quantity"><input class="form-control" value="{{product.quantity}}"></td>
-                                                        <td data-label="Unit Price"><input class="form-control" value="{{product.entityProduct.unitPrice}}"></td>
-                                                        <td data-label="Discount"><input class="form-control" value=""></td>
-                                                        <td data-label="Sub-Total"><label></label></td>
+                                                        <td data-label="Item" (click)="showSaleOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
+                                                        <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
+                                                        <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance()"></td>
+                                                        <td data-label="Discount" ><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
+                                                        <td data-label="Total"><label>{{product.total}}</label></td>
                                                         <td data-label="Delete" class="text-center"><i class="cursor-pointer fa fa-times" (click)="showSelectedSaleOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                     </tr>
                                                 </tbody>
@@ -145,7 +145,7 @@
                                         </div>
                                         <table class="common-table">
                                             <tfoot>
-                                                <tr class="cursor-pointer table-row-border-adjust" (click)="showSaleOrderEmptyRowProductModal($event)">
+                                                <tr class="cursor-pointer table-row-border-adjust" (click)="showSaleOrderProductModal($event, 0)">
                                                     <td class="text-center"><i class="fa fa-plus"></i></td>
                                                     <td></td>
                                                     <td></td>
@@ -253,7 +253,7 @@
                             <span class="product-title">Name</span>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                            <input [(ngModel)]="searchDTOCustomer.entityUser.firstName" name="name" class="form-control">
+                            <input [(ngModel)]="reqDTOCustomer.entityUser.firstName" name="name" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -261,7 +261,7 @@
                             <span class="product-title">Phone</span>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                            <input [(ngModel)]="searchDTOCustomer.entityUser.cell" name="cell" class="form-control">
+                            <input [(ngModel)]="reqDTOCustomer.entityUser.cell" name="cell" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -269,7 +269,7 @@
                             <span class="product-title">Email</span>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                            <input [(ngModel)]="searchDTOCustomer.entityUser.email" name="email" class="form-control">
+                            <input [(ngModel)]="reqDTOCustomer.entityUser.email" name="email" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -291,7 +291,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let customer of customerList">
+                                    <tr *ngFor="let customer of customerList" (click)="selectedCustomer($event, customer.entityCustomer.id)">
                                         <td data-label="Name">{{customer.entityUser.firstName}} {{customer.entityUser.lastName}}</td>
                                         <td data-label="Phone">{{customer.entityUser.cell}}</td>
                                         <td data-label="Phone">{{customer.entityUser.email}}</td>
@@ -336,7 +336,7 @@
                             <span class="product-title">Name</span>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                            <input [(ngModel)]="searchEntityProduct.name" id="name" name="name" class="form-control">
+                            <input [(ngModel)]="reqDTOProduct.name" id="name" name="name" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -458,7 +458,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideChildModal()">No</button>
-                        <button type="button" class="custom-button">Yes</button>
+                        <button type="button" class="custom-button" (click)="deleteSelectedProductFromModal($event)">Yes</button>
                     </div>
                 </div>
             </div>

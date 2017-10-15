@@ -68,6 +68,7 @@ export class ManagePurchaseComponent {
         
         this.dtoPurchaseOrder = new DTOPurchaseOrder();
         this.dtoPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
+        this.dtoPurchaseOrder.entityPurchaseOrder.id = 0;
         this.dtoPurchaseOrder.dtoSupplier = new DTOSupplier();
         this.dtoPurchaseOrder.dtoSupplier.entitySupplier = new EntitySupplier();
         this.dtoPurchaseOrder.dtoSupplier.entityUser = new EntityUser();
@@ -293,7 +294,7 @@ export class ManagePurchaseComponent {
                 }
             } 
         }
-        this.calculateBalance(event);
+        this.calculateBalance();
     }
     
     public showSelectedPurchaseOrderProductDeleteModal(event: Event, productId: number) {
@@ -315,10 +316,10 @@ export class ManagePurchaseComponent {
             }
         }
         this.dtoPurchaseOrder.products = tempDTOProductlist;
-        this.calculateBalance(event);
+        this.calculateBalance();
     }
     
-    public calculateBalance(event: Event)
+    public calculateBalance()
     {
         let totalPrice: number = 0;
         let purchasedProductCounter: number;

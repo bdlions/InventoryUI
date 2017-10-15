@@ -60,10 +60,10 @@ export class ManageSaleComponent {
         this.webAPIService = webAPIService;
         this.reqDTOSaleOrder = new DTOSaleOrder();
         this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
-        this.saleOrderList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entitySaleOrder\":{\"id\":1,\"orderNo\":\"order1\",\"customerUserId\":4,\"statusId\":0,\"saleDate\":0,\"discount\":0.0,\"total\":0.0,\"paid\":0.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoCustomer\":{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":0,\"userId\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":0,\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false},{\"limit\":0,\"offset\":0,\"entitySaleOrder\":{\"id\":2,\"orderNo\":\"order2\",\"customerUserId\":2,\"statusId\":0,\"saleDate\":0,\"discount\":10.0,\"total\":10.0,\"paid\":10.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoCustomer\":{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":0,\"userId\":0,\"balance\":10.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":1,\"accountStatusId\":1,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false}]");
-        //        setInterval(() => {this.saleOrderCustomerModal.hide();}, 1000 * 20);
-        //        setInterval(() => {this.saleOrderProductModal.hide();}, 1000 * 20);
-        console.log(this.saleOrderList);
+        this.reqDTOSaleOrder.limit = 10;
+        this.reqDTOSaleOrder.offset = 0;   
+        this.fetchSaleOrderList();
+        //this.saleOrderList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entitySaleOrder\":{\"id\":1,\"orderNo\":\"order1\",\"customerUserId\":4,\"statusId\":0,\"saleDate\":0,\"discount\":0.0,\"total\":0.0,\"paid\":0.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoCustomer\":{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":0,\"userId\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":0,\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false},{\"limit\":0,\"offset\":0,\"entitySaleOrder\":{\"id\":2,\"orderNo\":\"order2\",\"customerUserId\":2,\"statusId\":0,\"saleDate\":0,\"discount\":10.0,\"total\":10.0,\"paid\":10.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoCustomer\":{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":0,\"userId\":0,\"balance\":10.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":1,\"accountStatusId\":1,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false}]");
         
         this.dtoSaleOrder = new DTOSaleOrder();
         this.dtoSaleOrder.entitySaleOrder = new EntitySaleOrder();
@@ -115,33 +115,17 @@ export class ManageSaleComponent {
     ngOnInit() {
         this.subscribe = this.route.params.subscribe(params => {
             this.orderNo = params['orderNo'];
-            //this.dtoSaleOrder = JSON.parse("{\"limit\":0,\"offset\":0,\"entitySaleOrder\":{\"id\":1,\"orderNo\":\"order1\",\"customerUserId\":4,\"statusId\":0,\"saleDate\":0,\"discount\":0.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoCustomer\":{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":0,\"userId\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":0,\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false}");
-            //this.dtoSaleOrder.products = JSON.parse("[{\"limit\":10, \"offset\":0, \"quantity\":50, \"entityProduct\":{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}},{\"limit\":10, \"offset\":0, \"quantity\":100, \"entityProduct\":{\"id\":2,\"name\":\"product2\",\"code\":\"code2\",\"categoryId\":2,\"categoryTitle\":\"Product category2\",\"typeId\":2,\"typeTitle\":\"Product type2\",\"unitPrice\":20.0,\"standardUOMId\":20,\"saleUOMId\":20,\"purchaseUOMId\":20,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}}]");
-            //console.log(this.orderNo);
-            //console.log(this.dtoSaleOrder);
-            //console.log(this.dtoSaleOrder.products);
+            this.setSaleOrderInfo(this.orderNo);
         });
     }
+    
     searchSaleOrder(event: Event) {
         console.log(this.reqDTOSaleOrder.entitySaleOrder.orderNo);
     }
     
     
     
-    selectedSaleOrder(event: Event, orderNo: string){
-        event.preventDefault();
-        this.router.navigate(["managesale", {orderNo: orderNo}]);
-        let saleCounter: number;
-        for (saleCounter = 0; saleCounter < this.saleOrderList.length; saleCounter++)
-        {
-            if (this.saleOrderList[saleCounter].entitySaleOrder.orderNo == orderNo)
-            {
-                this.dtoCustomer = JSON.parse("{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"remarks\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}");
-                this.dtoSaleOrder = this.saleOrderList[saleCounter];
-                this.dtoSaleOrder.products = JSON.parse("[{\"limit\":10, \"offset\":0, \"quantity\":50, \"entityProduct\":{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}},{\"limit\":10, \"offset\":0, \"quantity\":100, \"entityProduct\":{\"id\":2,\"name\":\"product2\",\"code\":\"code2\",\"categoryId\":2,\"categoryTitle\":\"Product category2\",\"typeId\":2,\"typeTitle\":\"Product type2\",\"unitPrice\":20.0,\"standardUOMId\":20,\"saleUOMId\":20,\"purchaseUOMId\":20,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}}]");
-            }
-        }
-    }
+    
     selectedSaleOrderCustomer(event: Event, id: number) {
         console.log(id);
     }
@@ -359,6 +343,66 @@ export class ManageSaleComponent {
         }
     }
     //sale search section
+    public setSaleOrderInfo(orderNo: string)
+    {
+        this.dtoSaleOrder = new DTOSaleOrder();
+        this.dtoSaleOrder.entitySaleOrder = new EntitySaleOrder();
+        this.dtoSaleOrder.entitySaleOrder.id = 0;
+        this.dtoSaleOrder.dtoCustomer = new DTOCustomer();
+        this.dtoSaleOrder.dtoCustomer.entityCustomer = new EntityCustomer();
+        this.dtoSaleOrder.dtoCustomer.entityUser = new EntityUser();
+        this.dtoSaleOrder.dtoCustomer.entityUserRole = new EntityUserRole();
+        this.dtoSaleOrder.products = Array();
+
+        this.dtoCustomer = new DTOCustomer();
+        this.dtoCustomer.entityCustomer = new EntityCustomer();
+        this.dtoCustomer.entityUser = new EntityUser();
+        this.dtoCustomer.entityUserRole = new EntityUserRole();
+
+        this.reqDTOSaleOrder.entitySaleOrder.orderNo = orderNo;
+        this.fetchSaleOrderInfo();
+    }
+    
+    public fetchSaleOrderInfo() {
+        let requestBody: string = JSON.stringify(this.reqDTOSaleOrder);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_ORDER_INFO), requestBody).then(result => {
+            if (result.success) {
+                this.dtoSaleOrder = result;    
+                this.calculateBalance();  
+                this.reqDTOCustomer.entityCustomer.userId = this.dtoSaleOrder.entitySaleOrder.customerUserId;
+                this.fetchCustomerInfo();   
+            }
+            else {
+                
+            }
+        });
+    }
+    
+    public fetchCustomerInfo() {
+        let requestBody: string = JSON.stringify(this.reqDTOCustomer);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMER_INFO), requestBody).then(result => {
+            if (result.success) {
+                this.dtoCustomer = result;
+            }
+        });
+    }
+    
+    public fetchSaleOrderList() {
+        let requestBody: string = JSON.stringify(this.reqDTOSaleOrder);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_ORDERS), requestBody).then(result => {
+            if (result.success && result.saleOrders != null) {
+                this.saleOrderList = result.saleOrders;
+            }
+            else {
+                
+            }
+        });
+    }
+    
+    selectedSaleOrder(event: Event, orderNo: string){
+        event.preventDefault();
+        this.setSaleOrderInfo(orderNo);
+    }
 }
 
 

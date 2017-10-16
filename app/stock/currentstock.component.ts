@@ -24,21 +24,42 @@ export class CurrentStockComponent {
         this.webAPIService = webAPIService;
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
-        this.productList = JSON.parse("[{\"limit\":10, \"offset\":0, \"quantity\":50, \"entityProduct\":{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}}]");
-        this.productCategoryList = JSON.parse("[{\"id\":1,\"title\":\"Product category1\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"title\":\"Product category2\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
-        console.log(this.productList);
-        console.log(this.productCategoryList);
+        this.reqDTOProduct.limit = 10;
+        this.reqDTOProduct.offset = 0;
+        this.fetchCurrentStock();
+        this.fetchProductCategoryList();        
     }
 
     ngOnInit() {
 
     }
 
-    searchCurrentStock(event: Event) {
-        console.log(this.reqDTOProduct.entityProduct.name);
+    public searchCurrentStock(event: Event) {
+        this.fetchCurrentStock();
     }
-    showCurrentStock(event: Event, id: number) {
-        console.log(id);
+    
+    public fetchProductCategoryList() {
+        let requestBody: string = "{}";
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ALL_PRODUCT_CATEGORIES), requestBody).then(result => {
+            if (result.success && result.productCategories != null) {
+                this.productCategoryList = result.productCategories;
+            }
+            else {
+                //console.log(result);
+            }
+        });
+    }
+    public fetchCurrentStock() {
+
+        let requestBody: string = JSON.stringify(this.reqDTOProduct);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CURRENT_STOCK), requestBody).then(result => {
+            if (result.success && result.products != null) {
+                this.productList = result.products;
+            }
+            else {
+                
+            }
+        });
     }
 }
 

@@ -44,12 +44,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="cursor-pointer" *ngFor="let product of productList" (click)="showCurrentStock($event, product.entityProduct.id)">
+                            <tr class="cursor-pointer" *ngFor="let product of productList">
                                 <td data-label="Item">{{product.entityProduct.name}}</td>
                                 <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
                                 <td data-label="Last Supplier"></td>
                                 <td data-label="Location"></td>
-                                <td data-label="Quantity"></td>
+                                <td data-label="Quantity">{{product.quantity}}</td>
                             </tr>
                         </tbody>
                     </table>

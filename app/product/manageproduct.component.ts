@@ -1,12 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
+import {ModalDirective} from 'ngx-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MarketAPI} from './../services/MarketAPI.service';
 import {NavigationManager} from "../services/NavigationManager";
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
-import { TabsetComponent } from 'ngx-bootstrap';
+import {TabsetComponent} from 'ngx-bootstrap';
 import {DTOProduct} from '../dto/DTOProduct';
 import {EntityProduct} from '../dto/EntityProduct';
 import {EntityProductCategory} from '../dto/EntityProductCategory';
@@ -20,6 +21,7 @@ import {EntityUOM} from '../dto/EntityUOM';
 })
 
 export class ManageProductComponent {
+    @ViewChild('commonMessageDispalyModal') public commonMessageDispalyModal: ModalDirective;
     private webAPIService: WebAPIService;
     private subscribe: Subscription;
     private reqDTOProduct: DTOProduct;
@@ -47,11 +49,11 @@ export class ManageProductComponent {
             }
         });
         this.webAPIService = webAPIService;
-        
-        
+
+
         //this.searchEntityProduct = new EntityProduct();
         this.entityProduct = new EntityProduct();
-        
+
         this.dtoProduct = new DTOProduct();
         this.dtoProduct.entityProduct = new EntityProduct();
         this.dtoProduct.entityProductType = new EntityProductType();
@@ -66,11 +68,11 @@ export class ManageProductComponent {
         //console.log(this.productTypeList);
         //console.log(this.uomList);
         //console.log(this.productList);
-        
+
         this.fetchProductCategoryList();
         this.fetchProductTypeList();
         this.fetchUOMList();
-        
+
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = 10;
@@ -89,33 +91,44 @@ export class ManageProductComponent {
             //console.log(this.productId);
         });
     }
-
+    public hideChildModal(): void {
+        this.commonMessageDispalyModal.hide();
+    }
     searchProduct(event: Event) {
         //console.log(this.searchEntityProduct.name);
-        this.reqDTOProduct.limit = 10;
-        this.reqDTOProduct.offset = 0;
-        this.fetchProductList();
+
+        if (this.reqDTOProduct.entityProduct.name == null || this.reqDTOProduct.entityProduct.name == "") {
+            return;
+        }
+        else {
+            this.reqDTOProduct.limit = 10;
+            this.reqDTOProduct.offset = 0;
+            this.fetchProductList();
+        }
     }
+
     newProduct(event: Event) {
         //console.log(this.entityProduct.name);
         this.dtoProduct = new DTOProduct();
         this.dtoProduct.entityProduct = new EntityProduct();
         this.dtoProduct.entityProductCategory = new EntityProductCategory();
         this.dtoProduct.entityProductType = new EntityProductType();
-        
+
     }
     saveProduct(event: Event) {
+
+        this.commonMessageDispalyModal.config.backdrop = false;
+        this.commonMessageDispalyModal.show();
         
-        console.log(this.dtoProduct.entityProductType);
-        
+        //console.log(this.dtoProduct.entityProductType);
+
         this.dtoProduct.entityProduct.categoryId = this.dtoProduct.entityProductCategory.id;
         this.dtoProduct.entityProduct.categoryTitle = this.dtoProduct.entityProductCategory.title;
         this.dtoProduct.entityProduct.typeId = this.dtoProduct.entityProductType.id;
         this.dtoProduct.entityProduct.typeTitle = this.dtoProduct.entityProductType.title;
-        
+
         let requestBody: string = JSON.stringify(this.dtoProduct.entityProduct);
-        if (this.dtoProduct.entityProduct.id > 0)
-        {
+        if (this.dtoProduct.entityProduct.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_PRODUCT_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
@@ -126,10 +139,9 @@ export class ManageProductComponent {
                 }
             });
         }
-        else
-        {
+        else {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PRODUCT_INFO), requestBody).then(result => {
-                console.log(result);
+                // console.log(result);
                 if (result.success) {
                     //this.productList = result.products;
                 }
@@ -138,7 +150,7 @@ export class ManageProductComponent {
                 }
             });
         }
-        
+
     }
     selectedProduct(event: Event, productId: number) {
         //event.preventDefault();
@@ -148,26 +160,22 @@ export class ManageProductComponent {
         for (productCounter = 0; productCounter < this.productList.length; productCounter++) {
             if (this.productList[productCounter].id == productId) {
                 this.dtoProduct.entityProduct = this.productList[productCounter];
-                
-                for (let counter: number = 0; counter < this.productCategoryList.length; counter++)
-                {
-                    if (this.dtoProduct.entityProduct.categoryId == this.productCategoryList[counter].id)
-                    {
+
+                for (let counter: number = 0; counter < this.productCategoryList.length; counter++) {
+                    if (this.dtoProduct.entityProduct.categoryId == this.productCategoryList[counter].id) {
                         this.dtoProduct.entityProductCategory = this.productCategoryList[counter];
                     }
                 }
-                for (let counter: number = 0; counter < this.productTypeList.length; counter++)
-                {
-                    if (this.dtoProduct.entityProduct.typeId == this.productTypeList[counter].id)
-                    {
+                for (let counter: number = 0; counter < this.productTypeList.length; counter++) {
+                    if (this.dtoProduct.entityProduct.typeId == this.productTypeList[counter].id) {
                         this.dtoProduct.entityProductType = this.productTypeList[counter];
                     }
                 }
             }
         }
     }
-    
-    
+
+
     public fetchProductCategoryList() {
         let requestBody: string = "{}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ALL_PRODUCT_CATEGORIES), requestBody).then(result => {
@@ -179,7 +187,7 @@ export class ManageProductComponent {
             }
         });
     }
-    
+
     public fetchProductTypeList() {
         let requestBody: string = "{}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ALL_PRODUCT_TYPES), requestBody).then(result => {
@@ -191,7 +199,7 @@ export class ManageProductComponent {
             }
         });
     }
-    
+
     public fetchUOMList() {
         let requestBody: string = "{}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ALL_UOMS), requestBody).then(result => {
@@ -203,7 +211,7 @@ export class ManageProductComponent {
             }
         });
     }
-    
+
     public fetchProductList() {
         //this.reqDTOProduct.limit = 10;
         //this.reqDTOProduct.offset = 0;
@@ -219,7 +227,7 @@ export class ManageProductComponent {
             }
         });
     }
-    
+
     public fetchProductInfo(productId: number) {
         this.reqEntiryProduct = new EntityProduct();
         this.reqEntiryProduct.id = productId;
@@ -232,17 +240,13 @@ export class ManageProductComponent {
                 this.dtoProduct.entityProductCategory = new EntityProductCategory();
                 this.dtoProduct.entityProductType = new EntityProductType();
                 this.dtoProduct.entityProduct = result;
-                for (let counter: number = 0; counter < this.productCategoryList.length; counter++)
-                {
-                    if (this.dtoProduct.entityProduct.categoryId == this.productCategoryList[counter].id)
-                    {
+                for (let counter: number = 0; counter < this.productCategoryList.length; counter++) {
+                    if (this.dtoProduct.entityProduct.categoryId == this.productCategoryList[counter].id) {
                         this.dtoProduct.entityProductCategory = this.productCategoryList[counter];
                     }
                 }
-                for (let counter: number = 0; counter < this.productTypeList.length; counter++)
-                {
-                    if (this.dtoProduct.entityProduct.typeId == this.productTypeList[counter].id)
-                    {
+                for (let counter: number = 0; counter < this.productTypeList.length; counter++) {
+                    if (this.dtoProduct.entityProduct.typeId == this.productTypeList[counter].id) {
                         this.dtoProduct.entityProductType = this.productTypeList[counter];
                     }
                 }

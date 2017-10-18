@@ -25,7 +25,7 @@ const createWindow = () => {
   });
 
   // Tell Electron where to load the entry point from
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/desktop.html');
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

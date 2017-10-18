@@ -6,7 +6,6 @@
 
 
 (function () {
-  
   const remote = require('electron').remote;
   
   function init() {

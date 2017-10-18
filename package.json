@@ -12,10 +12,10 @@
   "contributors": [],
   "main": "desktop.js",
   "scripts": {
-    "build": "webpack --progress --profile --colors --display-error-details --display-cached",
+    "deploy": "webpack --progress --profile --colors --display-error-details --display-cached",
+    "compile": "tsc -w",
     "execute": "electron .",
-    "clean build": "npm run build && npm run execute"
-        
+    "build-run": "npm run deploy && npm run execute"
   },
   "dependencies": {
     "@angular/common": "~2.2.1",
@@ -30,12 +30,12 @@
     "@angular/router": "~3.2.1",
     "angular2-uuid": "^1.1.1",
     "core-js": "^2.4.1",
+    "electron": "^1.7.9",
     "ie-shim": "^0.1.0",
     "ng2-file-upload": "^1.2.1",
     "ngx-bootstrap": "^1.7.1",
     "rxjs": "5.0.0-beta.12",
     "systemjs": "^0.19.47",
-    "electron": "~1.6.2",
     "zone.js": "~0.6.26"
   },
   "devDependencies": {

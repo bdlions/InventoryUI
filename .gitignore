@@ -46,6 +46,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 /build/
+/app-build/
 /dist/
 /node_modules/
 /nbproject/

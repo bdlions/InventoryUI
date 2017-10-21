@@ -62,8 +62,6 @@ export class ManagePurchaseComponent {
         this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
         this.reqDTOPurchaseOrder.limit = 10;
         this.reqDTOPurchaseOrder.offset = 0;        
-        //this.purchaseOrderList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entityPurchaseOrder\":{\"id\":1,\"orderNo\":\"order1\",\"supplierUserId\":3,\"orderDate\":0,\"requestedShipDate\":0,\"subtotal\":0.0,\"discount\":0.0,\"total\":0.0,\"paid\":0.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoSupplier\":{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":0,\"userId\":0,\"remarks\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":0,\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false},{\"limit\":0,\"offset\":0,\"entityPurchaseOrder\":{\"id\":2,\"orderNo\":\"order2\",\"supplierUserId\":2,\"orderDate\":0,\"requestedShipDate\":0,\"subtotal\":10.0,\"discount\":10.0,\"total\":10.0,\"paid\":10.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoSupplier\":{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":2,\"userId\":0,\"remarks\":0,\"balance\":10.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":0,\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false}]");
-        //console.log(this.purchaseOrderList);
         this.fetchPurchaseOrderList();
         
         this.dtoPurchaseOrder = new DTOPurchaseOrder();
@@ -333,7 +331,12 @@ export class ManagePurchaseComponent {
     }
     
     //purchase add/save section
-    newPurchaseOrder(event: Event) {
+    public newPurchaseOrder(event: Event) {
+        this.resetPurchaseOrder();
+    }
+    
+    public resetPurchaseOrder()
+    {
         this.dtoPurchaseOrder = new DTOPurchaseOrder();
         this.dtoPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
         this.dtoPurchaseOrder.entityPurchaseOrder.id = 0;
@@ -360,16 +363,37 @@ export class ManagePurchaseComponent {
     
     public savePurchaseOrder(event: Event) 
     {
+        //check purchase order no
+        //-----------------
+        //check supplier selection
+        //----------------------
+        //check product selection
+        //-----------------------
+        
         let requestBody: string = JSON.stringify(this.dtoPurchaseOrder);
+        console.log(requestBody);
         if (this.dtoPurchaseOrder.entityPurchaseOrder.id == 0)
         {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PURCHASE_ORDER_INFO), requestBody).then(result => {
-                if (result.success) {
+                if (result.success) 
+                {
+                    //set success message
                     
-                }
-                else {
+                    //reset purchase order
+                    this.resetPurchaseOrder();
                     
+                    //update left panel purchase order list
+                    this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
+                    this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
+                    this.reqDTOPurchaseOrder.limit = 10;
+                    this.reqDTOPurchaseOrder.offset = 0;        
+                    this.fetchPurchaseOrderList();
                 }
+                else 
+                {
+                    //set error message
+                }
+                //display pop up with message
             });
         }
         else
@@ -383,6 +407,7 @@ export class ManagePurchaseComponent {
     {
         this.dtoPurchaseOrder = new DTOPurchaseOrder();
         this.dtoPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
+        this.dtoPurchaseOrder.entityPurchaseOrder.id = 0;
         this.dtoPurchaseOrder.dtoSupplier = new DTOSupplier();
         this.dtoPurchaseOrder.dtoSupplier.entitySupplier = new EntitySupplier();
         this.dtoPurchaseOrder.dtoSupplier.entityUser = new EntityUser();

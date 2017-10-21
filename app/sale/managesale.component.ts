@@ -34,6 +34,7 @@ export class ManageSaleComponent {
     @ViewChild('saleOrderProductModal') public saleOrderProductModal: ModalDirective;
     @ViewChild('selectedSaleOrderProductDeleteModal') public selectedSaleOrderProductDeleteModal: ModalDirective;
     @ViewChild('addSaleOrderProduct') public addSaleOrderProduct: ModalDirective;
+    @ViewChild('manageSaleMessageDispalyModal') public manageSaleMessageDispalyModal: ModalDirective;
     private webAPIService: WebAPIService;
     private dtoSaleOrder: DTOSaleOrder;
     private orderNo: string;
@@ -55,6 +56,12 @@ export class ManageSaleComponent {
     //private productId: number;
     private productIdToPopupSelectProduct: number;
     private productIdToPopupDeleteProduct: number;
+    
+    private reqStockDTOProduct: DTOProduct;
+    private stockProductList: DTOProduct[];
+    
+    private manageSaleSuccessMessage : string;
+    private manageSaleErrorMessage : string;
 
     constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
@@ -99,6 +106,12 @@ export class ManageSaleComponent {
         this.reqDTOProduct.offset = 0;
         this.fetchProductList();
         
+        this.reqStockDTOProduct = new DTOProduct();
+        this.reqStockDTOProduct.entityProduct = new EntityProduct();
+        this.reqStockDTOProduct.limit = 10;
+        this.reqStockDTOProduct.offset = 0;
+        this.fetchCurrentStock();
+        
         //this.searchEntityProduct = new EntityProduct();
         //this.entityProduct = JSON.parse("{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"length\":\"10 cm\",\"width\":\"20 cm\",\"height\":\"30 cm\",\"weight\":\"40 cm\",\"remark\":\"This is a good product...\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}");
         //this.productCategoryList = JSON.parse("[{\"id\":1,\"title\":\"Product category1\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"title\":\"Product category2\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
@@ -140,6 +153,9 @@ export class ManageSaleComponent {
         console.log(id);
     }
     
+    public hideManageSaleMessageDispalyModal(): void {
+        this.manageSaleMessageDispalyModal.hide();
+    }
     
     public hideChildModal(): void {
         this.saleOrderCustomerModal.hide();
@@ -297,7 +313,12 @@ export class ManageSaleComponent {
         this.dtoSaleOrder.entitySaleOrder.total = totalPrice;
     }
     //sale save/update section
-    newSaleOrder(event: Event) {
+    public newSaleOrder(event: Event) {
+        this.resetSaleOrder();
+    }
+    
+    public resetSaleOrder()
+    {
         this.dtoSaleOrder = new DTOSaleOrder();
         this.dtoSaleOrder.entitySaleOrder = new EntitySaleOrder();
         this.dtoSaleOrder.entitySaleOrder.id = 0;
@@ -324,22 +345,88 @@ export class ManageSaleComponent {
     }
     
     saveSaleOrder(event: Event) {
+        //check sale order no
+        if (this.dtoSaleOrder.entitySaleOrder.orderNo == null || this.dtoSaleOrder.entitySaleOrder.orderNo == "")
+        {
+            this.manageSaleSuccessMessage = "";
+            this.manageSaleErrorMessage = "Invalid sale orde no.";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;            
+            this.manageSaleMessageDispalyModal.show();
+            return;
+        }
+        //check customer selection
+        //----------------------
+        //check product selection
+        //-----------------------
+        //check current stock before saving sale order
+        let tempProductList: DTOProduct[] = this.dtoSaleOrder.products;
+        let productCounter: number = 0;
+        let isValidStock: boolean = false;
+        for (productCounter = 0; productCounter < tempProductList.length; productCounter++)
+        {
+            let tempValid: boolean = false;
+            let stockProductCounter: number = 0;
+            for (stockProductCounter = 0; stockProductCounter < this.stockProductList.length; stockProductCounter++)
+            {
+                if (tempProductList[productCounter].entityProduct.id == this.stockProductList[stockProductCounter].entityProduct.id && tempProductList[productCounter].quantity <= this.stockProductList[stockProductCounter].quantity)
+                {
+                    tempValid = true;
+                }
+            }
+            if (tempValid)
+            {
+                isValidStock = true;
+            }
+            else
+            {
+                this.manageSaleErrorMessage = "Insufficient Stock for the product : " + tempProductList[productCounter].entityProduct.name;
+            }
+        }
+        if (!isValidStock)
+        {
+            this.manageSaleSuccessMessage = "";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;            
+            this.manageSaleMessageDispalyModal.show();
+            return;
+        }
+        
         let requestBody: string = JSON.stringify(this.dtoSaleOrder);
         if (this.dtoSaleOrder.entitySaleOrder.id == 0)
         {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_SALE_ORDER_INFO), requestBody).then(result => {
                 if (result.success) {
+                    this.manageSaleSuccessMessage = result.message;
+                    this.manageSaleErrorMessage = "";   
                     
+                    this.resetSaleOrder();
+                    
+                    //update left panel sale order list
+                    this.reqDTOSaleOrder = new DTOSaleOrder();
+                    this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
+                    this.reqDTOSaleOrder.limit = 10;
+                    this.reqDTOSaleOrder.offset = 0;   
+                    this.fetchSaleOrderList();
+                    
+                    //update current stock
+                    this.reqStockDTOProduct = new DTOProduct();
+                    this.reqStockDTOProduct.entityProduct = new EntityProduct();
+                    this.reqStockDTOProduct.limit = 10;
+                    this.reqStockDTOProduct.offset = 0;
+                    this.fetchCurrentStock();
                 }
                 else 
                 {
-                    
+                    this.manageSaleSuccessMessage = "";
+                    this.manageSaleErrorMessage = result.message;     
                 }
+                this.manageSaleMessageDispalyModal.config.backdrop = false;            
+                this.manageSaleMessageDispalyModal.show();
             });
         }
         else
         {
             //handle to update purchase order
+            //-------------------------------
         }
     }
     //sale search section
@@ -402,6 +489,21 @@ export class ManageSaleComponent {
     selectedSaleOrder(event: Event, orderNo: string){
         event.preventDefault();
         this.setSaleOrderInfo(orderNo);
+    }
+    
+    public fetchCurrentStock() 
+    {
+        let requestBody: string = JSON.stringify(this.reqStockDTOProduct);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CURRENT_STOCK), requestBody).then(result => {
+            if (result.success && result.products != null) 
+            {
+                this.stockProductList = result.products;
+            }
+            else 
+            {
+                
+            }
+        });
     }
 }
 

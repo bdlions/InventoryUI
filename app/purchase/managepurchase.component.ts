@@ -347,6 +347,7 @@ export class ManagePurchaseComponent {
         this.dtoPurchaseOrder.products = Array();
 
         this.reqDTOSupplier = new DTOSupplier();
+        this.reqDTOSupplier.entitySupplier = new EntitySupplier();
         this.reqDTOSupplier.entityUser = new EntityUser();   
         this.reqDTOSupplier.limit = 10;
         this.reqDTOSupplier.offset = 0;     
@@ -399,6 +400,28 @@ export class ManagePurchaseComponent {
         else
         {
             //handle to update purchase order
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_PURCHASE_ORDER_INFO), requestBody).then(result => {
+                console.log(result);
+                if (result.success) 
+                {
+                    //set success message
+                    
+                    //reset purchase order
+                    this.resetPurchaseOrder();
+                    
+                    //update left panel purchase order list
+                    this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
+                    this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
+                    this.reqDTOPurchaseOrder.limit = 10;
+                    this.reqDTOPurchaseOrder.offset = 0;        
+                    this.fetchPurchaseOrderList();
+                }
+                else 
+                {
+                    //set error message
+                }
+                //display pop up with message
+            });
         }
     }
     

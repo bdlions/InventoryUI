@@ -425,8 +425,38 @@ export class ManageSaleComponent {
         }
         else
         {
-            //handle to update purchase order
-            //-------------------------------
+            //handle to update sale order
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_SALE_ORDER_INFO), requestBody).then(result => {
+                console.log(result);
+                if (result.success) 
+                {
+                    this.manageSaleSuccessMessage = result.message;
+                    this.manageSaleErrorMessage = "";   
+                    
+                    this.resetSaleOrder();
+                    
+                    //update left panel sale order list
+                    this.reqDTOSaleOrder = new DTOSaleOrder();
+                    this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
+                    this.reqDTOSaleOrder.limit = 10;
+                    this.reqDTOSaleOrder.offset = 0;   
+                    this.fetchSaleOrderList();
+                    
+                    //update current stock
+                    this.reqStockDTOProduct = new DTOProduct();
+                    this.reqStockDTOProduct.entityProduct = new EntityProduct();
+                    this.reqStockDTOProduct.limit = 10;
+                    this.reqStockDTOProduct.offset = 0;
+                    this.fetchCurrentStock();
+                }
+                else 
+                {
+                    this.manageSaleSuccessMessage = "";
+                    this.manageSaleErrorMessage = result.message;     
+                }
+                this.manageSaleMessageDispalyModal.config.backdrop = false;            
+                this.manageSaleMessageDispalyModal.show();
+            });
         }
     }
     //sale search section

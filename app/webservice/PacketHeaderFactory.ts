@@ -97,6 +97,12 @@ export class PacketHeaderFactory {
                 break;    
             case ACTION.UPDATE_SUPPLIER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
+                break; 
+            case ACTION.UPDATE_PURCHASE_ORDER_INFO:
+                packetHeader.requestType = REQUEST_TYPE.UPDATE
+                break; 
+            case ACTION.UPDATE_SALE_ORDER_INFO:
+                packetHeader.requestType = REQUEST_TYPE.UPDATE
                 break;        
                         
             default:

@@ -77,6 +77,9 @@ label{
 input, select,textArea{
     font-size: 13px!important;
 }
+textarea {
+    overflow-x: hidden;
+}
 input, select{
     border: 1px solid #ccc!important;
     padding: 3px 6px !important;
@@ -213,6 +216,12 @@ table tr:hover{
 }
 
 .errorMessage{
+    color: red;
+}
+.green{
+    color: green;
+}
+.red{
     color: red;
 }
 /*----------------------------- Main Menu ----------------------------------*/

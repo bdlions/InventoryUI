@@ -253,7 +253,7 @@
                         <h4 class="modal-title">Supplier</h4>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hidePurchaseOrderSupplierModal()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -336,7 +336,7 @@
                         <h4 class="modal-title">Product</h4>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hidePurchaseOrderProductModal()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -423,7 +423,7 @@
                         <h4 class="modal-title">Add Purchase Order Product</h4>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideAddPurchaseOrderProduct()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -439,7 +439,7 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideChildModal()">No</button>
+                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideAddPurchaseOrderProduct()">No</button>
                         <button type="button" class="custom-button">Yes</button>
                     </div>
                 </div>
@@ -459,7 +459,7 @@
                         <h4 class="modal-title">Selected Purchase Product Delete</h4>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideSelectedPurchaseOrderProductDeleteModal()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -475,7 +475,7 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideChildModal()">No</button>
+                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideSelectedPurchaseOrderProductDeleteModal()">No</button>
                         <button type="button" class="custom-button" (click)="deleteSelectedProductFromModal($event)">Yes</button>
                     </div>
                 </div>
@@ -484,3 +484,33 @@
     </div>
 </div>
 <!--Selected Purchase Order Product Delete Modal Ends-->
+
+<!-- Manage Purchase Message Dispaly Modal Starts-->
+<div bsModal #managePurchaseMessageDispalyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-offset-2 col-xs-8  col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+                        <h4 class="modal-title">Message</h4>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideManagePurchaseMessageDispalyModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row margin-top-10px">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="text-center green">{{managePurchaseSuccessMessage}}</p>
+                        <p class="text-center red">{{managePurchaseErrorMessage}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<!-- Manage Sale Message Dispaly Modal Ends-->

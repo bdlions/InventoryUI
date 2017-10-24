@@ -235,7 +235,7 @@
                         <h4 class="modal-title">Customer</h4>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideSaleOrderCustomerModal()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -318,7 +318,7 @@
                         <h4 class="modal-title">Product</h4>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideSaleOrderProductModal()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -405,7 +405,7 @@
                         <h4 class="modal-title">Add Sale Order Product</h4>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideAddSaleOrderProduct()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -421,7 +421,7 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideChildModal()">No</button>
+                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideAddSaleOrderProduct()">No</button>
                         <button type="button" class="custom-button">Yes</button>
                     </div>
                 </div>
@@ -441,7 +441,7 @@
                         <h4 class="modal-title">Selected Purchase Product Delete</h4>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideSelectedSaleOrderProductDeleteModal()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -457,7 +457,7 @@
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideChildModal()">No</button>
+                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideSelectedSaleOrderProductDeleteModal()">No</button>
                         <button type="button" class="custom-button" (click)="deleteSelectedProductFromModal($event)">Yes</button>
                     </div>
                 </div>
@@ -467,7 +467,7 @@
 </div>
 <!--Selected SaleOrder Product Delete Modal Ends-->
 
-
+<!-- Manage Sale Message Dispaly Modal Starts-->
 <div bsModal #manageSaleMessageDispalyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
      <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
@@ -486,8 +486,8 @@
             <div class="modal-body">
                 <div class="row margin-top-10px">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <p style="color: green" class="text-center">{{manageSaleSuccessMessage}}</p>
-                        <p style="color: red" class="text-center">{{manageSaleErrorMessage}}</p>
+                        <p class="text-center green">{{manageSaleSuccessMessage}}</p>
+                        <p class="text-center red">{{manageSaleErrorMessage}}</p>
                     </div>
                 </div>
             </div>
@@ -495,3 +495,4 @@
         </div>
     </div>
 </div>
+<!-- Manage Sale Message Dispaly Modal Ends-->

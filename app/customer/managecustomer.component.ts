@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ModalDirective} from 'ngx-bootstrap';
 import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
@@ -18,6 +19,7 @@ import {Subscription} from 'rxjs';
 })
 
 export class ManageCustomerComponent {
+    @ViewChild('manageCustomerMessageDispalyModal') public manageCustomerMessageDispalyModal: ModalDirective;
     private webAPIService: WebAPIService;
     private subscribe: Subscription;
     private reqDTOCustomer: DTOCustomer;
@@ -26,6 +28,9 @@ export class ManageCustomerComponent {
     //private searchDTOCustomer: DTOCustomer;
     private showNavBar: boolean = false;
     private activeMenu: string = "managecustomer";
+
+    private manageCustomerSuccessMessage: string;
+    private manageCustomerErrorMessage: string;
 
     constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
@@ -41,12 +46,12 @@ export class ManageCustomerComponent {
         this.webAPIService = webAPIService;
         //this.searchDTOCustomer = new DTOCustomer();
         //this.searchDTOCustomer.entityUser = new EntityUser();
-        
+
         this.reqDTOCustomer = new DTOCustomer();
         this.reqDTOCustomer.entityCustomer = new EntityCustomer();
         this.reqDTOCustomer.entityUser = new EntityUser();
         this.reqDTOCustomer.entityUserRole = new EntityUserRole();
-        
+
         this.dtoCustomer = new DTOCustomer();
         this.dtoCustomer.entityCustomer = new EntityCustomer();
         this.dtoCustomer.entityUser = new EntityUser();
@@ -64,11 +69,13 @@ export class ManageCustomerComponent {
             this.fetchCustomerInfo();
         });
     }
-
+    public hideManageCustomerMessageDispalyModal(): void {
+        this.manageCustomerMessageDispalyModal.hide();
+    }
     searchCustomer(event: Event) {
         console.log(this.reqDTOCustomer.entityUser.firstName);
     }
-    
+
     newCustomer(event: Event) {
         //console.log("New Customer");
         this.dtoCustomer = new DTOCustomer();
@@ -76,49 +83,62 @@ export class ManageCustomerComponent {
         this.dtoCustomer.entityUser = new EntityUser();
         this.dtoCustomer.entityUserRole = new EntityUserRole();
     }
-    
+
     saveCustomer(event: Event) {
+        //check customer first name
+        if (this.dtoCustomer.entityUser.firstName == null || this.dtoCustomer.entityUser.firstName == "") {
+            this.manageCustomerSuccessMessage = "";
+            this.manageCustomerErrorMessage = "Enter customer first name";
+            this.manageCustomerMessageDispalyModal.config.backdrop = false;
+            this.manageCustomerMessageDispalyModal.show();
+            return;
+        }
+        //check customer last name
+        if (this.dtoCustomer.entityUser.lastName == null || this.dtoCustomer.entityUser.lastName == "") {
+            this.manageCustomerSuccessMessage = "";
+            this.manageCustomerErrorMessage = "Enter customer last name";
+            this.manageCustomerMessageDispalyModal.config.backdrop = false;
+            this.manageCustomerMessageDispalyModal.show();
+            return;
+        }
+
         this.dtoCustomer.entityUser.password = "pass";
         let requestBody: string = JSON.stringify(this.dtoCustomer);
-        if (this.dtoCustomer.entityCustomer.id > 0)
-        {
+        if (this.dtoCustomer.entityCustomer.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_CUSTOMER_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
-                    
+
                 }
                 else {
-                    
+
                 }
             });
         }
-        else
-        {
+        else {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_CUSTOMER_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
-                    
+
                 }
                 else {
-                    
+
                 }
             });
         }
         //reset this customer, fetch customer list again
     }
     selectedCustomer(event: Event, customerId: number) {
-         event.preventDefault();
+        event.preventDefault();
         //this.router.navigate(["managecustomer", {customerId: customerId}]);
         let customerCounter: number;
-        for (customerCounter = 0; customerCounter < this.customerList.length; customerCounter++)
-        {
-            if (this.customerList[customerCounter].entityCustomer.id == customerId)
-            {
+        for (customerCounter = 0; customerCounter < this.customerList.length; customerCounter++) {
+            if (this.customerList[customerCounter].entityCustomer.id == customerId) {
                 this.dtoCustomer = this.customerList[customerCounter];
             }
         }
     }
-    
+
     public fetchCustomerList() {
         this.reqDTOCustomer.limit = 10;
         this.reqDTOCustomer.offset = 0;
@@ -130,7 +150,7 @@ export class ManageCustomerComponent {
             }
         });
     }
-    
+
     public fetchCustomerInfo() {
         let requestBody: string = JSON.stringify(this.reqDTOCustomer);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMER_INFO), requestBody).then(result => {

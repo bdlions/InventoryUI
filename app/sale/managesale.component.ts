@@ -153,17 +153,23 @@ export class ManageSaleComponent {
         console.log(id);
     }
     
-    public hideManageSaleMessageDispalyModal(): void {
-        this.manageSaleMessageDispalyModal.hide();
+    public hideSaleOrderCustomerModal(): void {
+        this.saleOrderCustomerModal.hide();
     }
     
-    public hideChildModal(): void {
-        this.saleOrderCustomerModal.hide();
-        this.saleOrderProductModal.hide();
-        this.selectedSaleOrderProductDeleteModal.hide();
+    public hideSaleOrderProductModal(): void {
+         this.saleOrderProductModal.hide();
+    }
+    
+    public hideAddSaleOrderProduct(): void {
         this.addSaleOrderProduct.hide();
     }
-    
+    public hideSelectedSaleOrderProductDeleteModal(): void {
+        this.selectedSaleOrderProductDeleteModal.hide();
+    }
+     public hideManageSaleMessageDispalyModal(): void {
+        this.manageSaleMessageDispalyModal.hide();
+    }
     public showSaleOrderEmptyRowProductModal(event: Event) {
         this.saleOrderProductModal.config.backdrop = false;
         this.saleOrderProductModal.show();
@@ -349,14 +355,29 @@ export class ManageSaleComponent {
         if (this.dtoSaleOrder.entitySaleOrder.orderNo == null || this.dtoSaleOrder.entitySaleOrder.orderNo == "")
         {
             this.manageSaleSuccessMessage = "";
-            this.manageSaleErrorMessage = "Invalid sale orde no.";
+            this.manageSaleErrorMessage = "Invalid sale order no.";
             this.manageSaleMessageDispalyModal.config.backdrop = false;            
             this.manageSaleMessageDispalyModal.show();
             return;
         }
         //check customer selection
-        //----------------------
+         if (this.dtoCustomer.entityUser.firstName == null || this.dtoCustomer.entityUser.firstName == "")
+        {
+            this.manageSaleSuccessMessage = "";
+            this.manageSaleErrorMessage = "Select a customer";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;            
+            this.manageSaleMessageDispalyModal.show();
+            return;
+        }
         //check product selection
+         if (this.dtoSaleOrder.products == null)
+        {
+            this.manageSaleSuccessMessage = "";
+            this.manageSaleErrorMessage = "Select a product";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;            
+            this.manageSaleMessageDispalyModal.show();
+            return;
+        }
         //-----------------------
         //check current stock before saving sale order
         let tempProductList: DTOProduct[] = this.dtoSaleOrder.products;

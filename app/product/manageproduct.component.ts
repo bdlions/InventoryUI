@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component,ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ModalDirective} from 'ngx-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -21,7 +21,7 @@ import {EntityUOM} from '../dto/EntityUOM';
 })
 
 export class ManageProductComponent {
-    @ViewChild('commonMessageDispalyModal') public commonMessageDispalyModal: ModalDirective;
+    @ViewChild('manageProductMessageDispalyModal') public manageProductMessageDispalyModal: ModalDirective;
     private webAPIService: WebAPIService;
     private subscribe: Subscription;
     private reqDTOProduct: DTOProduct;
@@ -36,6 +36,9 @@ export class ManageProductComponent {
     private productId: number;
     private showNavBar: boolean = false;
     private activeMenu: string = "manageproduct";
+
+    private manageProductSuccessMessage: string;
+    private manageProductErrorMessage: string;
 
     constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
@@ -91,8 +94,8 @@ export class ManageProductComponent {
             //console.log(this.productId);
         });
     }
-    public hideChildModal(): void {
-        this.commonMessageDispalyModal.hide();
+    public hideManageProductMessageDispalyModal(): void {
+        this.manageProductMessageDispalyModal.hide();
     }
     searchProduct(event: Event) {
         //console.log(this.searchEntityProduct.name);
@@ -116,10 +119,39 @@ export class ManageProductComponent {
 
     }
     saveProduct(event: Event) {
+        //check product name
+        if (this.dtoProduct.entityProduct.name == null || this.dtoProduct.entityProduct.name == "") {
+            this.manageProductSuccessMessage = "";
+            this.manageProductErrorMessage = "Enter a product name";
+            this.manageProductMessageDispalyModal.config.backdrop = false;
+            this.manageProductMessageDispalyModal.show();
+            return;
+        }
+        //check product type
+        if (this.dtoProduct.entityProductType.title == null || this.dtoProduct.entityProductType.title == "") {
+            this.manageProductSuccessMessage = "";
+            this.manageProductErrorMessage = "Select a product type";
+            this.manageProductMessageDispalyModal.config.backdrop = false;
+            this.manageProductMessageDispalyModal.show();
+            return;
+        }
+        //check product category
+        if (this.dtoProduct.entityProductCategory.title == null || this.dtoProduct.entityProductCategory.title == "") {
+            this.manageProductSuccessMessage = "";
+            this.manageProductErrorMessage = "Select a product category";
+            this.manageProductMessageDispalyModal.config.backdrop = false;
+            this.manageProductMessageDispalyModal.show();
+            return;
+        }
+        //check product price
+//        if (this.dtoProduct.entityProduct.unitPrice == null || this.dtoProduct.entityProduct.unitPrice > 0) {
+//            this.manageProductSuccessMessage = "";
+//            this.manageProductErrorMessage = "Select a product price";
+//            this.manageProductMessageDispalyModal.config.backdrop = false;
+//            this.manageProductMessageDispalyModal.show();
+//            return;
+//        }
 
-        this.commonMessageDispalyModal.config.backdrop = false;
-        this.commonMessageDispalyModal.show();
-        
         //console.log(this.dtoProduct.entityProductType);
 
         this.dtoProduct.entityProduct.categoryId = this.dtoProduct.entityProductCategory.id;

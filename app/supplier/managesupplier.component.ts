@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {ModalDirective} from 'ngx-bootstrap';
 import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
@@ -20,6 +21,7 @@ import {NavigationManager} from "../services/NavigationManager";
 })
 
 export class ManageSupplierComponent {
+     @ViewChild('manageSupplierMessageDispalyModal') public manageSupplierMessageDispalyModal: ModalDirective;
     private webAPIService: WebAPIService;
     private subscribe: Subscription;
     private reqDTOSupplier: DTOSupplier;
@@ -28,6 +30,9 @@ export class ManageSupplierComponent {
     //private searchDTOSupplier: DTOSupplier;
     private showNavBar: boolean = false;
     private activeMenu: string = "managesupplier";
+    
+    private manageSupplierSuccessMessage: string;
+    private manageSupplierErrorMessage: string;
 
     constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
@@ -66,6 +71,10 @@ export class ManageSupplierComponent {
             this.fetchSupplierInfo();
         });
     }
+    
+     public hideManageSupplierMessageDispalyModal(): void {
+        this.manageSupplierMessageDispalyModal.hide();
+    }
     searchSupplier(event: Event) {
         console.log(this.reqDTOSupplier.entityUser.firstName);
     }
@@ -78,6 +87,22 @@ export class ManageSupplierComponent {
     }
     
     saveSupplier(event: Event) {
+        //check supplier first name
+        if (this.dtoSupplier.entityUser.firstName == null || this.dtoSupplier.entityUser.firstName == "") {
+            this.manageSupplierErrorMessage = "";
+            this.manageSupplierErrorMessage = "Enter supplier first name";
+            this.manageSupplierMessageDispalyModal.config.backdrop = false;
+            this.manageSupplierMessageDispalyModal.show();
+            return;
+        }
+        //check supplier last name
+        if (this.dtoSupplier.entityUser.lastName == null || this.dtoSupplier.entityUser.lastName == "") {
+            this.manageSupplierErrorMessage = "";
+            this.manageSupplierErrorMessage = "Enter supplier last name";
+            this.manageSupplierMessageDispalyModal.config.backdrop = false;
+            this.manageSupplierMessageDispalyModal.show();
+            return;
+        }
         //set a default password for the supplier
         this.dtoSupplier.entityUser.password = "pass";
         let requestBody: string = JSON.stringify(this.dtoSupplier);

@@ -224,6 +224,10 @@ table tr:hover{
 .red{
     color: red;
 }
+.required{
+    font-size: 14px;
+    color: red;
+}
 /*----------------------------- Main Menu ----------------------------------*/
 
 .logo{

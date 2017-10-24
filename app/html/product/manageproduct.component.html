@@ -79,7 +79,7 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="product-title">Item</span>
+                                                <span class="product-title">Item<span class="required">*</span></span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                                 <input [(ngModel)]="dtoProduct.entityProduct.name" id="name" name="name" class="form-control">
@@ -87,7 +87,7 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="product-title">Type</span>
+                                                <span class="product-title">Type<span class="required">*</span></span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                                 <select [(ngModel)]="dtoProduct.entityProductType" name="entityProductType" class="form-control" >
@@ -97,7 +97,7 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="product-title">Category</span>
+                                                <span class="product-title">Category<span class="required">*</span></span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                                 <select [(ngModel)]="dtoProduct.entityProductCategory" name="entityProductCategory" class="form-control" >
@@ -112,7 +112,7 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="product-title">Price</span>
+                                                <span class="product-title">Price<span class="required">*</span></span>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                                 <input [(ngModel)]="dtoProduct.entityProduct.unitPrice" id="unitPrice" name="unitPrice" class="form-control">

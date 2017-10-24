@@ -94,13 +94,13 @@ export class ManageCustomerComponent {
             return;
         }
         //check customer last name
-        if (this.dtoCustomer.entityUser.lastName == null || this.dtoCustomer.entityUser.lastName == "") {
-            this.manageCustomerSuccessMessage = "";
-            this.manageCustomerErrorMessage = "Enter customer last name";
-            this.manageCustomerMessageDispalyModal.config.backdrop = false;
-            this.manageCustomerMessageDispalyModal.show();
-            return;
-        }
+//        if (this.dtoCustomer.entityUser.lastName == null || this.dtoCustomer.entityUser.lastName == "") {
+//            this.manageCustomerSuccessMessage = "";
+//            this.manageCustomerErrorMessage = "Enter customer last name";
+//            this.manageCustomerMessageDispalyModal.config.backdrop = false;
+//            this.manageCustomerMessageDispalyModal.show();
+//            return;
+//        }
 
         this.dtoCustomer.entityUser.password = "pass";
         let requestBody: string = JSON.stringify(this.dtoCustomer);

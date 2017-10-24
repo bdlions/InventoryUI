@@ -96,13 +96,13 @@ export class ManageSupplierComponent {
             return;
         }
         //check supplier last name
-        if (this.dtoSupplier.entityUser.lastName == null || this.dtoSupplier.entityUser.lastName == "") {
-            this.manageSupplierErrorMessage = "";
-            this.manageSupplierErrorMessage = "Enter supplier last name";
-            this.manageSupplierMessageDispalyModal.config.backdrop = false;
-            this.manageSupplierMessageDispalyModal.show();
-            return;
-        }
+//        if (this.dtoSupplier.entityUser.lastName == null || this.dtoSupplier.entityUser.lastName == "") {
+//            this.manageSupplierErrorMessage = "";
+//            this.manageSupplierErrorMessage = "Enter supplier last name";
+//            this.manageSupplierMessageDispalyModal.config.backdrop = false;
+//            this.manageSupplierMessageDispalyModal.show();
+//            return;
+//        }
         //set a default password for the supplier
         this.dtoSupplier.entityUser.password = "pass";
         let requestBody: string = JSON.stringify(this.dtoSupplier);

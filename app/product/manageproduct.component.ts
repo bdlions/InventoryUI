@@ -144,13 +144,13 @@ export class ManageProductComponent {
             return;
         }
         //check product price
-//        if (this.dtoProduct.entityProduct.unitPrice == null || this.dtoProduct.entityProduct.unitPrice > 0) {
-//            this.manageProductSuccessMessage = "";
-//            this.manageProductErrorMessage = "Select a product price";
-//            this.manageProductMessageDispalyModal.config.backdrop = false;
-//            this.manageProductMessageDispalyModal.show();
-//            return;
-//        }
+        if (this.dtoProduct.entityProduct.unitPrice == null || this.dtoProduct.entityProduct.unitPrice < 0) {
+            this.manageProductSuccessMessage = "";
+            this.manageProductErrorMessage = "Select a valid product price";
+            this.manageProductMessageDispalyModal.config.backdrop = false;
+            this.manageProductMessageDispalyModal.show();
+            return;
+        }
 
         //console.log(this.dtoProduct.entityProductType);
 

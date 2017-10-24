@@ -94,13 +94,13 @@ export class ManageCustomerComponent {
             return;
         }
         //check customer last name
-//        if (this.dtoCustomer.entityUser.lastName == null || this.dtoCustomer.entityUser.lastName == "") {
-//            this.manageCustomerSuccessMessage = "";
-//            this.manageCustomerErrorMessage = "Enter customer last name";
-//            this.manageCustomerMessageDispalyModal.config.backdrop = false;
-//            this.manageCustomerMessageDispalyModal.show();
-//            return;
-//        }
+        //        if (this.dtoCustomer.entityUser.lastName == null || this.dtoCustomer.entityUser.lastName == "") {
+        //            this.manageCustomerSuccessMessage = "";
+        //            this.manageCustomerErrorMessage = "Enter customer last name";
+        //            this.manageCustomerMessageDispalyModal.config.backdrop = false;
+        //            this.manageCustomerMessageDispalyModal.show();
+        //            return;
+        //        }
 
         this.dtoCustomer.entityUser.password = "pass";
         let requestBody: string = JSON.stringify(this.dtoCustomer);
@@ -108,22 +108,56 @@ export class ManageCustomerComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_CUSTOMER_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
+                    //set success message
+                    this.manageCustomerSuccessMessage = result.message;
+                    this.manageCustomerErrorMessage = "";
 
+                    //reset customer
+                    this.newCustomer(event);
+
+                    //update left panel customer list
+                    this.reqDTOCustomer = new DTOCustomer();
+                    this.reqDTOCustomer.entityCustomer = new EntityCustomer();
+                    this.reqDTOCustomer.entityUser = new EntityUser();
+                    this.reqDTOCustomer.entityUserRole = new EntityUserRole();
+                    this.fetchCustomerList();
                 }
                 else {
-
+                    //set error message
+                    this.manageCustomerSuccessMessage = "";
+                    this.manageCustomerErrorMessage = result.message;
                 }
+                //display pop up with message
+                this.manageCustomerMessageDispalyModal.config.backdrop = false;
+                this.manageCustomerMessageDispalyModal.show();
             });
         }
         else {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_CUSTOMER_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
+                    //set success message
+                    this.manageCustomerSuccessMessage = result.message;
+                    this.manageCustomerErrorMessage = "";
 
+                    //reset customer
+                    this.newCustomer(event);
+
+                    //update left panel customer list
+                    this.reqDTOCustomer = new DTOCustomer();
+                    this.reqDTOCustomer.entityCustomer = new EntityCustomer();
+                    this.reqDTOCustomer.entityUser = new EntityUser();
+                    this.reqDTOCustomer.entityUserRole = new EntityUserRole();
+                    this.fetchCustomerList();
                 }
                 else {
-
+                    //set error message
+                    this.manageCustomerSuccessMessage = "";
+                    this.manageCustomerErrorMessage = result.message;
                 }
+                //display pop up with message
+                this.manageCustomerMessageDispalyModal.config.backdrop = false;
+                this.manageCustomerMessageDispalyModal.show();
             });
         }
         //reset this customer, fetch customer list again

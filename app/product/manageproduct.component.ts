@@ -1,4 +1,4 @@
-import {Component,ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ModalDirective} from 'ngx-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -164,22 +164,57 @@ export class ManageProductComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_PRODUCT_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
-                    //this.productList = result.products;
+                    //set success message
+                    this.manageProductSuccessMessage = result.message;
+                    this.manageProductErrorMessage = "";
+
+                    //reset product
+                    this.newProduct(event);
+
+                    //update left panel product list
+                    this.reqDTOProduct = new DTOProduct();
+                    this.reqDTOProduct.entityProduct = new EntityProduct();
+                    this.reqDTOProduct.limit = 10;
+                    this.reqDTOProduct.offset = 0;
+                    this.fetchProductList();
                 }
                 else {
+                    //set error message
+                    this.manageProductSuccessMessage = "";
+                    this.manageProductErrorMessage = result.message;
                     //console.log(result);
                 }
+                //display pop up with message
+                this.manageProductMessageDispalyModal.config.backdrop = false;
+                this.manageProductMessageDispalyModal.show();
             });
         }
         else {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PRODUCT_INFO), requestBody).then(result => {
                 // console.log(result);
                 if (result.success) {
-                    //this.productList = result.products;
+                    //set success message
+                    this.manageProductSuccessMessage = result.message;
+                    this.manageProductSuccessMessage = "";
+
+                    //reset product
+                    this.newProduct(event);
+
+                    //update left panel product list
+                    this.reqDTOProduct = new DTOProduct();
+                    this.reqDTOProduct.entityProduct = new EntityProduct();
+                    this.reqDTOProduct.limit = 10;
+                    this.reqDTOProduct.offset = 0;
+                    this.fetchProductList();
                 }
                 else {
-                    //console.log(result);
+                    //set error message
+                    this.manageProductSuccessMessage = "";
+                    this.manageProductErrorMessage = result.message;
                 }
+                //display pop up with message
+                this.manageProductMessageDispalyModal.config.backdrop = false;
+                this.manageProductMessageDispalyModal.show();
             });
         }
 

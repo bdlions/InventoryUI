@@ -378,6 +378,8 @@ export class ManageSaleComponent {
             this.manageSaleMessageDispalyModal.show();
             return;
         }
+        
+        
         //-----------------------
         //check current stock before saving sale order
         let tempProductList: DTOProduct[] = this.dtoSaleOrder.products;

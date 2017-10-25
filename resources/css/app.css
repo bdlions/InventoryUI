@@ -84,7 +84,7 @@ label{
 }
 
 input, select,textArea{
-    font-size: 13px!important;
+    font-size: 11px!important;
 }
 textarea {
     overflow-x: hidden;
@@ -98,7 +98,7 @@ input, select{
 input:focus,select:focus{
     border: 1px solid #4568b2!important;
 }
- 
+
 .custom-button,.custom-red-button {
     color: #fff!important;
     border-color: #ccc;
@@ -153,12 +153,12 @@ table caption {
 }
 table tr {
     background: #fff;
-    border: 1px solid #ccc;
-    padding: 5px;
+    border: 1px solid #ddd;
+    padding: 0px;
 }
 table th,
 table td {
-    padding: 6px;
+    padding: 8px;
     text-align: center; 
 }
 table th {
@@ -170,9 +170,7 @@ table th {
 /*table tbody tr{
     background-color: #E6E6FA;
 }*/
-table tr:hover{
-    color: #484848;
-}
+
 @media screen and (max-width: 767px) {
     table {
         border: 0;
@@ -190,14 +188,14 @@ table tr:hover{
         width: 1px;
     }
     table tr {
-        border: 2px solid #aaa;
+        border: 1px solid #aaa;
         display: block;
-        margin-bottom: .625em;
+        margin-bottom: 5px;
     }
     table td {
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #ddd;
         display: block;
-        font-size: .8em;
+        font-size: 11px;
         text-align: right;
     }
     table td:before {
@@ -215,8 +213,8 @@ table tr:hover{
     border: 1px solid #ddd;
     border-top: none!important;
 }
-.common-table tr:hover{
-    color: #484848;
+.common-table > tfoot > tr > td{
+    padding: 10px;
 }
 .common-table input.form-control{
     width: 100%;
@@ -234,7 +232,14 @@ table tr:hover{
 }
 .adjust-input > tbody > tr > td > input,.adjust-input > tbody > tr > td > label{
     border: none!important;
-    height: 31px!important;
+    height: 28px!important;
+}
+.adjust-input > tbody > tr > td > input:focus,.adjust-input > tbody > tr > td > input:visited{
+    border: none!important;
+}
+.adjust-input > tbody > tr > td > label{
+    margin-top: 0px;
+    padding-top: 10px;
 }
 .errorMessage{
     color: red;

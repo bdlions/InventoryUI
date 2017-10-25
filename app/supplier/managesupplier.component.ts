@@ -31,7 +31,7 @@ export class ManageSupplierComponent {
     private showNavBar: boolean = false;
     private activeMenu: string = "managesupplier";
 
-    private manageSupplierSuccessMessage: string;
+    //    private manageSupplierSuccessMessage: string;
     private manageSupplierErrorMessage: string;
 
     constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
@@ -89,7 +89,7 @@ export class ManageSupplierComponent {
     saveSupplier(event: Event) {
         //check supplier first name
         if (this.dtoSupplier.entityUser.firstName == null || this.dtoSupplier.entityUser.firstName == "") {
-            this.manageSupplierSuccessMessage = "";
+            //            this.manageSupplierSuccessMessage = "";
             this.manageSupplierErrorMessage = "Enter supplier first name";
             this.manageSupplierMessageDispalyModal.config.backdrop = false;
             this.manageSupplierMessageDispalyModal.show();
@@ -111,7 +111,7 @@ export class ManageSupplierComponent {
                 console.log(result);
                 if (result.success) {
                     //set success message
-                    this.manageSupplierSuccessMessage = result.message;
+                    //this.manageSupplierSuccessMessage = result.message;
                     this.manageSupplierErrorMessage = "";
 
                     //reset supplier
@@ -126,12 +126,12 @@ export class ManageSupplierComponent {
                 }
                 else {
                     //set error message
-                    this.manageSupplierSuccessMessage = "";
+                    //this.manageSupplierSuccessMessage = "";
                     this.manageSupplierErrorMessage = result.message;
+                    //display pop up with message
+                    this.manageSupplierMessageDispalyModal.config.backdrop = false;
+                    this.manageSupplierMessageDispalyModal.show();
                 }
-                //display pop up with message
-                this.manageSupplierMessageDispalyModal.config.backdrop = false;
-                this.manageSupplierMessageDispalyModal.show();
             });
         }
         else {
@@ -139,7 +139,7 @@ export class ManageSupplierComponent {
                 console.log(result);
                 if (result.success) {
                     //set success message
-                    this.manageSupplierSuccessMessage = result.message;
+                    //this.manageSupplierSuccessMessage = result.message;
                     this.manageSupplierErrorMessage = "";
 
                     //reset supplier
@@ -154,12 +154,12 @@ export class ManageSupplierComponent {
                 }
                 else {
                     //set error message
-                    this.manageSupplierSuccessMessage = "";
+                    //this.manageSupplierSuccessMessage = "";
                     this.manageSupplierErrorMessage = result.message;
+                    //display pop up with message
+                    this.manageSupplierMessageDispalyModal.config.backdrop = false;
+                    this.manageSupplierMessageDispalyModal.show();
                 }
-                //display pop up with message
-                this.manageSupplierMessageDispalyModal.config.backdrop = false;
-                this.manageSupplierMessageDispalyModal.show();
             });
         }
         //reset this supplier, fetch supplier list again
@@ -180,10 +180,12 @@ export class ManageSupplierComponent {
         this.reqDTOSupplier.offset = 0;
         let requestBody: string = JSON.stringify(this.reqDTOSupplier);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS), requestBody).then(result => {
-            console.log(result);
+//            console.log(result);
             if (result.success && result.suppliers != null) {
+                 //console.log(result.suppliers);
                 this.supplierList = result.suppliers;
             }
+            this.supplierList.reverse()
         });
     }
 

@@ -107,7 +107,7 @@
                             <tab heading="Purchase">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <table class="common-table">
+                                        <table class="common-table adjust-input">
                                             <thead>
                                                 <tr>
                                                     <th>Item<span class="required">*</span></th>
@@ -127,6 +127,9 @@
                                                     <td data-label="Sub-Total"><label></label></td>
                                                     <td data-label="Action" class="text-center" (click)="showAddPurchaseOrderProductModal($event)"><i class="cursor-pointer fa fa-plus"></i></td>
                                                 </tr>
+                                        </table>
+                                        <div class="table-wrapper">
+                                            <table class="common-table adjust-input">
                                                 <tr *ngFor="let product of dtoPurchaseOrder.products">
                                                     <td data-label="Item" (click)="showPurchaseOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
                                                     <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
@@ -135,14 +138,17 @@
                                                     <td data-label="Total"><label>{{product.total}}</label></td>
                                                     <td data-label="Action"><i class="cursor-pointer fa fa-times" (click)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                 </tr>
-                                                <tr class="cursor-pointer" (click)="showPurchaseOrderProductModal($event, 0)">
-                                                    <td><i class="fa fa-plus"></i></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
+                                            </table>
+                                        </div>
+                                        <table class="common-table">
+                                            <tr class="cursor-pointer" (click)="showPurchaseOrderProductModal($event, 0)">
+                                                <td><i class="fa fa-plus"></i></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -190,14 +196,14 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-<!--                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="purchase-order-title">Sub-total</span>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <label name="subtotal">{{dtoPurchaseOrder.entityPurchaseOrder.subtotal}}</label>
-                                            </div>
-                                        </div>-->
+                                        <!--                                        <div class="row form-group">
+                                                                                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                                                        <span class="purchase-order-title">Sub-total</span>
+                                                                                    </div>
+                                                                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                                                        <label name="subtotal">{{dtoPurchaseOrder.entityPurchaseOrder.subtotal}}</label>
+                                                                                    </div>
+                                                                                </div>-->
                                         <div class="row form-group">
                                             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                                 <span class="purchase-order-title">Total</span>
@@ -206,14 +212,14 @@
                                                 <label name="total">{{dtoPurchaseOrder.entityPurchaseOrder.total}}</label>
                                             </div>
                                         </div>
-<!--                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="purchase-order-title">Balance</span>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <label name="balance">{{dtoPurchaseOrder.dtoSupplier.entitySupplier.balance}}</label>
-                                            </div>
-                                        </div>-->
+                                        <!--                                        <div class="row form-group">
+                                                                                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                                                        <span class="purchase-order-title">Balance</span>
+                                                                                    </div>
+                                                                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                                                        <label name="balance">{{dtoPurchaseOrder.dtoSupplier.entitySupplier.balance}}</label>
+                                                                                    </div>
+                                                                                </div>-->
                                     </div>
                                 </div>
                             </tab>
@@ -487,7 +493,7 @@
 
 <!-- Manage Purchase Message Dispaly Modal Starts-->
 <div bsModal #managePurchaseMessageDispalyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-     <div class="modal-dialog modal-md" role="document">
+     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <div class="row">
@@ -504,12 +510,18 @@
             <div class="modal-body">
                 <div class="row margin-top-10px">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <p class="text-center green">{{managePurchaseSuccessMessage}}</p>
+                        <!--<p class="text-center green">{{managePurchaseSuccessMessage}}</p>-->
                         <p class="text-center red">{{managePurchaseErrorMessage}}</p>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer"></div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" class="custom-button" (click)="hideManagePurchaseMessageDispalyModal()">Ok</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -29,7 +29,7 @@ export class ManageCustomerComponent {
     private showNavBar: boolean = false;
     private activeMenu: string = "managecustomer";
 
-    private manageCustomerSuccessMessage: string;
+    //    private manageCustomerSuccessMessage: string;
     private manageCustomerErrorMessage: string;
 
     constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
@@ -87,7 +87,7 @@ export class ManageCustomerComponent {
     saveCustomer(event: Event) {
         //check customer first name
         if (this.dtoCustomer.entityUser.firstName == null || this.dtoCustomer.entityUser.firstName == "") {
-            this.manageCustomerSuccessMessage = "";
+            //            this.manageCustomerSuccessMessage = "";
             this.manageCustomerErrorMessage = "Enter customer first name";
             this.manageCustomerMessageDispalyModal.config.backdrop = false;
             this.manageCustomerMessageDispalyModal.show();
@@ -109,7 +109,7 @@ export class ManageCustomerComponent {
                 console.log(result);
                 if (result.success) {
                     //set success message
-                    this.manageCustomerSuccessMessage = result.message;
+                    //                    this.manageCustomerSuccessMessage = result.message;
                     this.manageCustomerErrorMessage = "";
 
                     //reset customer
@@ -124,12 +124,13 @@ export class ManageCustomerComponent {
                 }
                 else {
                     //set error message
-                    this.manageCustomerSuccessMessage = "";
+                    //                    this.manageCustomerSuccessMessage = "";
                     this.manageCustomerErrorMessage = result.message;
+
+                    //display pop up with message
+                    this.manageCustomerMessageDispalyModal.config.backdrop = false;
+                    this.manageCustomerMessageDispalyModal.show();
                 }
-                //display pop up with message
-                this.manageCustomerMessageDispalyModal.config.backdrop = false;
-                this.manageCustomerMessageDispalyModal.show();
             });
         }
         else {
@@ -137,7 +138,7 @@ export class ManageCustomerComponent {
                 console.log(result);
                 if (result.success) {
                     //set success message
-                    this.manageCustomerSuccessMessage = result.message;
+                    //                    this.manageCustomerSuccessMessage = result.message;
                     this.manageCustomerErrorMessage = "";
 
                     //reset customer
@@ -152,12 +153,13 @@ export class ManageCustomerComponent {
                 }
                 else {
                     //set error message
-                    this.manageCustomerSuccessMessage = "";
+                    //                    this.manageCustomerSuccessMessage = "";
                     this.manageCustomerErrorMessage = result.message;
+
+                    //display pop up with message
+                    this.manageCustomerMessageDispalyModal.config.backdrop = false;
+                    this.manageCustomerMessageDispalyModal.show();
                 }
-                //display pop up with message
-                this.manageCustomerMessageDispalyModal.config.backdrop = false;
-                this.manageCustomerMessageDispalyModal.show();
             });
         }
         //reset this customer, fetch customer list again

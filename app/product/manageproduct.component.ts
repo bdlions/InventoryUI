@@ -37,7 +37,7 @@ export class ManageProductComponent {
     private showNavBar: boolean = false;
     private activeMenu: string = "manageproduct";
 
-    private manageProductSuccessMessage: string;
+    //    private manageProductSuccessMessage: string;
     private manageProductErrorMessage: string;
 
     constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
@@ -121,7 +121,7 @@ export class ManageProductComponent {
     saveProduct(event: Event) {
         //check product name
         if (this.dtoProduct.entityProduct.name == null || this.dtoProduct.entityProduct.name == "") {
-            this.manageProductSuccessMessage = "";
+            //            this.manageProductSuccessMessage = "";
             this.manageProductErrorMessage = "Enter a product name";
             this.manageProductMessageDispalyModal.config.backdrop = false;
             this.manageProductMessageDispalyModal.show();
@@ -129,7 +129,7 @@ export class ManageProductComponent {
         }
         //check product type
         if (this.dtoProduct.entityProductType.title == null || this.dtoProduct.entityProductType.title == "") {
-            this.manageProductSuccessMessage = "";
+            //            this.manageProductSuccessMessage = "";
             this.manageProductErrorMessage = "Select a product type";
             this.manageProductMessageDispalyModal.config.backdrop = false;
             this.manageProductMessageDispalyModal.show();
@@ -137,7 +137,7 @@ export class ManageProductComponent {
         }
         //check product category
         if (this.dtoProduct.entityProductCategory.title == null || this.dtoProduct.entityProductCategory.title == "") {
-            this.manageProductSuccessMessage = "";
+            //            this.manageProductSuccessMessage = "";
             this.manageProductErrorMessage = "Select a product category";
             this.manageProductMessageDispalyModal.config.backdrop = false;
             this.manageProductMessageDispalyModal.show();
@@ -145,7 +145,7 @@ export class ManageProductComponent {
         }
         //check product price
         if (this.dtoProduct.entityProduct.unitPrice == null || this.dtoProduct.entityProduct.unitPrice < 0) {
-            this.manageProductSuccessMessage = "";
+            //            this.manageProductSuccessMessage = "";
             this.manageProductErrorMessage = "Select a valid product price";
             this.manageProductMessageDispalyModal.config.backdrop = false;
             this.manageProductMessageDispalyModal.show();
@@ -165,7 +165,7 @@ export class ManageProductComponent {
                 console.log(result);
                 if (result.success) {
                     //set success message
-                    this.manageProductSuccessMessage = result.message;
+                    //                    this.manageProductSuccessMessage = result.message;
                     this.manageProductErrorMessage = "";
 
                     //reset product
@@ -180,13 +180,14 @@ export class ManageProductComponent {
                 }
                 else {
                     //set error message
-                    this.manageProductSuccessMessage = "";
+                    //                    this.manageProductSuccessMessage = "";
                     this.manageProductErrorMessage = result.message;
                     //console.log(result);
+                    //display pop up with message
+                    this.manageProductMessageDispalyModal.config.backdrop = false;
+                    this.manageProductMessageDispalyModal.show();
                 }
-                //display pop up with message
-                this.manageProductMessageDispalyModal.config.backdrop = false;
-                this.manageProductMessageDispalyModal.show();
+
             });
         }
         else {
@@ -194,8 +195,8 @@ export class ManageProductComponent {
                 // console.log(result);
                 if (result.success) {
                     //set success message
-                    this.manageProductSuccessMessage = result.message;
-                    this.manageProductSuccessMessage = "";
+                    //                    this.manageProductSuccessMessage = result.message;
+                    this.manageProductErrorMessage = "";
 
                     //reset product
                     this.newProduct(event);
@@ -209,12 +210,13 @@ export class ManageProductComponent {
                 }
                 else {
                     //set error message
-                    this.manageProductSuccessMessage = "";
+                    //                    this.manageProductSuccessMessage = "";
                     this.manageProductErrorMessage = result.message;
+                    //display pop up with message
+                    this.manageProductMessageDispalyModal.config.backdrop = false;
+                    this.manageProductMessageDispalyModal.show();
                 }
-                //display pop up with message
-                this.manageProductMessageDispalyModal.config.backdrop = false;
-                this.manageProductMessageDispalyModal.show();
+
             });
         }
 
@@ -285,7 +287,7 @@ export class ManageProductComponent {
         //this.reqDTOProduct.entityProduct = this.reqEntityProduct;
         let requestBody: string = JSON.stringify(this.reqDTOProduct);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS), requestBody).then(result => {
-            //console.log(result);
+            console.log(result);
             if (result.success && result.products != null) {
                 this.productList = result.products;
             }

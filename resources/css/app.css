@@ -15,15 +15,24 @@ Version: 1.0
 html,body{
     margin: 0;
     padding: 0;
+
 }
 body{
     font-family: 'roboto';
     position: relative;
     height: 100%;
-    font-size: 14px!important;
+    font-size: 11px!important;
     line-height: 150%!important;
     overflow-x: hidden;
-    color: #666!important;
+    color: #000!important;
+    /*    background: rgba(147,206,222,1);
+        background: -moz-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+        background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));
+        background: -webkit-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+        background: -o-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+        background: -ms-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+        background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );*/
 }
 .container-fluid {
     padding-right:0!important;
@@ -82,18 +91,19 @@ textarea {
 }
 input, select{
     border: 1px solid #ccc!important;
-    padding: 3px 6px !important;
+    padding: 2px 4px !important;
     border-radius: 0px!important;
-    height: 32px!important;
+    height: 28px!important;
 }
 input:focus,select:focus{
     border: 1px solid #4568b2!important;
 }
+ 
 .custom-button,.custom-red-button {
     color: #fff!important;
     border-color: #ccc;
     border-radius: 0px;
-    padding: 3px 32px;
+    padding: 2px 24px;
     display: inline-block;
     margin-bottom: 0;
     font-size: 14px;
@@ -129,7 +139,7 @@ input:focus,select:focus{
 }
 
 table {
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-collapse: collapse;
     margin: 0;
     padding: 0;
@@ -144,18 +154,18 @@ table caption {
 table tr {
     background: #fff;
     border: 1px solid #ccc;
-    padding: .35em;
+    padding: 5px;
 }
 table th,
 table td {
-    padding: .625em;
+    padding: 6px;
     text-align: center; 
 }
 table th {
-    font-size: .85em;
+    font-size: 11px;
     letter-spacing: .1em;
     color: #fff;
-    background-color: #CC9966;
+    background-color: #8b8b8b;
 }
 /*table tbody tr{
     background-color: #E6E6FA;
@@ -201,9 +211,9 @@ table tr:hover{
     }
 }
 
-
 .common-table > thead > tr > th, .common-table > tbody > tr > td {
     border: 1px solid #ddd;
+    border-top: none!important;
 }
 .common-table tr:hover{
     color: #484848;
@@ -211,10 +221,21 @@ table tr:hover{
 .common-table input.form-control{
     width: 100%;
 }
+
 .table-row-border-adjust > td{
     border: none!important;
 }
+.common-table, .adjust-input,.adjust-input > tbody > tr,.common-table > tfoot > tr{
+    border-top: none!important;
+}
 
+.adjust-input > tbody > tr > td{
+    padding: 0px!important;
+}
+.adjust-input > tbody > tr > td > input,.adjust-input > tbody > tr > td > label{
+    border: none!important;
+    height: 31px!important;
+}
 .errorMessage{
     color: red;
 }
@@ -227,6 +248,12 @@ table tr:hover{
 .required{
     font-size: 14px;
     color: red;
+}
+.tab-content>.active {
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 10px;
 }
 /*----------------------------- Main Menu ----------------------------------*/
 
@@ -295,7 +322,7 @@ table tr:hover{
     box-shadow: 5px 5px 5px #888888;
 }
 .login-form-header-pagelet,.login-form-body-pagelet{
-    color: #333;
+    color: #000;
     margin-bottom: 1px;
     box-shadow: 0 0 1px #bbb;
 }
@@ -457,11 +484,12 @@ table tr:hover{
 
 /*----------------------------- Common Title ----------------------------------*/
 .product-category-title,.product-title, .supplier-title,.purchase-order-title,.purchase-order-list-title,.sale-order-list-title,.current-stock-title{
-    font-size: 12px;
+    font-size: 11px;
 }
 /*----------------------------- Modal ----------------------------------*/
 .modal-title{
-    color: #666; 
+    font-size: 14px;
+    color: #000; 
     text-align: center;
 }
 .modal::before {
@@ -479,11 +507,18 @@ table tr:hover{
     text-align:center;
 }
 .modal-body,.modal-header{
-    padding: 5px 15px;
+    padding: 5px 10px;
+}
+.modal-footer {
+    padding: 10px;
 }
 .modal-header .close {
     margin-top: 5px;
 }
+
+
+
+
 @media (max-width: 480px) {
 
 }

@@ -236,7 +236,7 @@
 
 <!-- Manage Product Message Dispaly Modal Starts-->
 <div bsModal #manageProductMessageDispalyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-     <div class="modal-dialog modal-md" role="document">
+     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <div class="row">
@@ -253,12 +253,18 @@
             <div class="modal-body">
                 <div class="row margin-top-10px">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <p class="text-center green">{{manageProductSuccessMessage}}</p>
+                        <!--<p class="text-center green">{{manageProductSuccessMessage}}</p>-->
                         <p class="text-center red">{{manageProductErrorMessage}}</p>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer"></div>
+            <div class="modal-footer">
+                 <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" class="custom-button" (click)="hideManageProductMessageDispalyModal()">Ok</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

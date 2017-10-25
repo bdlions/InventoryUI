@@ -56,7 +56,7 @@ export class ManagePurchaseComponent {
     private productIdToPopupSelectProduct: number;
     private productIdToPopupDeleteProduct: number;
 
-    private managePurchaseSuccessMessage: string;
+    //    private managePurchaseSuccessMessage: string;
     private managePurchaseErrorMessage: string;
 
     constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
@@ -361,8 +361,8 @@ export class ManagePurchaseComponent {
 
     public savePurchaseOrder(event: Event) {
         //check purchase order no
-        if (this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo == null || this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo == "") {
-            this.managePurchaseSuccessMessage = "";
+        if (this.dtoPurchaseOrder.entityPurchaseOrder.orderNo == null || this.dtoPurchaseOrder.entityPurchaseOrder.orderNo == "") {
+            //            this.managePurchaseSuccessMessage = "";
             this.managePurchaseErrorMessage = "Invalid purchase order no.";
             this.managePurchaseMessageDispalyModal.config.backdrop = false;
             this.managePurchaseMessageDispalyModal.show();
@@ -370,7 +370,7 @@ export class ManagePurchaseComponent {
         }
         //check supplier selection
         if (this.dtoSupplier.entityUser.firstName == null || this.dtoSupplier.entityUser.firstName == "") {
-            this.managePurchaseSuccessMessage = "";
+            //            this.managePurchaseSuccessMessage = "";
             this.managePurchaseErrorMessage = "Select a supplier";
             this.managePurchaseMessageDispalyModal.config.backdrop = false;
             this.managePurchaseMessageDispalyModal.show();
@@ -378,7 +378,7 @@ export class ManagePurchaseComponent {
         }
         //check product selection
         if (this.dtoPurchaseOrder.products == null) {
-            this.managePurchaseSuccessMessage = "";
+            //            this.managePurchaseSuccessMessage = "";
             this.managePurchaseErrorMessage = "Select a product";
             this.managePurchaseMessageDispalyModal.config.backdrop = false;
             this.managePurchaseMessageDispalyModal.show();
@@ -391,7 +391,7 @@ export class ManagePurchaseComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PURCHASE_ORDER_INFO), requestBody).then(result => {
                 if (result.success) {
                     //set success message
-                    this.managePurchaseSuccessMessage = result.message;
+                    //                    this.managePurchaseSuccessMessage = result.message;
                     this.managePurchaseErrorMessage = "";
 
                     //reset purchase order
@@ -406,12 +406,13 @@ export class ManagePurchaseComponent {
                 }
                 else {
                     //set error message
-                    this.managePurchaseSuccessMessage = "";
+                    //                    this.managePurchaseSuccessMessage = "";
                     this.managePurchaseErrorMessage = result.message;
+
+                    //display pop up with message
+                    this.managePurchaseMessageDispalyModal.config.backdrop = false;
+                    this.managePurchaseMessageDispalyModal.show();
                 }
-                //display pop up with message
-                this.managePurchaseMessageDispalyModal.config.backdrop = false;
-                this.managePurchaseMessageDispalyModal.show();
             });
         }
         else {
@@ -420,7 +421,7 @@ export class ManagePurchaseComponent {
                 console.log(result);
                 if (result.success) {
                     //set success message
-                    this.managePurchaseSuccessMessage = result.message;
+                    //                    this.managePurchaseSuccessMessage = result.message;
                     this.managePurchaseErrorMessage = "";
 
                     //reset purchase order
@@ -435,12 +436,13 @@ export class ManagePurchaseComponent {
                 }
                 else {
                     //set error message
-                    this.managePurchaseSuccessMessage = "";
+                    //                    this.managePurchaseSuccessMessage = "";
                     this.managePurchaseErrorMessage = result.message;
+
+                    //display pop up with message
+                    this.managePurchaseMessageDispalyModal.config.backdrop = false;
+                    this.managePurchaseMessageDispalyModal.show();
                 }
-                //display pop up with message
-                this.managePurchaseMessageDispalyModal.config.backdrop = false;
-                this.managePurchaseMessageDispalyModal.show();
             });
         }
     }

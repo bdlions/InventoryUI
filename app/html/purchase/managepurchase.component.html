@@ -25,7 +25,7 @@
                 </form> 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="table-wrapper">
+                        <div class="table-wrapper manage-purchase-left-side-table">
                             <table class="common-table">
                                 <thead>
                                     <tr>
@@ -104,7 +104,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <tabset>
                             <!--Purchase Tab Starts-->
-                            <tab heading="Purchase">
+                            <tab class="manage-purchase-right-side-tab" heading="Purchase">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <table class="common-table adjust-input">
@@ -136,7 +136,7 @@
                                                         <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
                                                         <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance()"></td>
                                                         <td data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
-                                                        <td data-label="Total"><label>{{product.total}}</label></td>
+                                                        <td data-label="Sub-Total"><label>{{product.total}}</label></td>
                                                         <td data-label="Action"><i class="cursor-pointer fa fa-times" (click)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                     </tr>
                                                 </tbody>
@@ -229,7 +229,7 @@
                             <!--Purchase Tab Starts-->
 
                             <!--Receive Tab Starts-->
-                            <tab heading="Receive">
+                            <tab class="manage-purchase-right-side-tab" heading="Receive">
                                 <div class="row form-group">
                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                         <div class="row form-group">

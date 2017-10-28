@@ -24,7 +24,7 @@
                 </form> 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="table-wrapper">
+                        <div class="table-wrapper manage-customer-left-side-table">
                             <table class="common-table">
                                 <thead>
                                     <tr>
@@ -52,14 +52,11 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="tabbable tabs-bottom">
-                            <div class="tab-content">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#customer-info" data-toggle="tab">Customer Info</a></li>
-                                    <li><a href="#extra-info" data-toggle="tab">Extra Info</a></li>
-                                </ul>
-                                <div class="tab-pane active" id="customer-info">                
-                                    <div class="row form-group">
+                        
+                          <tabset>
+                            <!--Customer Info Tab Starts-->
+                            <tab class="manage-customer-right-side-tab" heading="Customer Info">
+                                <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="row form-group">
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -135,9 +132,11 @@
                                             <textarea  [(ngModel)]="dtoCustomer.entityCustomer.remarks" id="weight" name="weight" class="form-control" rows="5"></textarea>
                                         </div>
                                     </div>
-                                </div> 
-                                <div class="tab-pane" id="extra-info"> 
-                                    <div class="row form-group">
+                            </tab>
+                            <!--Customer Info Tab Ends-->
+                            <!--Extra Info Tab Starts-->
+                            <tab class="manage-customer-right-side-tab" heading="Extra Info">
+                                <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                             <div class="row form-group">
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -150,9 +149,9 @@
 
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                            </tab>
+                            <!--Extra Info Tab Ends-->
+                          </tabset>
                     </div>
                 </div>
             </div>

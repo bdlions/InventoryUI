@@ -231,6 +231,9 @@ table th {
     padding: 0px!important;
     border: none!important;
 }
+.adjust-input > tbody > tr{
+    border: none!important;
+}
 .adjust-input > tbody > tr > td > input,.adjust-input > tbody > tr > td > label{
     border: none!important;
     height: 28px!important;

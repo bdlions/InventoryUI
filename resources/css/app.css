@@ -229,10 +229,14 @@ table th {
 
 .adjust-input > tbody > tr > td{
     padding: 0px!important;
-    border: none!important;
+    border-top: none!important;
+    border-bottom: none!important;
+    border-left: none!important;
 }
 .adjust-input > tbody > tr{
-    border: none!important;
+    border-top: none!important;
+    border-left: none!important;
+    border-right: none!important;
 }
 .adjust-input > tbody > tr > td > input,.adjust-input > tbody > tr > td > label{
     border: none!important;

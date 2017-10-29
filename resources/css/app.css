@@ -376,7 +376,7 @@ table th {
 
 /*----------------------------- Desktop Menu ----------------------------------*/
 .bar{
-    border-top: 3px solid #703385;
+    border-top: 3px solid #fff;
     width: 30px;
     margin-bottom: 4px;
 }

@@ -7,14 +7,20 @@ and open the template in the editor.
     Created on : Sep 25, 2017, 1:12:27 PM
     Author     : alamgir
 */
-
+@font-face {
+    font-family: 'roboto';
+    src: url('../fonts/roboto-regular-webfont.woff2') format('woff2'),
+        url('../fonts/roboto-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 #title-bar {
     -webkit-app-region: drag;
-    height: 32px;	
+    height: 25px;	
     padding: 0px;
     margin: 0px;  
-    color: #ADADAD;
-    font-family: sans-serif;
+    color: #FFF;
+    font-family: 'roboto';
 }
 
 #title {
@@ -23,7 +29,7 @@ and open the template in the editor.
     margin-left: 10px;	
     line-height: 32px;
     font-size: 12px;
-    color: #703684;
+    color: #FFF;
     font-weight: bold;
 }
 
@@ -35,23 +41,26 @@ and open the template in the editor.
 }
 
 #title-bar-btns button {
-    height: 28px;
-    width: 28px;
-    background-color: #703684;
+    height: 25px;
+    width: 25px;
+    background-color: #FFF;
     border: none;
-    color: #F1F1F1;
+    color: #703684;
     font-size: 16px;
 }
 
 #min-btn:hover,#min-btn:active,#min-btn:focus,#min-btn:visited{
     background-color: #EC971F;
+    color: #FFF;
     border: 1px solid #EC971F;
 }
 #max-btn:hover,#max-btn:active,#max-btn:focus,#max-btn:visited{
     background-color: #449D44;
+    color: #FFF;
     border: 1px solid #449D44;
 }
 #close-btn:hover,#close-btn:active,#close-btn:focus,#close-btn:visited{
     background-color: #C9302C;
+    color: #FFF;
     border: 1px solid #C9302C;
 }

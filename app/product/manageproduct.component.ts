@@ -39,6 +39,9 @@ export class ManageProductComponent {
 
     //    private manageProductSuccessMessage: string;
     private manageProductErrorMessage: string;
+    
+    //constants & constraints
+    private maxProductLeftPanel: number = 10;
 
     constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
@@ -166,19 +169,22 @@ export class ManageProductComponent {
                 if (result.success) {
                     //set success message
                     //                    this.manageProductSuccessMessage = result.message;
-                    this.manageProductErrorMessage = "";
+                    //this.manageProductErrorMessage = "";
 
                     //reset product
-                    this.newProduct(event);
+                    //this.newProduct(event);
 
                     //update left panel product list
-                    this.reqDTOProduct = new DTOProduct();
-                    this.reqDTOProduct.entityProduct = new EntityProduct();
-                    this.reqDTOProduct.limit = 10;
-                    this.reqDTOProduct.offset = 0;
-                    this.fetchProductList();
+                    //this.reqDTOProduct = new DTOProduct();
+                    //this.reqDTOProduct.entityProduct = new EntityProduct();
+                    //this.reqDTOProduct.limit = 10;
+                    //this.reqDTOProduct.offset = 0;
+                    //this.fetchProductList();
+                    
+                    this.manageProductUpdateLeftPanel();
                 }
-                else {
+                else 
+                {
                     //set error message
                     //                    this.manageProductSuccessMessage = "";
                     this.manageProductErrorMessage = result.message;
@@ -194,19 +200,22 @@ export class ManageProductComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PRODUCT_INFO), requestBody).then(result => {
                 // console.log(result);
                 if (result.success) {
+                    this.dtoProduct.entityProduct.id = result.id;
+                    this.manageProductUpdateLeftPanel();
+                    //set product id from the response
                     //set success message
                     //                    this.manageProductSuccessMessage = result.message;
-                    this.manageProductErrorMessage = "";
+                    //this.manageProductErrorMessage = "";
 
                     //reset product
-                    this.newProduct(event);
+                    //this.newProduct(event);
 
                     //update left panel product list
-                    this.reqDTOProduct = new DTOProduct();
-                    this.reqDTOProduct.entityProduct = new EntityProduct();
-                    this.reqDTOProduct.limit = 10;
-                    this.reqDTOProduct.offset = 0;
-                    this.fetchProductList();
+                    //this.reqDTOProduct = new DTOProduct();
+                    //this.reqDTOProduct.entityProduct = new EntityProduct();
+                    //this.reqDTOProduct.limit = 10;
+                    //this.reqDTOProduct.offset = 0;
+                    //this.fetchProductList();
                 }
                 else {
                     //set error message
@@ -221,7 +230,27 @@ export class ManageProductComponent {
         }
 
     }
-    selectedProduct(event: Event, productId: number) {
+    
+    public manageProductUpdateLeftPanel()
+    {
+        //appending created/updated product on top of left panel
+        let tempProductList: EntityProduct[];
+        tempProductList = Array();
+        tempProductList[0] = this.dtoProduct.entityProduct;
+        let totalProdct = 1;
+        let productCounter: number;
+        for (productCounter = 0; productCounter < this.productList.length; productCounter++)
+        {
+            if (this.productList[productCounter].id != this.dtoProduct.entityProduct.id && totalProdct <= this.maxProductLeftPanel)
+            {
+                tempProductList[totalProdct] = this.productList[productCounter];
+                totalProdct++;
+            }
+        }
+        this.productList = tempProductList;
+    }
+    
+    public selectedProduct(event: Event, productId: number) {
         //event.preventDefault();
         //this.router.navigate(["manageproduct", {productId: productId}]);
 

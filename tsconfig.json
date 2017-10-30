@@ -10,7 +10,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "target": "es5",
     "outDir": "app-build",
-    "rootDir": "app"
+    "rootDir": "./"
   },
   "compileOnSave": true,
   "exclude": [

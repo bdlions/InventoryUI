@@ -1,7 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalDirective} from 'ngx-bootstrap';
-import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
@@ -32,7 +31,7 @@ export class ManageCustomerComponent {
     //    private manageCustomerSuccessMessage: string;
     private manageCustomerErrorMessage: string;
 
-    constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
+    constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
             if (mode !== null) {
                 this.showNavBar = mode;

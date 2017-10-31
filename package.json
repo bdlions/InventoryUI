@@ -31,7 +31,6 @@
     "@angular/platform-browser-dynamic": "^4.4.6",
     "@angular/platform-server": "^4.4.6",
     "@angular/router": "^4.4.6",
-    "angular2-busy": "^2.0.4",
     "angular2-uuid": "^1.1.1",
     "core-js": "^2.5.1",
     "electron": "^1.7.9",

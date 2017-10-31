@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router'
-import {MarketAPI} from './services/MarketAPI.service';
 import {NavigationManager} from './services/NavigationManager';
 import {UserType} from './user.type';
 import {User} from './user';
@@ -24,7 +23,7 @@ export class AppComponent {
     private entityUser: EntityUser;
     private errorMessage:string;
     private message:string;
-    constructor(private marketAPI: MarketAPI, private router: Router, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
+    constructor(private router: Router, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
         this.navigationManager.showNavBar(false);
         this.webAPIService = webAPIService;
         this.entityUser = new EntityUser();

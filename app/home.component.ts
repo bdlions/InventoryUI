@@ -7,7 +7,6 @@
 
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {MarketAPI} from './services/MarketAPI.service';
 import {NavigationManager} from "./services/NavigationManager";
 
 @Component({

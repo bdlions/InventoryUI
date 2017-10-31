@@ -2,7 +2,6 @@ import {Component, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ModalDirective} from 'ngx-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MarketAPI} from './../services/MarketAPI.service';
 import {NavigationManager} from "../services/NavigationManager";
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
@@ -43,7 +42,7 @@ export class ManageProductComponent {
     //constants & constraints
     private maxProductLeftPanel: number = 10;
 
-    constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
+    constructor(private router: Router, public route: ActivatedRoute, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
             if (mode !== null) {
                 this.showNavBar = mode;

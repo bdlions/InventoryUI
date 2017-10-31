@@ -9,8 +9,7 @@
     "sourceMap": true,
     "suppressImplicitAnyIndexErrors": true,
     "target": "es5",
-    "outDir": "app-build",
-    "rootDir": "./"
+    "outDir": "app-build"
   },
   "compileOnSave": true,
   "exclude": [

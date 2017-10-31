@@ -15,7 +15,6 @@ Version: 1.0
 html,body{
     margin: 0;
     padding: 0;
-
 }
 body::before {
     content: '';
@@ -104,12 +103,18 @@ input, select{
 }
 input:focus,select:focus{
     border: 1px solid #4568b2!important;
+    background-color: transparent!important;
+}
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: transparent;
+    background-image: none;
+    color: #fff;
 }
 .form-control {
-    color: #fff;
+    color: #fff!important;
     border: 1px solid transparent!important;
-    background-color: rgba(0,0,0,.15);
-    box-shadow: none;
+    background-color: rgba(0,0,0,.15)!important;
+    box-shadow: none!important;
 }
 select option {
     background: #fff;
@@ -281,11 +286,16 @@ table th {
     color: red;
 }
 /*----------------------------- Tab ----------------------------------*/
+.tab-container > ul{
+/*    position: absolute;
+    bottom: 0;*/
+}
 .tab-content>.active {
     padding: 10px;
     background: url(../images/blur-bg-blurred.jpg) fixed;
     -webkit-transition: none;
     transition: none;
+    /*height: 50vh;*/
 }
 .nav.nav-tabs>li.active>a {
     /*    color: #2DACD1;
@@ -408,7 +418,7 @@ table th {
     padding: 15px;
 }
 .login-form-body-pagelet{
-    background-color: #E4F1FE;
+    background: url(../images/blur-bg-blurred.jpg) center center no-repeat;
     padding: 30px;
 }
 .login-form-header-pagelet h1{
@@ -583,8 +593,7 @@ table th {
     /*background: rgba(0,0,0,.2);*/
 }
 .modal{
-    background: url(../images/blur-bg-blurred.jpg) center center no-repeat;
-    background-color: rgba(0,0,0,.2)
+    background-color: rgba(0,0,0,.3)
 }
 .modal-body,.modal-header{
     padding: 5px 10px;
@@ -987,39 +996,39 @@ table th {
     }
 }
 @media(min-width: 768px) {
-    
-/*----------------------------- Manage Supplier ----------------------------------*/
-.manage-supplier-left-side-table{
-    height: 552px!important;
-    background: #fff;
-}
-.manage-supplier-right-side-tab{
-    height: 610px!important;
-}
-/*----------------------------- Manage Purchase ----------------------------------*/
-.manage-purchase-left-side-table{
-    height: 680px!important;
-    background: #fff;
-}
-.manage-purchase-right-side-tab{
-    height: 515px!important;
-}
-/*----------------------------- Manage Sale ----------------------------------*/
-.manage-sale-left-side-table{
-    height: 680px!important;
-    background: #fff;
-}
-.manage-sale-right-side-tab{
-    height: 515px!important;
-}
-/*----------------------------- Manage Customer ----------------------------------*/
-.manage-customer-left-side-table{
-    height: 552px!important;
-    background: #fff;
-}
-.manage-customer-right-side-tab{
-    height: 610px!important;
-}
+
+    /*----------------------------- Manage Supplier ----------------------------------*/
+    .manage-supplier-left-side-table{
+        height: 552px!important;
+        background: #fff;
+    }
+    .manage-supplier-right-side-tab{
+        height: 610px!important;
+    }
+    /*----------------------------- Manage Purchase ----------------------------------*/
+    .manage-purchase-left-side-table{
+        height: 680px!important;
+        background: #fff;
+    }
+    .manage-purchase-right-side-tab{
+        height: 515px!important;
+    }
+    /*----------------------------- Manage Sale ----------------------------------*/
+    .manage-sale-left-side-table{
+        height: 680px!important;
+        background: #fff;
+    }
+    .manage-sale-right-side-tab{
+        height: 515px!important;
+    }
+    /*----------------------------- Manage Customer ----------------------------------*/
+    .manage-customer-left-side-table{
+        height: 552px!important;
+        background: #fff;
+    }
+    .manage-customer-right-side-tab{
+        height: 610px!important;
+    }
 
 
 

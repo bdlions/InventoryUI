@@ -30,12 +30,11 @@ and open the template in the editor.
     line-height: 32px;
     font-size: 12px;
     color: #FFF;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 #title-bar-btns {
     -webkit-app-region: no-drag;
-    /*position: fixed;*/
     top: 1px;
     right: 0px;	
 }
@@ -43,24 +42,37 @@ and open the template in the editor.
 #title-bar-btns button {
     height: 25px;
     width: 25px;
-    background-color: #FFF;
     border: none;
-    color: #703684;
-    font-size: 16px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
 }
 
+#min-btn{
+    background-color: transparent;
+    margin-right: -1px;
+}
+#min-btn > i{
+    position: relative;
+    top: -4px;
+}
+#max-btn{
+    background-color: transparent;
+    margin-right: -2px;
+}
+#close-btn{
+    background-color: transparent;
+    margin-right: -2px;
+}
 #min-btn:hover,#min-btn:active,#min-btn:focus,#min-btn:visited{
-    background-color: #EC971F;
-    color: #FFF;
-    border: 1px solid #EC971F;
+    background-color: #f0ad4e;
+    color: #fff;
 }
 #max-btn:hover,#max-btn:active,#max-btn:focus,#max-btn:visited{
-    background-color: #449D44;
-    color: #FFF;
-    border: 1px solid #449D44;
+    background-color: #5cb85c;
+    color: #fff;
 }
 #close-btn:hover,#close-btn:active,#close-btn:focus,#close-btn:visited{
-    background-color: #C9302C;
-    color: #FFF;
-    border: 1px solid #C9302C;
+    background-color: #d9534f;
+    color: #fff;
 }

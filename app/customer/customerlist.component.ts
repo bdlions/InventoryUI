@@ -69,7 +69,7 @@ export class CustomerListComponent {
                 this.customerList = result.customers;
             }
         });
-    }
+    }    
 }
 
 

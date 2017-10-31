@@ -62,6 +62,9 @@ export class ManageSaleComponent {
 
     //    private manageSaleSuccessMessage : string;
     private manageSaleErrorMessage: string;
+    
+    //constants & constraints
+    private maxSaleOrderLeftPanel: number = 10;
 
     constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
@@ -395,24 +398,26 @@ export class ManageSaleComponent {
         if (this.dtoSaleOrder.entitySaleOrder.id == 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_SALE_ORDER_INFO), requestBody).then(result => {
                 if (result.success) {
+                    this.dtoSaleOrder = result;
+                    this.manageSaleOrderUpdateLeftPanel();
                     //                    this.manageSaleSuccessMessage = result.message;
-                    this.manageSaleErrorMessage = "";
+                    //this.manageSaleErrorMessage = "";
 
-                    this.resetSaleOrder();
+                    //this.resetSaleOrder();
 
                     //update left panel sale order list
-                    this.reqDTOSaleOrder = new DTOSaleOrder();
-                    this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
-                    this.reqDTOSaleOrder.limit = 10;
-                    this.reqDTOSaleOrder.offset = 0;
-                    this.fetchSaleOrderList();
+                    //this.reqDTOSaleOrder = new DTOSaleOrder();
+                    //this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
+                    //this.reqDTOSaleOrder.limit = 10;
+                    //this.reqDTOSaleOrder.offset = 0;
+                    //this.fetchSaleOrderList();
 
                     //update current stock
-                    this.reqStockDTOProduct = new DTOProduct();
-                    this.reqStockDTOProduct.entityProduct = new EntityProduct();
-                    this.reqStockDTOProduct.limit = 10;
-                    this.reqStockDTOProduct.offset = 0;
-                    this.fetchCurrentStock();
+                    //this.reqStockDTOProduct = new DTOProduct();
+                    //this.reqStockDTOProduct.entityProduct = new EntityProduct();
+                    //this.reqStockDTOProduct.limit = 10;
+                    //this.reqStockDTOProduct.offset = 0;
+                    //this.fetchCurrentStock();
                 }
                 else {
                     //                    this.manageSaleSuccessMessage = "";
@@ -428,24 +433,25 @@ export class ManageSaleComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_SALE_ORDER_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
+                    this.manageSaleOrderUpdateLeftPanel();
                     //                    this.manageSaleSuccessMessage = result.message;
-                    this.manageSaleErrorMessage = "";
+                    //this.manageSaleErrorMessage = "";
 
-                    this.resetSaleOrder();
+                    //this.resetSaleOrder();
 
                     //update left panel sale order list
-                    this.reqDTOSaleOrder = new DTOSaleOrder();
-                    this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
-                    this.reqDTOSaleOrder.limit = 10;
-                    this.reqDTOSaleOrder.offset = 0;
-                    this.fetchSaleOrderList();
+                    //this.reqDTOSaleOrder = new DTOSaleOrder();
+                    //this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
+                    //this.reqDTOSaleOrder.limit = 10;
+                    //this.reqDTOSaleOrder.offset = 0;
+                    //this.fetchSaleOrderList();
 
                     //update current stock
-                    this.reqStockDTOProduct = new DTOProduct();
-                    this.reqStockDTOProduct.entityProduct = new EntityProduct();
-                    this.reqStockDTOProduct.limit = 10;
-                    this.reqStockDTOProduct.offset = 0;
-                    this.fetchCurrentStock();
+                    //this.reqStockDTOProduct = new DTOProduct();
+                    //this.reqStockDTOProduct.entityProduct = new EntityProduct();
+                    //this.reqStockDTOProduct.limit = 10;
+                    //this.reqStockDTOProduct.offset = 0;
+                    //this.fetchCurrentStock();
                 }
                 else {
                     //                    this.manageSaleSuccessMessage = "";
@@ -528,6 +534,23 @@ export class ManageSaleComponent {
 
             }
         });
+    }
+    
+    public manageSaleOrderUpdateLeftPanel()
+    {
+        let tempSaleOrderList: DTOSaleOrder[] = Array();
+        tempSaleOrderList[0] = this.dtoSaleOrder;
+        let totalSaleOrder: number = 1;
+        let saleOrderCounter: number;
+        for (saleOrderCounter = 0; saleOrderCounter < this.saleOrderList.length; saleOrderCounter++)
+        {
+            if (this.saleOrderList[saleOrderCounter].entitySaleOrder.id != this.dtoSaleOrder.entitySaleOrder.id && totalSaleOrder <= this.maxSaleOrderLeftPanel)
+            {
+                tempSaleOrderList[totalSaleOrder] = this.saleOrderList[saleOrderCounter];
+                totalSaleOrder++;
+            }
+        }
+        this.saleOrderList = tempSaleOrderList;
     }
 }
 

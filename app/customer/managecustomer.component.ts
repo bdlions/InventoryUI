@@ -30,6 +30,9 @@ export class ManageCustomerComponent {
 
     //    private manageCustomerSuccessMessage: string;
     private manageCustomerErrorMessage: string;
+    
+    //constants & constraints
+    private maxCustomerLeftPanel: number = 10;
 
     constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
@@ -92,14 +95,6 @@ export class ManageCustomerComponent {
             this.manageCustomerMessageDispalyModal.show();
             return;
         }
-        //check customer last name
-        //        if (this.dtoCustomer.entityUser.lastName == null || this.dtoCustomer.entityUser.lastName == "") {
-        //            this.manageCustomerSuccessMessage = "";
-        //            this.manageCustomerErrorMessage = "Enter customer last name";
-        //            this.manageCustomerMessageDispalyModal.config.backdrop = false;
-        //            this.manageCustomerMessageDispalyModal.show();
-        //            return;
-        //        }
 
         this.dtoCustomer.entityUser.password = "pass";
         let requestBody: string = JSON.stringify(this.dtoCustomer);
@@ -107,21 +102,23 @@ export class ManageCustomerComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_CUSTOMER_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
+                    this.manageCustomerUpdateLeftPanel();
                     //set success message
                     //                    this.manageCustomerSuccessMessage = result.message;
-                    this.manageCustomerErrorMessage = "";
+                    //this.manageCustomerErrorMessage = "";
 
                     //reset customer
-                    this.newCustomer(event);
+                    //this.newCustomer(event);
 
                     //update left panel customer list
-                    this.reqDTOCustomer = new DTOCustomer();
-                    this.reqDTOCustomer.entityCustomer = new EntityCustomer();
-                    this.reqDTOCustomer.entityUser = new EntityUser();
-                    this.reqDTOCustomer.entityUserRole = new EntityUserRole();
-                    this.fetchCustomerList();
+                    //this.reqDTOCustomer = new DTOCustomer();
+                    //this.reqDTOCustomer.entityCustomer = new EntityCustomer();
+                    //this.reqDTOCustomer.entityUser = new EntityUser();
+                    //this.reqDTOCustomer.entityUserRole = new EntityUserRole();
+                    //this.fetchCustomerList();
                 }
                 else {
+                    
                     //set error message
                     //                    this.manageCustomerSuccessMessage = "";
                     this.manageCustomerErrorMessage = result.message;
@@ -136,19 +133,21 @@ export class ManageCustomerComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_CUSTOMER_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
+                    this.dtoCustomer = result;
+                    this.manageCustomerUpdateLeftPanel();
                     //set success message
                     //                    this.manageCustomerSuccessMessage = result.message;
-                    this.manageCustomerErrorMessage = "";
+                    //this.manageCustomerErrorMessage = "";
 
                     //reset customer
-                    this.newCustomer(event);
+                    //this.newCustomer(event);
 
                     //update left panel customer list
-                    this.reqDTOCustomer = new DTOCustomer();
-                    this.reqDTOCustomer.entityCustomer = new EntityCustomer();
-                    this.reqDTOCustomer.entityUser = new EntityUser();
-                    this.reqDTOCustomer.entityUserRole = new EntityUserRole();
-                    this.fetchCustomerList();
+                    //this.reqDTOCustomer = new DTOCustomer();
+                    //this.reqDTOCustomer.entityCustomer = new EntityCustomer();
+                    //this.reqDTOCustomer.entityUser = new EntityUser();
+                    //this.reqDTOCustomer.entityUserRole = new EntityUserRole();
+                    //this.fetchCustomerList();
                 }
                 else {
                     //set error message
@@ -194,6 +193,23 @@ export class ManageCustomerComponent {
                 this.dtoCustomer = result;
             }
         });
+    }
+    
+    public manageCustomerUpdateLeftPanel()
+    {
+        let tempCustomerList: DTOCustomer[] = Array();
+        tempCustomerList[0] = this.dtoCustomer;
+        let totalCustomers: number = 1;
+        let customerCounter: number;
+        for (customerCounter = 0; customerCounter < this.customerList.length; customerCounter++)
+        {
+            if (this.customerList[customerCounter].entityCustomer.id != this.dtoCustomer.entityCustomer.id && totalCustomers <= this.maxCustomerLeftPanel)
+            {
+                tempCustomerList[totalCustomers] = this.customerList[customerCounter];
+                totalCustomers++;
+            }
+        }
+        this.customerList = tempCustomerList;
     }
 }
 

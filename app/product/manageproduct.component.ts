@@ -199,7 +199,8 @@ export class ManageProductComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PRODUCT_INFO), requestBody).then(result => {
                 // console.log(result);
                 if (result.success) {
-                    this.dtoProduct.entityProduct.id = result.id;
+                    //setting response object from the server
+                    this.dtoProduct.entityProduct = result;
                     this.manageProductUpdateLeftPanel();
                     //set product id from the response
                     //set success message
@@ -236,7 +237,7 @@ export class ManageProductComponent {
         let tempProductList: EntityProduct[];
         tempProductList = Array();
         tempProductList[0] = this.dtoProduct.entityProduct;
-        let totalProdct = 1;
+        let totalProdct: number = 1;
         let productCounter: number;
         for (productCounter = 0; productCounter < this.productList.length; productCounter++)
         {

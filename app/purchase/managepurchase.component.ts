@@ -57,6 +57,9 @@ export class ManagePurchaseComponent {
 
     //    private managePurchaseSuccessMessage: string;
     private managePurchaseErrorMessage: string;
+    
+    //constants & constraints
+    private maxPurchaseOrderLeftPanel: number = 10;
 
     constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
@@ -389,19 +392,21 @@ export class ManagePurchaseComponent {
         if (this.dtoPurchaseOrder.entityPurchaseOrder.id == 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PURCHASE_ORDER_INFO), requestBody).then(result => {
                 if (result.success) {
+                    this.dtoPurchaseOrder = result;
+                    this.managePurchaseOrderUpdateLeftPanel();
                     //set success message
                     //                    this.managePurchaseSuccessMessage = result.message;
-                    this.managePurchaseErrorMessage = "";
+                    //this.managePurchaseErrorMessage = "";
 
                     //reset purchase order
-                    this.resetPurchaseOrder();
+                    //this.resetPurchaseOrder();
 
                     //update left panel purchase order list
-                    this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
-                    this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
-                    this.reqDTOPurchaseOrder.limit = 10;
-                    this.reqDTOPurchaseOrder.offset = 0;
-                    this.fetchPurchaseOrderList();
+                    //this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
+                    //this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
+                    //this.reqDTOPurchaseOrder.limit = 10;
+                    //this.reqDTOPurchaseOrder.offset = 0;
+                    //this.fetchPurchaseOrderList();
                 }
                 else {
                     //set error message
@@ -419,19 +424,20 @@ export class ManagePurchaseComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_PURCHASE_ORDER_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
+                    this.managePurchaseOrderUpdateLeftPanel();
                     //set success message
                     //                    this.managePurchaseSuccessMessage = result.message;
-                    this.managePurchaseErrorMessage = "";
+                    //this.managePurchaseErrorMessage = "";
 
                     //reset purchase order
-                    this.resetPurchaseOrder();
+                    //this.resetPurchaseOrder();
 
                     //update left panel purchase order list
-                    this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
-                    this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
-                    this.reqDTOPurchaseOrder.limit = 10;
-                    this.reqDTOPurchaseOrder.offset = 0;
-                    this.fetchPurchaseOrderList();
+                    //this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
+                    //this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
+                    //this.reqDTOPurchaseOrder.limit = 10;
+                    //this.reqDTOPurchaseOrder.offset = 0;
+                    //this.fetchPurchaseOrderList();
                 }
                 else {
                     //set error message
@@ -504,6 +510,23 @@ export class ManagePurchaseComponent {
     selectedPurchaseOrder(event: Event, orderNo: string) {
         event.preventDefault();
         this.setPurchaseOrderInfo(orderNo);
+    }
+    
+    public managePurchaseOrderUpdateLeftPanel()
+    {
+        let tempPurchaseOrderList: DTOPurchaseOrder[] = Array();
+        tempPurchaseOrderList[0] = this.dtoPurchaseOrder;
+        let totalPurchaseOrder: number = 1;
+        let purchaseOrderCounter: number;
+        for (purchaseOrderCounter = 0; purchaseOrderCounter < this.purchaseOrderList.length; purchaseOrderCounter++)
+        {
+            if (this.purchaseOrderList[purchaseOrderCounter].entityPurchaseOrder.id != this.dtoPurchaseOrder.entityPurchaseOrder.id && totalPurchaseOrder <= this.maxPurchaseOrderLeftPanel)
+            {
+                tempPurchaseOrderList[totalPurchaseOrder] = this.purchaseOrderList[purchaseOrderCounter];
+                totalPurchaseOrder++;
+            }
+        }
+        this.purchaseOrderList = tempPurchaseOrderList;
     }
 }
 

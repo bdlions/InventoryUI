@@ -32,6 +32,9 @@ export class ManageSupplierComponent {
 
     //    private manageSupplierSuccessMessage: string;
     private manageSupplierErrorMessage: string;
+    
+    //constants & constraints
+    private maxSupplierLeftPanel: number = 10;
 
     constructor(private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
@@ -107,21 +110,23 @@ export class ManageSupplierComponent {
         let requestBody: string = JSON.stringify(this.dtoSupplier);
         if (this.dtoSupplier.entitySupplier.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_SUPPLIER_INFO), requestBody).then(result => {
-                console.log(result);
+                //console.log(result);
                 if (result.success) {
                     //set success message
                     //this.manageSupplierSuccessMessage = result.message;
-                    this.manageSupplierErrorMessage = "";
+                    //this.manageSupplierErrorMessage = "";
 
                     //reset supplier
-                    this.newSupplier(event);
+                    //this.newSupplier(event);
 
                     //update left panel supplier list
-                    this.reqDTOSupplier = new DTOSupplier();
-                    this.reqDTOSupplier.entitySupplier = new EntitySupplier();
-                    this.reqDTOSupplier.entityUser = new EntityUser();
-                    this.reqDTOSupplier.entityUserRole = new EntityUserRole();
-                    this.fetchSupplierList();
+                    //this.reqDTOSupplier = new DTOSupplier();
+                    //this.reqDTOSupplier.entitySupplier = new EntitySupplier();
+                    //this.reqDTOSupplier.entityUser = new EntityUser();
+                    //this.reqDTOSupplier.entityUserRole = new EntityUserRole();
+                    //this.fetchSupplierList();
+                    
+                    this.manageSupplierUpdateLeftPanel();
                 }
                 else {
                     //set error message
@@ -137,19 +142,22 @@ export class ManageSupplierComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_SUPPLIER_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
+                    //response from server contains newly created supplier id and user id
+                    this.dtoSupplier = result;
+                    this.manageSupplierUpdateLeftPanel();
                     //set success message
                     //this.manageSupplierSuccessMessage = result.message;
-                    this.manageSupplierErrorMessage = "";
+                    //this.manageSupplierErrorMessage = "";
 
                     //reset supplier
-                    this.newSupplier(event);
+                    //this.newSupplier(event);
 
                     //update left panel supplier list
-                    this.reqDTOSupplier = new DTOSupplier();
-                    this.reqDTOSupplier.entitySupplier = new EntitySupplier();
-                    this.reqDTOSupplier.entityUser = new EntityUser();
-                    this.reqDTOSupplier.entityUserRole = new EntityUserRole();
-                    this.fetchSupplierList();
+                    //this.reqDTOSupplier = new DTOSupplier();
+                    //this.reqDTOSupplier.entitySupplier = new EntitySupplier();
+                    //this.reqDTOSupplier.entityUser = new EntityUser();
+                    //this.reqDTOSupplier.entityUserRole = new EntityUserRole();
+                    //this.fetchSupplierList();
                 }
                 else {
                     //set error message
@@ -196,6 +204,23 @@ export class ManageSupplierComponent {
                 this.dtoSupplier = result;
             }
         });
+    }
+    
+    public manageSupplierUpdateLeftPanel()
+    {
+        let tempSupplierList: DTOSupplier[] = Array();
+        tempSupplierList[0] = this.dtoSupplier;
+        let totalSupplier: number = 1;
+        let supplierCounter: number;
+        for (supplierCounter = 0; supplierCounter < this.supplierList.length; supplierCounter++)
+        {
+            if (this.supplierList[supplierCounter].entitySupplier.id != this.dtoSupplier.entitySupplier.id && totalSupplier <= this.maxSupplierLeftPanel)
+            {
+                tempSupplierList[totalSupplier] = this.supplierList[supplierCounter];
+                totalSupplier++;
+            }
+        }
+        this.supplierList = tempSupplierList;
     }
 }
 

@@ -44,7 +44,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="cursor-pointer" *ngFor="let product of productList" (click)="selectedProduct($event, product.id)">
+                                    <tr *ngFor="let product of productList" (click)="selectedProduct($event, product.id)" [ngClass]="{'active': productId == product.id }">
                                         <td data-label="Item">{{product.name}}</td>
                                         <td data-label="Category">{{product.categoryTitle}}</td>
                                     </tr>

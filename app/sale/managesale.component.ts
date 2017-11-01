@@ -263,17 +263,56 @@ export class ManageSaleComponent {
                 dtoProduct.entityProduct = this.productList[productCounter];
             }
         }
+        let saleProductCounter: number;
         if (this.productIdToPopupSelectProduct == 0 && dtoProduct.entityProduct.id > 0) {
-            this.dtoSaleOrder.products[this.dtoSaleOrder.products.length] = dtoProduct;
-        }
-        else {
-            let saleProductCounter: number;
+            let isAppend: boolean = true;
             for (saleProductCounter = 0; saleProductCounter < this.dtoSaleOrder.products.length; saleProductCounter++) {
-                if (this.dtoSaleOrder.products[saleProductCounter].entityProduct.id == this.productIdToPopupSelectProduct) {
-                    this.dtoSaleOrder.products[saleProductCounter] = dtoProduct;
+                if (this.dtoSaleOrder.products[saleProductCounter].entityProduct.id == dtoProduct.entityProduct.id) {
+                    //from empty cell/add button, selecting a product whish is already in product list
+                    this.dtoSaleOrder.products[saleProductCounter].quantity = (this.dtoSaleOrder.products[saleProductCounter].quantity + 1);
+                    isAppend = false;
                     break;
                 }
             }
+            if (isAppend)
+            {
+                this.dtoSaleOrder.products[this.dtoSaleOrder.products.length] = dtoProduct;
+            } 
+        }
+        else {
+            let tempProducts: DTOProduct[] = Array();
+            let isOverWrite: boolean = false;
+            for (saleProductCounter = 0; saleProductCounter < this.dtoSaleOrder.products.length; saleProductCounter++) {
+                if (this.dtoSaleOrder.products[saleProductCounter].entityProduct.id == dtoProduct.entityProduct.id) {
+                    this.dtoSaleOrder.products[saleProductCounter].quantity = (this.dtoSaleOrder.products[saleProductCounter].quantity + 1);
+                    isOverWrite = true;
+                    break;
+                }
+            }
+            let tempProductsCounter: number = 0;
+            for (saleProductCounter = 0; saleProductCounter < this.dtoSaleOrder.products.length; saleProductCounter++) {
+                if (this.dtoSaleOrder.products[saleProductCounter].entityProduct.id == this.productIdToPopupSelectProduct) {
+                    if (!isOverWrite)
+                    {
+                        this.dtoSaleOrder.products[saleProductCounter] = dtoProduct;
+                        tempProducts[tempProductsCounter] = this.dtoSaleOrder.products[saleProductCounter];
+                        tempProductsCounter++;
+                    }
+                }
+                else
+                {
+                    tempProducts[tempProductsCounter] = this.dtoSaleOrder.products[saleProductCounter];
+                    tempProductsCounter++;
+                }
+            }
+            this.dtoSaleOrder.products = tempProducts;
+            
+//            for (saleProductCounter = 0; saleProductCounter < this.dtoSaleOrder.products.length; saleProductCounter++) {
+//                if (this.dtoSaleOrder.products[saleProductCounter].entityProduct.id == this.productIdToPopupSelectProduct) {
+//                    this.dtoSaleOrder.products[saleProductCounter] = dtoProduct;
+//                    break;
+//                }
+//            }
         }
         this.calculateBalance();
     }

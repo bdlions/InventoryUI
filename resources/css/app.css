@@ -15,7 +15,6 @@ Version: 1.0
 html,body{
     margin: 0;
     padding: 0;
-    overflow-y: hidden;
 }
 body::before {
     content: '';
@@ -277,8 +276,8 @@ table th {
     padding-top: 10px;
 }
 .adjust-input > tbody > tr > td > input.form-control{
-   color: #000!important;
-   background-color: transparent!important;
+    color: #000!important;
+    background-color: transparent!important;
 }
 
 .errorMessage{
@@ -296,8 +295,8 @@ table th {
 }
 /*----------------------------- Tab ----------------------------------*/
 .tab-container > ul{
-/*    position: absolute;
-    bottom: 0;*/
+    /*    position: absolute;
+        bottom: 0;*/
 }
 .tab-content>.active {
     padding: 10px;
@@ -570,9 +569,30 @@ table th {
 .home-manage-purchase-anchor,.home-purchase-list-anchor,
 .home-adjust-stock-anchor,.home-current-stock-anchor,.home-new-product-anchor,.home-product-list-anchor,
 .home-manage-sale-anchor,.home-sale-list-anchor,
-.home-manage-customer-anchor,.home-customer-list-anchor{
+.home-manage-customer-anchor,.home-customer-list-anchor,
+.home-supplier-title,.home-purchase-title,.home-inventory-title,.home-sale-title,.home-customer-title{
     position: absolute;
     cursor: pointer;
+}
+.home-supplier-title,.home-purchase-title,.home-inventory-title,.home-sale-title,.home-customer-title{
+    color: #000!important;
+    cursor: text!important;
+    font-weight: bold;
+}
+.home-manage-supplier-anchor,.home-supplier-list-anchor,
+.home-manage-purchase-anchor,.home-purchase-list-anchor,
+.home-current-stock-anchor,.home-new-product-anchor,.home-product-list-anchor,
+.home-manage-sale-anchor,.home-sale-list-anchor,
+.home-manage-customer-anchor,.home-customer-list-anchor{
+    display: none;
+}
+.supplier:hover .home-manage-supplier-anchor,.supplier:hover .home-supplier-list-anchor,
+.purchase:hover .home-manage-purchase-anchor, .purchase:hover .home-purchase-list-anchor,
+.inventory:hover .home-new-product-anchor,.inventory:hover .home-product-list-anchor,.inventory:hover .home-current-stock-anchor,
+.sale:hover .home-manage-sale-anchor, .sale:hover .home-sale-list-anchor,
+.customer:hover .home-manage-customer-anchor, .customer:hover .home-customer-list-anchor{
+    cursor: pointer;
+    display: block;
 }
 
 /*----------------------------- Home ----------------------------------*/
@@ -635,9 +655,6 @@ table th {
 }
 
 
-@media (max-width: 480px) {
-
-}
 @media(max-width: 767px) {
 
     .navbar-default .navbar-nav .open .dropdown-menu>li>a {
@@ -687,59 +704,116 @@ table th {
     .sale-customer-fourth-circle,
     .sale-customer-fifth-circle{
         margin-bottom: 8px;
+        margin-left: 20px;
     }
     .home-animation-ul > li > a{
         font-size: 12px;
         text-align: center;
         text-align: -webkit-center;
     }
+    .home-supplier-title,.home-purchase-title,.home-inventory-title,.home-sale-title,.home-customer-title{
+        font-size: 12px!important;
+        color: #fff!important;
+        font-weight: normal!important;
+    }
+
     .home-manage-supplier-anchor{
-        top: 30px;
-        margin-left: -110px;
+        position: relative;
+        top: 45px;
+        margin-left: -180px;
+        width: 100px;
+    }
+    .home-supplier-title{
+        position: relative;
+        top: 40px;
+        margin-left: -60px;
+
     }
     .home-supplier-list-anchor{
-        top: 30px;
-        margin-left: 15px;
+        position: relative;
+        top: -45px;
+        margin-left: 180px;
+        width: 100px;
     }
     .home-manage-purchase-anchor{
-        top: 220px;
-        margin-left: -110px;
+        position: relative;
+        top: 45px;
+        margin-left: -180px;
+        width: 100px;
+    }
+    .home-purchase-title{
+        position: relative;
+        top: 43px;
+        margin-left: -65px;
     }
     .home-purchase-list-anchor{
-        top: 220px;
-        margin-left: 15px;
+        position: relative;
+        top: -45px;
+        margin-left: 180px;
+        width: 100px;
     }
     .home-adjust-stock-anchor{
-        top: 382px;
-        margin-left: -110px;
+        position: relative;
+        top: 45px;
+        margin-left: -180px;
+        width: 100px;
     }
     .home-current-stock-anchor{
-        top: 415px;
-        margin-left: -107px;
+        position: relative;
+        top: 45px;
+        margin-left: -180px;
+        width: 100px;
+    }
+    .home-inventory-title{
+        position: relative;
+        top: 40px;
+        margin-left: -60px;
     }
     .home-new-product-anchor{
-        top: 382px;
-        margin-left: 15px;
+        position: relative;
+        top: -60px;
+        margin-left: 180px;
+        width: 100px;
     }
     .home-product-list-anchor{
-        top: 415px;
-        margin-left: 15px;
+        position: relative;
+        top: -45px;
+        margin-left: 180px;
+        width: 100px;
     }
     .home-manage-sale-anchor{
-        top: 595px;
-        margin-left: -110px;
+        position: relative;
+        top: 45px;
+        margin-left: -180px;
+        width: 100px;
+    }
+    .home-sale-title{
+        position: relative;
+        top: 43px;
+        margin-left: -53px;
     }
     .home-sale-list-anchor{
-        top: 595px;
-        margin-left: 15px;
+        position: relative;
+        top: -45px;
+        margin-left: 180px;
+        width: 100px;
     }
     .home-manage-customer-anchor{
-        top: 778px;
-        margin-left: -110px;
+        position: relative;
+        top: 45px;
+        margin-left: -180px;
+        width: 100px;
+    }
+    .home-customer-title{
+        position: relative;
+        top: 40px;
+        margin-left: -60px;
     }
     .home-customer-list-anchor{
-        top: 778px;
-        margin-left: 15px;
+        position: relative;
+        top: -45px;
+        margin-left: 180px;
+        width: 100px;
     }
     .manage-product-left-side-table {
         min-height: 100%!important;
@@ -752,7 +826,7 @@ table th {
         margin-left: 15px;
     }
     .home-animation-ul > li {
-        margin-top: 15px!important;
+        margin-top: 25px!important;
         text-align: center;
         text-align: -webkit-center;
     }
@@ -783,53 +857,110 @@ table th {
         text-align: center;
         text-align: -webkit-center;
     }
+    .home-supplier-title,.home-purchase-title,.home-inventory-title,.home-sale-title,.home-customer-title{
+        font-size: 12px!important;
+        color: #fff!important;
+        font-weight: normal!important;
+    }
+    /*    .supplier,.purchase,.inventory,.sale,.customer{
+            padding: 0px 125px 0px 125px;
+        }*/
     .home-manage-supplier-anchor{
-        top: 60px;
-        margin-left: -135px;
+        position: relative;
+        top: 75px;
+        margin-left: -220px;
+        width: 150px;
+    }
+    .home-supplier-title{
+        position: relative;
+        top: 40px;
+        margin-left: -60px;
     }
     .home-supplier-list-anchor{
-        top: 60px;
-        margin-left: 30px;
+        position: relative;
+        top: -45px;
+        margin-left: 180px;
+        width: 150px;
     }
     .home-manage-purchase-anchor{
-        top: 300px;
-        margin-left: -140px;
+        position: relative;
+        top: 45px;
+        margin-left: -180px;
+        width: 150px;
+    }
+    .home-purchase-title{
+        position: relative;
+        top: 43px;
+        margin-left: -65px;
     }
     .home-purchase-list-anchor{
-        top: 300px;
-        margin-left: 30px;
+        position: relative;
+        top: -45px;
+        margin-left: 180px;
+        width: 100px;
     }
     .home-adjust-stock-anchor{
-        top: 525px;
-        margin-left: -130px;
+        position: relative;
+        top: 45px;
+        margin-left: -180px;
+        width: 100px;
     }
     .home-current-stock-anchor{
-        top: 550px;
-        margin-left: -125px;
+        position: relative;
+        top: 45px;
+        margin-left: -180px;
+        width: 100px;
+    }
+    .home-inventory-title{
+        position: relative;
+        top: 40px;
+        margin-left: -60px;
     }
     .home-new-product-anchor{
-        top: 525px;
-        margin-left: 30px;
+        position: relative;
+        top: -60px;
+        margin-left: 180px;
+        width: 100px;
     }
     .home-product-list-anchor{
-        top: 550px;
-        margin-left: 30px;
+        position: relative;
+        top: -45px;
+        margin-left: 180px;
+        width: 100px;
     }
     .home-manage-sale-anchor{
-        top: 780px;
-        margin-left: -135px;
+        position: relative;
+        top: 45px;
+        margin-left: -180px;
+        width: 100px;
+    }
+    .home-sale-title{
+        position: relative;
+        top: 43px;
+        margin-left: -53px;
     }
     .home-sale-list-anchor{
-        top: 780px;
-        margin-left: 30px;
+        position: relative;
+        top: -45px;
+        margin-left: 180px;
+        width: 100px;
     }
     .home-manage-customer-anchor{
-        top: 1020px;
-        margin-left: -135px;
+        position: relative;
+        top: 45px;
+        margin-left: -180px;
+        width: 100px;
+    }
+    .home-customer-title{
+        position: relative;
+        top: 40px;
+        margin-left: -60px;
     }
     .home-customer-list-anchor{
-        top: 1020px;
-        margin-left: 30px;
+        position: relative;
+        top: -45px;
+        margin-left: 180px;
+        width: 100px;
     }
     .table-wrapper{
         background: #fff;
@@ -873,55 +1004,86 @@ table th {
         display: inline;
     }
     .home-animation-ul > li > a{
-        font-size: 15px;
+        font-size: 14px;
+    }
+    .home-supplier-title,.home-purchase-title,.home-inventory-title,.home-sale-title,.home-customer-title{
+        font-size: 14px!important;
+        color: #fff!important;
+        font-weight: normal!important;
+    }
+    .supplier,.purchase,.sale,.customer{
+        padding: 100px 0px 165px 0px;
+    }
+    .inventory{
+        padding: 100px 0px 220px 0px;
     }
     .home-manage-supplier-anchor{
-        left: 4px;
+        left: 15px;
         top: -40px;
+    }
+    .home-supplier-title{
+        left: 36px;
+        bottom: -50px;
     }
     .home-supplier-list-anchor{
-        left: 18px;
-        bottom: -50px;
+        left: 25px;
+        bottom: -100px;
     }
     .home-manage-purchase-anchor{
-        left: 205px;
+        left: 200px;
         top: -40px;
     }
-    .home-purchase-list-anchor{
-        left: 210px;
+    .home-purchase-title{
+        left: 221px;
         bottom: -50px;
+    }
+    .home-purchase-list-anchor{
+        left: 212px;
+        bottom: -100px;
     }
     .home-adjust-stock-anchor{
         left: 408px;
         top: -100px;
     }
     .home-current-stock-anchor{
-        left: 410px;
+        left: 390px;
         top: -40px; 
     }
-    .home-new-product-anchor{
+    .home-inventory-title{
         left: 407px;
         bottom: -50px;
     }
-    .home-product-list-anchor{
-        left: 410px;
+    .home-new-product-anchor{
+        left: 398px;
         bottom: -100px;
     }
+    .home-product-list-anchor{
+        left: 401px;
+        bottom: -150px;
+    }
     .home-manage-sale-anchor{
-        left: 602px;
+        left: 582px;
         top: -40px;
+    }
+    .home-sale-title{
+        left: 613px;
+        bottom: -50px;
     }
     .home-sale-list-anchor{
-        left: 616px;
-        bottom: -50px;
+        left: 603px;
+        bottom: -100px;
     }
     .home-manage-customer-anchor{
-        left: 778px;
+        left: 755px;
         top: -40px;
     }
-    .home-customer-list-anchor{
-        left: 792px;
+    .home-customer-title{
+        left: 785px;
         bottom: -50px;
+    }
+    .home-customer-list-anchor{
+        left: 775px;
+        bottom: -100px;
     }
     .table-wrapper{
         background: #fff;
@@ -962,55 +1124,85 @@ table th {
         display: inline;
     }
     .home-animation-ul > li > a{
-        font-size: 18px;
+        font-size: 16px;
     }
-    .home-manage-supplier-anchor{
-        left: 15px;
+    .home-supplier-title,.home-purchase-title,.home-inventory-title,.home-sale-title,.home-customer-title{
+        font-size: 16px!important;
+        color: #fff!important;
+        font-weight: normal!important;
+    }
+    .supplier,.purchase,.sale,.customer{
+        padding: 100px 5px 165px 5px;
+    }
+    .inventory{
+        padding: 100px 5px 220px 5px;
+    }
+.home-manage-supplier-anchor{
+        left: 20px;
         top: -40px;
+    }.home-supplier-title{
+        left: 50px;
+        bottom: -50px;
     }
     .home-supplier-list-anchor{
-        left: 20px;
-        bottom: -50px;
+        left: 40px;
+        bottom: -100px;
     }
     .home-manage-purchase-anchor{
-        left: 235px;
+        left: 242px;
         top: -40px;
     }
+    .home-purchase-title{
+        left: 275px;
+        bottom: -50px;                 
+    }
     .home-purchase-list-anchor{
-        left: 240px;
-        bottom: -50px;
+        left: 258px;
+        bottom: -100px;
     }
     .home-adjust-stock-anchor{
         left: 466px;
         top: -100px;
     }
     .home-current-stock-anchor{
-        left: 470px;
+        left: 478px;
         top: -40px; 
     }
-    .home-new-product-anchor{
-        left: 470px;
+    .home-inventory-title{
+        left: 490px;
         bottom: -50px;
     }
-    .home-product-list-anchor{
-        left: 473px;
+    .home-new-product-anchor{
+        left: 478px;
         bottom: -100px;
     }
+    .home-product-list-anchor{
+        left: 478px;
+        bottom: -150px;
+    }
     .home-manage-sale-anchor{
-        left: 688px;
+        left: 700px;
         top: -40px;
+    }
+    .home-sale-title{
+        left: 735px;
+        bottom: -50px;
     }
     .home-sale-list-anchor{
-        left: 705px;
-        bottom: -50px;
+        left: 722px;
+        bottom: -100px;
     }
     .home-manage-customer-anchor{
-        left: 892px;
+        left: 910px;
         top: -40px;
     }
-    .home-customer-list-anchor{
-        left: 910px;
+    .home-customer-title{
+        left: 945px;
         bottom: -50px;
+    }
+    .home-customer-list-anchor{
+        left: 935px;
+        bottom: -100px;
     }
     .table-wrapper{
         background: #fff;

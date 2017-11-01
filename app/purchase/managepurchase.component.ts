@@ -285,17 +285,49 @@ export class ManagePurchaseComponent {
                 dtoProduct.entityProduct = this.productList[productCounter];
             }
         }
+        let purchasedProductCounter: number;
         if (this.productIdToPopupSelectProduct == 0 && dtoProduct.entityProduct.id > 0) {
-            this.dtoPurchaseOrder.products[this.dtoPurchaseOrder.products.length] = dtoProduct;
-        }
-        else {
-            let purchasedProductCounter: number;
+            let isAppend: boolean = true;
             for (purchasedProductCounter = 0; purchasedProductCounter < this.dtoPurchaseOrder.products.length; purchasedProductCounter++) {
-                if (this.dtoPurchaseOrder.products[purchasedProductCounter].entityProduct.id == this.productIdToPopupSelectProduct) {
-                    this.dtoPurchaseOrder.products[purchasedProductCounter] = dtoProduct;
+                if (this.dtoPurchaseOrder.products[purchasedProductCounter].entityProduct.id == dtoProduct.entityProduct.id) {
+                    //from empty cell/add button, selecting a product whish is already in product list
+                    this.dtoPurchaseOrder.products[purchasedProductCounter].quantity = (this.dtoPurchaseOrder.products[purchasedProductCounter].quantity + 1);
+                    isAppend = false;
                     break;
                 }
             }
+            if (isAppend)
+            {
+                this.dtoPurchaseOrder.products[this.dtoPurchaseOrder.products.length] = dtoProduct;
+            }            
+        }
+        else {
+            let tempProducts: DTOProduct[] = Array();
+            let isOverWrite: boolean = false;
+            for (purchasedProductCounter = 0; purchasedProductCounter < this.dtoPurchaseOrder.products.length; purchasedProductCounter++) {
+                if (this.dtoPurchaseOrder.products[purchasedProductCounter].entityProduct.id == dtoProduct.entityProduct.id) {
+                    this.dtoPurchaseOrder.products[purchasedProductCounter].quantity = (this.dtoPurchaseOrder.products[purchasedProductCounter].quantity + 1);
+                    isOverWrite = true;
+                    break;
+                }
+            }
+            let tempProductsCounter: number = 0;
+            for (purchasedProductCounter = 0; purchasedProductCounter < this.dtoPurchaseOrder.products.length; purchasedProductCounter++) {
+                if (this.dtoPurchaseOrder.products[purchasedProductCounter].entityProduct.id == this.productIdToPopupSelectProduct) {
+                    if (!isOverWrite)
+                    {
+                        this.dtoPurchaseOrder.products[purchasedProductCounter] = dtoProduct;
+                        tempProducts[tempProductsCounter] = this.dtoPurchaseOrder.products[purchasedProductCounter];
+                        tempProductsCounter++;
+                    }
+                }
+                else
+                {
+                    tempProducts[tempProductsCounter] = this.dtoPurchaseOrder.products[purchasedProductCounter];
+                    tempProductsCounter++;
+                }
+            }
+            this.dtoPurchaseOrder.products = tempProducts;
         }
         this.calculateBalance();
     }

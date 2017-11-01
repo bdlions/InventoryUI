@@ -35,6 +35,7 @@
     "core-js": "^2.5.1",
     "electron": "^1.7.9",
     "ie-shim": "^0.1.0",
+    "ng2-ckeditor": "^1.1.9",
     "ng2-file-upload": "^1.2.1",
     "ngx-bootstrap": "^1.9.3",
     "rxjs": "^5.4.3",

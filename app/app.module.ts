@@ -34,6 +34,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoaderComponent} from './loader.component'
 import {LoaderService} from './webservice/loader.service'
 import {WebAPIService} from './webservice/web-api-service'
+import { CKEditorModule } from 'ng2-ckeditor';
+import {CKEditorSample} from './CKEditorSample';
 
 
 import {
@@ -144,6 +146,10 @@ const appRoutes: Routes = [
         component: ProfileComponent
     },
     {
+        path: 'ck',
+        component: CKEditorSample
+    },
+    {
         path: '**',
         component: AppComponent
     },
@@ -165,7 +171,8 @@ enableProdMode();
         MatFormFieldModule, MatOptionModule, MatSelectModule,
         MatMenuModule,
         BrowserAnimationsModule, MatButtonModule, FileUploadModule,
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes),
+        CKEditorModule
     ],
     exports: [
         MatAutocompleteModule,
@@ -234,7 +241,8 @@ enableProdMode();
         ProfileComponent,
         TopNavbarComponent,
         LoaderComponent,
-        MatProgressSpinner, MatSpinner
+        MatProgressSpinner, MatSpinner,
+        CKEditorSample
     ],
     providers: [
         NavigationManager,

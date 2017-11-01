@@ -53,6 +53,7 @@
             '@angular/cdk/stepper': 'npm:@angular/cdk/bundles/cdk-stepper.umd.js',
             '@angular/animations/browser': 'npm:@angular/animations/bundles/animations-browser.umd.js',
             '@angular/platform-browser/animations': 'npm:@angular/platform-browser/bundles/platform-browser-animations.umd.js',
+            "ng2-ckeditor": "npm:ng2-ckeditor",
 
             // other libraries
             'rxjs': 'npm:rxjs'
@@ -62,6 +63,10 @@
             app: {
                 main: './main.js',
                 defaultExtension: 'js'
+            },
+            "ng2-ckeditor": {
+                "main": "lib/index.js",
+                "defaultExtension": "js",
             },
             'rxjs': {
                 main: './bundles/Rx.js',

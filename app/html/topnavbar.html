@@ -71,6 +71,9 @@
                             </li>
                         </ul>
                     </li>
+                    <li [ngClass]="{'active': activeMenu == 'ck' }">
+                        <a href="#" (click)="goCkEditor($event)">CKEditor</a>
+                    </li>
                     <li [ngClass]="{'active': activeMenu == 'logout' }">
                         <a href="#" (click)="goLogout($event)">Logout</a>
                     </li>

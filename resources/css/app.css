@@ -15,7 +15,6 @@ Version: 1.0
 html,body{
     margin: 0;
     padding: 0;
-    overflow-y: hidden;
 }
 body::before {
     content: '';
@@ -585,7 +584,7 @@ table th {
 .home-current-stock-anchor,.home-new-product-anchor,.home-product-list-anchor,
 .home-manage-sale-anchor,.home-sale-list-anchor,
 .home-manage-customer-anchor,.home-customer-list-anchor{
-    display: block;
+    display: none;
 }
 .supplier:hover .home-manage-supplier-anchor,.supplier:hover .home-supplier-list-anchor,
 .purchase:hover .home-manage-purchase-anchor, .purchase:hover .home-purchase-list-anchor,
@@ -1127,13 +1126,6 @@ table th {
     .home-animation-ul > li > a{
         font-size: 16px;
     }
-    .home-manage-supplier-anchor{
-        left: 20px;
-        top: -40px;
-    }.home-supplier-title{
-        left: 50px;
-        bottom: -50px;
-    }
     .home-supplier-title,.home-purchase-title,.home-inventory-title,.home-sale-title,.home-customer-title{
         font-size: 16px!important;
         color: #fff!important;
@@ -1144,6 +1136,13 @@ table th {
     }
     .inventory{
         padding: 100px 5px 220px 5px;
+    }
+.home-manage-supplier-anchor{
+        left: 20px;
+        top: -40px;
+    }.home-supplier-title{
+        left: 50px;
+        bottom: -50px;
     }
     .home-supplier-list-anchor{
         left: 40px;

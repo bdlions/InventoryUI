@@ -251,6 +251,7 @@ export class ManageProductComponent {
     }
     
     public selectedProduct(event: Event, productId: number) {
+        this.productId = productId;
         //event.preventDefault();
         //this.router.navigate(["manageproduct", {productId: productId}]);
 

@@ -275,6 +275,11 @@ table th {
     margin-top: -15px;
     padding-top: 10px;
 }
+.adjust-input > tbody > tr > td > input.form-control{
+   color: #000!important;
+   background-color: transparent!important;
+}
+
 .errorMessage{
     color: red;
 }

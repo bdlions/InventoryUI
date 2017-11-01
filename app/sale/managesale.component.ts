@@ -313,6 +313,7 @@ export class ManageSaleComponent {
     }
 
     public resetSaleOrder() {
+        this.orderNo = '';
         this.dtoSaleOrder = new DTOSaleOrder();
         this.dtoSaleOrder.entitySaleOrder = new EntitySaleOrder();
         this.dtoSaleOrder.entitySaleOrder.id = 0;
@@ -531,6 +532,7 @@ export class ManageSaleComponent {
 
     selectedSaleOrder(event: Event, orderNo: string) {
         event.preventDefault();
+        this.orderNo = orderNo;
         this.setSaleOrderInfo(orderNo);
     }
 
@@ -548,6 +550,7 @@ export class ManageSaleComponent {
     
     public manageSaleOrderUpdateLeftPanel()
     {
+        this.orderNo = this.dtoSaleOrder.entitySaleOrder.orderNo;
         let tempSaleOrderList: DTOSaleOrder[] = Array();
         tempSaleOrderList[0] = this.dtoSaleOrder;
         let totalSaleOrder: number = 1;

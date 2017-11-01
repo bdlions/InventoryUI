@@ -27,7 +27,7 @@ export class ManageCustomerComponent {
     //private searchDTOCustomer: DTOCustomer;
     private showNavBar: boolean = false;
     private activeMenu: string = "managecustomer";
-
+    private customerId: number;
     //    private manageCustomerSuccessMessage: string;
     private manageCustomerErrorMessage: string;
     
@@ -67,6 +67,7 @@ export class ManageCustomerComponent {
     ngOnInit() {
         this.subscribe = this.route.params.subscribe(params => {
             let customerId: number = params['customerId'];
+            this.customerId = customerId;
             this.reqDTOCustomer.entityCustomer.id = customerId;
             this.fetchCustomerInfo();
         });
@@ -79,6 +80,7 @@ export class ManageCustomerComponent {
     }
 
     newCustomer(event: Event) {
+        this.customerId = 0;
         //console.log("New Customer");
         this.dtoCustomer = new DTOCustomer();
         this.dtoCustomer.entityCustomer = new EntityCustomer();
@@ -164,6 +166,7 @@ export class ManageCustomerComponent {
     }
     selectedCustomer(event: Event, customerId: number) {
         event.preventDefault();
+        this.customerId = customerId;
         //this.router.navigate(["managecustomer", {customerId: customerId}]);
         let customerCounter: number;
         for (customerCounter = 0; customerCounter < this.customerList.length; customerCounter++) {
@@ -197,6 +200,7 @@ export class ManageCustomerComponent {
     
     public manageCustomerUpdateLeftPanel()
     {
+        this.customerId = this.dtoCustomer.entityCustomer.id;
         let tempCustomerList: DTOCustomer[] = Array();
         tempCustomerList[0] = this.dtoCustomer;
         let totalCustomers: number = 1;

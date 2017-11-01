@@ -29,12 +29,12 @@ export class ManageSupplierComponent {
     //private searchDTOSupplier: DTOSupplier;
     private showNavBar: boolean = false;
     private activeMenu: string = "managesupplier";
-
+    private supplierId: number;
     //    private manageSupplierSuccessMessage: string;
     private manageSupplierErrorMessage: string;
     
     //constants & constraints
-    private maxSupplierLeftPanel: number = 10;
+    private maxSupplierLeftPanel: number = 10;    
 
     constructor(private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
@@ -69,6 +69,7 @@ export class ManageSupplierComponent {
     ngOnInit() {
         this.subscribe = this.route.params.subscribe(params => {
             let supplierId: number = params['supplierId'];
+            this.supplierId = supplierId;
             this.reqDTOSupplier.entitySupplier.id = supplierId;
             this.fetchSupplierInfo();
         });
@@ -82,6 +83,7 @@ export class ManageSupplierComponent {
     }
 
     newSupplier(event: Event) {
+        this.supplierId = 0;
         this.dtoSupplier = new DTOSupplier();
         this.dtoSupplier.entitySupplier = new EntitySupplier();
         this.dtoSupplier.entityUser = new EntityUser();
@@ -173,6 +175,7 @@ export class ManageSupplierComponent {
     }
     selectedSupplier(event: Event, supplierId: number) {
         event.preventDefault();
+        this.supplierId = supplierId;
         //this.router.navigate(["managesupplier", {productId: supplierId}]);
         let supplierCounter: number;
         for (supplierCounter = 0; supplierCounter < this.supplierList.length; supplierCounter++) {
@@ -208,6 +211,7 @@ export class ManageSupplierComponent {
     
     public manageSupplierUpdateLeftPanel()
     {
+        this.supplierId = this.dtoSupplier.entitySupplier.id;
         let tempSupplierList: DTOSupplier[] = Array();
         tempSupplierList[0] = this.dtoSupplier;
         let totalSupplier: number = 1;

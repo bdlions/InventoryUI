@@ -33,7 +33,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="cursor-pointer" *ngFor="let purchaseOrder of purchaseOrderList" (click)="selectedPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.orderNo)">
+                                    <tr class="cursor-pointer" *ngFor="let purchaseOrder of purchaseOrderList" (click)="selectedPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.orderNo)" [ngClass]="{'active': orderNo == purchaseOrder.entityPurchaseOrder.orderNo }">
                                         <td data-label="Name" id="{{purchaseOrder.entityPurchaseOrder.id}}">{{purchaseOrder.entityPurchaseOrder.orderNo}}</td>
                                     </tr>
                                 </tbody>

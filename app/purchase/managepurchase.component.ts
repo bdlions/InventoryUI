@@ -336,6 +336,7 @@ export class ManagePurchaseComponent {
     }
 
     public resetPurchaseOrder() {
+        this.orderNo = '';
         this.dtoPurchaseOrder = new DTOPurchaseOrder();
         this.dtoPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
         this.dtoPurchaseOrder.entityPurchaseOrder.id = 0;
@@ -522,11 +523,13 @@ export class ManagePurchaseComponent {
     }
     selectedPurchaseOrder(event: Event, orderNo: string) {
         event.preventDefault();
+        this.orderNo = orderNo;
         this.setPurchaseOrderInfo(orderNo);
     }
     
     public managePurchaseOrderUpdateLeftPanel()
     {
+        this.orderNo = this.dtoPurchaseOrder.entityPurchaseOrder.orderNo;
         let tempPurchaseOrderList: DTOPurchaseOrder[] = Array();
         tempPurchaseOrderList[0] = this.dtoPurchaseOrder;
         let totalPurchaseOrder: number = 1;

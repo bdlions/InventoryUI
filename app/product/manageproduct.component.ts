@@ -113,6 +113,7 @@ export class ManageProductComponent {
     }
 
     newProduct(event: Event) {
+        this.productId = 0;
         //console.log(this.entityProduct.name);
         this.dtoProduct = new DTOProduct();
         this.dtoProduct.entityProduct = new EntityProduct();
@@ -233,6 +234,7 @@ export class ManageProductComponent {
     
     public manageProductUpdateLeftPanel()
     {
+        this.productId = this.dtoProduct.entityProduct.id;
         //appending created/updated product on top of left panel
         let tempProductList: EntityProduct[];
         tempProductList = Array();

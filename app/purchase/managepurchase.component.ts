@@ -386,9 +386,22 @@ export class ManagePurchaseComponent {
             this.managePurchaseMessageDispalyModal.show();
             return;
         }
+        
+        //checking positive quantity
+        let counter: number;
+        for (counter = 0; counter < this.dtoPurchaseOrder.products.length; counter++)
+        {
+            if (this.dtoPurchaseOrder.products[counter].quantity <= 0)
+            {
+                this.managePurchaseErrorMessage = "Invalid quantity for the product : " + this.dtoPurchaseOrder.products[counter].entityProduct.name;
+                this.managePurchaseMessageDispalyModal.config.backdrop = false;
+                this.managePurchaseMessageDispalyModal.show();
+                return;
+            }
+        }
 
         let requestBody: string = JSON.stringify(this.dtoPurchaseOrder);
-        console.log(requestBody);
+        //console.log(requestBody);
         if (this.dtoPurchaseOrder.entityPurchaseOrder.id == 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PURCHASE_ORDER_INFO), requestBody).then(result => {
                 if (result.success) {

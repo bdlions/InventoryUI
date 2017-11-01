@@ -339,7 +339,7 @@ export class ManageSaleComponent {
     }
 
     saveSaleOrder(event: Event) {
-         console.log(this.stockProductList);
+        //console.log(this.stockProductList);
         //check sale order no
         if (this.dtoSaleOrder.entitySaleOrder.orderNo == null || this.dtoSaleOrder.entitySaleOrder.orderNo == "") {
             //            this.manageSaleSuccessMessage = "";
@@ -364,7 +364,18 @@ export class ManageSaleComponent {
             this.manageSaleMessageDispalyModal.show();
             return;
         }
-
+        //checking positive quantity
+        let counter: number;
+        for (counter = 0; counter < this.dtoSaleOrder.products.length; counter++)
+        {
+            if (this.dtoSaleOrder.products[counter].quantity <= 0)
+            {
+                this.manageSaleErrorMessage = "Invalid quantity for the product : " + this.dtoSaleOrder.products[counter].entityProduct.name;
+                this.manageSaleMessageDispalyModal.config.backdrop = false;
+                this.manageSaleMessageDispalyModal.show();
+                return;
+            }
+        }
 
         //-----------------------
         //check current stock before saving sale order

@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {NavigationManager} from "../services/NavigationManager";
-import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
@@ -26,7 +25,7 @@ export class ProductListComponent {
     private showNavBar: boolean = false;
     private activeMenu: string = "productlist";
 
-    constructor(private marketAPI: MarketAPI, private router: Router, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
+    constructor( private router: Router, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
             if (mode !== null) {
                 this.showNavBar = mode;

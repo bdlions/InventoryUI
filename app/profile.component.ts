@@ -7,7 +7,6 @@
 
 import { Component, ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
-import {MarketAPI} from './services/MarketAPI.service';
 import { ModalDirective } from 'ngx-bootstrap';
 import {WebAPIService} from './webservice/web-api-service';
 import {PacketHeaderFactory} from './webservice/PacketHeaderFactory';
@@ -23,7 +22,7 @@ export class ProfileComponent {
     private webAPIService: WebAPIService;
     @ViewChild('sampleModal') public sampleModal:ModalDirective;
     
-    constructor(private marketAPI: MarketAPI, private router: Router, webAPIService: WebAPIService) 
+    constructor( private router: Router, webAPIService: WebAPIService) 
     {
         this.webAPIService = webAPIService;
         setInterval(() => { this.sampleModal.hide(); }, 1000 * 20);

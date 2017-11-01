@@ -2,7 +2,6 @@ import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ModalDirective} from 'ngx-bootstrap';
-import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
@@ -62,7 +61,7 @@ export class ManagePurchaseComponent {
     //constants & constraints
     private maxPurchaseOrderLeftPanel: number = 10;
 
-    constructor(private marketAPI: MarketAPI, private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
+    constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
 
         this.reqDTOPurchaseOrder = new DTOPurchaseOrder();

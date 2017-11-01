@@ -15,11 +15,11 @@
     <link rel="stylesheet" href="resources/css/app.css"/>
     <link rel="stylesheet" href="resources/css/loader.css"/>
     <link rel="stylesheet" href="resources/css/title-bar.css" />
-
+    <link rel="stylesheet" href="node_modules/@angular/material/prebuilt-themes/indigo-pink.css" />
 
     <!--polyfill(s) for older browsers--> 
     <script src="resources/js/shim.min.js"></script>
-    <script src="resources/js/zone.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="resources/js/global.js"></script>
 
     <!--for production-->
@@ -29,6 +29,7 @@
     <script src="resources/js/system.src.js"></script>
     <script src="resources/js/systemjs.config.js"></script>
     <script src="resources/js/title-bar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <script>
         System.import('app').catch(function (err) {
             console.error(err);

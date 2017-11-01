@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {MarketAPI} from './../services/MarketAPI.service';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
@@ -20,7 +19,7 @@ export class CurrentStockComponent {
     private productList: DTOProduct[];
     private productCategoryList: EntityProductCategory[];
 
-    constructor(private marketAPI: MarketAPI, private router: Router, webAPIService: WebAPIService) {
+    constructor(private router: Router, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();

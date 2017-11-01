@@ -2,35 +2,40 @@
     <div class="row form-group home-animation-margin-top">
         <div class="col-md-12 col-lg-12">
             <ul class="home-animation-ul">
-                <li>
+                <li class="supplier">
                     <a class="home-manage-supplier-anchor" href="#" (click)="goManageSupplier($event)">Manage Supplier</a>
                     <img class="home-animation-ul-image-size" src="resources/images/supplier.png" alt="Supplier"/>
+                    <a class="home-supplier-title" href="#" >Suppllier</a>
                     <a class="home-supplier-list-anchor" href="#" (click)="goSupplierList($event)" >Supplier List</a>
                 </li>
                 <li><div class="supplier-purchase-first-circle"></div> <div class="supplier-purchase-second-circle"></div> <div class="supplier-purchase-third-circle"></div> <div class="supplier-purchase-fourth-circle"></div> <div class="supplier-purchase-fifth-circle"></div></li>
-                <li>
+                <li class="purchase">
                     <a class="home-manage-purchase-anchor" href="#" (click)="goManagePurchase($event)" >Manage Purchase</a>
                     <img class="home-animation-ul-image-size" src="resources/images/purchase_order.png" alt="Purchase Order"/>
+                    <a class="home-purchase-title" href="#" >Purchase</a>
                     <a class="home-purchase-list-anchor" (click)="goPurchaseList($event)" >Purchase List</a>
                 </li>
                 <li><div class="purchase-inventory-first-circle"></div> <div class="purchase-inventory-second-circle"></div> <div class="purchase-inventory-third-circle"></div> <div class="purchase-inventory-fourth-circle"></div> <div class="purchase-inventory-fifth-circle"></div></li>
-                <li>
+                <li class="inventory">
                     <!--<a class="home-adjust-stock-anchor" href="#" (click)="goProduct($event)" >Adjust Stock</a>-->
                     <a class="home-current-stock-anchor" href="#" (click)="goCurrentStock($event)" >Current Stock</a>
                     <img class="home-animation-ul-image-size" src="resources/images/inventory.png" alt="Inventory"/>
+                    <a class="home-inventory-title" href="#" >Inventory</a>
                     <a class="home-new-product-anchor" href="#" (click)="goManageProduct($event)" >New Product</a>
                     <a class="home-product-list-anchor" href="#" (click)="goProductList($event)" >Product List</a>
                 </li>
                 <li><div class="inventory-sale-first-circle"></div> <div class="inventory-sale-second-circle"></div> <div class="inventory-sale-third-circle"></div> <div class="inventory-sale-fourth-circle"></div> <div class="inventory-sale-fifth-circle"></div></li>
-                <li>
+                <li class="sale">
                     <a class="home-manage-sale-anchor" href="#" (click)="goManageSale($event)" >Manage Sale</a>
                     <img class="home-animation-ul-image-size" src="resources/images/sales_order.png" alt="Sale Order"/>
+                    <a class="home-sale-title" href="#" >Sale</a>
                     <a class="home-sale-list-anchor" href="#" (click)="goSaleList($event)" >Sale List</a>
                 </li>
                 <li><div class="sale-customer-fifth-circle"></div> <div class="sale-customer-second-circle"></div> <div class="sale-customer-third-circle"></div> <div class="sale-customer-fourth-circle"></div> <div class="sale-customer-fifth-circle"></div></li>
-                <li>
+                <li class="customer">
                     <a class="home-manage-customer-anchor" href="#" (click)="goManageCustomer($event)" >Manage Customer</a>
                     <img class="home-animation-ul-image-size" src="resources/images/customer.png" alt="Customer"/>
+                    <a class="home-customer-title" href="#" >Customer</a>
                     <a class="home-customer-list-anchor" href="#" (click)="goCustomerList($event)" >Customer List</a>
                 </li>
             </ul>

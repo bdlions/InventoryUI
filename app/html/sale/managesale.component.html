@@ -59,7 +59,7 @@
                                 <span class="purchase-order-title">Customer<span class="required">*</span></span>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                <input [(ngModel)]="dtoCustomer.entityUser.firstName"  name="firstName" class="form-control" (click)="showSaleOrderCustomerModal($event)">
+                                <input [(ngModel)]="dtoCustomer.entityUser.firstName" (keypress)="showSaleOrderCustomerModal($event)" name="firstName" class="form-control" (click)="showSaleOrderCustomerModal($event)">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -120,7 +120,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td data-label="Item" (click)="showSaleOrderProductModal($event, 0)"><input class="form-control"></td>
+                                                    <td data-label="Item" (keypress)="showSaleOrderProductModal($event, 0)"  (click)="showSaleOrderProductModal($event, 0)"><input class="form-control"></td>
                                                     <td data-label="Quantity"><input class="form-control"></td>
                                                     <td data-label="Unit Price"><input class="form-control"></td>
                                                     <td data-label="Discount"><input class="form-control"></td>
@@ -133,19 +133,19 @@
                                             <table class="common-table adjust-input">
                                                 <tbody>
                                                     <tr class="cursor-pointer" *ngFor="let product of dtoSaleOrder.products" >
-                                                        <td data-label="Item" (click)="showSaleOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
+                                                        <td data-label="Item" (keypress)="showSaleOrderProductModal($event, product.entityProduct.id)" (click)="showSaleOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
                                                         <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
                                                         <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance()"></td>
                                                         <td data-label="Discount" ><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
                                                         <td data-label="Total"><label>{{product.total}}</label></td>
-                                                        <td data-label="Delete" class="text-center"><i class="cursor-pointer fa fa-times" (click)="showSelectedSaleOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
+                                                        <td data-label="Delete" class="text-center"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedSaleOrderProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedSaleOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <table class="common-table">
                                             <tfoot>
-                                                <tr class="cursor-pointer table-row-border-adjust" (click)="showSaleOrderProductModal($event, 0)">
+                                                <tr class="cursor-pointer table-row-border-adjust" (keypress)="showSaleOrderProductModal($event, 0)" (click)="showSaleOrderProductModal($event, 0)">
                                                     <td class="text-center"><i class="fa fa-plus"></i></td>
                                                     <td></td>
                                                     <td></td>

@@ -59,7 +59,7 @@
                                 <span class="purchase-order-title">Supplier<span class="required">*</span></span>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                <input [(ngModel)]="dtoSupplier.entityUser.firstName"  name="firstName" class="form-control" (click)="showPurchaseOrderSupplierModal($event)">
+                                <input [(ngModel)]="dtoSupplier.entityUser.firstName"  name="firstName" class="form-control" (keypress)="showPurchaseOrderSupplierModal($event)" (click)="showPurchaseOrderSupplierModal($event)">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -120,7 +120,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td data-label="Item" (click)="showPurchaseOrderProductModal($event, 0)"><input class="form-control" ></td>
+                                                    <td data-label="Item" (keypress)="showPurchaseOrderProductModal($event, 0)" (click)="showPurchaseOrderProductModal($event, 0)"><input class="form-control" ></td>
                                                     <td data-label="Quantity"><input class="form-control" ></td>
                                                     <td data-label="Unit Price"><input class="form-control" ></td>
                                                     <td data-label="Discount"><input class="form-control"></td>
@@ -132,19 +132,19 @@
                                             <table class="common-table adjust-input">
                                                 <tbody>
                                                     <tr *ngFor="let product of dtoPurchaseOrder.products">
-                                                        <td data-label="Item" (click)="showPurchaseOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
+                                                        <td data-label="Item" (keypress)="showPurchaseOrderProductModal($event, product.entityProduct.id)" (click)="showPurchaseOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
                                                         <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
                                                         <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance()"></td>
                                                         <td data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
                                                         <td data-label="Sub-Total"><label>{{product.total}}</label></td>
-                                                        <td data-label="Action"><i class="cursor-pointer fa fa-times" (click)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
+                                                        <td data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <table class="common-table">
                                             <tfoot>
-                                                <tr class="cursor-pointer" (click)="showPurchaseOrderProductModal($event, 0)">
+                                                <tr class="cursor-pointer" (keypress)="showPurchaseOrderProductModal($event, 0)" (click)="showPurchaseOrderProductModal($event, 0)">
                                                     <td><i class="fa fa-plus"></i></td>
                                                     <td></td>
                                                     <td></td>

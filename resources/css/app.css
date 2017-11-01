@@ -375,6 +375,9 @@ table th {
 .dropdown-menu > li > a{
     padding: 10px 35px!important;
 }
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover{
+    background-color: #209E91!important;
+}
 .dropdown-menu > li > a:hover{
     background-color: #009180!important;
     color: #fff!important;
@@ -582,7 +585,7 @@ table th {
 /*----------------------------- Modal ----------------------------------*/
 .modal-title{
     font-size: 14px;
-    color: #000; 
+    color: #fff; 
     text-align: center;
 }
 .modal::before {
@@ -606,9 +609,13 @@ table th {
 .modal-body,.modal-header{
     padding: 5px 10px;
 }
+.modal-body{
+    color: #fff;
+}
 .modal-content{
     border-radius: 0;
     color: #000;
+    background: url(../images/blur-bg-blurred.jpg) center center no-repeat;
 }
 .modal-footer {
     padding: 10px;
@@ -617,7 +624,14 @@ table th {
     margin-top: 5px;
 }
 
-
+.close {
+    color: #fff;
+    opacity: .5;
+}
+.close:hover {
+    color: #fff;
+    opacity: 1;
+}
 
 
 @media (max-width: 480px) {

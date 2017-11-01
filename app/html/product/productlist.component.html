@@ -43,7 +43,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="cursor-pointer" *ngFor="let product of productList" (click)="showProduct($event, product.id)">
+                            <tr class="cursor-pointer" *ngFor="let product of productList" (keypress)="showProduct($event, product.id)" (click)="showProduct($event, product.id)">
                                 <td data-label="Item">{{product.name}}</td>
                                 <td data-label="Type">{{product.typeTitle}}</td>
                                 <td data-label="Category">{{product.categoryTitle}}</td>

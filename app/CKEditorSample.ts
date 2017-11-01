@@ -11,7 +11,7 @@ import {Component} from '@angular/core';
     template: `
   <ckeditor
     [(ngModel)]="ckeditorContent"
-    [config]="{uiColor: '#99000'}"
+    [config]="{uiColor: '#ffffff'}"
     [readonly]="false"
     (change)="onChange($event)"
     (ready)="onReady($event)"

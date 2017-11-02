@@ -11,8 +11,9 @@ import {NavigationManager} from "./services/NavigationManager";
 export class TopNavbarComponent {
     private showNavBar: boolean = true;
     private activeMenu: string = "home";
+    private selectedMenu: any;
 
-    constructor(private router:Router, private navigationManager: NavigationManager) {
+    constructor(private router: Router, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
             // mode will be null the first time it is created, so you need to igonore it when null
             if (mode !== null) {
@@ -38,7 +39,7 @@ export class TopNavbarComponent {
         event.preventDefault();
         this.navigationManager.showNavBar(true);
         this.navigationManager.setActiveMenu("manageproduct");
-        this.router.navigate(["manageproduct", {productId: 0 }]);
+        this.router.navigate(["manageproduct", {productId: 0}]);
     }
     goProductList(event: Event) {
         event.preventDefault();

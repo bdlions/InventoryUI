@@ -13,69 +13,77 @@
             </div>
             <div class="collapse navbar-collapse" id="main-menu">
                 <ul class="nav navbar-nav">
-                    <li [ngClass]="{'active': activeMenu == 'home' }">
-                        <a href="#" (click)="goHome($event)" >Home</a>
+                    <li mat-button (click)="goHome($event)" [ngClass]="{'active': activeMenu == 'home' }">
+                        <a href="#" >Home</a>
                     </li>
-                    <li dropdown triggers="mouseover" #dpSale="bs-dropdown">
-                        <a dropdownToggle class="dropdown-toggle" (mouseleave)="dpSale.hide()">
-                            Sale <span class="caret"></span></a>
-                        <ul class="dropdown-menu" (mouseleave)="dpSale.hide()">
+                    <li mat-button (mouseover)="saleMenu.openMenu()" #saleMenu="matMenuTrigger" [matMenuTriggerFor]="saleMenuItems">
+                        <a href="#">Sale </a>
+                    </li>
 
-                            <li [ngClass]="{'active': activeMenu == 'managesale' }">
-                                <a href="#" (click)="goManageSale($event)" >Manage Sale</a>
-                            </li>
+                    <mat-menu #saleMenuItems="matMenu" [overlapTrigger]="false" >
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'managesale' }" (click)="goManageSale($event)" [matMenuTriggerFor]="saleSubMenuItems">
+                            <a href="#">Manage Sale</a>
+                        </li>
 
-                            <li [ngClass]="{'active': activeMenu == 'salelist' }">
-                                <a href="#" (click)="goSaleList($event)" >Sale List</a>
-                            </li>
-                            <li [ngClass]="{'active': activeMenu == 'managecustomer' }">
-                                <a href="#" (click)="goManageCustomer($event)" >Manage Customer</a>
-                            </li>
-                            <li [ngClass]="{'active': activeMenu == 'customerlist' }">
-                                <a href="#" (click)="goCustomerList($event)" >Customer List</a>
-                            </li>
-                        </ul>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'salelist' }" (click)="goSaleList($event)" >
+                            <a href="#" >Sale List</a>
+                        </li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'managecustomer' }" (click)="goManageCustomer($event)">
+                            <a href="#"  >Manage Customer</a>
+                        </li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'customerlist' }" (click)="goCustomerList($event)">
+                            <a href="#"  >Customer List</a>
+                        </li>
+                    </mat-menu>
+
+                    <mat-menu #saleSubMenuItems="matMenu" [overlapTrigger]="false" >
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'managesale' }">
+                            <a href="#">Sub sub menu 1</a>
+                        </li>
+
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'salelist' }" >
+                            <a href="#" >Sub sub menu 2</a>
+                        </li>
+                    </mat-menu>
+
+                    <li mat-button (mouseenter)="purchaseMenu.openMenu()" #purchaseMenu="matMenuTrigger" [matMenuTriggerFor]="purchaseMenuItems">
+                        <a href="#">Purchase </a>
                     </li>
-                    <li dropdown triggers="mouseover" #dpPurchase="bs-dropdown">
-                        <a dropdownToggle class="dropdown-toggle" (mouseleave)="dpPurchase.hide()">
-                            Purchase <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" (mouseleave)="dpPurchase.hide()">
-                            <li [ngClass]="{'active': activeMenu == 'managepurchase' }">
-                                <a href="#" (click)="goManagePurchase($event)" >Manage Purchase</a>
-                            </li>
-                            <li [ngClass]="{'active': activeMenu == 'purchaselist' }">
-                                <a href="#" (click)="goPurchaseList($event)" >Purchase List</a>
-                            </li>
-                            <li [ngClass]="{'active': activeMenu == 'managesupplier' }">
-                                <a href="#" (click)="goManageSupplier($event)" >Manage Supplier</a>
-                            </li>
-                            <li [ngClass]="{'active': activeMenu == 'supplierlist' }">
-                                <a href="#" (click)="goSupplierList($event)" >Supplier List</a>
-                            </li>
-                        </ul>
+                    <mat-menu #purchaseMenuItems="matMenu" [overlapTrigger]="false" >
+                        <li mat-menu-item  [ngClass]="{'active': activeMenu == 'managepurchase' }" (click)="goManagePurchase($event)">
+                            <a href="#"  >Manage Purchase</a>
+                        </li>
+                        <li mat-menu-item  [ngClass]="{'active': activeMenu == 'purchaselist' }" (click)="goPurchaseList($event)" >
+                            <a href="#" >Purchase List</a>
+                        </li>
+                        <li mat-menu-item  [ngClass]="{'active': activeMenu == 'managesupplier' }" (click)="goManageSupplier($event)">
+                            <a href="#"  >Manage Supplier</a>
+                        </li>
+                        <li mat-menu-item  [ngClass]="{'active': activeMenu == 'supplierlist' }" (click)="goSupplierList($event)">
+                            <a href="#"  >Supplier List</a>
+                        </li>
+                    </mat-menu>
+                    <li  mat-button (mouseenter)="inventoryMenu.openMenu()" #inventoryMenu="matMenuTrigger" [matMenuTriggerFor]="inventoryMenuItems">
+                         <a href="#">Inventory</a>
                     </li>
-                    <li dropdown triggers="mouseover" #dpInventory="bs-dropdown">
-                        <a dropdownToggle class="dropdown-toggle" (mouseleave)="dpInventory.hide()">
-                            Inventory <span class="caret"></span>
-                        </a>
-                        <ul *dropdownMenu class="dropdown-menu" role="menu" (mouseleave)="dpInventory.hide()">
-                            <li role="menuitem" [ngClass]="{'active': activeMenu == 'manageproduct' }">
-                                <a href="#" (click)="goManageProduct($event)" >New Product</a>
-                            </li>
-                            <li role="menuitem" [ngClass]="{'active': activeMenu == 'productlist' }">
-                                <a href="#" (click)="goProductList($event)" >Product List</a>
-                            </li>
-                            <li role="menuitem" [ngClass]="{'active': activeMenu == 'currentstock' }">
-                                <a href="#" (click)="goCurrentStock($event)" >Current Stock</a>
-                            </li>
-                        </ul>
+
+                    <mat-menu #inventoryMenuItems="matMenu" [overlapTrigger]="false" >
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'manageproduct' }" (click)="goManageProduct($event)" >
+                            <a href="#" >New Product</a>
+                        </li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'productlist' }" (click)="goProductList($event)">
+                            <a href="#"  >Product List</a>
+                        </li>
+                        <li mat-menu-item  [ngClass]="{'active': activeMenu == 'currentstock' }" (click)="goCurrentStock($event)">
+                            <a href="#"  >Current Stock</a>
+                        </li>
+                    </mat-menu>
+
+                    <li mat-button [ngClass]="{'active': activeMenu == 'ck' }" (click)="goCkEditor($event)">
+                        <a href="#" >CKEditor</a>
                     </li>
-                    <li [ngClass]="{'active': activeMenu == 'ck' }">
-                        <a href="#" (click)="goCkEditor($event)">CKEditor</a>
-                    </li>
-                    <li [ngClass]="{'active': activeMenu == 'logout' }">
-                        <a href="#" (click)="goLogout($event)">Logout</a>
+                    <li mat-button [ngClass]="{'active': activeMenu == 'logout' }" (click)="goLogout($event)">
+                        <a href="#" >Logout</a>
                     </li>
                 </ul>
             </div>

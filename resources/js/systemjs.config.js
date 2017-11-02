@@ -71,8 +71,6 @@
             'rxjs': {
                 main: './bundles/Rx.js',
                 map: {
-                    //'./BehaviorSubject': './subject/BehaviorSubject.js'
-
                 }
             }
         }

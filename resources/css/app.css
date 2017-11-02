@@ -579,13 +579,7 @@ table th {
     cursor: text!important;
     font-weight: bold;
 }
-.home-manage-supplier-anchor,.home-supplier-list-anchor,
-.home-manage-purchase-anchor,.home-purchase-list-anchor,
-.home-current-stock-anchor,.home-new-product-anchor,.home-product-list-anchor,
-.home-manage-sale-anchor,.home-sale-list-anchor,
-.home-manage-customer-anchor,.home-customer-list-anchor{
-    display: none;
-}
+
 .supplier:hover .home-manage-supplier-anchor,.supplier:hover .home-supplier-list-anchor,
 .purchase:hover .home-manage-purchase-anchor, .purchase:hover .home-purchase-list-anchor,
 .inventory:hover .home-new-product-anchor,.inventory:hover .home-product-list-anchor,.inventory:hover .home-current-stock-anchor,
@@ -677,6 +671,7 @@ table th {
         margin-top: 15px!important;
         margin-bottom: 15px!important;
         text-align: center;
+        text-align: -moz-center;
         text-align: -webkit-center;
     }
     .home-animation-ul-image-size{
@@ -704,116 +699,101 @@ table th {
     .sale-customer-fourth-circle,
     .sale-customer-fifth-circle{
         margin-bottom: 8px;
-        margin-left: 20px;
     }
     .home-animation-ul > li > a{
-        font-size: 12px;
+        font-size: 11px;
         text-align: center;
         text-align: -webkit-center;
     }
     .home-supplier-title,.home-purchase-title,.home-inventory-title,.home-sale-title,.home-customer-title{
-        font-size: 12px!important;
+        font-size: 11px!important;
         color: #fff!important;
         font-weight: normal!important;
     }
 
-    .home-manage-supplier-anchor{
+    .supplier,.purchase,.inventory,.sale,.customer{
         position: relative;
-        top: 45px;
-        margin-left: -180px;
-        width: 100px;
+        margin-bottom: 20px!important;
+    }
+    .home-manage-supplier-anchor{
+        width: 150px;
+        margin-left: -120px;
+        margin-top: 35px;
     }
     .home-supplier-title{
-        position: relative;
-        top: 40px;
-        margin-left: -60px;
-
+        margin-left: -57px;
+        margin-top: 68px;
     }
     .home-supplier-list-anchor{
-        position: relative;
-        top: -45px;
-        margin-left: 180px;
-        width: 100px;
+        width: 150px;
+        margin-left: -35px;
+        margin-top: 35px;
     }
     .home-manage-purchase-anchor{
-        position: relative;
-        top: 45px;
-        margin-left: -180px;
-        width: 100px;
+        width: 150px;
+        margin-left: -120px;
+        margin-top: 35px;
     }
     .home-purchase-title{
-        position: relative;
-        top: 43px;
-        margin-left: -65px;
+        margin-left: -58px;
+        margin-top: 75px;
     }
     .home-purchase-list-anchor{
-        position: relative;
-        top: -45px;
-        margin-left: 180px;
-        width: 100px;
+        width: 150px;
+        margin-left: -35px;
+        margin-top: 35px;
     }
     .home-adjust-stock-anchor{
-        position: relative;
-        top: 45px;
-        margin-left: -180px;
-        width: 100px;
+        width: 150px;
+        margin-left: -120px;
+        margin-top: 15px;
     }
     .home-current-stock-anchor{
-        position: relative;
-        top: 45px;
-        margin-left: -180px;
-        width: 100px;
+        width: 150px;
+        margin-left: -120px;
+        margin-top: 45px;
     }
     .home-inventory-title{
-        position: relative;
-        top: 40px;
         margin-left: -60px;
+        margin-top: 58px;
     }
     .home-new-product-anchor{
-        position: relative;
-        top: -60px;
-        margin-left: 180px;
-        width: 100px;
+        width: 150px;
+        margin-left: -35px;
+        margin-top: 15px;
     }
     .home-product-list-anchor{
-        position: relative;
-        top: -45px;
-        margin-left: 180px;
-        width: 100px;
+        width: 150px;
+        margin-left: -35px;
+        margin-top: 45px;
     }
     .home-manage-sale-anchor{
-        position: relative;
-        top: 45px;
-        margin-left: -180px;
-        width: 100px;
+        width: 150px;
+        margin-left: -120px;
+        margin-top: 35px;
     }
     .home-sale-title{
-        position: relative;
-        top: 43px;
-        margin-left: -53px;
+        margin-left: -48px;
+        margin-top: 75px;
     }
     .home-sale-list-anchor{
-        position: relative;
-        top: -45px;
-        margin-left: 180px;
-        width: 100px;
+        width: 150px;
+        margin-left: -35px;
+        margin-top: 35px;
     }
     .home-manage-customer-anchor{
-        position: relative;
-        top: 45px;
-        margin-left: -180px;
-        width: 100px;
+        width: 150px;
+        margin-left: -120px;
+        margin-top: 35px;
     }
     .home-customer-title{
-        position: relative;
-        top: 40px;
-        margin-left: -60px;
+        margin-left: -58px;
+        margin-top: 70px;
     }
     .home-customer-list-anchor{
-        position: relative;
-        top: -45px;
-        margin-left: 180px;
-        width: 100px;
+        width: 150px;
+        margin-left: -35px;
+        margin-top: 35px;
     }
     .manage-product-left-side-table {
         min-height: 100%!important;
@@ -826,8 +806,9 @@ table th {
         margin-left: 15px;
     }
     .home-animation-ul > li {
-        margin-top: 25px!important;
+        margin-top: 20px!important;
         text-align: center;
+        text-align: -moz-center;
         text-align: -webkit-center;
     }
     .supplier-purchase-first-circle,
@@ -857,111 +838,102 @@ table th {
         text-align: center;
         text-align: -webkit-center;
     }
+    .home-manage-supplier-anchor,.home-supplier-list-anchor,
+    .home-manage-purchase-anchor,.home-purchase-list-anchor,
+    .home-current-stock-anchor,.home-new-product-anchor,.home-product-list-anchor,
+    .home-manage-sale-anchor,.home-sale-list-anchor,
+    .home-manage-customer-anchor,.home-customer-list-anchor{
+        display: none;
+    }
     .home-supplier-title,.home-purchase-title,.home-inventory-title,.home-sale-title,.home-customer-title{
         font-size: 12px!important;
         color: #fff!important;
         font-weight: normal!important;
     }
-    /*    .supplier,.purchase,.inventory,.sale,.customer{
-            padding: 0px 125px 0px 125px;
-        }*/
+    .supplier,.purchase,.inventory,.sale,.customer{
+        margin-bottom: 20px!important;
+    }
     .home-manage-supplier-anchor{
-        position: relative;
-        top: 75px;
-        margin-left: -220px;
         width: 150px;
+        margin-left: 150px;
+        margin-top: 50px;
     }
     .home-supplier-title{
-        position: relative;
-        top: 40px;
-        margin-left: -60px;
+        margin-left: -80px;
+        margin-top: 115px;
     }
     .home-supplier-list-anchor{
-        position: relative;
-        top: -45px;
-        margin-left: 180px;
         width: 150px;
+        margin-left: 375px;
+        margin-top: -75px;
     }
     .home-manage-purchase-anchor{
-        position: relative;
-        top: 45px;
-        margin-left: -180px;
         width: 150px;
+        margin-left: 150px;
+        margin-top: 50px;
     }
     .home-purchase-title{
-        position: relative;
-        top: 43px;
-        margin-left: -65px;
+        margin-left: -89px;
+        margin-top: 126px;
     }
     .home-purchase-list-anchor{
-        position: relative;
-        top: -45px;
-        margin-left: 180px;
-        width: 100px;
+        width: 150px;
+        margin-left: 375px;
+        margin-top: -75px;
     }
     .home-adjust-stock-anchor{
-        position: relative;
-        top: 45px;
-        margin-left: -180px;
-        width: 100px;
+        width: 150px;
+        margin-left: 150px;
+        margin-top: 100px;
     }
     .home-current-stock-anchor{
-        position: relative;
-        top: 45px;
-        margin-left: -180px;
-        width: 100px;
+        width: 150px;
+        margin-left: 150px;
+        margin-top: 25px;
     }
     .home-inventory-title{
-        position: relative;
-        top: 40px;
-        margin-left: -60px;
+        margin-left: -89px;
+        margin-top: 100px;
     }
     .home-new-product-anchor{
-        position: relative;
-        top: -60px;
-        margin-left: 180px;
-        width: 100px;
+        width: 150px;
+        margin-left: 375px;
+        margin-top: -100px;
     }
     .home-product-list-anchor{
-        position: relative;
-        top: -45px;
-        margin-left: 180px;
-        width: 100px;
+        width: 150px;
+        margin-left: 375px;
+        margin-top: -50px;
     }
     .home-manage-sale-anchor{
-        position: relative;
-        top: 45px;
-        margin-left: -180px;
-        width: 100px;
+        width: 150px;
+        margin-left: 150px;
+        margin-top: 50px;
     }
     .home-sale-title{
-        position: relative;
-        top: 43px;
-        margin-left: -53px;
+        margin-left: -78px;
+        margin-top: 126px;
     }
     .home-sale-list-anchor{
-        position: relative;
-        top: -45px;
-        margin-left: 180px;
-        width: 100px;
+        width: 150px;
+        margin-left: 375px;
+        margin-top: -75px;
     }
     .home-manage-customer-anchor{
-        position: relative;
-        top: 45px;
-        margin-left: -180px;
-        width: 100px;
+        width: 150px;
+        margin-left: 150px;
+        margin-top: 50px;
     }
     .home-customer-title{
-        position: relative;
-        top: 40px;
-        margin-left: -60px;
+        margin-left: -80px;
+        margin-top: 115px;
     }
     .home-customer-list-anchor{
-        position: relative;
-        top: -45px;
-        margin-left: 180px;
-        width: 100px;
+        width: 150px;
+        margin-left: 375px;
+        margin-top: -75px;
     }
+
     .table-wrapper{
         background: #fff;
         height: 300px;
@@ -1010,6 +982,13 @@ table th {
         font-size: 14px!important;
         color: #fff!important;
         font-weight: normal!important;
+    }
+    .home-manage-supplier-anchor,.home-supplier-list-anchor,
+    .home-manage-purchase-anchor,.home-purchase-list-anchor,
+    .home-current-stock-anchor,.home-new-product-anchor,.home-product-list-anchor,
+    .home-manage-sale-anchor,.home-sale-list-anchor,
+    .home-manage-customer-anchor,.home-customer-list-anchor{
+        display: none;
     }
     .supplier,.purchase,.sale,.customer{
         padding: 100px 0px 165px 0px;
@@ -1137,7 +1116,14 @@ table th {
     .inventory{
         padding: 100px 5px 220px 5px;
     }
-.home-manage-supplier-anchor{
+    .home-manage-supplier-anchor,.home-supplier-list-anchor,
+    .home-manage-purchase-anchor,.home-purchase-list-anchor,
+    .home-current-stock-anchor,.home-new-product-anchor,.home-product-list-anchor,
+    .home-manage-sale-anchor,.home-sale-list-anchor,
+    .home-manage-customer-anchor,.home-customer-list-anchor{
+        display: none;
+    }
+    .home-manage-supplier-anchor{
         left: 20px;
         top: -40px;
     }.home-supplier-title{

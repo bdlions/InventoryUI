@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
-                  <!--Search a Product Starts-->
+                <!--Search a Product Starts-->
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h4>Search</h4>
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                   <!--Search a Product Ends-->
+                <!--Search a Product Ends-->
             </div>
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
                 <div class="row form-group">
@@ -125,107 +125,107 @@
                                     </div>
                                 </div> 
                             </tab>
-                             <!--Product Info Tab Ends-->
-                             
-                             <!--Extra Info Tab Starts-->
-                             <tab class="manage-product-right-side-tab" heading="Extra Info">
-                                 <div class="row form-group">
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <h3>Unit of Measure</h3>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="product-title">Standard UoM</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <select class="form-control" >
-                                                        <option *ngFor="let uom of uomList" id="{{uom.id}}" value="{{uom.title}}">{{uom.title}}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="product-title">Sales UoM</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <select class="form-control" >
-                                                        <option *ngFor="let uom of uomList" id="{{uom.id}}" value="{{uom.title}}">{{uom.title}}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="product-title">Purchasing UoM</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <select class="form-control" >
-                                                        <option *ngFor="let uom of uomList" id="{{uom.id}}" value="{{uom.title}}">{{uom.title}}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <h3>Measurements</h3>
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="product-title">Length</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoProduct.entityProduct.length" id="length" name="length" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="product-title">Width</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoProduct.entityProduct.width" id="width" name="width" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="product-title">Height</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoProduct.entityProduct.height" id="height" name="height" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                    <span class="product-title">Weight</span>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                    <input [(ngModel)]="dtoProduct.entityProduct.weight" id="weight" name="weight" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <!--Product Info Tab Ends-->
 
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <h3>Remarks</h3>
-                                                </div>
+                            <!--Extra Info Tab Starts-->
+                            <tab class="manage-product-right-side-tab" heading="Extra Info">
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Unit of Measure</h3>
                                             </div>
-                                            <div class="row form-group">
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                    <textarea [(ngModel)]="dtoProduct.entityProduct.remark" id="weight" name="weight" class="form-control" rows="5"></textarea>
-                                                </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="product-title">Standard UoM</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <select class="form-control" >
+                                                    <option *ngFor="let uom of uomList" id="{{uom.id}}" value="{{uom.title}}">{{uom.title}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="product-title">Sales UoM</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <select class="form-control" >
+                                                    <option *ngFor="let uom of uomList" id="{{uom.id}}" value="{{uom.title}}">{{uom.title}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="product-title">Purchasing UoM</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <select class="form-control" >
+                                                    <option *ngFor="let uom of uomList" id="{{uom.id}}" value="{{uom.title}}">{{uom.title}}</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
-                             </tab>
-                             <!--Extra Info Tab Ends-->
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Measurements</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="product-title">Length</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoProduct.entityProduct.length" id="length" name="length" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="product-title">Width</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoProduct.entityProduct.width" id="width" name="width" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="product-title">Height</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoProduct.entityProduct.height" id="height" name="height" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="product-title">Weight</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="dtoProduct.entityProduct.weight" id="weight" name="weight" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Remarks</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <textarea [(ngModel)]="dtoProduct.entityProduct.remark" id="weight" name="weight" class="form-control" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    </div>
+                                </div>
+                            </tab>
+                            <!--Extra Info Tab Ends-->
                         </tabset>
                     </div>
                 </div>
@@ -259,7 +259,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                 <div class="row">
+                <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <button type="button" class="custom-button" (click)="hideManageProductMessageDispalyModal()">Ok</button>
                     </div>

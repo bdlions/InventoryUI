@@ -87,7 +87,19 @@
                                                     <input [(ngModel)]="dtoCustomer.entityCustomer.balance" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
                                                 </div>
                                             </div>
-                                            <div class="row form-group">
+                                             <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <h3>Remarks</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <textarea  [(ngModel)]="dtoCustomer.entityCustomer.remarks" id="weight" name="weight" class="form-control" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+<div class="row form-group">
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                     <h3>Contact</h3>
                                                 </div>
@@ -117,21 +129,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-
-                                        </div>
                                     </div> 
-                                    <div class="row form-group">
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <h3>Remarks</h3>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <textarea  [(ngModel)]="dtoCustomer.entityCustomer.remarks" id="weight" name="weight" class="form-control" rows="5"></textarea>
-                                        </div>
-                                    </div>
+                                   
                             </tab>
                             <!--Customer Info Tab Ends-->
                             <!--Extra Info Tab Starts-->

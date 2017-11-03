@@ -119,12 +119,12 @@ export class TopNavbarComponent {
         this.navigationManager.setActiveMenu("logout");
         this.router.navigate(["logout"]);
     }
-    goCkEditor(event: Event) {
-        event.preventDefault();
-        this.navigationManager.showNavBar(true);
-        this.navigationManager.setActiveMenu("ck");
-        this.router.navigate(["ck"]);
-    }
+//    goCkEditor(event: Event) {
+//        event.preventDefault();
+//        this.navigationManager.showNavBar(true);
+//        this.navigationManager.setActiveMenu("ck");
+//        this.router.navigate(["ck"]);
+//    }
 
 
 }

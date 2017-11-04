@@ -363,6 +363,8 @@ table th {
     border: none!important;
     border-radius: 0px!important;
     margin-bottom: 0px!important;
+    position: fixed;
+    width: 100%;
 }
 .navbar-default .navbar-brand {
     color: #fff!important;
@@ -475,6 +477,7 @@ table th {
     animation-fill-mode: forwards;
     /*visibility: hidden;*/
     border-radius: 10px;
+    /*display: none;*/
 }
 .supplier-purchase-first-circle,
 .supplier-purchase-second-circle,
@@ -500,66 +503,67 @@ table th {
 .sale-customer-fifth-circle{
     background-color: #703385;
 }
-.supplier-purchase-first-circle {
-    animation: 1s fadeIn;
+.supplier-purchase-first-circle,.inventory-sale-first-circle {
+    animation: 0.25s fadeIn;
+    -webkit-animation: 0.25s fadeIn;
+    -moz-animation: 0.25s fadeIn;
+    -o-animation: 0.25s fadeIn;
 }
-.supplier-purchase-second-circle {
+.supplier-purchase-second-circle,.inventory-sale-second-circle {
+    animation: 0.5s fadeIn;
+    -webkit-animation: 0.5s fadeIn;
+    -moz-animation: 0.5s fadeIn;
+    -o-animation: 0.5s fadeIn;
+}
+.supplier-purchase-third-circle,.inventory-sale-third-circle {
+    animation: 0.75s fadeIn;
+    -webkit-animation: 0.75s fadeIn;
+    -moz-animation: 0.75s fadeIn;
+    -o-animation: 0.75s fadeIn;
+}
+.supplier-purchase-fourth-circle.inventory-sale-fourth-circle {
+    animation: 1.0s fadeIn;
+    -webkit-animation: 1.0s fadeIn;
+    -moz-animation: 1.0s fadeIn;
+    -o-animation: 1.0s fadeIn;
+}
+.supplier-purchase-fifth-circle,.inventory-sale-fifth-circle {
+    animation: 1.25s fadeIn;
+    -webkit-animation: 1.25s fadeIn;
+    -moz-animation: 1.25s fadeIn;
+    -o-animation: 1.25s fadeIn;
+}
+.purchase-inventory-first-circle,.sale-customer-first-circle{
+    animation: 1.5s fadeIn;
+    -webkit-animation: 1.5s fadeIn;
+    -moz-animation: 1.5s fadeIn;
+    -o-animation: 1.5s fadeIn;
+}
+.purchase-inventory-second-circle,.sale-customer-second-circle{
+    animation: 1.75s fadeIn;
+    -webkit-animation: 1.75s fadeIn;
+    -moz-animation: 1.75s fadeIn;
+    -o-animation: 1.75s fadeIn;
+}
+.purchase-inventory-third-circle,.sale-customer-third-circle{
     animation: 2s fadeIn;
+    -webkit-animation: 2s fadeIn;
+    -moz-animation: 2s fadeIn;
+    -o-animation: 2s fadeIn;
 }
-.supplier-purchase-third-circle {
-    animation: 3s fadeIn;
+.purchase-inventory-fourth-circle,.sale-customer-fourth-circle{
+    animation: 2.25s fadeIn;
+    -webkit-animation: 2.25s fadeIn;
+    -moz-animation: 2.25s fadeIn;
+    -o-animation: 2.25s fadeIn;
 }
-.supplier-purchase-fourth-circle {
-    animation: 4s fadeIn;
+.purchase-inventory-fifth-circle,.sale-customer-fifth-circle{
+    animation: 2.5s fadeIn;
+    -webkit-animation: 2.5s fadeIn;
+    -moz-animation: 2.5s fadeIn;
+    -o-animation: 2.5s fadeIn;
 }
-.supplier-purchase-fifth-circle {
-    animation: 5s fadeIn;
-}
-.purchase-inventory-first-circle{
-    animation: 6s fadeIn;
-}
-.purchase-inventory-second-circle{
-    animation: 7s fadeIn;
-}
-.purchase-inventory-third-circle{
-    animation: 8s fadeIn;
-}
-.purchase-inventory-fourth-circle{
-    animation: 9s fadeIn;
-}
-.purchase-inventory-fifth-circle{
-    animation: 10s fadeIn;
-}
-.inventory-sale-first-circle {
-    animation: 11s fadeIn;
-}
-.inventory-sale-second-circle {
-    animation: 12s fadeIn;
-}
-.inventory-sale-third-circle {
-    animation: 13s fadeIn;
-}
-.inventory-sale-fourth-circle {
-    animation: 14s fadeIn;
-}
-.inventory-sale-fifth-circle {
-    animation: 15s fadeIn;
-}
-.sale-customer-first-circle{
-    animation: 16s fadeIn;
-}
-.sale-customer-second-circle{
-    animation: 17s fadeIn;
-}
-.sale-customer-third-circle{
-    animation: 18s fadeIn;
-}
-.sale-customer-fourth-circle{
-    animation: 19s fadeIn;
-}
-.sale-customer-fifth-circle{
-    animation: 20s fadeIn;
-}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -601,6 +605,8 @@ table th {
     cursor: pointer;
     display: block;
 }
+
+
 
 /*----------------------------- Home ----------------------------------*/
 
@@ -724,7 +730,9 @@ table th {
         color: #fff!important;
         font-weight: normal!important;
     }
-
+    .home-supplier-animation-dot,.home-purchase-animation-dot,.home-inventory-animation-dot,.home-sale-animation-dot{
+        display: none!important;
+    }
     .supplier,.purchase,.inventory,.sale,.customer{
         position: relative;
         margin-bottom: 20px!important;
@@ -893,6 +901,9 @@ table th {
         font-size: 12px!important;
         color: #fff!important;
         font-weight: normal!important;
+    }
+    .home-supplier-animation-dot,.home-purchase-animation-dot,.home-inventory-animation-dot,.home-sale-animation-dot{
+        display: none!important;
     }
     .supplier,.purchase,.inventory,.sale,.customer{
         margin-bottom: 20px!important;
@@ -1067,6 +1078,9 @@ table th {
     .supplier,.purchase,.sale,.customer{
         padding: 100px 0px 165px 0px;
     }
+    .dot{
+        display: none!important;
+    }
     .inventory{
         padding: 100px 0px 220px 0px;
     }
@@ -1161,6 +1175,76 @@ table th {
     .manage-purchase-right-side-tab .table-wrapper,.manage-sale-right-side-tab .table-wrapper{
         height: 200px!important;
     }
+    .supplier-purchase-first-circle,
+    .supplier-purchase-second-circle,
+    .supplier-purchase-third-circle,
+    .supplier-purchase-fourth-circle,
+    .supplier-purchase-fifth-circle,
+    .purchase-inventory-first-circle,
+    .purchase-inventory-second-circle,
+    .purchase-inventory-third-circle,
+    .purchase-inventory-fourth-circle,
+    .purchase-inventory-fifth-circle,
+    .inventory-sale-first-circle,
+    .inventory-sale-second-circle,
+    .inventory-sale-third-circle,
+    .inventory-sale-fourth-circle,
+    .inventory-sale-fifth-circle,
+    .sale-customer-first-circle,
+    .sale-customer-second-circle,
+    .sale-customer-third-circle,
+    .sale-customer-fourth-circle,
+    .sale-customer-fifth-circle{
+        position: relative;
+        display: none;
+        /*display: inline-block;*/
+    }
+    .purchase:hover .supplier-purchase-first-circle, 
+    .purchase:hover .supplier-purchase-second-circle,
+    .purchase:hover .supplier-purchase-third-circle,
+    .purchase:hover .supplier-purchase-fourth-circle,
+    .purchase:hover .supplier-purchase-fifth-circle,
+    .purchase:hover .purchase-inventory-first-circle, 
+    .purchase:hover .purchase-inventory-second-circle,
+    .purchase:hover .purchase-inventory-third-circle,
+    .purchase:hover .purchase-inventory-fourth-circle,
+    .purchase:hover .purchase-inventory-fifth-circle,
+    .sale:hover .inventory-sale-first-circle, 
+    .sale:hover .inventory-sale-second-circle,
+    .sale:hover .inventory-sale-third-circle,
+    .sale:hover .inventory-sale-fourth-circle,
+    .sale:hover .inventory-sale-fifth-circle,
+    .sale:hover .sale-customer-first-circle, 
+    .sale:hover .sale-customer-second-circle,
+    .sale:hover .sale-customer-third-circle,
+    .sale:hover .sale-customer-fourth-circle,
+    .sale:hover .sale-customer-fifth-circle
+    {
+        display: inline-block;
+    }
+    .home-supplier-animation-dot{
+        position: absolute;
+        margin-left: -250px;
+        top: 45px;
+    }
+    .home-purchase-animation-dot{
+        position: absolute;
+        margin-left: -75px;
+        top: 45px;
+    }
+    .home-inventory-animation-dot{
+        position: absolute;
+        margin-left: -250px;
+        top: 45px;
+    }
+    .home-sale-animation-dot{
+        position: absolute;
+        margin-left: -75px;
+        top: 45px;
+    }
+    .supplier img,.purchase img,.inventory img,.sale img{
+        margin-right: 75px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -1199,30 +1283,10 @@ table th {
         margin-top: 150px;
         margin-left: 45px;
     }
-    .supplier-purchase-first-circle,
-    .supplier-purchase-second-circle,
-    .supplier-purchase-third-circle,
-    .supplier-purchase-fourth-circle,
-    .supplier-purchase-fifth-circle,
-    .purchase-inventory-first-circle,
-    .purchase-inventory-second-circle,
-    .purchase-inventory-third-circle,
-    .purchase-inventory-fourth-circle,
-    .purchase-inventory-fifth-circle,
-    .inventory-sale-first-circle,
-    .inventory-sale-second-circle,
-    .inventory-sale-third-circle,
-    .inventory-sale-fourth-circle,
-    .inventory-sale-fifth-circle,
-    .sale-customer-first-circle,
-    .sale-customer-second-circle,
-    .sale-customer-third-circle,
-    .sale-customer-fourth-circle,
-    .sale-customer-fifth-circle{
-        display: inline-block;
-    }
+
+
     .home-animation-ul > li{
-        margin-right: 10px; 
+        /*margin-right: 10px;*/ 
         display: inline;
     }
     .home-animation-ul > li > span{
@@ -1239,6 +1303,9 @@ table th {
     .inventory{
         padding: 100px 5px 220px 5px;
     }
+    .dot{
+        display: none!important;
+    }
     .home-manage-supplier-anchor,.home-supplier-list-anchor,
     .home-manage-purchase-anchor,.home-purchase-list-anchor,
     .home-current-stock-anchor,.home-new-product-anchor,.home-product-list-anchor,
@@ -1247,7 +1314,7 @@ table th {
         display: none;
     }
     .home-manage-supplier-anchor{
-        left: 20px;
+        left: 30px;
         top: -40px;
     }.home-supplier-title{
         left: 50px;
@@ -1258,7 +1325,7 @@ table th {
         bottom: -100px;
     }
     .home-manage-purchase-anchor{
-        left: 242px;
+        left: 250px;
         top: -40px;
     }
     .home-purchase-title{
@@ -1266,7 +1333,7 @@ table th {
         bottom: -50px;                 
     }
     .home-purchase-list-anchor{
-        left: 258px;
+        left: 265px;
         bottom: -100px;
     }
     .home-adjust-stock-anchor{
@@ -1290,7 +1357,7 @@ table th {
         bottom: -150px;
     }
     .home-manage-sale-anchor{
-        left: 700px;
+        left: 715px;
         top: -40px;
     }
     .home-sale-title{
@@ -1302,7 +1369,7 @@ table th {
         bottom: -100px;
     }
     .home-manage-customer-anchor{
-        left: 910px;
+        left: 925px;
         top: -40px;
     }
     .home-customer-title{
@@ -1336,44 +1403,78 @@ table th {
     .manage-purchase-right-side-tab .table-wrapper,.manage-sale-right-side-tab .table-wrapper{
         height: 200px!important;
     }
+    .supplier-purchase-first-circle,
+    .supplier-purchase-second-circle,
+    .supplier-purchase-third-circle,
+    .supplier-purchase-fourth-circle,
+    .supplier-purchase-fifth-circle,
+    .purchase-inventory-first-circle,
+    .purchase-inventory-second-circle,
+    .purchase-inventory-third-circle,
+    .purchase-inventory-fourth-circle,
+    .purchase-inventory-fifth-circle,
+    .inventory-sale-first-circle,
+    .inventory-sale-second-circle,
+    .inventory-sale-third-circle,
+    .inventory-sale-fourth-circle,
+    .inventory-sale-fifth-circle,
+    .sale-customer-first-circle,
+    .sale-customer-second-circle,
+    .sale-customer-third-circle,
+    .sale-customer-fourth-circle,
+    .sale-customer-fifth-circle{
+        position: relative;
+        display: none;
+        /*display: inline-block;*/
+    }
+    .purchase:hover .supplier-purchase-first-circle, 
+    .purchase:hover .supplier-purchase-second-circle,
+    .purchase:hover .supplier-purchase-third-circle,
+    .purchase:hover .supplier-purchase-fourth-circle,
+    .purchase:hover .supplier-purchase-fifth-circle,
+    .purchase:hover .purchase-inventory-first-circle, 
+    .purchase:hover .purchase-inventory-second-circle,
+    .purchase:hover .purchase-inventory-third-circle,
+    .purchase:hover .purchase-inventory-fourth-circle,
+    .purchase:hover .purchase-inventory-fifth-circle,
+    .sale:hover .inventory-sale-first-circle, 
+    .sale:hover .inventory-sale-second-circle,
+    .sale:hover .inventory-sale-third-circle,
+    .sale:hover .inventory-sale-fourth-circle,
+    .sale:hover .inventory-sale-fifth-circle,
+    .sale:hover .sale-customer-first-circle, 
+    .sale:hover .sale-customer-second-circle,
+    .sale:hover .sale-customer-third-circle,
+    .sale:hover .sale-customer-fourth-circle,
+    .sale:hover .sale-customer-fifth-circle
+    {
+        display: inline-block;
+    }
+    .home-supplier-animation-dot{
+        position: absolute;
+        margin-left: -305px;
+        top: 60px;
+    }
+    .home-purchase-animation-dot{
+        position: absolute;
+        margin-left: -85px;
+        top: 60px;
+    }
+    .home-inventory-animation-dot{
+        position: absolute;
+        margin-left: -290px;
+        top: 60px;
+    }
+    .home-sale-animation-dot{
+        position: absolute;
+        margin-left: -85px;
+        top: 60px;
+    }
+    .supplier img,.purchase img,.inventory img,.sale img{
+        margin-right: 85px;
+    }
 }
 @media(min-width: 768px) {
-
-    /*----------------------------- Manage Supplier ----------------------------------*/
-    /*    .manage-supplier-left-side-table{
-            height: 552px!important;
-            background: #fff;
-        }
-        .manage-supplier-right-side-tab{
-            height: 610px!important;
-        }*/
-    /*----------------------------- Manage Purchase ----------------------------------*/
-    /*    .manage-purchase-left-side-table{
-            height: 680px!important;
-            background: #fff;
-        }
-        .manage-purchase-right-side-tab{
-            height: 515px!important;
-        }*/
-    /*----------------------------- Manage Sale ----------------------------------*/
-    /*    .manage-sale-left-side-table{
-            height: 680px!important;
-            background: #fff;
-        }
-        .manage-sale-right-side-tab{
-            height: 515px!important;
-        }*/
-    /*----------------------------- Manage Customer ----------------------------------*/
-    /*    .manage-customer-left-side-table{
-            height: 552px!important;
-            background: #fff;
-        }
-        .manage-customer-right-side-tab{
-            height: 610px!important;
-        }*/
-
-
-
     textarea{
         color: #000 !important;
     }

@@ -371,6 +371,7 @@ table th {
     color: #fff!important;
     padding: 15px 35px!important;
     font-size: 13px;
+    cursor: pointer;
 }
 .navbar-default .navbar-nav>.active>span {
     color: #703684!important;
@@ -814,7 +815,7 @@ table th {
 }
 
 @media (min-width: 768px)and (max-width: 991px) {
-     .navbar-custom{
+    .navbar-custom{
         height: 40px;
     }
     .cuntom-nav > li{
@@ -1192,6 +1193,7 @@ table th {
     .navbar-default .navbar-nav > .active > span,.navbar-default .navbar-nav > span > .mat-menu-item.active{
         color: #703684!important;
         font-weight: bold;
+        cursor: pointer;        
     }
     .home-animation-margin-top{
         margin-top: 150px;

@@ -43,6 +43,7 @@ body{
 }
 .wrapper{
     padding: 0px 15px;
+    margin-top: 50px;
 }
 h1,h2,h3,h4,h5,h6{
     color: #DEB71B;
@@ -365,6 +366,7 @@ table th {
     margin-bottom: 0px!important;
     position: fixed;
     width: 100%;
+    z-index: 101;
 }
 .navbar-default .navbar-brand {
     color: #fff!important;

@@ -1169,27 +1169,13 @@ table th {
     }
     .table-wrapper{
         background: #fff;
-        height: 300px;
+        max-height: 66vh;
         overflow: auto;
     }
-    .manage-supplier-left-side-table,.manage-customer-left-side-table, .manage-purchase-left-side-table{
+    .manage-purchase-right-side-product-table,.manage-sale-right-side-product-table{
         height: 250px!important;
-        background: #fff;
     }
-/*    .manage-supplier-right-side-tab,.manage-customer-right-side-tab{
-        height: 295px!important;
-    }*/
-/*    .manage-purchase-left-side-table,.manage-sale-left-side-table{
-        height: 418px!important;
-        background: #fff;
-        margin-top: 30px;
-    }*/
-/*    .manage-purchase-right-side-tab,.manage-sale-right-side-tab{
-        height: 390px!important;
-    }*/
-/*    .manage-purchase-right-side-tab .table-wrapper,.manage-sale-right-side-tab .table-wrapper{
-        height: 200px!important;
-    }*/
+
     .supplier-purchase-first-circle,
     .supplier-purchase-second-circle,
     .supplier-purchase-third-circle,
@@ -1456,26 +1442,11 @@ table th {
     }
     .table-wrapper{
         background: #fff;
-        height: 250px;
+        max-height: 66vh;
         overflow: auto;
     }
-    .manage-supplier-left-side-table,.manage-customer-left-side-table, .manage-purchase-left-side-table{
+    .manage-purchase-right-side-product-table,.manage-sale-right-side-product-table{
         height: 250px!important;
-        background: #fff;
-    }
-    /*    .manage-supplier-right-side-tab,.manage-customer-right-side-tab{
-            height: 295px!important;
-        }*/
-    .manage-purchase-left-side-table,.manage-sale-left-side-table{
-        height: 418px!important;
-        background: #fff;
-        margin-top: 30px;
-    }
-    .manage-purchase-right-side-tab,.manage-sale-right-side-tab{
-        min-height: 390px!important;
-    }
-    .manage-purchase-right-side-tab .table-wrapper,.manage-sale-right-side-tab .table-wrapper{
-        height: 200px!important;
     }
     .supplier-purchase-first-circle,
     .supplier-purchase-second-circle,

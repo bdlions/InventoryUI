@@ -22,42 +22,57 @@
         </form>
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="table-wrapper">
-                    <table class="common-table">
-                        <thead>
-                            <tr>
-                                <th>Order</th>
-                                <th>Order Date</th>
-                                <th>Inventory Status</th>
-                                <th>Payment Status</th>
-                                <th>Customer</th>
-                                <th>Customer Order</th>
-                                <th>Location</th>
-                                <th>Requester Ship Date</th>
-                                <th>Due Date</th>
-                                <th>Total</th>
-                                <th>Paid</th>
-                                <th>Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="cursor-pointer" *ngFor="let saleOrder of saleOrderList" (click)="showSaleOrder($event, saleOrder.entitySaleOrder.orderNo)">
-                                <td data-label="Order">{{saleOrder.entitySaleOrder.orderNo}}</td>
-                                <td data-label="Order Date">{{saleOrder.entitySaleOrder.saleDate}}</td>
-                                <td data-label="Inventory Status"></td>
-                                <td data-label="Payment Status"></td>
-                                <td data-label="Customer"></td>
-                                <td data-label="Customer Order"></td>
-                                <td data-label="Location"></td>
-                                <td data-label="Requester Ship Date">{{saleOrder.entitySaleOrder.requestedShipDate}}</td>
-                                <td data-label="Due Date"></td>
-                                <td data-label="Total">{{saleOrder.entitySaleOrder.total}}</td>
-                                <td data-label="Paid">{{saleOrder.entitySaleOrder.paid}}</td>
-                                <td data-label="Balance">{{saleOrder.dtoCustomer.entityCustomer.balance}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="sale-list-table-height-view-point">
+                    <div class="table-wrapper">
+                        <table class="common-table">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Order Date</th>
+                                    <th>Inventory Status</th>
+                                    <th>Payment Status</th>
+                                    <th>Customer</th>
+                                    <th>Customer Order</th>
+                                    <th>Location</th>
+                                    <th>Requester Ship Date</th>
+                                    <th>Due Date</th>
+                                    <th>Total</th>
+                                    <th>Paid</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="cursor-pointer" *ngFor="let saleOrder of saleOrderList" (click)="showSaleOrder($event, saleOrder.entitySaleOrder.orderNo)">
+                                    <td data-label="Order">{{saleOrder.entitySaleOrder.orderNo}}</td>
+                                    <td data-label="Order Date">{{saleOrder.entitySaleOrder.saleDate}}</td>
+                                    <td data-label="Inventory Status"></td>
+                                    <td data-label="Payment Status"></td>
+                                    <td data-label="Customer"></td>
+                                    <td data-label="Customer Order"></td>
+                                    <td data-label="Location"></td>
+                                    <td data-label="Requester Ship Date">{{saleOrder.entitySaleOrder.requestedShipDate}}</td>
+                                    <td data-label="Due Date"></td>
+                                    <td data-label="Total">{{saleOrder.entitySaleOrder.total}}</td>
+                                    <td data-label="Paid">{{saleOrder.entitySaleOrder.paid}}</td>
+                                    <td data-label="Balance">{{saleOrder.dtoCustomer.entityCustomer.balance}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid footer-bg">
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <footer>
+                    <ul class="footer-ul">
+                        <li><img class="img-responsive" src="resources/images/logo.png" alt="company logo"></li>
+                        <li><span>Bdlions</span></li>
+                        <li><span>016 XXXX XXXX</span></li>
+                    </ul>
+                </footer>
             </div>
         </div>
     </div>

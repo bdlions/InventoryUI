@@ -25,19 +25,21 @@
                 </form> 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="table-wrapper manage-sale-left-side-table">
-                            <table class="common-table">
-                                <thead>
-                                    <tr>
-                                        <th>Order</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="cursor-pointer" *ngFor="let saleOrder of saleOrderList" (click)="selectedSaleOrder($event, saleOrder.entitySaleOrder.orderNo)" [ngClass]="{'active': orderNo == saleOrder.entitySaleOrder.orderNo }">
-                                        <td data-label="Name" id="{{saleOrder.entitySaleOrder.id}}">{{saleOrder.entitySaleOrder.orderNo}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="manage-sale-left-side-table-height-view-point">
+                            <div class="table-wrapper manage-sale-left-side-table">
+                                <table class="common-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="cursor-pointer" *ngFor="let saleOrder of saleOrderList" (click)="selectedSaleOrder($event, saleOrder.entitySaleOrder.orderNo)" [ngClass]="{'active': orderNo == saleOrder.entitySaleOrder.orderNo }">
+                                            <td data-label="Name" id="{{saleOrder.entitySaleOrder.id}}">{{saleOrder.entitySaleOrder.orderNo}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -102,7 +104,7 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <tabset>
+                        <tabset class="manage-sale-right-side-tabset">
                             <!--Sale Tab Starts-->
                             <tab class="manage-sale-right-side-tab" heading="Sale">
                                 <div class="row form-group">
@@ -158,9 +160,9 @@
                                     </div>
                                 </div>
                                 <div class="row form-group margin-top-20px">
-<!--                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-
-                                    </div>-->
+                                    <!--                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    
+                                                                        </div>-->
                                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                         <div class="row form-group">
                                             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
@@ -220,6 +222,19 @@
                         </tabset>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid footer-bg">
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <footer>
+                    <ul class="footer-ul">
+                        <li><img class="img-responsive" src="resources/images/logo.png" alt="company logo"></li>
+                        <li><span>Bdlions</span></li>
+                        <li><span>016 XXXX XXXX</span></li>
+                    </ul>
+                </footer>
             </div>
         </div>
     </div>

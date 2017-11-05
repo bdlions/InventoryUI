@@ -10,7 +10,7 @@
                 <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
                     <span class="purchase-order-list-title">Order</span>
                 </div>
-                 <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
                     <input [(ngModel)]="reqDTOPurchaseOrder.entityPurchaseOrder.orderNo" id="orderNo" name="orderNo" class="form-control">
                 </div>
             </div>
@@ -22,42 +22,57 @@
         </form>
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="table-wrapper">
-                    <table class="common-table">
-                        <thead>
-                            <tr>
-                                <th>Order</th>
-                                <th>Order Date</th>
-                                <th>Inventory Status</th>
-                                <th>Payment Status</th>
-                                <th>Supplier</th>
-                                <th>Supplier Order</th>
-                                <th>Location</th>
-                                <th>Requester Ship Date</th>
-                                <th>Due Date</th>
-                                <th>Total</th>
-                                <th>Paid</th>
-                                <th>Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="cursor-pointer" *ngFor="let purchaseOrder of purchaseOrderList" (click)="showPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.orderNo)">
-                                <td data-label="Order">{{purchaseOrder.entityPurchaseOrder.orderNo}}</td>
-                                <td data-label="Order Date">{{purchaseOrder.entityPurchaseOrder.orderDate}}</td>
-                                <td data-label="Inventory Status"></td>
-                                <td data-label="Payment Status"></td>
-                                <td data-label="Supplier"></td>
-                                <td data-label="Supplier Order"></td>
-                                <td data-label="Location"></td>
-                                <td data-label="Requester Ship Date">{{purchaseOrder.entityPurchaseOrder.requestedShipDate}}</td>
-                                <td data-label="Due Date"></td>
-                                <td data-label="Total">{{purchaseOrder.entityPurchaseOrder.total}}</td>
-                                <td data-label="Paid">{{purchaseOrder.entityPurchaseOrder.paid}}</td>
-                                <td data-label="Balance">{{purchaseOrder.dtoSupplier.entitySupplier.balance}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="purchase-list-table-height-view-point">
+                    <div class="table-wrapper">
+                        <table class="common-table">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Order Date</th>
+                                    <th>Inventory Status</th>
+                                    <th>Payment Status</th>
+                                    <th>Supplier</th>
+                                    <th>Supplier Order</th>
+                                    <th>Location</th>
+                                    <th>Requester Ship Date</th>
+                                    <th>Due Date</th>
+                                    <th>Total</th>
+                                    <th>Paid</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="cursor-pointer" *ngFor="let purchaseOrder of purchaseOrderList" (click)="showPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.orderNo)">
+                                    <td data-label="Order">{{purchaseOrder.entityPurchaseOrder.orderNo}}</td>
+                                    <td data-label="Order Date">{{purchaseOrder.entityPurchaseOrder.orderDate}}</td>
+                                    <td data-label="Inventory Status"></td>
+                                    <td data-label="Payment Status"></td>
+                                    <td data-label="Supplier"></td>
+                                    <td data-label="Supplier Order"></td>
+                                    <td data-label="Location"></td>
+                                    <td data-label="Requester Ship Date">{{purchaseOrder.entityPurchaseOrder.requestedShipDate}}</td>
+                                    <td data-label="Due Date"></td>
+                                    <td data-label="Total">{{purchaseOrder.entityPurchaseOrder.total}}</td>
+                                    <td data-label="Paid">{{purchaseOrder.entityPurchaseOrder.paid}}</td>
+                                    <td data-label="Balance">{{purchaseOrder.dtoSupplier.entitySupplier.balance}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid footer-bg">
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <footer>
+                    <ul class="footer-ul">
+                        <li><img class="img-responsive" src="resources/images/logo.png" alt="company logo"></li>
+                        <li><span>Bdlions</span></li>
+                        <li><span>016 XXXX XXXX</span></li>
+                    </ul>
+                </footer>
             </div>
         </div>
     </div>

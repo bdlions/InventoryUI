@@ -302,6 +302,26 @@ table th {
     font-size: 14px;
     color: red;
 }
+
+/*----------------------------- View Point ----------------------------------*/
+.product-list-table-height-view-point,
+.customer-list-table-height-view-point,
+.purchase-list-table-height-view-point,
+.current-stock-table-height-view-point,
+.supplier-list-table-height-view-point,
+.sale-list-table-height-view-point{
+    height: 68vh;
+    background: #fff;
+}
+
+.customer-list-table-height-view-point,
+.purchase-list-table-height-view-point,
+.supplier-list-table-height-view-point,
+.sale-list-table-height-view-point{
+    margin-top: 32px;
+}
+
+
 /*----------------------------- Tab ----------------------------------*/
 .tab-container > ul{
     /*    position: absolute;
@@ -312,7 +332,7 @@ table th {
     background: url(../images/blur-bg-blurred.jpg) fixed;
     -webkit-transition: none;
     transition: none;
-    /*height: 50vh;*/
+    height: 66vh;
 }
 .nav.nav-tabs>li.active>a {
     /*    color: #2DACD1;
@@ -403,13 +423,7 @@ table th {
     border: 1px solid #fff!important;
     border-radius: 0px!important; 
 }
-/*----------------------------- Manage Product ----------------------------------*/
-.manage-product-left-side-table{
-    height: 250px!important;
-}
-.manage-product-right-side-tab{
-    min-height: 330px;
-}
+
 
 /*----------------------------- Desktop Menu ----------------------------------*/
 .bar{
@@ -610,7 +624,6 @@ table th {
 
 
 
-/*----------------------------- Home ----------------------------------*/
 
 
 
@@ -1163,20 +1176,20 @@ table th {
         height: 250px!important;
         background: #fff;
     }
-    .manage-supplier-right-side-tab,.manage-customer-right-side-tab{
+/*    .manage-supplier-right-side-tab,.manage-customer-right-side-tab{
         height: 295px!important;
-    }
-    .manage-purchase-left-side-table,.manage-sale-left-side-table{
+    }*/
+/*    .manage-purchase-left-side-table,.manage-sale-left-side-table{
         height: 418px!important;
         background: #fff;
         margin-top: 30px;
-    }
-    .manage-purchase-right-side-tab,.manage-sale-right-side-tab{
+    }*/
+/*    .manage-purchase-right-side-tab,.manage-sale-right-side-tab{
         height: 390px!important;
-    }
-    .manage-purchase-right-side-tab .table-wrapper,.manage-sale-right-side-tab .table-wrapper{
+    }*/
+/*    .manage-purchase-right-side-tab .table-wrapper,.manage-sale-right-side-tab .table-wrapper{
         height: 200px!important;
-    }
+    }*/
     .supplier-purchase-first-circle,
     .supplier-purchase-second-circle,
     .supplier-purchase-third-circle,
@@ -1246,6 +1259,65 @@ table th {
     }
     .supplier img,.purchase img,.inventory img,.sale img{
         margin-right: 75px;
+    }
+    .manage-product-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 330px;
+    }
+    .manage-product-right-side-tab{
+        min-height: 330px;
+    }
+    .manage-product-right-side-tabset .nav-tabs{
+        margin-top: 83px;
+    }
+    .manage-supplier-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 330px;
+        margin-top: 38px;
+    }
+    .manage-supplier-right-side-tab{
+        min-height: 330px;
+    }
+    .manage-supplier-right-side-tabset .nav-tabs{
+        margin-top: 83px;
+    }
+    .manage-customer-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 330px;
+        margin-top: 38px;
+    }
+    .manage-customer-right-side-tab{
+        min-height: 330px;
+    }
+    .manage-customer-right-side-tabset .nav-tabs{
+        margin-top: 83px;
+    }
+    .manage-purchase-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 500px;
+        margin-top: 38px;
+    }
+    .manage-purchase-right-side-tab{
+        min-height: 500px;
+    }
+    .manage-purchase-right-side-tabset .nav-tabs{
+        margin-top: -18px;
+    }
+    .manage-sale-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 330px;
+        margin-top: 38px;
+    }
+    .manage-sale-right-side-tab{
+        min-height: 330px;
+    }
+    .manage-sale-right-side-tabset .nav-tabs{
+        margin-top: -18px;
     }
 }
 
@@ -1391,16 +1463,16 @@ table th {
         height: 250px!important;
         background: #fff;
     }
-    .manage-supplier-right-side-tab,.manage-customer-right-side-tab{
-        height: 295px!important;
-    }
+    /*    .manage-supplier-right-side-tab,.manage-customer-right-side-tab{
+            height: 295px!important;
+        }*/
     .manage-purchase-left-side-table,.manage-sale-left-side-table{
         height: 418px!important;
         background: #fff;
         margin-top: 30px;
     }
     .manage-purchase-right-side-tab,.manage-sale-right-side-tab{
-        height: 390px!important;
+        min-height: 390px!important;
     }
     .manage-purchase-right-side-tab .table-wrapper,.manage-sale-right-side-tab .table-wrapper{
         height: 200px!important;
@@ -1475,6 +1547,65 @@ table th {
     .supplier img,.purchase img,.inventory img,.sale img{
         margin-right: 85px;
     }
+    .manage-product-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 330px;
+    }
+    .manage-product-right-side-tab{
+        min-height: 330px;
+    }
+    .manage-product-right-side-tabset .nav-tabs{
+        margin-top: 83px;
+    }
+    .manage-supplier-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 330px;
+        margin-top: 38px;
+    }
+    .manage-supplier-right-side-tab{
+        min-height: 330px;
+    }
+    .manage-supplier-right-side-tabset .nav-tabs{
+        margin-top: 83px;
+    }
+    .manage-customer-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 330px;
+        margin-top: 38px;
+    }
+    .manage-customer-right-side-tab{
+        min-height: 330px;
+    }
+    .manage-customer-right-side-tabset .nav-tabs{
+        margin-top: 83px;
+    }
+    .manage-purchase-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 330px;
+        margin-top: 38px;
+    }
+    .manage-purchase-right-side-tab{
+        min-height: 330px;
+    }
+    .manage-purchase-right-side-tabset .nav-tabs{
+        margin-top: -18px;
+    }
+    .manage-sale-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 330px;
+        margin-top: 38px;
+    }
+    .manage-sale-right-side-tab{
+        min-height: 330px;
+    }
+    .manage-sale-right-side-tabset .nav-tabs{
+        margin-top: -18px;
+    }
 }
 @media(min-width: 768px) {
     textarea{
@@ -1482,3 +1613,31 @@ table th {
     }
 
 }
+
+/*----------------------------- Footer ----------------------------------*/
+.footer-bg{
+    background: url(../images/blur-bg-blurred.jpg) no-repeat;
+}
+footer{
+    margin-top: 8px;
+    padding: 0 10px;
+}
+.footer-ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.footer-ul li{
+    display: inline-block;
+    margin-right: 20px;
+}
+.footer-ul img{
+    height: 32px;
+}
+
+.footer-ul li span{
+    position: relative;
+    top: -10px;
+    font-size: 16px;
+}
+

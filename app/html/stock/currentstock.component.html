@@ -32,28 +32,43 @@
         </form>
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="table-wrapper">
-                    <table class="common-table">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Category</th>
-                                <th>Last Supplier</th>
-                                <th>Location</th>
-                                <th>Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="cursor-pointer" *ngFor="let product of productList">
-                                <td data-label="Item">{{product.entityProduct.name}}</td>
-                                <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
-                                <td data-label="Last Supplier"></td>
-                                <td data-label="Location"></td>
-                                <td data-label="Quantity">{{product.quantity}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="current-stock-table-height-view-point">
+                    <div class="table-wrapper">
+                        <table class="common-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Category</th>
+                                    <th>Last Supplier</th>
+                                    <th>Location</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="cursor-pointer" *ngFor="let product of productList">
+                                    <td data-label="Item">{{product.entityProduct.name}}</td>
+                                    <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
+                                    <td data-label="Last Supplier"></td>
+                                    <td data-label="Location"></td>
+                                    <td data-label="Quantity">{{product.quantity}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid footer-bg">
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <footer>
+                    <ul class="footer-ul">
+                        <li><img class="img-responsive" src="resources/images/logo.png" alt="company logo"></li>
+                        <li><span>Bdlions</span></li>
+                        <li><span>016 XXXX XXXX</span></li>
+                    </ul>
+                </footer>
             </div>
         </div>
     </div>

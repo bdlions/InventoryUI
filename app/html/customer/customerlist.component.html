@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrap">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -23,51 +23,52 @@
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="customer-list-table-height-view-point">
-                <div class="table-wrapper">
-                    <table class="common-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Contact</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Website</th>
-                                <th>Address</th>
-                                <th>City</th>
-                                <th>Zip/Postal Code</th>
-                                <th>Discount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="cursor-pointer" *ngFor="let customer of customerList" (click)="showCustomer($event, customer.entityCustomer.id)">
-                                <td data-label="Name">{{customer.entityUser.firstName}} {{customer.entityUser.lastName}}</td>
-                                <td data-label="Contact"></td>
-                                <td data-label="Phone">{{customer.entityUser.cell}}</td>
-                                <td data-label="Email">{{customer.entityUser.email}}</td>
-                                <td data-label="Website"></td>
-                                <td data-label="Address"></td>
-                                <td data-label="City"></td>
-                                <td data-label="Zip/Postal Code"></td>
-                                <td data-label="Discount"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="table-wrapper">
+                        <table class="common-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Website</th>
+                                    <th>Address</th>
+                                    <th>City</th>
+                                    <th>Zip/Postal Code</th>
+                                    <th>Discount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="cursor-pointer" *ngFor="let customer of customerList" (click)="showCustomer($event, customer.entityCustomer.id)">
+                                    <td data-label="Name">{{customer.entityUser.firstName}} {{customer.entityUser.lastName}}</td>
+                                    <td data-label="Contact"></td>
+                                    <td data-label="Phone">{{customer.entityUser.cell}}</td>
+                                    <td data-label="Email">{{customer.entityUser.email}}</td>
+                                    <td data-label="Website"></td>
+                                    <td data-label="Address"></td>
+                                    <td data-label="City"></td>
+                                    <td data-label="Zip/Postal Code"></td>
+                                    <td data-label="Discount"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-     <div class="container-fluid footer-bg">
-        <div class="row form-group">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <footer>
-                    <ul class="footer-ul">
-                        <li><img class="img-responsive" src="resources/images/logo.png" alt="company logo"></li>
-                        <li><span>Bdlions</span></li>
-                        <li><span>016 XXXX XXXX</span></li>
-                    </ul>
-                </footer>
-            </div>
+    <div class="push"></div>
+</div>
+<div class="container-fluid footer-bg">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <footer>
+                <ul class="footer-ul">
+                    <li><img class="img-responsive" src="resources/images/logo.png" alt="company logo"></li>
+                    <li><span>Bdlions</span></li>
+                    <li><span>016 XXXX XXXX</span></li>
+                </ul>
+            </footer>
         </div>
     </div>
 </div>

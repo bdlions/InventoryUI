@@ -44,9 +44,7 @@ body{
 }
 .wrap{
     padding: 0px 15px;
-    margin-top: 50px;
     min-height: 100%!important;
-
     margin-bottom: -50px!important;
 }
 .footer-bg,
@@ -561,11 +559,11 @@ table th {
 /*----------------------------- Footer ----------------------------------*/
 .footer-bg{
     position: absolute;
-    right: 0;
+    right: 15px;
     bottom: -50px;
-    left: 0;
+    left: 15px;
     background: url(../images/blur-bg-blurred.jpg) no-repeat;
-    margin: 0 15px;
+    margin: 0px 15px;
 }
 footer{
     margin-top: 8px;

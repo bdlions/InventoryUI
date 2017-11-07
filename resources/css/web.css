@@ -3,6 +3,9 @@ Theme Name: InventoryUI
 Author: A.K.M. Nazmul Islam
 Version: 1.0
 */
+.wrap{
+    margin-top: 50px;
+}
 /*----------------------------- View Point ----------------------------------*/
 .product-list-table-height-view-point,
 .customer-list-table-height-view-point,

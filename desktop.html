@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="resources/css/loader.css"/>
     <link rel="stylesheet" href="resources/css/title-bar.css" />
     <link rel="stylesheet" href="node_modules/@angular/material/prebuilt-themes/indigo-pink.css" />
-    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
 
     <!--polyfill(s) for older browsers--> 
     <script src="resources/js/shim.min.js"></script>
@@ -32,7 +31,7 @@
     <script src="resources/js/system.src.js"></script>
     <script src="resources/js/systemjs.config.js"></script>
     <script src="resources/js/title-bar.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="resources/js/hammer.min.js"></script>
     <script>
         System.import('app').catch(function (err) {
             console.error(err);
@@ -44,10 +43,10 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="color:white; font-family: 'Dancing Script', cursive; font-size:  16pt; font-weight: bold">
-                Inventory Management System
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <div class="top-heading">Inventory Management System</div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 pull-right">
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 pull-right">
                 <div id="title-bar">
                     <div id="title-bar-btns" class="pull-right">
                         <button id="min-btn"><i class="fa fa-window-minimize"></i></button>

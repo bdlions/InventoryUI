@@ -3,6 +3,16 @@ Theme Name: InventoryUI
 Author: A.K.M. Nazmul Islam
 Version: 1.0
 */
+
+/*----------------------------- Title Bar ----------------------------------*/
+.top-heading{
+    color: #fff;
+    font-family: cursive;
+    font-size: 16px;
+    font-weight: normal;
+    margin-top: 3px;
+    text-align: right;
+}
 /*----------------------------- View Point ----------------------------------*/
 .product-list-table-height-view-point,
 .customer-list-table-height-view-point,
@@ -10,7 +20,7 @@ Version: 1.0
 .current-stock-table-height-view-point,
 .supplier-list-table-height-view-point,
 .sale-list-table-height-view-point{
-    height: 68vh;
+    height: 62vh;
     background: #fff;
 }
 
@@ -32,7 +42,7 @@ Version: 1.0
     background: url(../images/blur-bg-blurred.jpg) fixed;
     -webkit-transition: none;
     transition: none;
-    height: 66vh;
+    height: 60vh;
 }
 .nav.nav-tabs>li.active>a {
     /*    color: #2DACD1;
@@ -73,57 +83,26 @@ Version: 1.0
 }
 /*----------------------------- Main Menu ----------------------------------*/
 
-.logo{
+.logo,.mat-btn{
     height: 50px;
     width: 50px;
-    padding: 10px;
 }
-.navbar-custom{
-    background-color: #209e91!important;
-    border-color: #209e91!important;
-    border: none!important;
-    border-radius: 0px!important;
-    margin-bottom: 0px!important;
-    position: fixed;
-    width: 100%;
-    z-index: 101;
-}
-.navbar-default .navbar-brand {
-    color: #fff!important;
-}
-.navbar-default .navbar-nav>li>span {
-    color: #fff!important;
-    padding: 15px 35px!important;
-    font-size: 13px;
+.logo{
     cursor: pointer;
 }
-.navbar-default .navbar-nav>.active>span {
-    color: #703684!important;
-    font-weight: bold;
-    /*color: #fff!important;*/
-    padding: 10px 35px!important;
+.mat-menu-item{
+  padding: 0px 20px!important;  
 }
-.navbar-default .navbar-nav>.open>span, .navbar-default .navbar-nav>.open>span:focus, .navbar-default .navbar-nav>.open>span:hover {
-    color: #fff!important;
-    padding: 15px 35px!important;
-    background-color: #009180!important;
+.mat-menu-item-submenu-trigger,.mat-menu-item-submenu-trigger:hover{
+    background-color: #009180;
+    color: #fff;
 }
-.dropdown-menu > li > span{
-    padding: 10px 35px!important;
+.mat-menu-panel {
+    background: #009180!important;  
 }
-.dropdown-menu>.active>span, .dropdown-menu>.active>span:focus, .dropdown-menu>.active>span:hover{
-    background-color: #209E91!important;
+.mat-menu-item {
+    color: #fff!important;  
 }
-.dropdown-menu > li > span:hover{
-    background-color: #009180!important;
-    color: #fff!important;
-}
-.navbar-toggle {
-    background-color: #fff!important;
-    border: 1px solid #fff!important;
-    border-radius: 0px!important; 
-}
-
 
 /*----------------------------- Desktop Menu ----------------------------------*/
 .bar{
@@ -132,7 +111,7 @@ Version: 1.0
     margin-bottom: 4px;
 }
 .menu-wrapper{
-    padding: 0 15px 15px 15px;
+    padding: 0 0 0 15px;
 }
 
 
@@ -300,7 +279,7 @@ Version: 1.0
         min-height: 40px;
     }
     .cdk-overlay-pane{
-        top: 41.3523px!important;
+        top: 70px!important;
     }
     .mat-menu-item {
         font-size: 12px!important;
@@ -473,7 +452,7 @@ Version: 1.0
         min-height: 40px;
     }
     .cdk-overlay-pane{
-        top: 41.3523px!important;
+        top: 70px!important;
     }
     .mat-menu-item {
         font-size: 12px!important;
@@ -621,7 +600,7 @@ Version: 1.0
     }
     .table-wrapper{
         background: #fff;
-        max-height: 66vh;
+        max-height: 60vh;
         overflow: auto;
     }
     .manage-purchase-right-side-product-table,.manage-sale-right-side-product-table{
@@ -699,7 +678,7 @@ Version: 1.0
         margin-right: 75px;
     }
     .manage-product-left-side-table-height-view-point{
-        height: 66vh;
+        height: 60vh;
         background: #fff;
         min-height: 330px;
     }
@@ -710,7 +689,7 @@ Version: 1.0
         margin-top: 83px;
     }
     .manage-supplier-left-side-table-height-view-point{
-        height: 66vh;
+        height: 60vh;
         background: #fff;
         min-height: 330px;
         margin-top: 38px;
@@ -722,7 +701,7 @@ Version: 1.0
         margin-top: 83px;
     }
     .manage-customer-left-side-table-height-view-point{
-        height: 66vh;
+        height: 60vh;
         background: #fff;
         min-height: 330px;
         margin-top: 38px;
@@ -734,7 +713,7 @@ Version: 1.0
         margin-top: 83px;
     }
     .manage-purchase-left-side-table-height-view-point{
-        height: 66vh;
+        height: 60vh;
         background: #fff;
         min-height: 500px;
         margin-top: 38px;
@@ -746,7 +725,7 @@ Version: 1.0
         margin-top: -18px;
     }
     .manage-sale-left-side-table-height-view-point{
-        height: 66vh;
+        height: 60vh;
         background: #fff;
         min-height: 330px;
         margin-top: 38px;
@@ -770,13 +749,13 @@ Version: 1.0
         min-height: 40px;
     }
     .cdk-overlay-pane{
-        top: 41.3523px!important;
+         top: 70px!important;
     }
     .mat-menu-item {
         font-size: 12px!important;
-        padding: 0px!important;
+        padding: 1px!important;
         line-height: 250%!important;
-        height: 32px!important;
+        height: 36px!important;
     }
     .mat-menu-item > span{
         padding: 6px 21px!important;
@@ -894,7 +873,7 @@ Version: 1.0
     }
     .table-wrapper{
         background: #fff;
-        max-height: 66vh;
+        max-height: 60vh;
         overflow: auto;
     }
     .manage-purchase-right-side-product-table,.manage-sale-right-side-product-table{
@@ -971,7 +950,7 @@ Version: 1.0
         margin-right: 85px;
     }
     .manage-product-left-side-table-height-view-point{
-        height: 66vh;
+        height: 60vh;
         background: #fff;
         min-height: 330px;
     }
@@ -982,7 +961,7 @@ Version: 1.0
         margin-top: 83px;
     }
     .manage-supplier-left-side-table-height-view-point{
-        height: 66vh;
+        height: 60vh;
         background: #fff;
         min-height: 330px;
         margin-top: 38px;
@@ -994,7 +973,7 @@ Version: 1.0
         margin-top: 83px;
     }
     .manage-customer-left-side-table-height-view-point{
-        height: 66vh;
+        height: 60vh;
         background: #fff;
         min-height: 330px;
         margin-top: 38px;
@@ -1006,7 +985,7 @@ Version: 1.0
         margin-top: 83px;
     }
     .manage-purchase-left-side-table-height-view-point{
-        height: 66vh;
+        height: 60vh;
         background: #fff;
         min-height: 330px;
         margin-top: 38px;
@@ -1018,7 +997,7 @@ Version: 1.0
         margin-top: -18px;
     }
     .manage-sale-left-side-table-height-view-point{
-        height: 66vh;
+        height: 60vh;
         background: #fff;
         min-height: 330px;
         margin-top: 38px;

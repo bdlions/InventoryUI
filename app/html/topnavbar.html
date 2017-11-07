@@ -97,7 +97,7 @@
 
 <div class="menu-wrapper">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div *ngIf='showNavBar' class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="mat-btn" mat-button (mouseover)="saleMenu.openMenu()" #saleMenu="matMenuTrigger" [matMenuTriggerFor]="saleMenuItems">
                  <img class="logo" src="resources/images/inventory.png" alt="Inventory"/>
             </div>

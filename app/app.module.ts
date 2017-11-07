@@ -27,6 +27,7 @@ import {ProductComponent} from './product.component';
 import {ProfileComponent} from './profile.component';
 import {AppTemplate} from './app.template';
 import {TopNavbarComponent} from './topnavbar.component';
+import {FooterComponent} from './footer.component';
 import {NavigationManager} from './services/NavigationManager';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
@@ -241,6 +242,7 @@ enableProdMode();
         ProductComponent,
         ProfileComponent,
         TopNavbarComponent,
+        FooterComponent,
         LoaderComponent,
         MatProgressSpinner, MatSpinner,
         CKEditorSample,

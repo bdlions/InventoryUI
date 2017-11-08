@@ -21,7 +21,7 @@
                     </li>
 
                     <mat-menu #saleMenuItems="matMenu" [overlapTrigger]="false" >
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'managesale' }" (click)="goManageSale($event)" [matMenuTriggerFor]="saleSubMenuItems">
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'managesale' }" (click)="goManageSale($event)" >
                             <span>Manage Sale</span>
                         </li>
 
@@ -33,16 +33,6 @@
                         </li>
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'customerlist' }" (click)="goCustomerList($event)">
                             <span  >Customer List</span>
-                        </li>
-                    </mat-menu>
-
-                    <mat-menu #saleSubMenuItems="matMenu" [overlapTrigger]="false" >
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'managesale' }">
-                            <span>Sub sub menu 1</span>
-                        </li>
-
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'salelist' }" >
-                            <span>Sub sub menu 2</span>
                         </li>
                     </mat-menu>
 

@@ -90,6 +90,8 @@ Version: 1.0
     position: fixed;
     width: 100%;
     z-index: 101;
+    top: 0;
+    left: 0;
 }
 .navbar-default .navbar-brand {
     color: #fff!important;
@@ -885,7 +887,7 @@ Version: 1.0
         bottom: -100px;
     }
     .table-wrapper{
-        background: transparent;
+        background: #fff;
         max-height: 66vh;
         overflow: auto;
     }
@@ -964,7 +966,7 @@ Version: 1.0
     }
     .manage-product-left-side-table-height-view-point{
         height: 66vh;
-        background: transparent;
+        background: #fff;
         min-height: 330px;
     }
     .manage-product-right-side-tab{
@@ -1000,11 +1002,11 @@ Version: 1.0
     .manage-purchase-left-side-table-height-view-point{
         height: 66vh;
         background: #fff;
-        min-height: 330px;
-        margin-top: 45px;
+        min-height: 415px;
+        margin-top: 40px;
     }
     .manage-purchase-right-side-tab{
-        min-height: 330px;
+        min-height: 415px;
     }
     .manage-purchase-right-side-tabset .nav-tabs{
         margin-top: -18px;
@@ -1012,11 +1014,11 @@ Version: 1.0
     .manage-sale-left-side-table-height-view-point{
         height: 66vh;
         background: #fff;
-        min-height: 330px;
-        margin-top: 45px;
+        min-height: 415px;
+        margin-top: 40px;
     }
     .manage-sale-right-side-tab{
-        min-height: 330px;
+        min-height: 415px;
     }
     .manage-sale-right-side-tabset .nav-tabs{
         margin-top: -18px;
@@ -1028,4 +1030,3 @@ Version: 1.0
     }
 
 }
-

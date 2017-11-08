@@ -1,180 +1,163 @@
-<div class="wrap">
-    <div class="container-fluid">
-        <div class="row form-group">
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <h4>Search</h4>
+<div class="container-fluid">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h4>Search</h4>
+                </div>
+            </div>
+            <form role="form" (submit)="searchCustomer($event)">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="supplier-title">Name</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input [(ngModel)]="reqDTOCustomer.entityUser.firstName" name="firstName" id="firstName" class="form-control">
                     </div>
                 </div>
-                <form role="form" (submit)="searchCustomer($event)">
-                    <div class="row form-group">
-                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                            <span class="supplier-title">Name</span>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                            <input [(ngModel)]="reqDTOCustomer.entityUser.firstName" name="firstName" id="firstName" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <button type="submit" id="search-product" class="custom-button pull-right">Refresh</button>
-                        </div>
-                    </div>
-                </form> 
-                <div class="row">
+                <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="manage-customer-left-side-table-height-view-point">
-                            <div class="table-wrapper manage-customer-left-side-table">
-                                <table class="common-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="cursor-pointer" *ngFor="let customer of customerList" (click)="selectedCustomer($event, customer.entityCustomer.id)" [ngClass]="{'active': customerId == customer.entityCustomer.id }">
-                                            <td data-label="Name">{{customer.entityUser.firstName}} {{customer.entityUser.lastName}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <button type="submit" id="search-product" class="custom-button pull-right">Refresh</button>
+                    </div>
+                </div>
+            </form> 
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="manage-customer-left-side-table-height-view-point">
+                        <div class="table-wrapper manage-customer-left-side-table">
+                            <table class="common-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="cursor-pointer" *ngFor="let customer of customerList" (click)="selectedCustomer($event, customer.entityCustomer.id)" [ngClass]="{'active': customerId == customer.entityCustomer.id }">
+                                        <td data-label="Name">{{customer.entityUser.firstName}} {{customer.entityUser.lastName}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
-                <div class="row form-group">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="btn-group" role="group" aria-label="...">
-                            <button (click)="newCustomer($event)" type="button" class="custom-button"><i class="fa fa-file"></i> New</button>
-                            <button (click)="saveCustomer($event)"  type="button" class="custom-button"><i class="fa fa-floppy-o"></i> Save</button>
-                        </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button (click)="newCustomer($event)" type="button" class="custom-button"><i class="fa fa-file"></i> New</button>
+                        <button (click)="saveCustomer($event)"  type="button" class="custom-button"><i class="fa fa-floppy-o"></i> Save</button>
                     </div>
                 </div>
-                <div class="row form-group">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                        <tabset class="manage-customer-right-side-tabset">
-                            <!--Customer Info Tab Starts-->
-                            <tab class="manage-customer-right-side-tab" heading="Customer Info">
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                <h3>Basic</h3>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="supplier-title">First Name<span class="required">*</span></span>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="dtoCustomer.entityUser.firstName" id="{{dtoCustomer.entityUser.id}}" name="{{dtoCustomer.entityUser.id}}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="supplier-title">Last Name</span>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="dtoCustomer.entityUser.lastName" id="{{dtoCustomer.entityUser.id}}" name="{{dtoCustomer.entityUser.id}}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="supplier-title">Balance</span>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="dtoCustomer.entityCustomer.balance" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                <h3>Remarks</h3>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                <textarea  [(ngModel)]="dtoCustomer.entityCustomer.remarks" id="weight" name="weight" class="form-control" rows="5"></textarea>
-                                            </div>
+                    <tabset class="manage-customer-right-side-tabset">
+                        <!--Customer Info Tab Starts-->
+                        <tab class="manage-customer-right-side-tab" heading="Customer Info">
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <h3>Basic</h3>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                <h3>Contact</h3>
-                                            </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="supplier-title">First Name<span class="required">*</span></span>
                                         </div>
-                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="supplier-title">Name</span>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="dtoCustomer.entityUser.firstName" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="supplier-title">Phone</span>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="dtoCustomer.entityUser.cell" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                <span class="supplier-title">Email</span>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                <input [(ngModel)]="dtoCustomer.entityUser.email" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
-                                            </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input [(ngModel)]="dtoCustomer.entityUser.firstName" id="{{dtoCustomer.entityUser.id}}" name="{{dtoCustomer.entityUser.id}}" class="form-control">
                                         </div>
                                     </div>
-                                </div> 
-
-                            </tab>
-                            <!--Customer Info Tab Ends-->
-                            <!--Extra Info Tab Starts-->
-                            <tab class="manage-customer-right-side-tab" heading="Extra Info">
-                                <div class="row form-group">
-                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                        <div class="row form-group">
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                <h3>Preferences</h3>
-                                            </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="supplier-title">Last Name</span>
                                         </div>
-
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input [(ngModel)]="dtoCustomer.entityUser.lastName" id="{{dtoCustomer.entityUser.id}}" name="{{dtoCustomer.entityUser.id}}" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="supplier-title">Balance</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input [(ngModel)]="dtoCustomer.entityCustomer.balance" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <h3>Remarks</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <textarea  [(ngModel)]="dtoCustomer.entityCustomer.remarks" id="weight" name="weight" class="form-control" rows="5"></textarea>
+                                        </div>
                                     </div>
                                 </div>
-                            </tab>
-                            <!--Extra Info Tab Ends-->
-                        </tabset>
-                    </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <h3>Contact</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="supplier-title">Name</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input [(ngModel)]="dtoCustomer.entityUser.firstName" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="supplier-title">Phone</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input [(ngModel)]="dtoCustomer.entityUser.cell" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="supplier-title">Email</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input [(ngModel)]="dtoCustomer.entityUser.email" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+
+                        </tab>
+                        <!--Customer Info Tab Ends-->
+                        <!--Extra Info Tab Starts-->
+                        <tab class="manage-customer-right-side-tab" heading="Extra Info">
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <h3>Preferences</h3>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                </div>
+                            </div>
+                        </tab>
+                        <!--Extra Info Tab Ends-->
+                    </tabset>
                 </div>
             </div>
         </div>
     </div>
-    <div class="push"></div>
 </div>
-<!--<div class=" footer-bg">
-    <div class="container-fluid">
-        <div class="row form-group">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <footer>
-                    <ul class="footer-ul">
-                        <li><img class="img-responsive" src="resources/images/logo.png" alt="company logo"></li>
-                        <li><span>Bdlions</span></li>
-                        <li><span>016 XXXX XXXX</span></li>
-                    </ul>
-                </footer>
-            </div>
-        </div>
-    </div>
-</div>-->
+
 
 <!-- Manage Customer Message Dispaly Modal Starts-->
 <div bsModal #manageCustomerMessageDispalyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

@@ -41,44 +41,46 @@
 
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                <div class="top-heading">Inventory Management System</div>
+    <div class="wrap">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <div class="top-heading">Inventory Management System</div>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 pull-right">
+                    <div id="title-bar">
+                        <div id="title-bar-btns" class="pull-right">
+                            <button id="min-btn"><i class="fa fa-window-minimize"></i></button>
+                            <button id="max-btn"><i class="fa fa-window-maximize"></i></button>
+                            <button id="close-btn"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>  
+                </div>
             </div>
-            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 pull-right">
-                <div id="title-bar">
-                    <div id="title-bar-btns" class="pull-right">
-                        <button id="min-btn"><i class="fa fa-window-minimize"></i></button>
-                        <button id="max-btn"><i class="fa fa-window-maximize"></i></button>
-                        <button id="close-btn"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>  
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <app>
-                    <div class="loading"></div>
-                    <!--                    <div class="vertical-center">
-                                            <div class="sk-fading-circle">
-                                                <div class="sk-circle1 sk-circle"></div>
-                                                <div class="sk-circle2 sk-circle"></div>
-                                                <div class="sk-circle3 sk-circle"></div>
-                                                <div class="sk-circle4 sk-circle"></div>
-                                                <div class="sk-circle5 sk-circle"></div>
-                                                <div class="sk-circle6 sk-circle"></div>
-                                                <div class="sk-circle7 sk-circle"></div>
-                                                <div class="sk-circle8 sk-circle"></div>
-                                                <div class="sk-circle9 sk-circle"></div>
-                                                <div class="sk-circle10 sk-circle"></div>
-                                                <div class="sk-circle11 sk-circle"></div>
-                                                <div class="sk-circle12 sk-circle"></div>
-                                            </div>
-                                        </div>-->
-                </app>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <app>
+                        <div class="loading"></div>
+                    </app>
+                </div>
             </div>
         </div>
+        <div class="push"></div>
     </div>
+    <footer *ngIf='showNavBar' class="footer-bg">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <img class="img-responsive" src="resources/images/logo.png" alt="company logo">
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <span>Bdlions</span>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <span>016 XXXX XXXX</span>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

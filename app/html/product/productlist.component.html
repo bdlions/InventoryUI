@@ -1,80 +1,62 @@
-<div class="wrap">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h4>Search</h4>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h4>Search</h4>
+        </div>
+    </div>
+    <form role="form" (submit)="searchProduct($event)">
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+                <span class="product-title">Item Name/Code</span>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                <input [(ngModel)]="reqDTOProduct.entityProduct.name" id="name" name="name" class="form-control">
             </div>
         </div>
-        <form role="form" (submit)="searchProduct($event)">
-            <div class="row form-group">
-                <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
-                    <span class="product-title">Item Name/Code</span>
-                </div>
-                <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
-                    <input [(ngModel)]="reqDTOProduct.entityProduct.name" id="name" name="name" class="form-control">
-                </div>
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+                <span class="product-title">Category</span>
             </div>
-            <div class="row form-group">
-                <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
-                    <span class="product-title">Category</span>
-                </div>
-                <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
-                    <select class="form-control" >
-                        <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
-                    </select>
-                </div>
+            <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                <select class="form-control" >
+                    <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
+                </select>
             </div>
-            <div class="row form-group">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
-                </div>
-            </div>
-        </form>
+        </div>
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="product-list-table-height-view-point">
-                    <div class="table-wrapper">
-                        <table class="common-table">
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Type</th>
-                                    <th>Category</th>
-                                    <th>Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="cursor-pointer" *ngFor="let product of productList" (keypress)="showProduct($event, product.id)" (click)="showProduct($event, product.id)">
-                                    <td data-label="Item">{{product.name}}</td>
-                                    <td data-label="Type">{{product.typeTitle}}</td>
-                                    <td data-label="Category">{{product.categoryTitle}}</td>
-                                    <td data-label="Price">{{product.unitPrice}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <!--                        <mat-paginator [length]="8"
-                                                    [pageSize]="4"
-                                                    [pageSizeOptions]="[5, 10, 25, 100]">
-                                                </mat-paginator>-->
-                    </div>
+                <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+            </div>
+        </div>
+    </form>
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="product-list-table-height-view-point">
+                <div class="table-wrapper">
+                    <table class="common-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cursor-pointer" *ngFor="let product of productList" (keypress)="showProduct($event, product.id)" (click)="showProduct($event, product.id)">
+                                <td data-label="Item">{{product.name}}</td>
+                                <td data-label="Type">{{product.typeTitle}}</td>
+                                <td data-label="Category">{{product.categoryTitle}}</td>
+                                <td data-label="Price">{{product.unitPrice}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--                        <mat-paginator [length]="8"
+                                                [pageSize]="4"
+                                                [pageSizeOptions]="[5, 10, 25, 100]">
+                                            </mat-paginator>-->
                 </div>
             </div>
         </div>
     </div>
-    <div class="push"></div>
 </div>
-<!--<div class=" footer-bg">
-    <div class="container-fluid">
-        <div class="row form-group">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <footer>
-                    <ul class="footer-ul">
-                        <li><img class="img-responsive" src="resources/images/logo.png" alt="company logo"></li>
-                        <li><span>Bdlions</span></li>
-                        <li><span>016 XXXX XXXX</span></li>
-                    </ul>
-                </footer>
-            </div>
-        </div>
-    </div>
-</div>-->

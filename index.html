@@ -42,14 +42,32 @@
 
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <app>
-                    <div class="loading"></div>
-                </app>
+    <div class="wrap">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <app>
+                        <div class="loading"></div>
+                    </app>
+                </div>
             </div>
         </div>
+        <div class="push"></div>
     </div>
+    <footer *ngIf='showNavBar' class="footer-bg">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <img class="img-responsive" src="resources/images/logo.png" alt="company logo">
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <span>Bdlions</span>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <span>016 XXXX XXXX</span>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

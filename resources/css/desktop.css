@@ -4,7 +4,8 @@ Author: A.K.M. Nazmul Islam
 Version: 1.0
 */
 
-/*----------------------------- Title Bar ----------------------------------*/
+/*----------------------------- Top Header ----------------------------------*/
+
 .top-heading{
     color: #fff;
     font-family: cursive;
@@ -82,6 +83,9 @@ Version: 1.0
     border-bottom: none;
 }
 /*----------------------------- Main Menu ----------------------------------*/
+.cdk-overlay-container,.cdk-overlay-pane {
+    position: absolute!important;
+}
 
 .logo,.mat-btn{
     height: 50px;
@@ -111,7 +115,7 @@ Version: 1.0
     margin-bottom: 4px;
 }
 .menu-wrapper{
-    padding: 0 0 0 15px;
+    padding: 0px;
 }
 
 
@@ -987,11 +991,11 @@ Version: 1.0
     .manage-purchase-left-side-table-height-view-point{
         height: 60vh;
         background: #fff;
-        min-height: 330px;
+        min-height: 415px;
         margin-top: 38px;
     }
     .manage-purchase-right-side-tab{
-        min-height: 330px;
+        min-height: 415px;
     }
     .manage-purchase-right-side-tabset .nav-tabs{
         margin-top: -18px;
@@ -999,11 +1003,11 @@ Version: 1.0
     .manage-sale-left-side-table-height-view-point{
         height: 60vh;
         background: #fff;
-        min-height: 330px;
+        min-height: 415px;
         margin-top: 38px;
     }
     .manage-sale-right-side-tab{
-        min-height: 330px;
+        min-height: 415px;
     }
     .manage-sale-right-side-tabset .nav-tabs{
         margin-top: -18px;
@@ -1014,4 +1018,8 @@ Version: 1.0
         color: #000 !important;
     }
 
+}
+/*----------------------------- Footer ----------------------------------*/
+.footer-bg{
+    margin: 0px 15px;
 }

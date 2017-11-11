@@ -24,9 +24,7 @@ body::before {
     min-height: 100%;
     top: 0;
     left: 0;
-    background: url(../images/blur-bg.jpg) center center no-repeat;
-    background-size: cover;
-    will-change: transform;
+    background: #006CA8;
     z-index: -1;
 }
 body{
@@ -117,7 +115,7 @@ input, select{
     height: 28px!important;
 }
 input:focus,select:focus,textarea:focus{
-    border: 1px solid #4568b2!important;
+    border: 1px solid #DEB71B!important;
     background-color: transparent!important;
 }
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
@@ -156,8 +154,11 @@ select option {
     background-image: none;
     border: 1px solid transparent;
 }
+.custom-button:focus,.custom-red-button:focus {
+     border: 1px solid #DEB71B!important;
+}
 .custom-button{
-    background-color: #209E91!important;
+    background-color: #005989!important;
 }
 .custom-button > i{
     margin-right: 3px;
@@ -205,7 +206,7 @@ table th {
     font-size: 11px;
     letter-spacing: .1em;
     color: #fff;
-    background-color: #8b8b8b;
+    background-color: #00A7F9;
 }
 /*table tbody tr{
     background-color: #E6E6FA;
@@ -252,6 +253,11 @@ table th {
 .common-table > thead > tr > th, .common-table > tbody > tr > td {
     border: 1px solid #ddd;
     border-top: none!important;
+}
+.common-table > thead > tr > th {
+    color: #fff;
+}
+.common-table > tbody > tr > td {
     color: #000;
 }
 .common-table > tfoot > tr > td{
@@ -320,17 +326,16 @@ table th {
 }
 
 .login-layout,.registration-layout{
-    border: 1px solid rgba(0,0,0,.55);
+    border: 1px solid #fff;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
 .login-form-header-pagelet,.login-form-body-pagelet{
     color: #000;
-    margin-bottom: 1px;
     box-shadow: 0 0 1px #bbb;
 }
 .login-form-header-pagelet{
-    background-color: rgba(0,0,0,.55);
+    background-color: #00A7F9;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     padding: 15px;
@@ -539,7 +544,7 @@ table th {
 .modal-content{
     border-radius: 0;
     color: #000;
-    background: url(../images/blur-bg-blurred.jpg) center center no-repeat;
+    background: #00a7f9;
 }
 .modal-footer {
     padding: 10px;
@@ -563,7 +568,7 @@ table th {
     right: 0;
     bottom: 0;
     left: 0;
-    background: url(../images/blur-bg-blurred.jpg) no-repeat;
+    background: #00A7F9;
 }
 
 .footer-bg img{
@@ -582,6 +587,6 @@ table th {
 .cdk-overlay-container,.cdk-overlay-backdrop {
     /*z-index: 0!important;*/
 }
- 
+
 
 

@@ -54,6 +54,8 @@ export class PurchaseListComponent {
     }
     
     public fetchPurchaseOrderList() {
+        this.reqDTOPurchaseOrder.offset = 0;
+        this.reqDTOPurchaseOrder.limit = 10;
         let requestBody: string = JSON.stringify(this.reqDTOPurchaseOrder);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PURCHASE_ORDERS), requestBody).then(result => {
             if (result.success && result.purchaseOrders != null) {

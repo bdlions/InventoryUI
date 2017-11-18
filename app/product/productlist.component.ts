@@ -72,8 +72,8 @@ export class ProductListComponent {
         this.router.navigate(["manageproduct", {productId: id}]);
     }
     public fetchProductList() {
-        //this.reqDTOProduct.limit = 10;
-        //this.reqDTOProduct.offset = 0;
+        this.reqDTOProduct.limit = 10;
+        this.reqDTOProduct.offset = 0;
         //this.reqDTOProduct.entityProduct = this.reqEntityProduct;
         let requestBody: string = JSON.stringify(this.reqDTOProduct);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS), requestBody).then(result => {

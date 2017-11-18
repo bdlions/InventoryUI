@@ -7,6 +7,7 @@ export class EntitySaleOrder {
     discount: number;
     remarks: string;
     total: number;
+    paid: number;
     createdOn: number;
     modifiedOn: number;
 }

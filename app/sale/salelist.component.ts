@@ -57,6 +57,8 @@ export class SaleListComponent {
     }
     
     public fetchSaleOrderList() {
+        this.reqDTOSaleOrder.offset = 0;
+        this.reqDTOSaleOrder.limit = 10;
         let requestBody: string = JSON.stringify(this.reqDTOSaleOrder);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_ORDERS), requestBody).then(result => {
             if (result.success && result.saleOrders != null) {

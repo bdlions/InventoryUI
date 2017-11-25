@@ -189,6 +189,14 @@
                                             <label name="total">{{dtoSaleOrder.entitySaleOrder.total}}</label>
                                         </div>
                                     </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="purchase-order-title">Paid<span class="required">*</span></span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input [(ngModel)]="dtoSaleOrder.entitySaleOrder.paid" name="Paid" class="form-control">
+                                        </div>
+                                    </div>
                                     <!--                                        <div class="row form-group">
                                                                                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                                                                     <span class="purchase-order-title">Balance</span>

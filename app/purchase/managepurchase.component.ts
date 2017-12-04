@@ -576,6 +576,11 @@ export class ManagePurchaseComponent {
         }
         this.purchaseOrderList = tempPurchaseOrderList;
     }
+    
+    printReport(event: Event)
+    {
+        window.printJS('http://signtechbd.com:8080/InvServer/purchasereport?order_no=' + this.dtoPurchaseOrder.entityPurchaseOrder.orderNo);
+    }
 }
 
 

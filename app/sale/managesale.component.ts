@@ -604,6 +604,11 @@ export class ManageSaleComponent {
         }
         this.saleOrderList = tempSaleOrderList;
     }
+    
+    printReport(event: Event)
+    {
+        window.printJS('http://signtechbd.com:8080/InvServer/salereport?order_no=' + this.dtoSaleOrder.entitySaleOrder.orderNo);
+    }
 }
 
 

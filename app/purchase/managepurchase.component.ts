@@ -126,7 +126,17 @@ export class ManagePurchaseComponent {
     }
 
     searchPurchaseOrder(event: Event) {
-        console.log(this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo);
+        //console.log(this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo);
+        if (this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo != null && this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo != "") {
+            this.reqDTOPurchaseOrder.limit = 10;
+            this.reqDTOPurchaseOrder.offset = 0;
+            this.searchPurchaseOrdersByOrderNo();
+        }
+        else {
+            this.reqDTOPurchaseOrder.limit = 10;
+            this.reqDTOPurchaseOrder.offset = 0;
+            this.fetchPurchaseOrderList();
+        }
     }
 
 
@@ -575,6 +585,18 @@ export class ManagePurchaseComponent {
             }
         }
         this.purchaseOrderList = tempPurchaseOrderList;
+    }
+    
+    public searchPurchaseOrdersByOrderNo() {
+        let requestBody: string = JSON.stringify(this.reqDTOPurchaseOrder);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PURCHASE_ORDERS_BY_ORDER_NO), requestBody).then(result => {
+            if (result.success && result.purchaseOrders != null) {
+                this.purchaseOrderList = result.purchaseOrders;
+            }
+            else {
+                
+            }
+        });
     }
     
     printReport(event: Event)

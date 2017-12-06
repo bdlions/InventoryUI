@@ -102,8 +102,10 @@ export class ManageProductComponent {
     searchProduct(event: Event) {
         //console.log(this.searchEntityProduct.name);
 
-        if (this.reqDTOProduct.entityProduct.name == null || this.reqDTOProduct.entityProduct.name == "") {
-            return;
+        if (this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "") {
+            this.reqDTOProduct.limit = 10;
+            this.reqDTOProduct.offset = 0;
+            this.searchProductsByName();
         }
         else {
             this.reqDTOProduct.limit = 10;
@@ -352,6 +354,19 @@ export class ManageProductComponent {
                     }
                 }
                 //this.entityProduct = result;
+            }
+            else {
+                //console.log(result);
+            }
+        });
+    }
+    
+    public searchProductsByName() {
+        let requestBody: string = JSON.stringify(this.reqDTOProduct);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_BY_NAME), requestBody).then(result => {
+            //console.log(result);
+            if (result.success && result.products != null) {
+                this.productList = result.products;
             }
             else {
                 //console.log(result);

@@ -135,7 +135,17 @@ export class ManageSaleComponent {
     }
 
     searchSaleOrder(event: Event) {
-        console.log(this.reqDTOSaleOrder.entitySaleOrder.orderNo);
+        //console.log(this.reqDTOSaleOrder.entitySaleOrder.orderNo);
+        if (this.reqDTOSaleOrder.entitySaleOrder.orderNo != null && this.reqDTOSaleOrder.entitySaleOrder.orderNo != "") {
+            this.reqDTOSaleOrder.limit = 10;
+            this.reqDTOSaleOrder.offset = 0;
+            this.searchSaleOrdersByOrderNo();
+        }
+        else {
+            this.reqDTOSaleOrder.limit = 10;
+            this.reqDTOSaleOrder.offset = 0;
+            this.fetchSaleOrderList();
+        }
     }
 
 
@@ -603,6 +613,18 @@ export class ManageSaleComponent {
             }
         }
         this.saleOrderList = tempSaleOrderList;
+    }
+    
+    public searchSaleOrdersByOrderNo() {
+        let requestBody: string = JSON.stringify(this.reqDTOSaleOrder);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_ORDERS_BY_ORDER_NO), requestBody).then(result => {
+            if (result.success && result.saleOrders != null) {
+                this.saleOrderList = result.saleOrders;
+            }
+            else {
+
+            }
+        });
     }
     
     printReport(event: Event)

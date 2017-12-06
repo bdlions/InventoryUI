@@ -26,6 +26,8 @@ export class ProductListComponent {
     private showNavBar: boolean = false;
     private activeMenu: string = "productlist";
     
+    private requestId: number;
+    
     // MatPaginator Inputs
     length = 0;
     pageSize = 10;
@@ -61,6 +63,7 @@ export class ProductListComponent {
         //console.log(this.productCategoryList);
         this.reqDTOProduct.limit = this.pageSize;
         this.reqDTOProduct.offset = 0;
+        this.requestId = ACTION.FETCH_PRODUCTS;
         this.fetchProductList();
         this.fetchProductCategoryList();
     }
@@ -72,6 +75,14 @@ export class ProductListComponent {
         //console.log(this.searchEntityProduct.name);
         this.reqDTOProduct.limit = this.pageSize;
         this.reqDTOProduct.offset = 0;
+        if (this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "")
+        {
+            this.requestId = ACTION.FETCH_PRODUCTS_BY_NAME;
+            this.searchProductsByName();
+            return;
+        }
+        //if nothing is set then get all products
+        this.requestId = ACTION.FETCH_PRODUCTS;
         this.fetchProductList();
     }
     showProduct(event: Event, id: number) {
@@ -80,10 +91,8 @@ export class ProductListComponent {
         this.navigationManager.setActiveMenu("manageproduct");
         this.router.navigate(["manageproduct", {productId: id}]);
     }
+    
     public fetchProductList() {
-        //this.reqDTOProduct.limit = 10;
-        //this.reqDTOProduct.offset = 0;
-        //this.reqDTOProduct.entityProduct = this.reqEntityProduct;
         let requestBody: string = JSON.stringify(this.reqDTOProduct);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS), requestBody).then(result => {
             //console.log(result);
@@ -109,10 +118,31 @@ export class ProductListComponent {
         });
     }
     
+    public searchProductsByName() {
+        let requestBody: string = JSON.stringify(this.reqDTOProduct);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_BY_NAME), requestBody).then(result => {
+            //console.log(result);
+            if (result.success && result.products != null) {
+                this.productList = result.products;
+                this.length = result.totalProducts;
+            }
+            else {
+                //console.log(result);
+            }
+        });
+    }
+    
     onPaginateChange(event:PageEvent){
         this.reqDTOProduct.limit = event.pageSize;
         this.reqDTOProduct.offset = (event.pageIndex * event.pageSize) ;
-        this.fetchProductList();
+        if (this.requestId == ACTION.FETCH_PRODUCTS)
+        {
+            this.fetchProductList();
+        }
+        else if (this.requestId == ACTION.FETCH_PRODUCTS_BY_NAME)
+        {
+            this.searchProductsByName();
+        }
     }
 
 }

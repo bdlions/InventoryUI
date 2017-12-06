@@ -71,6 +71,15 @@ export class PacketHeaderFactory {
                 break; 
             case ACTION.FETCH_CURRENT_STOCK:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
+            case ACTION.FETCH_PRODUCTS_BY_NAME:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
+            case ACTION.FETCH_PURCHASE_ORDERS_BY_ORDER_NO:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
+            case ACTION.FETCH_SALE_ORDERS_BY_ORDER_NO:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break; 
                 
             case ACTION.ADD_PRODUCT_INFO:

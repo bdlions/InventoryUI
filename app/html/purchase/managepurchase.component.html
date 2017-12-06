@@ -316,7 +316,7 @@
                                         <th>Name</th>
                                         <th>Phone</th>
                                         <th>Email</th>
-                                        <th>View</th>
+<!--                                        <th>View</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -324,10 +324,15 @@
                                         <td data-label="Name">{{supplier.entityUser.firstName}} {{supplier.entityUser.lastName}}</td>
                                         <td data-label="Phone">{{supplier.entityUser.cell}}</td>
                                         <td data-label="Phone">{{supplier.entityUser.email}}</td>
-                                        <td data-label="View"><a href="#" (click)="selectedPurchaseOrderSupplier($event, supplier.entityUser.id)">view</a></td>
+                                        <!--<td data-label="View"><a href="#" (click)="selectedPurchaseOrderSupplier($event, supplier.entityUser.id)">view</a></td>-->
                                     </tr>
                                 </tbody>
                             </table>
+                            <mat-paginator [length]="supplierLength"
+                                [pageSize]="supplierPageSize"
+                                [pageSizeOptions]="supplierPageSizeOptions"
+                                (page)="onSupplierPaginateChange($event)">
+                            </mat-paginator>
                         </div>
                     </div>
                 </div>
@@ -403,7 +408,7 @@
                                         <th>Item</th>
                                         <th>Category</th>
                                         <th>Normal Price</th>
-                                        <th>Details</th>
+                                        <!--<th>Details</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -411,10 +416,15 @@
                                         <td data-label="Item">{{product.name}}</td>
                                         <td data-label="Category">{{product.categoryTitle}}</td>
                                         <td data-label="Normal Price">{{product.unitPrice}}</td>
-                                        <td data-label="Details"><a href="#" (click)="selectedPurchaseOrderProductDetails($event, product.id)">details</a></td>
+                                        <!--<td data-label="Details"><a href="#" (click)="selectedPurchaseOrderProductDetails($event, product.id)">details</a></td>-->
                                     </tr>
                                 </tbody>
                             </table>
+                            <mat-paginator [length]="productLength"
+                                [pageSize]="productPageSize"
+                                [pageSizeOptions]="productPageSizeOptions"
+                                (page)="onProductPaginateChange($event)">
+                            </mat-paginator>
                         </div>
                     </div>
                 </div>

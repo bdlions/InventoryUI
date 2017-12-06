@@ -20,6 +20,7 @@ import {EntityProductCategory} from '../dto/EntityProductCategory';
 import {EntityProductType} from '../dto/EntityProductType';
 import {EntityUOM} from '../dto/EntityUOM';
 import {DTOProduct} from '../dto/DTOProduct';
+import {PageEvent} from '@angular/material';
 
 @Component({
     selector: 'app',
@@ -64,6 +65,18 @@ export class ManageSaleComponent {
     
     //constants & constraints
     private maxSaleOrderLeftPanel: number = 10;
+    
+    private productRequestId: number;
+    private customerRequestId: number;
+    
+    // MatPaginator Inputs
+    productLength = 0;
+    productPageSize = 10;
+    productPageSizeOptions = [5, 10];
+    
+    customerLength = 0;
+    customerPageSize = 10;
+    customerPageSizeOptions = [5, 10];
 
     constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
@@ -92,8 +105,9 @@ export class ManageSaleComponent {
         this.reqDTOCustomer = new DTOCustomer();
         this.reqDTOCustomer.entityCustomer = new EntityCustomer();
         this.reqDTOCustomer.entityUser = new EntityUser();
-        this.reqDTOCustomer.limit = 10;
+        this.reqDTOCustomer.limit = this.customerPageSize;
         this.reqDTOCustomer.offset = 0;
+        this.customerRequestId = ACTION.FETCH_CUSTOMERS;
         this.fetchCustomerList();
         this.dtoCustomer = new DTOCustomer();
         this.dtoCustomer.entityCustomer = new EntityCustomer();
@@ -104,8 +118,9 @@ export class ManageSaleComponent {
         this.fetchProductTypeList();
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
-        this.reqDTOProduct.limit = 10;
+        this.reqDTOProduct.limit = this.productPageSize;
         this.reqDTOProduct.offset = 0;
+        this.productRequestId = ACTION.FETCH_PRODUCTS;
         this.fetchProductList();
 
         this.reqStockDTOProduct = new DTOProduct();
@@ -198,13 +213,14 @@ export class ManageSaleComponent {
         this.fetchCustomerList();
     }
     public fetchCustomerList() {
-        this.reqDTOCustomer.limit = 10;
-        this.reqDTOCustomer.offset = 0;
+        //this.reqDTOCustomer.limit = 10;
+        //this.reqDTOCustomer.offset = 0;
         let requestBody: string = JSON.stringify(this.reqDTOCustomer);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMERS), requestBody).then(result => {
             //console.log(result);
             if (result.success && result.customers != null) {
                 this.customerList = result.customers;
+                this.customerLength = result.totalCustomers;
             }
         });
     }
@@ -220,6 +236,16 @@ export class ManageSaleComponent {
     }
     //product section
     searchSaleOrderProduct(event: Event) {
+        this.reqDTOProduct.limit = this.productPageSize;
+        this.reqDTOProduct.offset = 0;
+        if (this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "")
+        {
+            this.productRequestId = ACTION.FETCH_PRODUCTS_BY_NAME;
+            this.searchProductsByName();
+            return;
+        }
+        //if nothing is set then get all products
+        this.productRequestId = ACTION.FETCH_PRODUCTS;
         this.fetchProductList();
     }
     public fetchProductCategoryList() {
@@ -251,12 +277,27 @@ export class ManageSaleComponent {
             //console.log(result);
             if (result.success && result.products != null) {
                 this.productList = result.products;
+                this.productLength = result.totalProducts;
             }
             else {
                 //console.log(result);
             }
         });
     }
+    public searchProductsByName() {
+        let requestBody: string = JSON.stringify(this.reqDTOProduct);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_BY_NAME), requestBody).then(result => {
+            //console.log(result);
+            if (result.success && result.products != null) {
+                this.productList = result.products;
+                this.productLength = result.totalProducts;
+            }
+            else {
+                //console.log(result);
+            }
+        });
+    }
+    
     public showSaleOrderProductModal(event: Event, productId: number) {
         this.productIdToPopupSelectProduct = productId;
         this.saleOrderProductModal.config.backdrop = false;
@@ -630,6 +671,28 @@ export class ManageSaleComponent {
     printReport(event: Event)
     {
         window.printJS('http://signtechbd.com:8080/InvServer/salereport?order_no=' + this.dtoSaleOrder.entitySaleOrder.orderNo);
+    }
+    
+    onProductPaginateChange(event:PageEvent){
+        this.reqDTOProduct.limit = event.pageSize;
+        this.reqDTOProduct.offset = (event.pageIndex * event.pageSize) ;
+        if (this.productRequestId == ACTION.FETCH_PRODUCTS)
+        {
+            this.fetchProductList();
+        }
+        else if (this.productRequestId == ACTION.FETCH_PRODUCTS_BY_NAME)
+        {
+            this.searchProductsByName();
+        }
+    }
+    
+    onCustomerPaginateChange(event:PageEvent){
+        this.reqDTOCustomer.limit = event.pageSize;
+        this.reqDTOCustomer.offset = (event.pageIndex * event.pageSize) ;
+        if (this.customerRequestId == ACTION.FETCH_CUSTOMERS)
+        {
+            this.fetchCustomerList();
+        }
     }
 }
 

@@ -19,6 +19,7 @@ import {DTOProduct} from '../dto/DTOProduct';
 import {EntityProduct} from '../dto/EntityProduct';
 import {EntityProductCategory} from '../dto/EntityProductCategory';
 import {EntityProductType} from '../dto/EntityProductType';
+import {PageEvent} from '@angular/material';
 
 @Component({
     selector: 'app',
@@ -60,6 +61,18 @@ export class ManagePurchaseComponent {
     
     //constants & constraints
     private maxPurchaseOrderLeftPanel: number = 10;
+    
+    private productRequestId: number;
+    private supplierRequestId: number;
+    
+    // MatPaginator Inputs
+    productLength = 0;
+    productPageSize = 10;
+    productPageSizeOptions = [5, 10];
+    
+    supplierLength = 0;
+    supplierPageSize = 10;
+    supplierPageSizeOptions = [5, 10];
 
     constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
@@ -82,8 +95,9 @@ export class ManagePurchaseComponent {
         this.reqDTOSupplier = new DTOSupplier();
         this.reqDTOSupplier.entitySupplier = new EntitySupplier();
         this.reqDTOSupplier.entityUser = new EntityUser();
-        this.reqDTOSupplier.limit = 10;
+        this.reqDTOSupplier.limit = this.supplierPageSize;
         this.reqDTOSupplier.offset = 0;
+        this.supplierRequestId = ACTION.FETCH_SUPPLIERS;
         this.fetchSupplierList();
         this.dtoSupplier = new DTOSupplier();
         this.dtoSupplier.entitySupplier = new EntitySupplier();
@@ -97,8 +111,9 @@ export class ManagePurchaseComponent {
         this.fetchProductTypeList();
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
-        this.reqDTOProduct.limit = 10;
+        this.reqDTOProduct.limit = this.productPageSize;
         this.reqDTOProduct.offset = 0;
+        this.productRequestId = ACTION.FETCH_PRODUCTS;
         this.fetchProductList();
 
 
@@ -214,6 +229,7 @@ export class ManagePurchaseComponent {
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS), requestBody).then(result => {
             if (result.success && result.suppliers != null) {
                 this.supplierList = result.suppliers;
+                this.supplierLength = result.totalSuppliers;
             }
         });
     }
@@ -240,6 +256,16 @@ export class ManagePurchaseComponent {
 
     //product section
     public searchPurchaseOrderProduct(event: Event) {
+        this.reqDTOProduct.limit = this.productPageSize;
+        this.reqDTOProduct.offset = 0;
+        if (this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "")
+        {
+            this.productRequestId = ACTION.FETCH_PRODUCTS_BY_NAME;
+            this.searchProductsByName();
+            return;
+        }
+        //if nothing is set then get all products
+        this.productRequestId = ACTION.FETCH_PRODUCTS;
         this.fetchProductList();
     }
     public fetchProductCategoryList() {
@@ -271,6 +297,20 @@ export class ManagePurchaseComponent {
             //console.log(result);
             if (result.success && result.products != null) {
                 this.productList = result.products;
+                this.productLength = result.totalProducts;
+            }
+            else {
+                //console.log(result);
+            }
+        });
+    }
+    public searchProductsByName() {
+        let requestBody: string = JSON.stringify(this.reqDTOProduct);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_BY_NAME), requestBody).then(result => {
+            //console.log(result);
+            if (result.success && result.products != null) {
+                this.productList = result.products;
+                this.productLength = result.totalProducts;
             }
             else {
                 //console.log(result);
@@ -602,6 +642,28 @@ export class ManagePurchaseComponent {
     printReport(event: Event)
     {
         window.printJS('http://signtechbd.com:8080/InvServer/purchasereport?order_no=' + this.dtoPurchaseOrder.entityPurchaseOrder.orderNo);
+    }
+    
+    onProductPaginateChange(event:PageEvent){
+        this.reqDTOProduct.limit = event.pageSize;
+        this.reqDTOProduct.offset = (event.pageIndex * event.pageSize) ;
+        if (this.productRequestId == ACTION.FETCH_PRODUCTS)
+        {
+            this.fetchProductList();
+        }
+        else if (this.productRequestId == ACTION.FETCH_PRODUCTS_BY_NAME)
+        {
+            this.searchProductsByName();
+        }
+    }
+    
+    onSupplierPaginateChange(event:PageEvent){
+        this.reqDTOSupplier.limit = event.pageSize;
+        this.reqDTOSupplier.offset = (event.pageIndex * event.pageSize) ;
+        if (this.supplierRequestId == ACTION.FETCH_SUPPLIERS)
+        {
+            this.fetchSupplierList();
+        }
     }
 }
 

@@ -63,6 +63,8 @@ export class ManageSupplierComponent {
         //this.dtoSupplier = JSON.parse("{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":1,\"userId\":3,\"remarks\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":3,\"firstName\":\"Nazmul\",\"lastName\":\"Hasan\",\"email\":\"supplier1@gmail.com\",\"cell\":\"01612341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}");
         //this.supplierList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":1,\"userId\":1,\"remarks\":\"remarks of supplier1\",\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":1,\"firstName\":\"Nazmul\",\"lastName\":\"Hasan\",\"email\":\"supplier1@gmail.com\",\"cell\":\"01612341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true},{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":2,\"userId\":2,\"remarks\":\"remarks of supplier2\",\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":2,\"firstName\":\"Nazmul\",\"lastName\":\"Islam\",\"email\":\"supplier2@gmail.com\",\"cell\":\"01912341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}]");
         //console.log(this.supplierList);
+        this.reqDTOSupplier.limit = 10;
+        this.reqDTOSupplier.offset = 0;
         this.fetchSupplierList();
     }
 
@@ -78,8 +80,19 @@ export class ManageSupplierComponent {
     public hideManageSupplierMessageDispalyModal(): void {
         this.manageSupplierMessageDispalyModal.hide();
     }
-    searchSupplier(event: Event) {
-        console.log(this.reqDTOSupplier.entityUser.firstName);
+    searchSupplier(event: Event) 
+    {
+        if (this.reqDTOSupplier.entitySupplier.supplierName != null && this.reqDTOSupplier.entitySupplier.supplierName != "") 
+        {
+            this.reqDTOSupplier.limit = 10;
+            this.reqDTOSupplier.offset = 0;
+            this.fetchSupplierListByName();
+        }
+        else {
+            this.reqDTOSupplier.limit = 10;
+            this.reqDTOSupplier.offset = 0;
+            this.fetchSupplierList();
+        }
     }
 
     newSupplier(event: Event) {
@@ -186,8 +199,6 @@ export class ManageSupplierComponent {
     }
 
     public fetchSupplierList() {
-        this.reqDTOSupplier.limit = 10;
-        this.reqDTOSupplier.offset = 0;
         let requestBody: string = JSON.stringify(this.reqDTOSupplier);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS), requestBody).then(result => {
 //            console.log(result);
@@ -198,6 +209,19 @@ export class ManageSupplierComponent {
             this.supplierList.reverse()
         });
     }
+    
+    public fetchSupplierListByName() {
+        let requestBody: string = JSON.stringify(this.reqDTOSupplier);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS_BY_NAME), requestBody).then(result => {
+//            console.log(result);
+            if (result.success && result.suppliers != null) {
+                 //console.log(result.suppliers);
+                this.supplierList = result.suppliers;
+            }
+            this.supplierList.reverse()
+        });
+    }
+
 
     public fetchSupplierInfo() {
         let requestBody: string = JSON.stringify(this.reqDTOSupplier);

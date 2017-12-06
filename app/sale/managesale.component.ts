@@ -210,7 +210,20 @@ export class ManageSaleComponent {
     }
 
     public searchSaleOrderCustomer(event: Event) {
+        //this.fetchCustomerList();
+        
+        this.reqDTOCustomer.limit = this.customerPageSize;
+        this.reqDTOCustomer.offset = 0;
+        if (this.reqDTOCustomer.entityCustomer.customerName != null && this.reqDTOCustomer.entityCustomer.customerName != "")
+        {
+            this.customerRequestId = ACTION.FETCH_CUSTOMERS_BY_NAME;
+            this.fetchCustomerListByName();
+            return;
+        }
+        //if nothing is set then get all customers
+        this.customerRequestId = ACTION.FETCH_CUSTOMERS;
         this.fetchCustomerList();
+        
     }
     public fetchCustomerList() {
         //this.reqDTOCustomer.limit = 10;
@@ -224,6 +237,18 @@ export class ManageSaleComponent {
             }
         });
     }
+    
+    public fetchCustomerListByName() {
+        let requestBody: string = JSON.stringify(this.reqDTOCustomer);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMERS_BY_NAME), requestBody).then(result => {
+            //console.log(result);
+            if (result.success && result.customers != null) {
+                this.customerList = result.customers;
+                this.customerLength = result.totalCustomers;
+            }
+        });
+    }
+    
     public selectedCustomer(event: Event, customerId: number) {
         this.saleOrderCustomerModal.hide();
         let customerCounter: number;
@@ -692,6 +717,10 @@ export class ManageSaleComponent {
         if (this.customerRequestId == ACTION.FETCH_CUSTOMERS)
         {
             this.fetchCustomerList();
+        }
+        else if (this.customerRequestId == ACTION.FETCH_CUSTOMERS_BY_NAME)
+        {
+            this.fetchCustomerListByName();
         }
     }
 }

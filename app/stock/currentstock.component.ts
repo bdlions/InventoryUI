@@ -20,6 +20,8 @@ export class CurrentStockComponent {
     private productList: DTOProduct[];
     private productCategoryList: EntityProductCategory[];
     
+    private requestId: number;
+    
     // MatPaginator Inputs
     length = 0;
     pageSize = 10;
@@ -31,6 +33,7 @@ export class CurrentStockComponent {
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = this.pageSize;
         this.reqDTOProduct.offset = 0;
+        this.requestId = ACTION.FETCH_CURRENT_STOCK;
         this.fetchCurrentStock();
         this.fetchProductCategoryList();        
     }
@@ -40,6 +43,16 @@ export class CurrentStockComponent {
     }
 
     public searchCurrentStock(event: Event) {
+        this.reqDTOProduct.limit = this.pageSize;
+        this.reqDTOProduct.offset = 0;
+        if (this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "")
+        {
+            this.requestId = ACTION.FETCH_CURRENT_STOCK_BY_PRODUCT_NAME;
+            this.fetchCurrentStockByProductName();
+            return;
+        }
+        //if nothing is set then get all current stocks
+        this.requestId = ACTION.FETCH_CURRENT_STOCK;
         this.fetchCurrentStock();
     }
     
@@ -68,10 +81,31 @@ export class CurrentStockComponent {
         });
     }
     
+    public fetchCurrentStockByProductName() {
+
+        let requestBody: string = JSON.stringify(this.reqDTOProduct);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CURRENT_STOCK_BY_PRODUCT_NAME), requestBody).then(result => {
+            if (result.success && result.products != null) {
+                this.productList = result.products;
+                this.length = result.totalProducts;
+            }
+            else {
+                
+            }
+        });
+    }
+    
     onPaginateChange(event:PageEvent){
         this.reqDTOProduct.limit = event.pageSize;
         this.reqDTOProduct.offset = (event.pageIndex * event.pageSize) ;
-        this.fetchCurrentStock();
+        if (this.requestId == ACTION.FETCH_CURRENT_STOCK)
+        {
+            this.fetchCurrentStock();
+        }
+        else if (this.requestId == ACTION.FETCH_CURRENT_STOCK_BY_PRODUCT_NAME)
+        {
+            this.fetchCurrentStockByProductName();
+        }
     }
 }
 

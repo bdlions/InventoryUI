@@ -61,6 +61,8 @@ export class ManageCustomerComponent {
         //this.dtoCustomer = JSON.parse("{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"remarks\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}");
         //this.customerList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true},{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":2,\"userId\":2,\"balance\":10.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":1,\"firstName\":\"Mohiuddin\",\"lastName\":\"Mishu\",\"email\":\"customer2@gmail.com\",\"cell\":\"01511223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":2,\"userId\":2,\"roleId\":2},\"reasonCode\":1000,\"success\":true}]");
         //console.log(this.customerList);
+        this.reqDTOCustomer.limit = 10;
+        this.reqDTOCustomer.offset = 0;
         this.fetchCustomerList();
     }
 
@@ -75,8 +77,21 @@ export class ManageCustomerComponent {
     public hideManageCustomerMessageDispalyModal(): void {
         this.manageCustomerMessageDispalyModal.hide();
     }
-    searchCustomer(event: Event) {
-        console.log(this.reqDTOCustomer.entityUser.firstName);
+    
+    searchCustomer(event: Event) 
+    {
+        if (this.reqDTOCustomer.entityCustomer.customerName != null && this.reqDTOCustomer.entityCustomer.customerName != "") 
+        {
+            this.reqDTOCustomer.limit = 10;
+            this.reqDTOCustomer.offset = 0;
+            this.fetchCustomerListByName();
+        }
+        else 
+        {
+            this.reqDTOCustomer.limit = 10;
+            this.reqDTOCustomer.offset = 0;
+            this.fetchCustomerList();
+        }
     }
 
     newCustomer(event: Event) {
@@ -177,10 +192,18 @@ export class ManageCustomerComponent {
     }
 
     public fetchCustomerList() {
-        this.reqDTOCustomer.limit = 10;
-        this.reqDTOCustomer.offset = 0;
         let requestBody: string = JSON.stringify(this.reqDTOCustomer);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMERS), requestBody).then(result => {
+            //console.log(result);
+            if (result.success && result.customers != null) {
+                this.customerList = result.customers;
+            }
+        });
+    }
+    
+    public fetchCustomerListByName() {
+        let requestBody: string = JSON.stringify(this.reqDTOCustomer);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMERS_BY_NAME), requestBody).then(result => {
             //console.log(result);
             if (result.success && result.customers != null) {
                 this.customerList = result.customers;

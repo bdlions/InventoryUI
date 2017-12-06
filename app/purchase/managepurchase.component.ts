@@ -233,6 +233,16 @@ export class ManagePurchaseComponent {
             }
         });
     }
+    
+    public fetchSupplierListByName() {
+        let requestBody: string = JSON.stringify(this.reqDTOSupplier);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS_BY_NAME), requestBody).then(result => {
+            if (result.success && result.suppliers != null) {
+                this.supplierList = result.suppliers;
+                this.supplierLength = result.totalSuppliers;
+            }
+        });
+    }
 
     public showPurchaseOrderSupplierModal(event: Event) {
         this.purchaseOrderSupplierModal.config.backdrop = false;
@@ -240,6 +250,18 @@ export class ManagePurchaseComponent {
     }
 
     public searchPurchaseOrderSupplier(event: Event) {
+        //this.fetchSupplierList();
+        
+        this.reqDTOSupplier.limit = this.supplierPageSize;
+        this.reqDTOSupplier.offset = 0;
+        if (this.reqDTOSupplier.entitySupplier.supplierName != null && this.reqDTOSupplier.entitySupplier.supplierName != "")
+        {
+            this.supplierRequestId = ACTION.FETCH_SUPPLIERS_BY_NAME;
+            this.fetchSupplierListByName();
+            return;
+        }
+        //if nothing is set then get all suppliers
+        this.supplierRequestId = ACTION.FETCH_SUPPLIERS;
         this.fetchSupplierList();
     }
 
@@ -657,12 +679,17 @@ export class ManagePurchaseComponent {
         }
     }
     
-    onSupplierPaginateChange(event:PageEvent){
+    onSupplierPaginateChange(event:PageEvent)
+    {
         this.reqDTOSupplier.limit = event.pageSize;
         this.reqDTOSupplier.offset = (event.pageIndex * event.pageSize) ;
         if (this.supplierRequestId == ACTION.FETCH_SUPPLIERS)
         {
             this.fetchSupplierList();
+        }
+        else if (this.supplierRequestId == ACTION.FETCH_SUPPLIERS_BY_NAME)
+        {
+            this.fetchSupplierListByName();
         }
     }
 }

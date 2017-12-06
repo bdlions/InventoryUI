@@ -5,6 +5,7 @@ import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
 import {EntityUser} from '../dto/EntityUser';
+import {EntitySupplier} from '../dto/EntitySupplier';
 import {DTOSupplier} from '../dto/DTOSupplier';
 import {PageEvent} from '@angular/material';
 
@@ -21,6 +22,8 @@ export class SupplierListComponent {
     //private searchDTOSupplier: DTOSupplier;
     private showNavBar: boolean = false;
     private activeMenu: string = "supplierlist";
+    
+    private requestId: number;
     
     // MatPaginator Inputs
     length = 0;
@@ -42,11 +45,13 @@ export class SupplierListComponent {
         //this.searchDTOSupplier = new DTOSupplier();
         //this.searchDTOSupplier.entityUser = new EntityUser();
         this.reqDTOSupplier = new DTOSupplier();
+        this.reqDTOSupplier.entitySupplier = new EntitySupplier();
         this.reqDTOSupplier.entityUser = new EntityUser();
         //this.supplierList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":1,\"userId\":1,\"remarks\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":1,\"firstName\":\"Nazmul\",\"lastName\":\"Hasan\",\"email\":\"supplier1@gmail.com\",\"cell\":\"01612341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true},{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":2,\"userId\":2,\"remarks\":10,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":2,\"firstName\":\"Nazmul\",\"lastName\":\"Islam\",\"email\":\"supplier2@gmail.com\",\"cell\":\"01912341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}]");
         //console.log(this.supplierList);
         this.reqDTOSupplier.limit = this.pageSize;
         this.reqDTOSupplier.offset = 0;
+        this.requestId = ACTION.FETCH_SUPPLIERS;
         this.fetchSupplierList();
     }
 
@@ -54,7 +59,18 @@ export class SupplierListComponent {
 
     }
     searchSupplier(event: Event) {
-        console.log(this.reqDTOSupplier.entityUser.firstName);
+        //console.log(this.reqDTOSupplier.entityUser.firstName);
+        this.reqDTOSupplier.limit = this.pageSize;
+        this.reqDTOSupplier.offset = 0;
+        if (this.reqDTOSupplier.entitySupplier.supplierName != null && this.reqDTOSupplier.entitySupplier.supplierName != "")
+        {
+            this.requestId = ACTION.FETCH_SUPPLIERS_BY_NAME;
+            this.fetchSupplierListByName();
+            return;
+        }
+        //if nothing is set then get all suppliers
+        this.requestId = ACTION.FETCH_SUPPLIERS;
+        this.fetchSupplierList();
     }
     showSupplier(event: Event, id: number) {
         console.log(id);
@@ -64,8 +80,6 @@ export class SupplierListComponent {
         this.router.navigate(["managesupplier", {supplierId: id}]);
     }
     public fetchSupplierList() {
-        //this.reqDTOSupplier.limit = 10;
-        //this.reqDTOSupplier.offset = 0;
         let requestBody: string = JSON.stringify(this.reqDTOSupplier);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS), requestBody).then(result => {
             console.log(result);
@@ -76,10 +90,28 @@ export class SupplierListComponent {
         });
     }
     
+    public fetchSupplierListByName() {
+        let requestBody: string = JSON.stringify(this.reqDTOSupplier);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS_BY_NAME), requestBody).then(result => {
+            console.log(result);
+            if (result.success && result.suppliers != null) {
+                this.supplierList = result.suppliers;
+                this.length = result.totalSuppliers;
+            }
+        });
+    }
+    
     onPaginateChange(event:PageEvent){
         this.reqDTOSupplier.limit = event.pageSize;
-        this.reqDTOSupplier.offset = (event.pageIndex * event.pageSize) ;
-        this.fetchSupplierList();
+        this.reqDTOSupplier.offset = (event.pageIndex * event.pageSize) ;        
+        if (this.requestId == ACTION.FETCH_SUPPLIERS)
+        {
+            this.fetchSupplierList();
+        }
+        else if (this.requestId == ACTION.FETCH_SUPPLIERS_BY_NAME)
+        {
+            this.fetchSupplierListByName();
+        }
     }
 }
 

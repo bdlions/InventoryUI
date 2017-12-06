@@ -6,6 +6,7 @@ import {ACTION} from './../webservice/ACTION';
 import {DTOProduct} from '../dto/DTOProduct';
 import {EntityProduct} from '../dto/EntityProduct';
 import {EntityProductCategory} from '../dto/EntityProductCategory';
+import {PageEvent} from '@angular/material';
 
 @Component({
     selector: 'app',
@@ -18,12 +19,17 @@ export class CurrentStockComponent {
     private reqDTOProduct: DTOProduct;
     private productList: DTOProduct[];
     private productCategoryList: EntityProductCategory[];
+    
+    // MatPaginator Inputs
+    length = 0;
+    pageSize = 10;
+    pageSizeOptions = [5, 10];
 
     constructor(private router: Router, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
-        this.reqDTOProduct.limit = 10;
+        this.reqDTOProduct.limit = this.pageSize;
         this.reqDTOProduct.offset = 0;
         this.fetchCurrentStock();
         this.fetchProductCategoryList();        
@@ -54,11 +60,18 @@ export class CurrentStockComponent {
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CURRENT_STOCK), requestBody).then(result => {
             if (result.success && result.products != null) {
                 this.productList = result.products;
+                this.length = result.totalProducts;
             }
             else {
                 
             }
         });
+    }
+    
+    onPaginateChange(event:PageEvent){
+        this.reqDTOProduct.limit = event.pageSize;
+        this.reqDTOProduct.offset = (event.pageIndex * event.pageSize) ;
+        this.fetchCurrentStock();
     }
 }
 

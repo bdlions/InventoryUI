@@ -6,6 +6,7 @@ import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
 import {DTOPurchaseOrder} from '../dto/DTOPurchaseOrder';
 import {EntityPurchaseOrder} from '../dto/EntityPurchaseOrder';
+import {PageEvent} from '@angular/material';
 
 @Component({
     selector: 'app',
@@ -19,6 +20,11 @@ export class PurchaseListComponent {
     private purchaseOrderList: DTOPurchaseOrder[];
     private showNavBar: boolean = false;
     private activeMenu: string = "purchaselist";
+    
+    // MatPaginator Inputs
+    length = 0;
+    pageSize = 10;
+    pageSizeOptions = [5, 10];
 
     constructor(private router: Router, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
@@ -36,6 +42,8 @@ export class PurchaseListComponent {
         this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
         //this.purchaseOrderList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entityPurchaseOrder\":{\"id\":1,\"orderNo\":\"order1\",\"supplierUserId\":3,\"orderDate\":0,\"requestedShipDate\":0,\"subtotal\":0.0,\"discount\":0.0,\"total\":0.0,\"paid\":0.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoSupplier\":{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":0,\"userId\":0,\"remarks\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":0,\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false},{\"limit\":0,\"offset\":0,\"entityPurchaseOrder\":{\"id\":2,\"orderNo\":\"order2\",\"supplierUserId\":2,\"orderDate\":0,\"requestedShipDate\":0,\"subtotal\":10.0,\"discount\":10.0,\"total\":10.0,\"paid\":10.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoSupplier\":{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":2,\"userId\":0,\"remarks\":0,\"balance\":10.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":0,\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false}]");
         //console.log(this.purchaseOrderList);
+        this.reqDTOPurchaseOrder.offset = 0;
+        this.reqDTOPurchaseOrder.limit = this.pageSize;
         this.fetchPurchaseOrderList();
     }
 
@@ -54,17 +62,24 @@ export class PurchaseListComponent {
     }
     
     public fetchPurchaseOrderList() {
-        this.reqDTOPurchaseOrder.offset = 0;
-        this.reqDTOPurchaseOrder.limit = 10;
+        //this.reqDTOPurchaseOrder.offset = 0;
+        //this.reqDTOPurchaseOrder.limit = 10;
         let requestBody: string = JSON.stringify(this.reqDTOPurchaseOrder);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PURCHASE_ORDERS), requestBody).then(result => {
             if (result.success && result.purchaseOrders != null) {
                 this.purchaseOrderList = result.purchaseOrders;
+                this.length = result.totalPurchaseOrders;
             }
             else {
                 
             }
         });
+    }
+    
+    onPaginateChange(event:PageEvent){
+        this.reqDTOPurchaseOrder.limit = event.pageSize;
+        this.reqDTOPurchaseOrder.offset = (event.pageIndex * event.pageSize) ;
+        this.fetchPurchaseOrderList();
     }
 }
 

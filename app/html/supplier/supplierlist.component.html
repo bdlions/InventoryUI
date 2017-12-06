@@ -51,6 +51,11 @@
                             </tr>
                         </tbody>
                     </table>
+                    <mat-paginator [length]="length"
+                        [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions"
+                        (page)="onPaginateChange($event)">
+                    </mat-paginator>
                 </div>
             </div>
         </div>

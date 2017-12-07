@@ -243,6 +243,26 @@ export class ManagePurchaseComponent {
             }
         });
     }
+    
+    public fetchSupplierListByCell() {
+        let requestBody: string = JSON.stringify(this.reqDTOSupplier);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS_BY_CELL), requestBody).then(result => {
+            if (result.success && result.suppliers != null) {
+                this.supplierList = result.suppliers;
+                this.supplierLength = result.totalSuppliers;
+            }
+        });
+    }
+    
+    public fetchSupplierListByEmail() {
+        let requestBody: string = JSON.stringify(this.reqDTOSupplier);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS_BY_EMAIL), requestBody).then(result => {
+            if (result.success && result.suppliers != null) {
+                this.supplierList = result.suppliers;
+                this.supplierLength = result.totalSuppliers;
+            }
+        });
+    }
 
     public showPurchaseOrderSupplierModal(event: Event) {
         this.purchaseOrderSupplierModal.config.backdrop = false;
@@ -258,11 +278,24 @@ export class ManagePurchaseComponent {
         {
             this.supplierRequestId = ACTION.FETCH_SUPPLIERS_BY_NAME;
             this.fetchSupplierListByName();
-            return;
         }
-        //if nothing is set then get all suppliers
-        this.supplierRequestId = ACTION.FETCH_SUPPLIERS;
-        this.fetchSupplierList();
+        else if (this.reqDTOSupplier.entitySupplier.cell != null && this.reqDTOSupplier.entitySupplier.cell != "")
+        {
+            this.supplierRequestId = ACTION.FETCH_SUPPLIERS_BY_CELL;
+            this.fetchSupplierListByCell();
+        }
+        else if (this.reqDTOSupplier.entitySupplier.email != null && this.reqDTOSupplier.entitySupplier.email != "")
+        {
+            this.supplierRequestId = ACTION.FETCH_SUPPLIERS_BY_EMAIL;
+            this.fetchSupplierListByEmail();
+        }
+        else
+        {
+            //if nothing is set then get all suppliers
+            this.supplierRequestId = ACTION.FETCH_SUPPLIERS;
+            this.fetchSupplierList();
+        }
+        
     }
 
     public selectedSupplier(event: Event, supplierId: number) {
@@ -690,6 +723,14 @@ export class ManagePurchaseComponent {
         else if (this.supplierRequestId == ACTION.FETCH_SUPPLIERS_BY_NAME)
         {
             this.fetchSupplierListByName();
+        }
+        else if (this.supplierRequestId == ACTION.FETCH_SUPPLIERS_BY_CELL)
+        {
+            this.fetchSupplierListByCell();
+        }
+        else if (this.supplierRequestId == ACTION.FETCH_SUPPLIERS_BY_EMAIL)
+        {
+            this.fetchSupplierListByEmail();
         }
     }
 }

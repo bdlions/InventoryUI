@@ -218,11 +218,24 @@ export class ManageSaleComponent {
         {
             this.customerRequestId = ACTION.FETCH_CUSTOMERS_BY_NAME;
             this.fetchCustomerListByName();
-            return;
         }
-        //if nothing is set then get all customers
-        this.customerRequestId = ACTION.FETCH_CUSTOMERS;
-        this.fetchCustomerList();
+        else if (this.reqDTOCustomer.entityCustomer.cell != null && this.reqDTOCustomer.entityCustomer.cell != "")
+        {
+            this.customerRequestId = ACTION.FETCH_CUSTOMERS_BY_CELL;
+            this.fetchCustomerListByCell();
+        }
+        else if (this.reqDTOCustomer.entityCustomer.email != null && this.reqDTOCustomer.entityCustomer.email != "")
+        {
+            this.customerRequestId = ACTION.FETCH_CUSTOMERS_BY_EMAIL;
+            this.fetchCustomerListByEmail();
+        }
+        else
+        {
+            //if nothing is set then get all customers
+            this.customerRequestId = ACTION.FETCH_CUSTOMERS;
+            this.fetchCustomerList();       
+        }
+        
         
     }
     public fetchCustomerList() {
@@ -241,6 +254,28 @@ export class ManageSaleComponent {
     public fetchCustomerListByName() {
         let requestBody: string = JSON.stringify(this.reqDTOCustomer);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMERS_BY_NAME), requestBody).then(result => {
+            //console.log(result);
+            if (result.success && result.customers != null) {
+                this.customerList = result.customers;
+                this.customerLength = result.totalCustomers;
+            }
+        });
+    }
+    
+    public fetchCustomerListByCell() {
+        let requestBody: string = JSON.stringify(this.reqDTOCustomer);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMERS_BY_CELL), requestBody).then(result => {
+            //console.log(result);
+            if (result.success && result.customers != null) {
+                this.customerList = result.customers;
+                this.customerLength = result.totalCustomers;
+            }
+        });
+    }
+    
+    public fetchCustomerListByEmail() {
+        let requestBody: string = JSON.stringify(this.reqDTOCustomer);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMERS_BY_EMAIL), requestBody).then(result => {
             //console.log(result);
             if (result.success && result.customers != null) {
                 this.customerList = result.customers;
@@ -721,6 +756,14 @@ export class ManageSaleComponent {
         else if (this.customerRequestId == ACTION.FETCH_CUSTOMERS_BY_NAME)
         {
             this.fetchCustomerListByName();
+        }
+        else if (this.customerRequestId == ACTION.FETCH_CUSTOMERS_BY_CELL)
+        {
+            this.fetchCustomerListByCell();
+        }
+        else if (this.customerRequestId == ACTION.FETCH_CUSTOMERS_BY_EMAIL)
+        {
+            this.fetchCustomerListByEmail();
         }
     }
 }

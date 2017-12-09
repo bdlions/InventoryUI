@@ -63,6 +63,8 @@ export class ManageSaleComponent {
     //    private manageSaleSuccessMessage : string;
     private manageSaleErrorMessage: string;
     
+    private barcode: string = "";
+    
     //constants & constraints
     private maxSaleOrderLeftPanel: number = 10;
     
@@ -366,6 +368,11 @@ export class ManageSaleComponent {
 
     public selectedSaleOrderProductFromModal(event: Event, productId: number) {
         this.saleOrderProductModal.hide();
+        this.appendProductInSaleOrder(productId);
+    }
+    
+    public appendProductInSaleOrder(productId: number)
+    {
         let dtoProduct: DTOProduct = new DTOProduct();
         dtoProduct.entityProduct = new EntityProduct();
         let productCounter: number;
@@ -765,6 +772,27 @@ export class ManageSaleComponent {
         {
             this.fetchCustomerListByEmail();
         }
+    }
+    
+    onBarcodeChange(event:Event)
+    {
+        if (this.barcode.length == 13)
+        {
+            let productId: number = 0;
+            let productCounter: number;
+            for (productCounter = 0; productCounter < this.productList.length; productCounter++) {
+                if (this.productList[productCounter].code == this.barcode) {
+                    productId = this.productList[productCounter].id;
+                }
+            }
+            if (productId > 0)
+            {
+                this.productIdToPopupSelectProduct = 0;
+                this.appendProductInSaleOrder(productId);
+                this.barcode = "";
+            }
+            //alert("Barcode:" + this.barcode);            
+        }        
     }
 }
 

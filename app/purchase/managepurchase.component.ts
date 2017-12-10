@@ -75,7 +75,9 @@ export class ManagePurchaseComponent {
     supplierLength = 0;
     supplierPageSize = 10;
     supplierPageSizeOptions = [5, 10];
-
+    
+    barcodeScanInterval;
+    
     constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
 
@@ -118,7 +120,7 @@ export class ManagePurchaseComponent {
         this.productRequestId = ACTION.FETCH_PRODUCTS;
         this.fetchProductList();
 
-
+        
         this.searchEntityProduct = new EntityProduct();
         this.entityProduct = JSON.parse("{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"length\":\"10 cm\",\"width\":\"20 cm\",\"height\":\"30 cm\",\"weight\":\"40 cm\",\"remark\":\"This is a good product...\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}");
         //this.productCategoryList = JSON.parse("[{\"id\":1,\"title\":\"Product category1\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"title\":\"Product category2\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
@@ -740,9 +742,9 @@ export class ManagePurchaseComponent {
         }
     }
     
-    onBarcodeChange(event:Event)
+    onBarcodeCharChange(event:Event)
     {
-        if (this.barcode.length == 13)
+        /*if (this.barcode.length == 13)
         {
             let productId: number = 0;
             let productCounter: number;
@@ -752,13 +754,37 @@ export class ManagePurchaseComponent {
                 }
             }
             if (productId > 0)
-            {
+            {                
                 this.productIdToPopupSelectProduct = 0;
                 this.appendProductInPurchaseOrder(productId);
                 this.barcode = "";
             }
             //alert("Barcode:" + this.barcode);            
-        }        
+        }*/ 
+        clearInterval(this.barcodeScanInterval);
+        this.barcodeScanInterval = setInterval(() => { this.getProductByCode(); }, 1000 * 1);
+    }
+    
+    getProductByCode()
+    {
+        console.log(this.barcode);
+        clearInterval(this.barcodeScanInterval);
+        let entityProduct: EntityProduct = new EntityProduct();
+        entityProduct.code = this.barcode;
+        //resetting barcode
+        this.barcode = "";
+        let requestBody: string = JSON.stringify(entityProduct);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCT_BY_CODE), requestBody).then(result => {
+            //console.log(result);
+            if (result.success) {
+                this.productIdToPopupSelectProduct = 0;
+                this.appendProductInPurchaseOrder(result.id);
+                this.barcode = "";
+            }
+            else {
+                //console.log(result);
+            }
+        });
     }
 }
 

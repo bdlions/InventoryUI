@@ -79,6 +79,8 @@ export class ManageSaleComponent {
     customerLength = 0;
     customerPageSize = 10;
     customerPageSizeOptions = [5, 10];
+    
+    barcodeScanInterval;
 
     constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
@@ -774,9 +776,9 @@ export class ManageSaleComponent {
         }
     }
     
-    onBarcodeChange(event:Event)
+    onBarcodeCharChange(event:Event)
     {
-        if (this.barcode.length == 13)
+        /*if (this.barcode.length == 13)
         {
             let productId: number = 0;
             let productCounter: number;
@@ -792,7 +794,31 @@ export class ManageSaleComponent {
                 this.barcode = "";
             }
             //alert("Barcode:" + this.barcode);            
-        }        
+        }*/ 
+        clearInterval(this.barcodeScanInterval);
+        this.barcodeScanInterval = setInterval(() => { this.getProductByCode(); }, 1000 * 1);       
+    }
+    
+    getProductByCode()
+    {
+        console.log(this.barcode);
+        clearInterval(this.barcodeScanInterval);
+        let entityProduct: EntityProduct = new EntityProduct();
+        entityProduct.code = this.barcode;
+        //resetting barcode
+        this.barcode = "";
+        let requestBody: string = JSON.stringify(entityProduct);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCT_BY_CODE), requestBody).then(result => {
+            //console.log(result);
+            if (result.success) {
+                this.productIdToPopupSelectProduct = 0;
+                this.appendProductInSaleOrder(result.id);
+                this.barcode = "";
+            }
+            else {
+                //console.log(result);
+            }
+        });
     }
 }
 

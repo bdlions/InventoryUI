@@ -101,6 +101,9 @@ export class PacketHeaderFactory {
                 break;
             case ACTION.FETCH_CUSTOMERS_BY_EMAIL:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
+            case ACTION.FETCH_PRODUCT_BY_CODE:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break; 
                 
             case ACTION.ADD_PRODUCT_INFO:

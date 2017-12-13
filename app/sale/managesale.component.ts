@@ -57,8 +57,8 @@ export class ManageSaleComponent {
     private productIdToPopupSelectProduct: number;
     private productIdToPopupDeleteProduct: number;
 
-    private reqStockDTOProduct: DTOProduct;
-    private stockProductList: DTOProduct[];
+    //private reqStockDTOProduct: DTOProduct;
+    //private stockProductList: DTOProduct[];
 
     //    private manageSaleSuccessMessage : string;
     private manageSaleErrorMessage: string;
@@ -127,11 +127,11 @@ export class ManageSaleComponent {
         this.productRequestId = ACTION.FETCH_PRODUCTS;
         this.fetchProductList();
 
-        this.reqStockDTOProduct = new DTOProduct();
-        this.reqStockDTOProduct.entityProduct = new EntityProduct();
-        this.reqStockDTOProduct.limit = 10;
-        this.reqStockDTOProduct.offset = 0;
-        this.fetchCurrentStock();
+        //this.reqStockDTOProduct = new DTOProduct();
+        //this.reqStockDTOProduct.entityProduct = new EntityProduct();
+        //this.reqStockDTOProduct.limit = 10;
+        //this.reqStockDTOProduct.offset = 0;
+        //this.fetchCurrentStock();
 
         //this.searchEntityProduct = new EntityProduct();
         //this.entityProduct = JSON.parse("{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"length\":\"10 cm\",\"width\":\"20 cm\",\"height\":\"30 cm\",\"weight\":\"40 cm\",\"remark\":\"This is a good product...\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}");
@@ -537,9 +537,8 @@ export class ManageSaleComponent {
             }
         }
 
-        //-----------------------
         //check current stock before saving sale order
-        let tempProductList: DTOProduct[] = this.dtoSaleOrder.products;
+        /*let tempProductList: DTOProduct[] = this.dtoSaleOrder.products;
         let productCounter: number = 0;
         let isValidStock: boolean = false;
         for (productCounter = 0; productCounter < tempProductList.length; productCounter++) {
@@ -558,11 +557,10 @@ export class ManageSaleComponent {
             }
         }
         if (!isValidStock) {
-            //            this.manageSaleSuccessMessage = "";
             this.manageSaleMessageDispalyModal.config.backdrop = false;
             this.manageSaleMessageDispalyModal.show();
             return;
-        }
+        }*/
        
         let requestBody: string = JSON.stringify(this.dtoSaleOrder);
         if (this.dtoSaleOrder.entitySaleOrder.id == 0) {
@@ -695,7 +693,7 @@ export class ManageSaleComponent {
         this.setSaleOrderInfo(orderNo);
     }
 
-    public fetchCurrentStock() {
+    /*public fetchCurrentStock() {
         let requestBody: string = JSON.stringify(this.reqStockDTOProduct);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CURRENT_STOCK), requestBody).then(result => {
             if (result.success && result.products != null) {
@@ -705,7 +703,7 @@ export class ManageSaleComponent {
 
             }
         });
-    }
+    }*/
     
     public manageSaleOrderUpdateLeftPanel()
     {

@@ -62,11 +62,18 @@ export class SaleListComponent {
         {
             this.requestId = ACTION.FETCH_SALE_ORDERS_BY_ORDER_NO;
             this.searchSaleOrdersByOrderNo();
-            return;
         }
-        //if nothing is set then get all sale orders
-        this.requestId = ACTION.FETCH_SALE_ORDERS
-        this.fetchSaleOrderList();
+        else if (this.reqDTOSaleOrder.entitySaleOrder.cell != null && this.reqDTOSaleOrder.entitySaleOrder.cell != "")
+        {
+            this.requestId = ACTION.FETCH_SALE_ORDERS_BY_CELL;
+            this.searchSaleOrdersByCell();
+        }
+        else
+        {
+            //if nothing is set then get all sale orders
+            this.requestId = ACTION.FETCH_SALE_ORDERS
+            this.fetchSaleOrderList();
+        }        
     }
     
     public showSaleOrder(event: Event, orderNo: string) {
@@ -105,6 +112,19 @@ export class SaleListComponent {
         });
     }
     
+    public searchSaleOrdersByCell() {
+        let requestBody: string = JSON.stringify(this.reqDTOSaleOrder);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_ORDERS_BY_CELL), requestBody).then(result => {
+            if (result.success && result.saleOrders != null) {
+                this.saleOrderList = result.saleOrders;
+                this.length = result.totalSaleOrders;
+            }
+            else {
+                
+            }
+        });
+    }
+    
     onPaginateChange(event:PageEvent){
         this.reqDTOSaleOrder.limit = event.pageSize;
         this.reqDTOSaleOrder.offset = (event.pageIndex * event.pageSize) ;
@@ -115,6 +135,10 @@ export class SaleListComponent {
         else if (this.requestId == ACTION.FETCH_SALE_ORDERS_BY_ORDER_NO)
         {
             this.searchSaleOrdersByOrderNo();
+        }
+        else if (this.requestId == ACTION.FETCH_SALE_ORDERS_BY_CELL)
+        {
+            this.searchSaleOrdersByCell();
         }
     }
 }

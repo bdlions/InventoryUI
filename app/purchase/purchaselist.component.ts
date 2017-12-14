@@ -61,11 +61,19 @@ export class PurchaseListComponent {
         {
             this.requestId = ACTION.FETCH_PURCHASE_ORDERS_BY_ORDER_NO;
             this.searchPurchaseOrdersByOrderNo();
-            return;
         }
-        //if nothing is set then get all purchase orders
-        this.requestId = ACTION.FETCH_PURCHASE_ORDERS;
-        this.fetchPurchaseOrderList();
+        else if (this.reqDTOPurchaseOrder.entityPurchaseOrder.cell != null && this.reqDTOPurchaseOrder.entityPurchaseOrder.cell != "")
+        {
+            this.requestId = ACTION.FETCH_PURCHASE_ORDERS_BY_CELL;
+            this.searchPurchaseOrdersByCell();
+        }
+        else
+        {
+            //if nothing is set then get all purchase orders
+            this.requestId = ACTION.FETCH_PURCHASE_ORDERS;
+            this.fetchPurchaseOrderList();
+        }
+        
     }
     showPurchaseOrder(event: Event, orderNo: string) {
         //console.log(id);
@@ -103,6 +111,19 @@ export class PurchaseListComponent {
         });
     }
     
+    public searchPurchaseOrdersByCell() {
+        let requestBody: string = JSON.stringify(this.reqDTOPurchaseOrder);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PURCHASE_ORDERS_BY_CELL), requestBody).then(result => {
+            if (result.success && result.purchaseOrders != null) {
+                this.purchaseOrderList = result.purchaseOrders;
+                this.length = result.totalPurchaseOrders;
+            }
+            else {
+                
+            }
+        });
+    }
+    
     onPaginateChange(event:PageEvent){
         this.reqDTOPurchaseOrder.limit = event.pageSize;
         this.reqDTOPurchaseOrder.offset = (event.pageIndex * event.pageSize) ;
@@ -113,6 +134,10 @@ export class PurchaseListComponent {
         else if (this.requestId == ACTION.FETCH_PURCHASE_ORDERS_BY_ORDER_NO)
         {
             this.searchPurchaseOrdersByOrderNo();
+        }
+        else if (this.requestId == ACTION.FETCH_PURCHASE_ORDERS_BY_CELL)
+        {
+            this.searchPurchaseOrdersByCell();
         }
     }
 }

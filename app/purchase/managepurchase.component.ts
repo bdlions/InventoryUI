@@ -551,7 +551,7 @@ export class ManagePurchaseComponent {
         if (this.dtoPurchaseOrder.entityPurchaseOrder.id == 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PURCHASE_ORDER_INFO), requestBody).then(result => {
                 if (result.success) {
-                    this.dtoPurchaseOrder = result;
+                    this.dtoPurchaseOrder.entityPurchaseOrder.id = result.entityPurchaseOrder.id;
                     this.managePurchaseOrderUpdateLeftPanel();
                     //set success message
                     //                    this.managePurchaseSuccessMessage = result.message;
@@ -704,7 +704,7 @@ export class ManagePurchaseComponent {
     
     printReport(event: Event)
     {
-        window.printJS('http://signtechbd.com:8080/InvServer/purchasereport?order_no=' + this.dtoPurchaseOrder.entityPurchaseOrder.orderNo);
+        window.printJS(window.SITE_URL +'purchasereport?order_no=' + this.dtoPurchaseOrder.entityPurchaseOrder.orderNo);
     }
     
     onProductPaginateChange(event:PageEvent){

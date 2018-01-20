@@ -566,8 +566,9 @@ export class ManageSaleComponent {
         if (this.dtoSaleOrder.entitySaleOrder.id == 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_SALE_ORDER_INFO), requestBody).then(result => {
                 if (result.success) {
-                    this.dtoSaleOrder = result;
+                    this.dtoSaleOrder.entitySaleOrder.id = result.entitySaleOrder.id;
                     this.manageSaleOrderUpdateLeftPanel();
+                    
                     //                    this.manageSaleSuccessMessage = result.message;
                     //this.manageSaleErrorMessage = "";
 
@@ -737,7 +738,7 @@ export class ManageSaleComponent {
     
     printReport(event: Event)
     {
-        window.printJS('http://signtechbd.com:8080/InvServer/salereport?order_no=' + this.dtoSaleOrder.entitySaleOrder.orderNo);
+        window.printJS(window.SITE_URL +'salereport?order_no=' + this.dtoSaleOrder.entitySaleOrder.orderNo);
     }
     
     onProductPaginateChange(event:PageEvent){

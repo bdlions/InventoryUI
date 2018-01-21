@@ -460,7 +460,7 @@ export class ManageSaleComponent {
         let totalPrice: number = 0;
         let purchasedProductCounter: number;
         for (purchasedProductCounter = 0; purchasedProductCounter < this.dtoSaleOrder.products.length; purchasedProductCounter++) {
-            let currentPrice: number = this.dtoSaleOrder.products[purchasedProductCounter].quantity * this.dtoSaleOrder.products[purchasedProductCounter].entityProduct.unitPrice - this.dtoSaleOrder.products[purchasedProductCounter].discount;
+            let currentPrice: number = this.dtoSaleOrder.products[purchasedProductCounter].quantity * this.dtoSaleOrder.products[purchasedProductCounter].entityProduct.unitPrice - (this.dtoSaleOrder.products[purchasedProductCounter].quantity * this.dtoSaleOrder.products[purchasedProductCounter].entityProduct.unitPrice * this.dtoSaleOrder.products[purchasedProductCounter].discount / 100);
             this.dtoSaleOrder.products[purchasedProductCounter].total = currentPrice;
             totalPrice = totalPrice + currentPrice;
         }

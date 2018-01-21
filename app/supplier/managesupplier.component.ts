@@ -105,9 +105,9 @@ export class ManageSupplierComponent {
 
     saveSupplier(event: Event) {
         //check supplier first name
-        if (this.dtoSupplier.entityUser.firstName == null || this.dtoSupplier.entityUser.firstName == "") {
+        if (this.dtoSupplier.entityUser.userName == null || this.dtoSupplier.entityUser.userName == "") {
             //            this.manageSupplierSuccessMessage = "";
-            this.manageSupplierErrorMessage = "Enter supplier first name";
+            this.manageSupplierErrorMessage = "Name is required.";
             this.manageSupplierMessageDispalyModal.config.backdrop = false;
             this.manageSupplierMessageDispalyModal.show();
             return;

@@ -34,7 +34,7 @@
                                 </thead>
                                 <tbody>
                                     <tr class="cursor-pointer" *ngFor="let supplier of supplierList" (click)="selectedSupplier($event, supplier.entitySupplier.id)" [ngClass]="{'active': supplierId == supplier.entitySupplier.id }">
-                                        <td data-label="Name">{{supplier.entityUser.firstName}} {{supplier.entityUser.lastName}}</td>
+                                        <td data-label="Name">{{supplier.entityUser.userName}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -69,20 +69,20 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                            <span class="supplier-title">First Name<span class="required">*</span></span>
+                                            <span class="supplier-title">Name<span class="required">*</span></span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                            <input [(ngModel)]="dtoSupplier.entityUser.firstName" name="firstName" class="form-control">
+                                            <input [(ngModel)]="dtoSupplier.entityUser.userName" name="userName" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="row form-group">
+<!--                                    <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                             <span class="supplier-title">Last Name</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                             <input [(ngModel)]="dtoSupplier.entityUser.lastName" name="lastName" class="form-control">
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                             <span class="supplier-title">Balance</span>
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                            <span class="supplier-title">Name</span>
+                                            <span class="supplier-title">Full Name</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                             <input [(ngModel)]="dtoSupplier.entityUser.firstName"  name="firstName" class="form-control">
@@ -143,6 +143,14 @@
                             </div>
                         </tab>
                         <!--Supplier Extra Info Tab Ends-->
+                        
+                        <!--Product List Tab Starts-->
+                        <tab class="manage-supplier-right-side-tab" heading="Product List">
+                            <div class="row form-group">
+                                
+                            </div>
+                        </tab>
+                        <!--Product List Tab Ends-->
                     </tabset>
                 </div>
             </div>

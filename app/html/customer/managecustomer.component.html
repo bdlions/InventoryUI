@@ -66,20 +66,20 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                            <span class="supplier-title">First Name<span class="required">*</span></span>
+                                            <span class="supplier-title">Name<span class="required">*</span></span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                            <input [(ngModel)]="dtoCustomer.entityUser.firstName" id="{{dtoCustomer.entityUser.id}}" name="{{dtoCustomer.entityUser.id}}" class="form-control">
+                                            <input [(ngModel)]="dtoCustomer.entityUser.userName" name="userName" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="row form-group">
+<!--                                    <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                             <span class="supplier-title">Last Name</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                             <input [(ngModel)]="dtoCustomer.entityUser.lastName" id="{{dtoCustomer.entityUser.id}}" name="{{dtoCustomer.entityUser.id}}" class="form-control">
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                             <span class="supplier-title">Balance</span>
@@ -107,10 +107,10 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                            <span class="supplier-title">Name</span>
+                                            <span class="supplier-title">Full Name</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                            <input [(ngModel)]="dtoCustomer.entityUser.firstName" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
+                                            <input [(ngModel)]="dtoCustomer.entityUser.firstName" name="firstName" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -118,7 +118,7 @@
                                             <span class="supplier-title">Phone</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                            <input [(ngModel)]="dtoCustomer.entityUser.cell" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
+                                            <input [(ngModel)]="dtoCustomer.entityUser.cell" name="cell" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -126,7 +126,7 @@
                                             <span class="supplier-title">Email</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                            <input [(ngModel)]="dtoCustomer.entityUser.email" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
+                                            <input [(ngModel)]="dtoCustomer.entityUser.email" name="email" class="form-control">
                                         </div>
                                     </div>
                                 </div>

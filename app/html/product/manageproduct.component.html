@@ -235,6 +235,55 @@
                             </div>
                         </tab>
                         <!--Extra Info Tab Ends-->
+                        
+                        <!--Supplier List Tab Starts-->
+                        <tab class="manage-product-right-side-tab" heading="Supplier List">
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <table class="common-table adjust-input">
+                                        <thead>
+                                            <tr>
+                                                <th>Supplier<span class="required">*</span></th>
+                                                <th>Price<span class="required">*</span></th>
+                                                <th>Product Code<span class="required">*</span></th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td data-label="Supplier" (keypress)="showManageProductSupplierModal($event, 0)" (click)="showManageProductSupplierModal($event, 0)"><input class="form-control" ></td>
+                                                <td data-label="Price"><input class="form-control" ></td>
+                                                <td data-label="Product Code"><input class="form-control" ></td>
+                                                <td data-label="Action" class="text-center"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-wrapper manage-purchase-right-side-product-table">
+                                        <table class="common-table adjust-input">
+                                            <tbody>
+                                                <tr *ngFor="let entityProductSupplier of entityProductSupplierList">
+                                                    <td data-label="Supplier" (keypress)="showManageProductSupplierModal($event, entityProductSupplier.supplierUserId)" (click)="showManageProductSupplierModal($event, entityProductSupplier.supplierUserId)"><input class="form-control" value="{{entityProductSupplier.supplierUserName}}"></td>
+                                                    <td data-label="Price"><input class="form-control" [(ngModel)]="entityProductSupplier.supplierPrice"></td>
+                                                    <td data-label="Product Code"><input class="form-control" [(ngModel)]="entityProductSupplier.supplierProductCode"></td>
+                                                    <td data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showManageProductSelectedSupplierDeleteModal($event, entityProductSupplier.supplierUserId)" (click)="showManageProductSelectedSupplierDeleteModal($event, entityProductSupplier.supplierUserId)"></i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <table class="common-table">
+                                        <tfoot>
+                                            <tr class="cursor-pointer" (keypress)="showManageProductSupplierModal($event, 0)" (click)="showManageProductSupplierModal($event, 0)">
+                                                <td><i class="fa fa-plus"></i></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </tab>
+                        <!--Supplier List Tab Ends-->
                     </tabset>
                 </div>
             </div>
@@ -279,5 +328,126 @@
 </div>
 <!-- Manage Product Message Display Modal Ends-->
 
+<!-- Manage Product Supplier Modal Starts-->
+<div bsModal #manageProductSupplierModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-offset-2 col-xs-8  col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+                        <h4 class="modal-title">Supplier</h4>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideManageProductSupplierModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4>Search</h4>
+                    </div>
+                </div>
+                <form role="form" (submit)="searchManageProductSupplier($event)">
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Name</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <input [(ngModel)]="reqDTOSupplier.entitySupplier.supplierName" name="firstName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Phone</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <input [(ngModel)]="reqDTOSupplier.entitySupplier.cell" name="cell" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Email</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <input [(ngModel)]="reqDTOSupplier.entitySupplier.email" name="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="table-wrapper">
+                            <table class="common-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+<!--                                        <th>View</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let supplier of supplierList" (click)="selectedSupplier($event, supplier.entityUser.id)">
+                                        <td data-label="Name">{{supplier.entityUser.userName}}</td>
+                                        <td data-label="Phone">{{supplier.entityUser.cell}}</td>
+                                        <td data-label="Phone">{{supplier.entityUser.email}}</td>                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <mat-paginator [length]="supplierLength"
+                                [pageSize]="supplierPageSize"
+                                [pageSizeOptions]="supplierPageSizeOptions"
+                                (page)="onSupplierPaginateChange($event)">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Manage Product Supplier Modal Ends-->
 
+<!--Selected Supplier Delete Modal Starts-->
+<div bsModal #manageProductSelectedSupplierDeleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-offset-2 col-xs-8  col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+                        <h4 class="modal-title">Confirmation</h4>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideManageProductSelectedSupplierDeleteModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row margin-top-10px">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="text-center">Do you want to remove the supplier from this product? </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideManageProductSelectedSupplierDeleteModal()">No</button>
+                        <button type="button" class="custom-button" (click)="deleteSelectedSupplier($event)">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Selected Supplier Delete Modal Ends-->
 

@@ -8,10 +8,15 @@ import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
 import {TabsetComponent} from 'ngx-bootstrap';
 import {DTOProduct} from '../dto/DTOProduct';
+import {DTOSupplier} from '../dto/DTOSupplier';
+import {EntityUser} from '../dto/EntityUser';
+import {EntitySupplier} from "../dto/EntitySupplier";
+import {EntityProductSupplier} from "../dto/EntityProductSupplier";
 import {EntityProduct} from '../dto/EntityProduct';
 import {EntityProductCategory} from '../dto/EntityProductCategory';
 import {EntityProductType} from '../dto/EntityProductType';
 import {EntityUOM} from '../dto/EntityUOM';
+import {PageEvent} from '@angular/material';
 
 @Component({
     selector: 'app',
@@ -21,6 +26,8 @@ import {EntityUOM} from '../dto/EntityUOM';
 
 export class ManageProductComponent {
     @ViewChild('manageProductMessageDispalyModal') public manageProductMessageDispalyModal: ModalDirective;
+    @ViewChild('manageProductSupplierModal') public manageProductSupplierModal: ModalDirective;
+    @ViewChild('manageProductSelectedSupplierDeleteModal') public manageProductSelectedSupplierDeleteModal: ModalDirective;
     private webAPIService: WebAPIService;
     private subscribe: Subscription;
     private reqDTOProduct: DTOProduct;
@@ -41,6 +48,17 @@ export class ManageProductComponent {
     
     //constants & constraints
     private maxProductLeftPanel: number = 10;
+    
+    private entityProductSupplierList: EntityProductSupplier[];
+    
+    private reqDTOSupplier: DTOSupplier;
+    private supplierList: DTOSupplier[];
+    private supplierRequestId: number;
+    supplierLength = 0;
+    supplierPageSize = 10;
+    supplierPageSizeOptions = [5, 10];
+    
+    private supplierUserIdToBeDeleted: number;
 
     constructor(private router: Router, public route: ActivatedRoute, private navigationManager: NavigationManager, webAPIService: WebAPIService) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
@@ -67,6 +85,19 @@ export class ManageProductComponent {
         //this.fetchProductCategoryList();
         //this.fetchProductTypeList();
         //this.fetchUOMList();
+        
+        this.entityProductSupplierList = Array();
+        
+        this.reqDTOSupplier = new DTOSupplier();
+        this.reqDTOSupplier.entitySupplier = new EntitySupplier();
+        this.reqDTOSupplier.entityUser = new EntityUser();
+        this.reqDTOSupplier.limit = this.supplierPageSize;
+        this.reqDTOSupplier.offset = 0;
+        this.supplierRequestId = ACTION.FETCH_SUPPLIERS;
+        this.supplierList = Array();
+        this.fetchSupplierList();
+        
+        
 
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
@@ -87,9 +118,192 @@ export class ManageProductComponent {
             //console.log(this.productId);
         });
     }
-    public hideManageProductMessageDispalyModal(): void {
+    public hideManageProductMessageDispalyModal(): void 
+    {
         this.manageProductMessageDispalyModal.hide();
     }
+    public hideManageProductSupplierModal(): void 
+    {
+        this.manageProductSupplierModal.hide();
+    }
+    public hideManageProductSelectedSupplierDeleteModal(): void 
+    {
+        this.manageProductSelectedSupplierDeleteModal.hide();
+    }
+    
+    public showManageProductSupplierModal(event: Event, supplierUserId: number) 
+    {
+        this.manageProductSupplierModal.config.backdrop = false;
+        this.manageProductSupplierModal.show();
+    }
+    
+    
+    
+    public searchManageProductSupplier(event: Event) {
+        //this.fetchSupplierList();
+        
+        this.reqDTOSupplier.limit = this.supplierPageSize;
+        this.reqDTOSupplier.offset = 0;
+        if (this.reqDTOSupplier.entitySupplier.supplierName != null && this.reqDTOSupplier.entitySupplier.supplierName != "")
+        {
+            this.supplierRequestId = ACTION.FETCH_SUPPLIERS_BY_NAME;
+            this.fetchSupplierListByName();
+        }
+        else if (this.reqDTOSupplier.entitySupplier.cell != null && this.reqDTOSupplier.entitySupplier.cell != "")
+        {
+            this.supplierRequestId = ACTION.FETCH_SUPPLIERS_BY_CELL;
+            this.fetchSupplierListByCell();
+        }
+        else if (this.reqDTOSupplier.entitySupplier.email != null && this.reqDTOSupplier.entitySupplier.email != "")
+        {
+            this.supplierRequestId = ACTION.FETCH_SUPPLIERS_BY_EMAIL;
+            this.fetchSupplierListByEmail();
+        }
+        else
+        {
+            //if nothing is set then get all suppliers
+            this.supplierRequestId = ACTION.FETCH_SUPPLIERS;
+            this.fetchSupplierList();
+        }
+        
+    }
+    
+    public fetchSupplierListByName() {
+        let requestBody: string = JSON.stringify(this.reqDTOSupplier);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS_BY_NAME), requestBody).then(result => {
+            if (result.success && result.suppliers != null) {
+                this.supplierList = result.suppliers;
+                this.supplierLength = result.totalSuppliers;
+            }
+        });
+    }
+    
+    public fetchSupplierListByCell() {
+        let requestBody: string = JSON.stringify(this.reqDTOSupplier);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS_BY_CELL), requestBody).then(result => {
+            if (result.success && result.suppliers != null) {
+                this.supplierList = result.suppliers;
+                this.supplierLength = result.totalSuppliers;
+            }
+        });
+    }
+    
+    public fetchSupplierListByEmail() {
+        let requestBody: string = JSON.stringify(this.reqDTOSupplier);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS_BY_EMAIL), requestBody).then(result => {
+            if (result.success && result.suppliers != null) {
+                this.supplierList = result.suppliers;
+                this.supplierLength = result.totalSuppliers;
+            }
+        });
+    }
+    
+    public fetchSupplierList() {
+        let requestBody: string = JSON.stringify(this.reqDTOSupplier);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS), requestBody).then(result => {
+            if (result.success && result.suppliers != null) {
+                this.supplierList = result.suppliers;
+                this.supplierLength = result.totalSuppliers;
+            }
+        });
+    }
+    
+    
+    
+    onSupplierPaginateChange(event:PageEvent)
+    {
+        this.reqDTOSupplier.limit = event.pageSize;
+        this.reqDTOSupplier.offset = (event.pageIndex * event.pageSize) ;
+        if (this.supplierRequestId == ACTION.FETCH_SUPPLIERS)
+        {
+            this.fetchSupplierList();
+        }
+        else if (this.supplierRequestId == ACTION.FETCH_SUPPLIERS_BY_NAME)
+        {
+            this.fetchSupplierListByName();
+        }
+        else if (this.supplierRequestId == ACTION.FETCH_SUPPLIERS_BY_CELL)
+        {
+            this.fetchSupplierListByCell();
+        }
+        else if (this.supplierRequestId == ACTION.FETCH_SUPPLIERS_BY_EMAIL)
+        {
+            this.fetchSupplierListByEmail();
+        }
+    }
+    
+    public selectedSupplier(event: Event, supplierUserId: number) 
+    {
+        this.manageProductSupplierModal.config.backdrop = false;
+        this.manageProductSupplierModal.hide();
+        console.log(supplierUserId);
+        this.appendSupplierInProductSupplierList(supplierUserId);
+    }
+    
+    public appendSupplierInProductSupplierList(supplierUserId: number)
+    {
+        let dtoSupplier: DTOSupplier = new DTOSupplier();
+        for (let counter: number = 0; counter < this.supplierList.length; counter++)
+        {
+            if (this.supplierList[counter].entityUser.id == supplierUserId)
+            {
+                dtoSupplier = this.supplierList[counter];
+            }
+        }
+        if (dtoSupplier.entityUser.id <= 0)
+        {
+            return;
+        }
+        let entityProductSupplier: EntityProductSupplier = new EntityProductSupplier();
+        entityProductSupplier.supplierUserId = dtoSupplier.entityUser.id;
+        entityProductSupplier.supplierUserName = dtoSupplier.entityUser.userName;
+        let isAppend: boolean = true;
+        let tempEntityProductSupplierList: EntityProductSupplier[] = Array();
+        for (let counter: number = 0; counter < this.entityProductSupplierList.length; counter++)
+        {
+            if (this.entityProductSupplierList[counter].supplierUserId == dtoSupplier.entityUser.id)
+            {
+                isAppend = false;
+                tempEntityProductSupplierList[tempEntityProductSupplierList.length] = entityProductSupplier;
+            }
+            else
+            {
+                tempEntityProductSupplierList[tempEntityProductSupplierList.length] = this.entityProductSupplierList[counter];
+            }
+        }
+        if (isAppend)
+        {
+            tempEntityProductSupplierList[tempEntityProductSupplierList.length] = entityProductSupplier;
+        }  
+        this.entityProductSupplierList = tempEntityProductSupplierList;
+    }
+    
+    public showManageProductSelectedSupplierDeleteModal(event: Event, supplierUserId: number) 
+    {
+        this.manageProductSelectedSupplierDeleteModal.config.backdrop = false;
+        this.manageProductSelectedSupplierDeleteModal.show();
+        this.supplierUserIdToBeDeleted = supplierUserId;
+    }
+    
+    deleteSelectedSupplier(event: Event)
+    {
+        let tempEntityProductSupplierList: EntityProductSupplier[] = Array();
+        for (let counter: number = 0; counter < this.entityProductSupplierList.length; counter++)
+        {
+            if (this.entityProductSupplierList[counter].supplierUserId == this.supplierUserIdToBeDeleted)
+            {
+                //ignoring this supplier
+            }
+            else
+            {
+                tempEntityProductSupplierList[tempEntityProductSupplierList.length] = this.entityProductSupplierList[counter];
+            }
+        }
+        this.entityProductSupplierList = tempEntityProductSupplierList;
+        this.manageProductSelectedSupplierDeleteModal.config.backdrop = false;
+        this.manageProductSelectedSupplierDeleteModal.hide();
+    }
+    
     searchProduct(event: Event) {
         //console.log(this.searchEntityProduct.name);
 

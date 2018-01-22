@@ -49,7 +49,7 @@ export class ManageProductComponent {
     //constants & constraints
     private maxProductLeftPanel: number = 10;
     
-    private entityProductSupplierList: EntityProductSupplier[];
+    //private entityProductSupplierList: EntityProductSupplier[];
     
     private reqDTOSupplier: DTOSupplier;
     private supplierList: DTOSupplier[];
@@ -81,12 +81,11 @@ export class ManageProductComponent {
         this.dtoProduct.entityProduct = new EntityProduct();
         this.dtoProduct.entityProductType = new EntityProductType();
         this.dtoProduct.entityProductCategory = new EntityProductCategory();
+        this.dtoProduct.entityProductSupplierList = null;
 
         //this.fetchProductCategoryList();
         //this.fetchProductTypeList();
         //this.fetchUOMList();
-        
-        this.entityProductSupplierList = null;
         
         this.reqDTOSupplier = new DTOSupplier();
         this.reqDTOSupplier.entitySupplier = new EntitySupplier();
@@ -113,6 +112,7 @@ export class ManageProductComponent {
             this.dtoProduct.entityProduct = new EntityProduct();
             this.dtoProduct.entityProductType = new EntityProductType();
             this.dtoProduct.entityProductCategory = new EntityProductCategory();
+            this.dtoProduct.entityProductSupplierList = null;
             this.fetchProductCategoryList();
             
             //console.log(this.productId);
@@ -139,7 +139,7 @@ export class ManageProductComponent {
     
     setProductSupplierList(event: Event)
     {
-        if (this.entityProductSupplierList == null)
+        if (this.dtoProduct.entityProductSupplierList == null)
         {
             let entityProduct: EntityProduct = new EntityProduct();
             if (this.dtoProduct.entityProduct.id != null && this.dtoProduct.entityProduct.id > 0)
@@ -155,11 +155,11 @@ export class ManageProductComponent {
                 if (result.success) {
                     if(result.list != null)
                     {
-                        this.entityProductSupplierList = result.list;
+                        this.dtoProduct.entityProductSupplierList = result.list;
                     }
                     else
                     {
-                        this.entityProductSupplierList = Array();
+                        this.dtoProduct.entityProductSupplierList = Array();
                     }
                 }
             });
@@ -286,23 +286,23 @@ export class ManageProductComponent {
         entityProductSupplier.supplierUserName = dtoSupplier.entityUser.userName;
         let isAppend: boolean = true;
         let tempEntityProductSupplierList: EntityProductSupplier[] = Array();
-        for (let counter: number = 0; counter < this.entityProductSupplierList.length; counter++)
+        for (let counter: number = 0; counter < this.dtoProduct.entityProductSupplierList.length; counter++)
         {
-            if (this.entityProductSupplierList[counter].supplierUserId == dtoSupplier.entityUser.id)
+            if (this.dtoProduct.entityProductSupplierList[counter].supplierUserId == dtoSupplier.entityUser.id)
             {
                 isAppend = false;
                 tempEntityProductSupplierList[tempEntityProductSupplierList.length] = entityProductSupplier;
             }
             else
             {
-                tempEntityProductSupplierList[tempEntityProductSupplierList.length] = this.entityProductSupplierList[counter];
+                tempEntityProductSupplierList[tempEntityProductSupplierList.length] = this.dtoProduct.entityProductSupplierList[counter];
             }
         }
         if (isAppend)
         {
             tempEntityProductSupplierList[tempEntityProductSupplierList.length] = entityProductSupplier;
         }  
-        this.entityProductSupplierList = tempEntityProductSupplierList;
+        this.dtoProduct.entityProductSupplierList = tempEntityProductSupplierList;
     }
     
     public showManageProductSelectedSupplierDeleteModal(event: Event, supplierUserId: number) 
@@ -315,18 +315,18 @@ export class ManageProductComponent {
     deleteSelectedSupplier(event: Event)
     {
         let tempEntityProductSupplierList: EntityProductSupplier[] = Array();
-        for (let counter: number = 0; counter < this.entityProductSupplierList.length; counter++)
+        for (let counter: number = 0; counter < this.dtoProduct.entityProductSupplierList.length; counter++)
         {
-            if (this.entityProductSupplierList[counter].supplierUserId == this.supplierUserIdToBeDeleted)
+            if (this.dtoProduct.entityProductSupplierList[counter].supplierUserId == this.supplierUserIdToBeDeleted)
             {
                 //ignoring this supplier
             }
             else
             {
-                tempEntityProductSupplierList[tempEntityProductSupplierList.length] = this.entityProductSupplierList[counter];
+                tempEntityProductSupplierList[tempEntityProductSupplierList.length] = this.dtoProduct.entityProductSupplierList[counter];
             }
         }
-        this.entityProductSupplierList = tempEntityProductSupplierList;
+        this.dtoProduct.entityProductSupplierList = tempEntityProductSupplierList;
         this.manageProductSelectedSupplierDeleteModal.config.backdrop = false;
         this.manageProductSelectedSupplierDeleteModal.hide();
     }
@@ -397,7 +397,6 @@ export class ManageProductComponent {
         this.dtoProduct.entityProduct.typeId = this.dtoProduct.entityProductType.id;
         this.dtoProduct.entityProduct.typeTitle = this.dtoProduct.entityProductType.title;
 
-        this.dtoProduct.entityProductSupplierList = this.entityProductSupplierList;
         let requestBody: string = JSON.stringify(this.dtoProduct);        
         if (this.dtoProduct.entityProduct.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_PRODUCT_INFO), requestBody).then(result => {
@@ -469,7 +468,7 @@ export class ManageProductComponent {
         for (productCounter = 0; productCounter < this.productList.length; productCounter++) {
             if (this.productList[productCounter].id == productId) {
                 this.dtoProduct.entityProduct = this.productList[productCounter];
-
+                
                 for (let counter: number = 0; counter < this.productCategoryList.length; counter++) {
                     if (this.dtoProduct.entityProduct.categoryId == this.productCategoryList[counter].id) {
                         this.dtoProduct.entityProductCategory = this.productCategoryList[counter];
@@ -480,6 +479,8 @@ export class ManageProductComponent {
                         this.dtoProduct.entityProductType = this.productTypeList[counter];
                     }
                 }
+                this.dtoProduct.entityProductSupplierList = null;
+                this.setProductSupplierList(event);
             }
         }
     }

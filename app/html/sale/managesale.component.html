@@ -310,7 +310,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let customer of customerList" (click)="selectedCustomer($event, customer.entityCustomer.id)">
-                                        <td data-label="Name">{{customer.entityUser.firstName}} {{customer.entityUser.lastName}}</td>
+                                        <td data-label="Name">{{customer.entityUser.userName}}</td>
                                         <td data-label="Phone">{{customer.entityUser.cell}}</td>
                                         <td data-label="Phone">{{customer.entityUser.email}}</td>
                                         <!--<td data-label="View"><a href="#" (click)="selectedSaleOrderCustomer($event, customer.entityUser.id)">view</a></td>-->

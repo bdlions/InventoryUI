@@ -7,6 +7,7 @@ import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
 import {TabsetComponent} from 'ngx-bootstrap';
 import {EntityUser} from '../dto/EntityUser';
+import {EntityProductSupplier} from "../dto/EntityProductSupplier";
 import {EntitySupplier} from "../dto/EntitySupplier";
 import {EntityUserRole} from "../dto/EntityUserRole";
 import {DTOSupplier} from '../dto/DTOSupplier';
@@ -33,6 +34,8 @@ export class ManageSupplierComponent {
     //    private manageSupplierSuccessMessage: string;
     private manageSupplierErrorMessage: string;
     
+    private entityProductSupplierList: EntityProductSupplier[];
+    
     //constants & constraints
     private maxSupplierLeftPanel: number = 10;    
 
@@ -58,7 +61,8 @@ export class ManageSupplierComponent {
         this.dtoSupplier = new DTOSupplier();
         this.dtoSupplier.entitySupplier = new EntitySupplier();
         this.dtoSupplier.entityUser = new EntityUser();
-        this.dtoSupplier.entityUserRole = new EntityUserRole();
+        this.dtoSupplier.entityUserRole = new EntityUserRole();        
+        this.dtoSupplier.entityProductSupplierList = null;
 
         //this.dtoSupplier = JSON.parse("{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":1,\"userId\":3,\"remarks\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":3,\"firstName\":\"Nazmul\",\"lastName\":\"Hasan\",\"email\":\"supplier1@gmail.com\",\"cell\":\"01612341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}");
         //this.supplierList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":1,\"userId\":1,\"remarks\":\"remarks of supplier1\",\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":1,\"firstName\":\"Nazmul\",\"lastName\":\"Hasan\",\"email\":\"supplier1@gmail.com\",\"cell\":\"01612341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true},{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":2,\"userId\":2,\"remarks\":\"remarks of supplier2\",\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":2,\"firstName\":\"Nazmul\",\"lastName\":\"Islam\",\"email\":\"supplier2@gmail.com\",\"cell\":\"01912341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}]");
@@ -75,6 +79,35 @@ export class ManageSupplierComponent {
             this.reqDTOSupplier.entitySupplier.id = supplierId;
             this.fetchSupplierInfo();
         });
+    }
+
+    setProductSupplierList(event: Event)
+    {
+        if (this.dtoSupplier.entityProductSupplierList == null)
+        {
+            let entityUser: EntityUser = new EntityUser();
+            if (this.dtoSupplier.entityUser.id != null && this.dtoSupplier.entityUser.id > 0)
+            {
+                entityUser.id = this.dtoSupplier.entityUser.id;
+            }
+            else
+            {
+                entityUser.id = 0;
+            }
+            let requestBody: string = JSON.stringify(entityUser);
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIER_PRODUCT_LIST), requestBody).then(result => {
+                if (result.success) {
+                    if(result.list != null)
+                    {
+                        this.dtoSupplier.entityProductSupplierList = result.list;
+                    }
+                    else
+                    {
+                        this.dtoSupplier.entityProductSupplierList = Array();
+                    }
+                }
+            });
+        }
     }
 
     public hideManageSupplierMessageDispalyModal(): void {
@@ -194,6 +227,7 @@ export class ManageSupplierComponent {
         for (supplierCounter = 0; supplierCounter < this.supplierList.length; supplierCounter++) {
             if (this.supplierList[supplierCounter].entitySupplier.id == supplierId) {
                 this.dtoSupplier = this.supplierList[supplierCounter];
+                this.setProductSupplierList(event);
             }
         }
     }
@@ -229,6 +263,7 @@ export class ManageSupplierComponent {
             console.log(result);
             if (result.success) {
                 this.dtoSupplier = result;
+                this.dtoSupplier.entityProductSupplierList = null;
             }
         });
     }

@@ -261,7 +261,7 @@
                                     <div class="table-wrapper manage-purchase-right-side-product-table">
                                         <table class="common-table adjust-input">
                                             <tbody>
-                                                <tr *ngFor="let entityProductSupplier of entityProductSupplierList">
+                                                <tr *ngFor="let entityProductSupplier of dtoProduct.entityProductSupplierList">
                                                     <td data-label="Supplier" (keypress)="showManageProductSupplierModal($event, entityProductSupplier.supplierUserId)" (click)="showManageProductSupplierModal($event, entityProductSupplier.supplierUserId)"><input class="form-control" value="{{entityProductSupplier.supplierUserName}}"></td>
                                                     <td data-label="Price"><input class="form-control" [(ngModel)]="entityProductSupplier.supplierPrice"></td>
                                                     <td data-label="Product Code"><input class="form-control" [(ngModel)]="entityProductSupplier.supplierProductCode"></td>

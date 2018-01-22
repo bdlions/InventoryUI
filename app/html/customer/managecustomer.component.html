@@ -33,7 +33,7 @@
                                 </thead>
                                 <tbody>
                                     <tr class="cursor-pointer" *ngFor="let customer of customerList" (click)="selectedCustomer($event, customer.entityCustomer.id)" [ngClass]="{'active': customerId == customer.entityCustomer.id }">
-                                        <td data-label="Name">{{customer.entityUser.firstName}} {{customer.entityUser.lastName}}</td>
+                                        <td data-label="Name">{{customer.entityUser.userName}}</td>
                                     </tr>
                                 </tbody>
                             </table>

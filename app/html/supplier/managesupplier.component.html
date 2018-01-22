@@ -145,9 +145,34 @@
                         <!--Supplier Extra Info Tab Ends-->
                         
                         <!--Product List Tab Starts-->
-                        <tab class="manage-supplier-right-side-tab" heading="Product List">
+                        <tab (select)="setProductSupplierList($event)" class="manage-product-right-side-tab" heading="Product List">
                             <div class="row form-group">
-                                
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <table class="common-table adjust-input">
+                                        <thead>
+                                            <tr>
+                                                <th>Product<span class="required"></span></th>
+                                                <th>Price<span class="required"></span></th>
+                                                <th>Product Code<span class="required"></span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        </tbody>
+                                    </table>
+                                    <div class="table-wrapper manage-purchase-right-side-product-table">
+                                        <table class="common-table adjust-input">
+                                            <tbody>
+                                                <tr *ngFor="let entityProductSupplier of dtoSupplier.entityProductSupplierList">
+                                                    <td data-label="Supplier">{{entityProductSupplier.productName}}</td>
+                                                    <td data-label="Price">{{entityProductSupplier.supplierPrice}}</td>
+                                                    <td data-label="Product Code">{{entityProductSupplier.supplierProductCode}}</td>
+                                                    
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>                                    
+                                </div>
                             </div>
                         </tab>
                         <!--Product List Tab Ends-->

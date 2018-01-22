@@ -110,6 +110,9 @@ export class PacketHeaderFactory {
                 break;
             case ACTION.FETCH_SALE_ORDERS_BY_CELL:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
+            case ACTION.FETCH_PRODUCT_SUPPLIER_LIST:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break; 
                 
             case ACTION.ADD_PRODUCT_INFO:

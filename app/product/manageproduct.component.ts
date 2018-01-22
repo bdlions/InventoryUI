@@ -86,7 +86,7 @@ export class ManageProductComponent {
         //this.fetchProductTypeList();
         //this.fetchUOMList();
         
-        this.entityProductSupplierList = Array();
+        this.entityProductSupplierList = null;
         
         this.reqDTOSupplier = new DTOSupplier();
         this.reqDTOSupplier.entitySupplier = new EntitySupplier();
@@ -137,7 +137,34 @@ export class ManageProductComponent {
         this.manageProductSupplierModal.show();
     }
     
-    
+    setProductSupplierList(event: Event)
+    {
+        if (this.entityProductSupplierList == null)
+        {
+            let entityProduct: EntityProduct = new EntityProduct();
+            if (this.dtoProduct.entityProduct.id != null && this.dtoProduct.entityProduct.id > 0)
+            {
+                entityProduct.id = this.dtoProduct.entityProduct.id;
+            }
+            else
+            {
+                entityProduct.id = 0;
+            }
+            let requestBody: string = JSON.stringify(entityProduct);
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCT_SUPPLIER_LIST), requestBody).then(result => {
+                if (result.success) {
+                    if(result.list != null)
+                    {
+                        this.entityProductSupplierList = result.list;
+                    }
+                    else
+                    {
+                        this.entityProductSupplierList = Array();
+                    }
+                }
+            });
+        }
+    }
     
     public searchManageProductSupplier(event: Event) {
         //this.fetchSupplierList();
@@ -325,7 +352,8 @@ export class ManageProductComponent {
         this.dtoProduct = new DTOProduct();
         this.dtoProduct.entityProduct = new EntityProduct();
         this.dtoProduct.entityProductCategory = new EntityProductCategory();
-        this.dtoProduct.entityProductType = new EntityProductType();
+        this.dtoProduct.entityProductType = new EntityProductType();  
+        this.dtoProduct.entityProductSupplierList = Array();      
 
     }
     saveProduct(event: Event) {
@@ -369,7 +397,8 @@ export class ManageProductComponent {
         this.dtoProduct.entityProduct.typeId = this.dtoProduct.entityProductType.id;
         this.dtoProduct.entityProduct.typeTitle = this.dtoProduct.entityProductType.title;
 
-        let requestBody: string = JSON.stringify(this.dtoProduct.entityProduct);
+        this.dtoProduct.entityProductSupplierList = this.entityProductSupplierList;
+        let requestBody: string = JSON.stringify(this.dtoProduct);        
         if (this.dtoProduct.entityProduct.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_PRODUCT_INFO), requestBody).then(result => {
                 console.log(result);

@@ -512,13 +512,13 @@ export class ManageSaleComponent {
         }
         
         //check customer selection
-        if (this.dtoCustomer.entityUser.firstName == null || this.dtoCustomer.entityUser.firstName == "") {
+        /*if (this.dtoCustomer.entityUser.firstName == null || this.dtoCustomer.entityUser.firstName == "") {
             //            this.manageSaleSuccessMessage = "";
             this.manageSaleErrorMessage = "Select a customer";
             this.manageSaleMessageDispalyModal.config.backdrop = false;
             this.manageSaleMessageDispalyModal.show();
             return;
-        }
+        }*/
         //check product selection
         if (this.dtoSaleOrder.products == null) {
             //            this.manageSaleSuccessMessage = "";

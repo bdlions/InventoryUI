@@ -464,7 +464,8 @@ export class ManageSaleComponent {
             this.dtoSaleOrder.products[purchasedProductCounter].total = currentPrice;
             totalPrice = totalPrice + currentPrice;
         }
-        this.dtoSaleOrder.entitySaleOrder.total = totalPrice;
+        this.dtoSaleOrder.entitySaleOrder.subtotal = totalPrice;
+        this.dtoSaleOrder.entitySaleOrder.total = (totalPrice - this.dtoSaleOrder.entitySaleOrder.discount);
     }
     //sale save/update section
     public newSaleOrder(event: Event) {

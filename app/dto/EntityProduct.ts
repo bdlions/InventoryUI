@@ -7,7 +7,8 @@ export class EntityProduct {
     width: string;
     height: string;
     weight: string;
-    unitPrice: number;
+    costPrice: number = 0;
+    unitPrice: number = 0;
     length: string;
     typeId: number;
     typeTitle: string;

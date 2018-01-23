@@ -7,10 +7,11 @@ export class EntitySaleOrder {
     email: string;
     statusId: number;
     saleDate: number;
-    discount: number;
     remarks: string;
-    total: number;
-    paid: number;
+    subtotal: number = 0;
+    discount: number = 0;
+    total: number = 0;
+    paid: number = 0;
     createdOn: number;
     modifiedOn: number;
 }

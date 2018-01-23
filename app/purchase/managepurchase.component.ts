@@ -9,7 +9,7 @@ import {TabsetComponent} from 'ngx-bootstrap';
 
 import {DTOPurchaseOrder} from '../dto/DTOPurchaseOrder';
 import {EntityPurchaseOrder} from '../dto/EntityPurchaseOrder';
-
+import {EntityProductSupplier} from "../dto/EntityProductSupplier";
 import {EntityUser} from '../dto/EntityUser';
 import {EntitySupplier} from "../dto/EntitySupplier";
 import {EntityUserRole} from "../dto/EntityUserRole";
@@ -67,6 +67,8 @@ export class ManagePurchaseComponent {
     private productRequestId: number;
     private supplierRequestId: number;
     
+    private entityProductSupplierList: EntityProductSupplier[];
+    
     // MatPaginator Inputs
     productLength = 0;
     productPageSize = 10;
@@ -80,6 +82,8 @@ export class ManagePurchaseComponent {
     
     constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
+
+        this.entityProductSupplierList = Array();
 
         this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
         this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
@@ -113,6 +117,7 @@ export class ManagePurchaseComponent {
 
         this.fetchProductCategoryList();
         this.fetchProductTypeList();
+        
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = this.productPageSize;
@@ -123,24 +128,12 @@ export class ManagePurchaseComponent {
         
         this.searchEntityProduct = new EntityProduct();
         this.entityProduct = JSON.parse("{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"length\":\"10 cm\",\"width\":\"20 cm\",\"height\":\"30 cm\",\"weight\":\"40 cm\",\"remark\":\"This is a good product...\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}");
-        //this.productCategoryList = JSON.parse("[{\"id\":1,\"title\":\"Product category1\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"title\":\"Product category2\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
-        //this.productTypeList = JSON.parse("[{\"id\":1,\"title\":\"Product type1\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"title\":\"Product type2\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
-        //this.uomList = JSON.parse("[{\"id\":1,\"title\":\"UOM1\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"title\":\"UOM2\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
-        //this.productList = JSON.parse("[{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"name\":\"product2\",\"code\":\"code2\",\"categoryId\":2,\"categoryTitle\":\"Product category2\",\"typeId\":2,\"typeTitle\":\"Product type2\",\"unitPrice\":20.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":3,\"name\":\"product3\",\"code\":\"code3\",\"categoryId\":3,\"categoryTitle\":\"Product category3\",\"typeId\":3,\"typeTitle\":\"Product type3\",\"unitPrice\":30.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":4,\"name\":\"product4\",\"code\":\"code4\",\"categoryId\":4,\"categoryTitle\":\"Product category4\",\"typeId\":4,\"typeTitle\":\"Product type4\",\"unitPrice\":40.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":5,\"name\":\"product5\",\"code\":\"code5\",\"categoryId\":5,\"categoryTitle\":\"Product category5\",\"typeId\":5,\"typeTitle\":\"Product type5\",\"unitPrice\":50.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":6,\"name\":\"product6\",\"code\":\"code6\",\"categoryId\":6,\"categoryTitle\":\"Product category6\",\"typeId\":6,\"typeTitle\":\"Product type6\",\"unitPrice\":60.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":7,\"name\":\"product7\",\"code\":\"code7\",\"categoryId\":7,\"categoryTitle\":\"Product category7\",\"typeId\":7,\"typeTitle\":\"Product type17\",\"unitPrice\":70.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":8,\"name\":\"product8\",\"code\":\"code8\",\"categoryId\":8,\"categoryTitle\":\"Product category8\",\"typeId\":8,\"typeTitle\":\"Product type8\",\"unitPrice\":80.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":9,\"name\":\"product9\",\"code\":\"code9\",\"categoryId\":9,\"categoryTitle\":\"Product category9\",\"typeId\":9,\"typeTitle\":\"Product type9\",\"unitPrice\":90.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":10,\"name\":\"product10\",\"code\":\"code1\",\"categoryId\":10,\"categoryTitle\":\"Product category10\",\"typeId\":10,\"typeTitle\":\"Product type10\",\"unitPrice\":100.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":11,\"name\":\"product11\",\"code\":\"code11\",\"categoryId\":11,\"categoryTitle\":\"Product category11\",\"typeId\":11,\"typeTitle\":\"Product type11\",\"unitPrice\":110.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":12,\"name\":\"product12\",\"code\":\"code12\",\"categoryId\":12,\"categoryTitle\":\"Product category12\",\"typeId\":12,\"typeTitle\":\"Product type12\",\"unitPrice\":120.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
     }
 
     ngOnInit() {
         this.subscribe = this.route.params.subscribe(params => {
             this.orderNo = params['orderNo'];
             this.setPurchaseOrderInfo(this.orderNo);
-
-
-
-            //this.dtoPurchaseOrder = JSON.parse("{\"limit\":12,\"offset\":0,\"entityPurchaseOrder\":{\"id\":1,\"orderNo\":\"order1\",\"supplierUserId\":3,\"orderDate\":0,\"requestedShipDate\":0,\"subtotal\":0.0,\"discount\":0.0,\"total\":0.0,\"paid\":0.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoSupplier\":{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":0,\"userId\":0,\"remarks\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":0,\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false}");
-            //this.dtoPurchaseOrder.products = JSON.parse("[{\"limit\":10, \"offset\":0, \"quantity\":50, \"entityProduct\":{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}},{\"limit\":10, \"offset\":0, \"quantity\":100, \"entityProduct\":{\"id\":2,\"name\":\"product2\",\"code\":\"code2\",\"categoryId\":2,\"categoryTitle\":\"Product category2\",\"typeId\":2,\"typeTitle\":\"Product type2\",\"unitPrice\":20.0,\"standardUOMId\":20,\"saleUOMId\":20,\"purchaseUOMId\":20,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}},{\"limit\":10, \"offset\":0, \"quantity\":50, \"entityProduct\":{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}},{\"limit\":10, \"offset\":0, \"quantity\":100, \"entityProduct\":{\"id\":2,\"name\":\"product2\",\"code\":\"code2\",\"categoryId\":2,\"categoryTitle\":\"Product category2\",\"typeId\":2,\"typeTitle\":\"Product type2\",\"unitPrice\":20.0,\"standardUOMId\":20,\"saleUOMId\":20,\"purchaseUOMId\":20,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}},{\"limit\":10, \"offset\":0, \"quantity\":50, \"entityProduct\":{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}},{\"limit\":10, \"offset\":0, \"quantity\":100, \"entityProduct\":{\"id\":2,\"name\":\"product2\",\"code\":\"code2\",\"categoryId\":2,\"categoryTitle\":\"Product category2\",\"typeId\":2,\"typeTitle\":\"Product type2\",\"unitPrice\":20.0,\"standardUOMId\":20,\"saleUOMId\":20,\"purchaseUOMId\":20,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}},{\"limit\":10, \"offset\":0, \"quantity\":50, \"entityProduct\":{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}},{\"limit\":10, \"offset\":0, \"quantity\":100, \"entityProduct\":{\"id\":2,\"name\":\"product2\",\"code\":\"code2\",\"categoryId\":2,\"categoryTitle\":\"Product category2\",\"typeId\":2,\"typeTitle\":\"Product type2\",\"unitPrice\":20.0,\"standardUOMId\":20,\"saleUOMId\":20,\"purchaseUOMId\":20,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}}]");
-            //console.log(this.orderNo);
-            //console.log(this.dtoPurchaseOrder);
-            //console.log(this.dtoPurchaseOrder.products);
         });
     }
 
@@ -171,36 +164,6 @@ export class ManagePurchaseComponent {
         console.log(id);
     }
 
-
-    //    purchaseOrderProductPagination(event: Event) {
-    //        let counter: number;
-    //        let limit: number;
-    //        let products: number;
-    //        counter = 0;
-    //        limit = this.dtoPurchaseOrder.limit;
-    //        products = this.dtoPurchaseOrder.products.length;
-    //        if (products == 0) {
-    //            
-    //        }
-    //        if ((products % limit) == 0) {
-    //            for (limit = 10; limit < products; limit + 10) {
-    //                  counter = counter + 1;
-    //            }
-    //             //console.log(counter);
-    //        }
-    //        else {
-    //            for (limit = 10; limit < products; limit + 10) {
-    //                  counter = counter + 1;
-    //            }
-    //            counter = counter + 1;
-    //             //console.log(counter);
-    //        }
-    //
-    //    }
-
-    //    test(event: Event) {
-    //        this.dtoPurchaseOrder.products[this.dtoPurchaseOrder.products.length] = JSON.parse("{\"limit\":10, \"offset\":0, \"quantity\":50, \"entityProduct\":{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}}");
-    //    }
     public hidePurchaseOrderSupplierModal(): void {
         this.purchaseOrderSupplierModal.hide();
     }
@@ -309,8 +272,35 @@ export class ManagePurchaseComponent {
             if (this.supplierList[supplierCounter].entitySupplier.id == supplierId) {
                 this.dtoSupplier = this.supplierList[supplierCounter];
                 this.dtoPurchaseOrder.entityPurchaseOrder.supplierUserId = this.dtoSupplier.entityUser.id;
+                this.fetchSupplierProductList(this.dtoSupplier.entityUser.id);
             }
         }
+    }
+    
+    fetchSupplierProductList(supplierUserId: number)
+    {
+        let entityUser: EntityUser = new EntityUser();
+        entityUser.id = supplierUserId;
+        let requestBody: string = JSON.stringify(entityUser);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIER_PRODUCT_LIST), requestBody).then(result => {
+            if (result.success) {
+                if(result.list != null)
+                {
+                    this.entityProductSupplierList = result.list;
+                    for (let counter1: number = 0; counter1 < this.entityProductSupplierList.length; counter1++)
+                    {
+                        for (let counter2: number = 0; counter2 < this.dtoPurchaseOrder.products.length; counter2++)
+                        {
+                            if (this.entityProductSupplierList[counter1].productId == this.dtoPurchaseOrder.products[counter2].entityProduct.id)
+                            {
+                                this.dtoPurchaseOrder.products[counter2].entityProduct.costPrice = this.entityProductSupplierList[counter1].supplierPrice;
+                            }
+                        }
+                    }
+                    this.calculateBalance();
+                }
+            }
+        });
     }
 
     //product section
@@ -398,6 +388,19 @@ export class ManagePurchaseComponent {
                 dtoProduct.entityProduct = this.productList[productCounter];
             }
         }
+        console.log(this.productList);
+        console.log(this.entityProductSupplierList);
+        if (this.entityProductSupplierList != null && this.entityProductSupplierList.length > 0)
+        {
+            for (let counter1: number = 0; counter1 < this.entityProductSupplierList.length; counter1++)
+            {
+                if (this.entityProductSupplierList[counter1].productId == dtoProduct.entityProduct.id)
+                {
+                    dtoProduct.entityProduct.costPrice = this.entityProductSupplierList[counter1].supplierPrice;
+                }
+            }
+        }
+        console.log(dtoProduct);
         let purchasedProductCounter: number;
         if (this.productIdToPopupSelectProduct == 0 && dtoProduct.entityProduct.id > 0) {
             let isAppend: boolean = true;
@@ -468,11 +471,12 @@ export class ManagePurchaseComponent {
         let totalPrice: number = 0;
         let purchasedProductCounter: number;
         for (purchasedProductCounter = 0; purchasedProductCounter < this.dtoPurchaseOrder.products.length; purchasedProductCounter++) {
-            let currentPrice: number = this.dtoPurchaseOrder.products[purchasedProductCounter].quantity * this.dtoPurchaseOrder.products[purchasedProductCounter].entityProduct.unitPrice - (this.dtoPurchaseOrder.products[purchasedProductCounter].quantity * this.dtoPurchaseOrder.products[purchasedProductCounter].entityProduct.unitPrice * this.dtoPurchaseOrder.products[purchasedProductCounter].discount / 100 );
+            let currentPrice: number = this.dtoPurchaseOrder.products[purchasedProductCounter].quantity * this.dtoPurchaseOrder.products[purchasedProductCounter].entityProduct.costPrice - (this.dtoPurchaseOrder.products[purchasedProductCounter].quantity * this.dtoPurchaseOrder.products[purchasedProductCounter].entityProduct.costPrice * this.dtoPurchaseOrder.products[purchasedProductCounter].discount / 100 );
             this.dtoPurchaseOrder.products[purchasedProductCounter].total = currentPrice;
             totalPrice = totalPrice + currentPrice;
         }
-        this.dtoPurchaseOrder.entityPurchaseOrder.total = totalPrice;
+        this.dtoPurchaseOrder.entityPurchaseOrder.subtotal = totalPrice;
+        this.dtoPurchaseOrder.entityPurchaseOrder.total = (totalPrice - this.dtoPurchaseOrder.entityPurchaseOrder.discount);
     }
 
     //purchase add/save section
@@ -505,6 +509,10 @@ export class ManagePurchaseComponent {
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = 10;
         this.reqDTOProduct.offset = 0;
+        this.productRequestId = ACTION.FETCH_PRODUCTS;
+        this.fetchProductList();
+        
+        this.entityProductSupplierList = Array();
     }
 
     public savePurchaseOrder(event: Event) {

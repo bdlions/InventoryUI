@@ -145,7 +145,7 @@
                                                 <tr *ngFor="let product of dtoPurchaseOrder.products">
                                                     <td data-label="Item" (keypress)="showPurchaseOrderProductModal($event, product.entityProduct.id)" (click)="showPurchaseOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
                                                     <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
-                                                    <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance()"></td>
+                                                    <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.costPrice" (change)="calculateBalance()"></td>
                                                     <td data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
                                                     <td data-label="Sub-Total"><label>{{product.total}}</label></td>
                                                     <td data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
@@ -167,38 +167,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <!--                                    <div class="row">
-                                                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
-                                                                        <div class="cursor-pointer" (click)="purchaseOrderProductPagination($event)">
-                                                                            <div><i class="fa fa-plus"></i></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-11">
-                                                                        <nav aria-label="Page navigation example">
-                                                                            <ul class="pagination">
-                                                                                <li class="page-item">
-                                                                                    <a class="page-link" href="#" aria-label="Previous">
-                                                                                        <span aria-hidden="true">&laquo;</span>
-                                                                                        <span class="sr-only">Previous</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                                                <li class="page-item">
-                                                                                    <a class="page-link" href="#" aria-label="Next">
-                                                                                        <span aria-hidden="true">&raquo;</span>
-                                                                                        <span class="sr-only">Next</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </nav>
-                                                                    </div>
-                                                                </div>-->
                             <div class="row form-group">
-                                <!--                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                
-                                                                    </div>-->
                                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
@@ -210,14 +179,14 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                    <!--                                        <div class="row form-group">
-                                                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                                                                    <span class="purchase-order-title">Sub-total</span>
-                                                                                </div>
-                                                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                                                                    <label name="subtotal">{{dtoPurchaseOrder.entityPurchaseOrder.subtotal}}</label>
-                                                                                </div>
-                                                                            </div>-->
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="purchase-order-title">Discount</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input (change)="calculateBalance()" [(ngModel)]="dtoPurchaseOrder.entityPurchaseOrder.discount" name="discount" class="form-control">
+                                        </div>
+                                    </div>
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                             <span class="purchase-order-title">Total</span>

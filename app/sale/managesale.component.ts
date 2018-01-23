@@ -500,15 +500,17 @@ export class ManageSaleComponent {
     }
 
     saveSaleOrder(event: Event) {
-        //console.log(this.stockProductList);
-        //check sale order no
-        if (this.dtoSaleOrder.entitySaleOrder.orderNo == null || this.dtoSaleOrder.entitySaleOrder.orderNo == "") {
-            //            this.manageSaleSuccessMessage = "";
-            this.manageSaleErrorMessage = "Invalid sale order no.";
-            this.manageSaleMessageDispalyModal.config.backdrop = false;
-            this.manageSaleMessageDispalyModal.show();
-            return;
+        if (this.dtoSaleOrder.entitySaleOrder.id > 0) 
+        {
+            //order is required to update order
+            if (this.dtoSaleOrder.entitySaleOrder.orderNo == null || this.dtoSaleOrder.entitySaleOrder.orderNo == "") {
+                this.manageSaleErrorMessage = "Order No is required.";
+                this.manageSaleMessageDispalyModal.config.backdrop = false;
+                this.manageSaleMessageDispalyModal.show();
+                return;
+            }
         }
+        
         //check customer selection
         if (this.dtoCustomer.entityUser.firstName == null || this.dtoCustomer.entityUser.firstName == "") {
             //            this.manageSaleSuccessMessage = "";
@@ -537,59 +539,17 @@ export class ManageSaleComponent {
                 return;
             }
         }
-
-        //check current stock before saving sale order
-        /*let tempProductList: DTOProduct[] = this.dtoSaleOrder.products;
-        let productCounter: number = 0;
-        let isValidStock: boolean = false;
-        for (productCounter = 0; productCounter < tempProductList.length; productCounter++) {
-            let tempValid: boolean = false;
-            let stockProductCounter: number = 0;
-            for (stockProductCounter = 0; stockProductCounter < this.stockProductList.length; stockProductCounter++) {
-                if (tempProductList[productCounter].entityProduct.id == this.stockProductList[stockProductCounter].entityProduct.id && tempProductList[productCounter].quantity <= this.stockProductList[stockProductCounter].quantity) {
-                    tempValid = true;
-                }
-            }
-            if (tempValid) {
-                isValidStock = true;
-            }
-            else {
-                this.manageSaleErrorMessage = "Insufficient Stock for the product : " + tempProductList[productCounter].entityProduct.name;
-            }
-        }
-        if (!isValidStock) {
-            this.manageSaleMessageDispalyModal.config.backdrop = false;
-            this.manageSaleMessageDispalyModal.show();
-            return;
-        }*/
-       
+      
         let requestBody: string = JSON.stringify(this.dtoSaleOrder);
         if (this.dtoSaleOrder.entitySaleOrder.id == 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_SALE_ORDER_INFO), requestBody).then(result => {
                 if (result.success) {
                     this.dtoSaleOrder.entitySaleOrder.id = result.entitySaleOrder.id;
+                    this.dtoSaleOrder.entitySaleOrder.orderNo = result.entitySaleOrder.orderNo;
                     this.manageSaleOrderUpdateLeftPanel();
-                    
-                    //                    this.manageSaleSuccessMessage = result.message;
-                    //this.manageSaleErrorMessage = "";
-
-                    //this.resetSaleOrder();
-
-                    //update left panel sale order list
-                    //this.reqDTOSaleOrder = new DTOSaleOrder();
-                    //this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
-                    //this.reqDTOSaleOrder.limit = 10;
-                    //this.reqDTOSaleOrder.offset = 0;
-                    //this.fetchSaleOrderList();
-
-                    //update current stock
-                    //this.reqStockDTOProduct = new DTOProduct();
-                    //this.reqStockDTOProduct.entityProduct = new EntityProduct();
-                    //this.reqStockDTOProduct.limit = 10;
-                    //this.reqStockDTOProduct.offset = 0;
-                    //this.fetchCurrentStock();
                 }
-                else {
+                else 
+                {
                     //                    this.manageSaleSuccessMessage = "";
                     this.manageSaleErrorMessage = result.message;
 

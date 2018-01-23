@@ -516,13 +516,14 @@ export class ManagePurchaseComponent {
     }
 
     public savePurchaseOrder(event: Event) {
-        //check purchase order no
-        if (this.dtoPurchaseOrder.entityPurchaseOrder.orderNo == null || this.dtoPurchaseOrder.entityPurchaseOrder.orderNo == "") {
-            //            this.managePurchaseSuccessMessage = "";
-            this.managePurchaseErrorMessage = "Invalid purchase order no.";
-            this.managePurchaseMessageDispalyModal.config.backdrop = false;
-            this.managePurchaseMessageDispalyModal.show();
-            return;
+        if (this.dtoPurchaseOrder.entityPurchaseOrder.id > 0) {
+            //order is required to update order
+            if (this.dtoPurchaseOrder.entityPurchaseOrder.orderNo == null || this.dtoPurchaseOrder.entityPurchaseOrder.orderNo == "") {
+                this.managePurchaseErrorMessage = "Order No is required";
+                this.managePurchaseMessageDispalyModal.config.backdrop = false;
+                this.managePurchaseMessageDispalyModal.show();
+                return;
+            }
         }
         //check supplier selection
         if (this.dtoSupplier.entityUser.firstName == null || this.dtoSupplier.entityUser.firstName == "") {
@@ -560,6 +561,7 @@ export class ManagePurchaseComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PURCHASE_ORDER_INFO), requestBody).then(result => {
                 if (result.success) {
                     this.dtoPurchaseOrder.entityPurchaseOrder.id = result.entityPurchaseOrder.id;
+                    this.dtoPurchaseOrder.entityPurchaseOrder.orderNo = result.entityPurchaseOrder.orderNo;
                     this.managePurchaseOrderUpdateLeftPanel();
                     //set success message
                     //                    this.managePurchaseSuccessMessage = result.message;

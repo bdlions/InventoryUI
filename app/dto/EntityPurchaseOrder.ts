@@ -1,6 +1,7 @@
 export class EntityPurchaseOrder {
     id: number;
     orderNo: string;
+    nextOrderNo: number;
     supplierUserId: number;
     supplierName: string;
     cell: string;

@@ -18,7 +18,6 @@ import {DTOCustomer} from '../dto/DTOCustomer';
 import {EntityProduct} from '../dto/EntityProduct';
 import {EntityProductCategory} from '../dto/EntityProductCategory';
 import {EntityProductType} from '../dto/EntityProductType';
-import {EntityUOM} from '../dto/EntityUOM';
 import {DTOProduct} from '../dto/DTOProduct';
 import {PageEvent} from '@angular/material';
 
@@ -44,23 +43,14 @@ export class ManageSaleComponent {
     private reqDTOCustomer: DTOCustomer;
     private dtoCustomer: DTOCustomer;
     private customerList: DTOCustomer[];
-    //private searchDTOCustomer: DTOCustomer;
-
+    
     private reqDTOProduct: DTOProduct;
-    //private entityProduct: EntityProduct;
-    //private searchEntityProduct: EntityProduct;
     private productCategoryList: EntityProductCategory[];
     private productTypeList: EntityProductType[];
-    //private uomList: EntityUOM[];
     private productList: EntityProduct[];
-    //private productId: number;
     private productIdToPopupSelectProduct: number;
     private productIdToPopupDeleteProduct: number;
 
-    //private reqStockDTOProduct: DTOProduct;
-    //private stockProductList: DTOProduct[];
-
-    //    private manageSaleSuccessMessage : string;
     private manageSaleErrorMessage: string;
     
     private barcode: string = "";
@@ -89,8 +79,7 @@ export class ManageSaleComponent {
         this.reqDTOSaleOrder.limit = 10;
         this.reqDTOSaleOrder.offset = 0;
         this.fetchSaleOrderList();
-        //this.saleOrderList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entitySaleOrder\":{\"id\":1,\"orderNo\":\"order1\",\"customerUserId\":4,\"statusId\":0,\"saleDate\":0,\"discount\":0.0,\"total\":0.0,\"paid\":0.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoCustomer\":{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":0,\"userId\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":0,\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false},{\"limit\":0,\"offset\":0,\"entitySaleOrder\":{\"id\":2,\"orderNo\":\"order2\",\"customerUserId\":2,\"statusId\":0,\"saleDate\":0,\"discount\":10.0,\"total\":10.0,\"paid\":10.0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"dtoCustomer\":{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":0,\"userId\":0,\"balance\":10.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":1,\"accountStatusId\":1,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":false},\"products\":[],\"reasonCode\":1000,\"success\":false}]");
-
+        
         this.dtoSaleOrder = new DTOSaleOrder();
         this.dtoSaleOrder.entitySaleOrder = new EntitySaleOrder();
         this.dtoSaleOrder.entitySaleOrder.id = 0;
@@ -99,12 +88,6 @@ export class ManageSaleComponent {
         this.dtoSaleOrder.dtoCustomer.entityUser = new EntityUser();
         this.dtoSaleOrder.dtoCustomer.entityUserRole = new EntityUserRole();
         this.dtoSaleOrder.products = Array();
-
-        //this.searchDTOCustomer = new DTOCustomer();
-        //this.searchDTOCustomer.entityUser = new EntityUser();
-        //this.reqDTOCustomer = new DTOCustomer();
-        //this.dtoCustomer = JSON.parse("{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"remarks\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}");
-        //this.customerList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":1,\"userId\":4,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":4,\"firstName\":\"Alamgir\",\"lastName\":\"Kabir\",\"email\":\"customer1@gmail.com\",\"cell\":\"01711223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true},{\"limit\":0,\"offset\":0,\"entityCustomer\":{\"id\":2,\"userId\":2,\"balance\":10.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":1,\"firstName\":\"Mohiuddin\",\"lastName\":\"Mishu\",\"email\":\"customer2@gmail.com\",\"cell\":\"01511223344\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":2,\"userId\":2,\"roleId\":2},\"reasonCode\":1000,\"success\":true}]");
 
         this.reqDTOCustomer = new DTOCustomer();
         this.reqDTOCustomer.entityCustomer = new EntityCustomer();
@@ -126,24 +109,6 @@ export class ManageSaleComponent {
         this.reqDTOProduct.offset = 0;
         this.productRequestId = ACTION.FETCH_PRODUCTS;
         this.fetchProductList();
-
-        //this.reqStockDTOProduct = new DTOProduct();
-        //this.reqStockDTOProduct.entityProduct = new EntityProduct();
-        //this.reqStockDTOProduct.limit = 10;
-        //this.reqStockDTOProduct.offset = 0;
-        //this.fetchCurrentStock();
-
-        //this.searchEntityProduct = new EntityProduct();
-        //this.entityProduct = JSON.parse("{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"length\":\"10 cm\",\"width\":\"20 cm\",\"height\":\"30 cm\",\"weight\":\"40 cm\",\"remark\":\"This is a good product...\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}");
-        //this.productCategoryList = JSON.parse("[{\"id\":1,\"title\":\"Product category1\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"title\":\"Product category2\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
-        //this.productTypeList = JSON.parse("[{\"id\":1,\"title\":\"Product type1\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"title\":\"Product type2\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
-        //this.uomList = JSON.parse("[{\"id\":1,\"title\":\"UOM1\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"title\":\"UOM2\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
-        //this.productList = JSON.parse("[{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":2,\"name\":\"product2\",\"code\":\"code2\",\"categoryId\":2,\"categoryTitle\":\"Product category2\",\"typeId\":2,\"typeTitle\":\"Product type2\",\"unitPrice\":20.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":3,\"name\":\"product3\",\"code\":\"code3\",\"categoryId\":3,\"categoryTitle\":\"Product category3\",\"typeId\":3,\"typeTitle\":\"Product type3\",\"unitPrice\":30.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":4,\"name\":\"product4\",\"code\":\"code4\",\"categoryId\":4,\"categoryTitle\":\"Product category4\",\"typeId\":4,\"typeTitle\":\"Product type4\",\"unitPrice\":40.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":5,\"name\":\"product5\",\"code\":\"code5\",\"categoryId\":5,\"categoryTitle\":\"Product category5\",\"typeId\":5,\"typeTitle\":\"Product type5\",\"unitPrice\":50.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":6,\"name\":\"product6\",\"code\":\"code6\",\"categoryId\":6,\"categoryTitle\":\"Product category6\",\"typeId\":6,\"typeTitle\":\"Product type6\",\"unitPrice\":60.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":7,\"name\":\"product7\",\"code\":\"code7\",\"categoryId\":7,\"categoryTitle\":\"Product category7\",\"typeId\":7,\"typeTitle\":\"Product type17\",\"unitPrice\":70.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":8,\"name\":\"product8\",\"code\":\"code8\",\"categoryId\":8,\"categoryTitle\":\"Product category8\",\"typeId\":8,\"typeTitle\":\"Product type8\",\"unitPrice\":80.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":9,\"name\":\"product9\",\"code\":\"code9\",\"categoryId\":9,\"categoryTitle\":\"Product category9\",\"typeId\":9,\"typeTitle\":\"Product type9\",\"unitPrice\":90.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":10,\"name\":\"product10\",\"code\":\"code1\",\"categoryId\":10,\"categoryTitle\":\"Product category10\",\"typeId\":10,\"typeTitle\":\"Product type10\",\"unitPrice\":100.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":11,\"name\":\"product11\",\"code\":\"code11\",\"categoryId\":11,\"categoryTitle\":\"Product category11\",\"typeId\":11,\"typeTitle\":\"Product type11\",\"unitPrice\":110.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},{\"id\":12,\"name\":\"product12\",\"code\":\"code12\",\"categoryId\":12,\"categoryTitle\":\"Product category12\",\"typeId\":12,\"typeTitle\":\"Product type12\",\"unitPrice\":120.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false}]");
-        //console.log(this.entityProduct);
-        //console.log(this.productCategoryList);
-        //console.log(this.productTypeList);
-        //console.log(this.uomList);
-        //console.log(this.productList);
     }
 
     ngOnInit() {
@@ -154,7 +119,6 @@ export class ManageSaleComponent {
     }
 
     searchSaleOrder(event: Event) {
-        //console.log(this.reqDTOSaleOrder.entitySaleOrder.orderNo);
         if (this.reqDTOSaleOrder.entitySaleOrder.orderNo != null && this.reqDTOSaleOrder.entitySaleOrder.orderNo != "") {
             this.reqDTOSaleOrder.limit = 10;
             this.reqDTOSaleOrder.offset = 0;
@@ -167,21 +131,18 @@ export class ManageSaleComponent {
         }
     }
 
-
-
-
     selectedSaleOrderCustomer(event: Event, id: number) {
-        console.log(id);
+        //console.log(id);
     }
     selectedSaleOrderProduct(event: Event, id: number) {
-        console.log(id);
+        //console.log(id);
     }
 
     selectedSaleOrderProductDetails(event: Event, id: number) {
-        console.log(id);
+        //console.log(id);
     }
     selectedSaleOrderProductDelete(event: Event, id: number) {
-        console.log(id);
+        //console.log(id);
     }
 
     public hideSaleOrderCustomerModal(): void {
@@ -214,8 +175,6 @@ export class ManageSaleComponent {
     }
 
     public searchSaleOrderCustomer(event: Event) {
-        //this.fetchCustomerList();
-        
         this.reqDTOCustomer.limit = this.customerPageSize;
         this.reqDTOCustomer.offset = 0;
         if (this.reqDTOCustomer.entityCustomer.customerName != null && this.reqDTOCustomer.entityCustomer.customerName != "")
@@ -239,12 +198,8 @@ export class ManageSaleComponent {
             this.customerRequestId = ACTION.FETCH_CUSTOMERS;
             this.fetchCustomerList();       
         }
-        
-        
     }
     public fetchCustomerList() {
-        //this.reqDTOCustomer.limit = 10;
-        //this.reqDTOCustomer.offset = 0;
         let requestBody: string = JSON.stringify(this.reqDTOCustomer);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMERS), requestBody).then(result => {
             //console.log(result);
@@ -269,7 +224,6 @@ export class ManageSaleComponent {
     public fetchCustomerListByCell() {
         let requestBody: string = JSON.stringify(this.reqDTOCustomer);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMERS_BY_CELL), requestBody).then(result => {
-            //console.log(result);
             if (result.success && result.customers != null) {
                 this.customerList = result.customers;
                 this.customerLength = result.totalCustomers;
@@ -280,7 +234,6 @@ export class ManageSaleComponent {
     public fetchCustomerListByEmail() {
         let requestBody: string = JSON.stringify(this.reqDTOCustomer);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMERS_BY_EMAIL), requestBody).then(result => {
-            //console.log(result);
             if (result.success && result.customers != null) {
                 this.customerList = result.customers;
                 this.customerLength = result.totalCustomers;
@@ -338,7 +291,6 @@ export class ManageSaleComponent {
     public fetchProductList() {
         let requestBody: string = JSON.stringify(this.reqDTOProduct);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS), requestBody).then(result => {
-            //console.log(result);
             if (result.success && result.products != null) {
                 this.productList = result.products;
                 this.productLength = result.totalProducts;
@@ -351,7 +303,6 @@ export class ManageSaleComponent {
     public searchProductsByName() {
         let requestBody: string = JSON.stringify(this.reqDTOProduct);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_BY_NAME), requestBody).then(result => {
-            //console.log(result);
             if (result.success && result.products != null) {
                 this.productList = result.products;
                 this.productLength = result.totalProducts;
@@ -426,13 +377,6 @@ export class ManageSaleComponent {
                 }
             }
             this.dtoSaleOrder.products = tempProducts;
-            
-//            for (saleProductCounter = 0; saleProductCounter < this.dtoSaleOrder.products.length; saleProductCounter++) {
-//                if (this.dtoSaleOrder.products[saleProductCounter].entityProduct.id == this.productIdToPopupSelectProduct) {
-//                    this.dtoSaleOrder.products[saleProductCounter] = dtoProduct;
-//                    break;
-//                }
-//            }
         }
         this.calculateBalance();
     }
@@ -509,19 +453,20 @@ export class ManageSaleComponent {
                 this.manageSaleMessageDispalyModal.show();
                 return;
             }
-        }
-        
-        //check customer selection
-        /*if (this.dtoCustomer.entityUser.firstName == null || this.dtoCustomer.entityUser.firstName == "") {
-            //            this.manageSaleSuccessMessage = "";
-            this.manageSaleErrorMessage = "Select a customer";
-            this.manageSaleMessageDispalyModal.config.backdrop = false;
-            this.manageSaleMessageDispalyModal.show();
-            return;
-        }*/
+        } 
+        //if sale is executed without selecting customer then paid and total must be equal  
+        if (this.dtoSaleOrder.entitySaleOrder.customerUserId == null || this.dtoSaleOrder.entitySaleOrder.customerUserId <= 0)
+        {
+            if (this.dtoSaleOrder.entitySaleOrder.paid != this.dtoSaleOrder.entitySaleOrder.total)
+            {
+                this.manageSaleErrorMessage = "Paid amount should be equal to total amount.";
+                this.manageSaleMessageDispalyModal.config.backdrop = false;
+                this.manageSaleMessageDispalyModal.show();
+                return;
+            }
+        }     
         //check product selection
         if (this.dtoSaleOrder.products == null) {
-            //            this.manageSaleSuccessMessage = "";
             this.manageSaleErrorMessage = "Select a product";
             this.manageSaleMessageDispalyModal.config.backdrop = false;
             this.manageSaleMessageDispalyModal.show();
@@ -550,9 +495,7 @@ export class ManageSaleComponent {
                 }
                 else 
                 {
-                    //                    this.manageSaleSuccessMessage = "";
                     this.manageSaleErrorMessage = result.message;
-
                     this.manageSaleMessageDispalyModal.config.backdrop = false;
                     this.manageSaleMessageDispalyModal.show();
                 }
@@ -563,30 +506,10 @@ export class ManageSaleComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_SALE_ORDER_INFO), requestBody).then(result => {
                 console.log(result);
                 if (result.success) {
-                    this.manageSaleOrderUpdateLeftPanel();
-                    //                    this.manageSaleSuccessMessage = result.message;
-                    //this.manageSaleErrorMessage = "";
-
-                    //this.resetSaleOrder();
-
-                    //update left panel sale order list
-                    //this.reqDTOSaleOrder = new DTOSaleOrder();
-                    //this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
-                    //this.reqDTOSaleOrder.limit = 10;
-                    //this.reqDTOSaleOrder.offset = 0;
-                    //this.fetchSaleOrderList();
-
-                    //update current stock
-                    //this.reqStockDTOProduct = new DTOProduct();
-                    //this.reqStockDTOProduct.entityProduct = new EntityProduct();
-                    //this.reqStockDTOProduct.limit = 10;
-                    //this.reqStockDTOProduct.offset = 0;
-                    //this.fetchCurrentStock();
+                    this.manageSaleOrderUpdateLeftPanel();                    
                 }
                 else {
-                    //                    this.manageSaleSuccessMessage = "";
                     this.manageSaleErrorMessage = result.message;
-
                     this.manageSaleMessageDispalyModal.config.backdrop = false;
                     this.manageSaleMessageDispalyModal.show();
                 }
@@ -655,18 +578,6 @@ export class ManageSaleComponent {
         this.setSaleOrderInfo(orderNo);
     }
 
-    /*public fetchCurrentStock() {
-        let requestBody: string = JSON.stringify(this.reqStockDTOProduct);
-        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CURRENT_STOCK), requestBody).then(result => {
-            if (result.success && result.products != null) {
-                this.stockProductList = result.products;
-            }
-            else {
-
-            }
-        });
-    }*/
-    
     public manageSaleOrderUpdateLeftPanel()
     {
         this.orderNo = this.dtoSaleOrder.entitySaleOrder.orderNo;
@@ -736,32 +647,14 @@ export class ManageSaleComponent {
         }
     }
     
+    //barCode logic section starts
     onBarcodeCharChange(event:Event)
     {
-        /*if (this.barcode.length == 13)
-        {
-            let productId: number = 0;
-            let productCounter: number;
-            for (productCounter = 0; productCounter < this.productList.length; productCounter++) {
-                if (this.productList[productCounter].code == this.barcode) {
-                    productId = this.productList[productCounter].id;
-                }
-            }
-            if (productId > 0)
-            {
-                this.productIdToPopupSelectProduct = 0;
-                this.appendProductInSaleOrder(productId);
-                this.barcode = "";
-            }
-            //alert("Barcode:" + this.barcode);            
-        }*/ 
         clearInterval(this.barcodeScanInterval);
         this.barcodeScanInterval = setInterval(() => { this.getProductByCode(); }, 1000 * 1);       
-    }
-    
+    }    
     getProductByCode()
     {
-        console.log(this.barcode);
         clearInterval(this.barcodeScanInterval);
         let entityProduct: EntityProduct = new EntityProduct();
         entityProduct.code = this.barcode;
@@ -769,19 +662,15 @@ export class ManageSaleComponent {
         this.barcode = "";
         let requestBody: string = JSON.stringify(entityProduct);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCT_BY_CODE), requestBody).then(result => {
-            //console.log(result);
             if (result.success) {
                 this.productIdToPopupSelectProduct = 0;
                 this.appendProductInSaleOrder(result.id);
                 this.barcode = "";
             }
             else {
-                //console.log(result);
+                
             }
         });
     }
+    //barCode logic section ends
 }
-
-
-
-

@@ -61,7 +61,7 @@
                             <span class="purchase-order-title">Supplier<span class="required">*</span></span>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                            <input [(ngModel)]="dtoSupplier.entityUser.firstName"  name="firstName" class="form-control" (keypress)="showPurchaseOrderSupplierModal($event)" (click)="showPurchaseOrderSupplierModal($event)">
+                            <input [(ngModel)]="dtoSupplier.entityUser.userName"  name="userName" class="form-control" (keypress)="showPurchaseOrderSupplierModal($event)" (click)="showPurchaseOrderSupplierModal($event)">
                         </div>
                     </div>
                     <div class="row form-group">
@@ -94,7 +94,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="row form-group">
                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                            <span class="purchase-order-title">Order<span class="required">*</span></span>
+                            <span class="purchase-order-title">Order<span class="required"></span></span>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                             <input [(ngModel)]="dtoPurchaseOrder.entityPurchaseOrder.orderNo" name="orderNo" class="form-control">

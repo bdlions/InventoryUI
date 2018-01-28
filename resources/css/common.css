@@ -155,7 +155,7 @@ select option {
     border: 1px solid transparent;
 }
 .custom-button:focus,.custom-red-button:focus {
-     border: 1px solid #DEB71B!important;
+    border: 1px solid #DEB71B!important;
 }
 .custom-button{
     background-color: #00a7f9!important;
@@ -594,3 +594,34 @@ table th {
 
 
 
+/*----------------------------- Report CSS ----------------------------------*/
+.report-layer{
+    padding: 5px 10px;
+    background: #005989;
+    -webkit-transition: none;
+    transition: none;
+}
+.report-layer h1{
+    color: #fff;
+    border-bottom: none;
+    font-size: 36px;
+}
+.report-layer-label{
+    color: #DEB71B;
+    border-bottom: none;
+}
+.report-layer-content{
+    color: #fff;
+    border-bottom: none;
+    font-size: 16px;
+}
+.report-layer-divider{
+        border-bottom: 1px solid #fff;
+}
+
+.report-layer-category-label{
+    color: #DEB71B;
+    border-bottom: none;
+    font-size: 18px;
+    font-style: italic;
+}

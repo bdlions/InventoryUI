@@ -1,5 +1,5 @@
 <!--Web Starts-->
-<!--<div class="row">
+<div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <nav *ngIf='showNavBar' class="navbar navbar-custom navbar-default">
             <div class="navbar-header">
@@ -68,10 +68,18 @@
                             <span  >Current Stock</span>
                         </li>
                     </mat-menu>
-
-                    <li mat-button [ngClass]="{'active': activeMenu == 'ck' }" (click)="goCkEditor($event)">
-                        <span>CKEditor</span>
+                    <li  mat-button (mouseenter)="reportMenu.openMenu()" #reportMenu="matMenuTrigger" [matMenuTriggerFor]="reportMenuItems">
+                         <span>Report</span>
                     </li>
+                    <mat-menu #reportMenuItems="matMenu" [overlapTrigger]="false" >
+                        <li class="disabled-menu" mat-menu-item><span><b>Sales Reports</b></span></li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'salesbyproductsummery' }" (click)="goSalesByProductSummery($event)" >
+                            <span>Sales by Product Summery</span>
+                        </li>
+                    </mat-menu>
+                    <!--                    <li mat-button [ngClass]="{'active': activeMenu == 'ck' }" (click)="goCkEditor($event)">
+                                            <span>CKEditor</span>
+                                        </li>-->
                     <li mat-button [ngClass]="{'active': activeMenu == 'logout' }" (click)="goLogout($event)">
                         <span>Logout</span>
                     </li>
@@ -80,12 +88,12 @@
         </nav>
     </div>
 </div>
-<angular-loader></angular-loader>-->
+<angular-loader></angular-loader>
 <!--Web Ends-->
 
 <!--Desktop Starts-->
 
-<div class="menu-wrapper">
+<!--<div class="menu-wrapper">
     <div class="row">
         <div *ngIf='showNavBar' class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="mat-btn" mat-button (mouseover)="saleMenu.openMenu()" #saleMenu="matMenuTrigger" [matMenuTriggerFor]="saleMenuItems">
@@ -156,5 +164,5 @@
         </div>
     </div>
     <angular-loader></angular-loader>
-</div>
+</div>-->
 <!--Desktop Ends-->

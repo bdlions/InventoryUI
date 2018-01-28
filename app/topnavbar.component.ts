@@ -125,11 +125,11 @@ export class TopNavbarComponent {
 //        this.navigationManager.setActiveMenu("ck");
 //        this.router.navigate(["ck"]);
 //    }
-    goSalesByProductSummery(event: Event) {
+    goSalesByProductSummary(event: Event) {
         event.preventDefault();
         this.navigationManager.showNavBar(true);
-        this.navigationManager.setActiveMenu("salesbyproductsummery");
-        this.router.navigate(["salesbyproductsummery"]);
+        this.navigationManager.setActiveMenu("salesbyproductsummary");
+        this.router.navigate(["salesbyproductsummary"]);
     }
 
 

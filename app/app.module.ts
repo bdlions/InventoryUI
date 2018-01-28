@@ -38,7 +38,7 @@ import {WebAPIService} from './webservice/web-api-service'
 import { CKEditorModule } from 'ng2-ckeditor';
 import {CKEditorSample} from './CKEditorSample';
 //report
-import {SalesByProductSummery} from './report/sales/salesbyproductsummery.component';
+import {SalesByProductSummary} from './report/sales/salesbyproductsummary.component';
 
 import {
     MatAutocompleteModule,
@@ -152,13 +152,14 @@ const appRoutes: Routes = [
         component: CKEditorSample
     },
     {
+        path: 'salesbyproductsummary',
+        component: SalesByProductSummary
+    },
+    {
         path: '**',
         component: AppComponent
     },
-    {
-        path: 'salesbyproductsummery',
-        component: SalesByProductSummery
-    },
+    
 
 ];
 
@@ -251,7 +252,7 @@ enableProdMode();
         LoaderComponent,
         MatProgressSpinner, MatSpinner,
         CKEditorSample,
-        SalesByProductSummery,
+        SalesByProductSummary,
     ],
     providers: [
         NavigationManager,

@@ -24,7 +24,7 @@ body::before {
     min-height: 100%;
     top: 0;
     left: 0;
-    background: #D5C8B9;
+    background: #006CA8;
     z-index: -1;
 }
 body{
@@ -34,7 +34,7 @@ body{
     font-size: 11px!important;
     line-height: 150%!important;
     overflow-x: hidden;
-    color: #666!important;
+    color: #fff!important;
 }
 .container-fluid {
     padding-right:0!important;
@@ -50,11 +50,11 @@ body{
     height: 50px;
 }
 h1,h2,h3,h4,h5,h6{
-    color: #333;
+    color: #DEB71B;
     line-height: 150%;
     margin-top: 5px!important;
     margin-bottom: 5px!important;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #DEB71B;
 }
 h3, h4{
     font-size: 20px;
@@ -115,7 +115,7 @@ input, select{
     height: 28px!important;
 }
 input:focus,select:focus,textarea:focus{
-    border: 1px solid #666!important;
+    border: 1px solid #DEB71B!important;
     background-color: transparent!important;
 }
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
@@ -124,7 +124,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     color: #fff;
 }
 .form-control {
-    color: #333!important;
+    color: #fff!important;
     border: 1px solid transparent!important;
     background-color: rgba(0,0,0,.15)!important;
     box-shadow: none!important;
@@ -155,10 +155,10 @@ select option {
     border: 1px solid transparent;
 }
 .custom-button:focus,.custom-red-button:focus {
-    border: 1px solid #DEB71B!important;
+     border: 1px solid #DEB71B!important;
 }
 .custom-button{
-    background-color: #7E8186!important;
+    background-color: #00a7f9!important;
 }
 .custom-button > i{
     margin-right: 3px;
@@ -175,7 +175,11 @@ select option {
 .cursor-pointer{
     cursor: pointer;
 }
-
+.disabled-menu{
+    font-weight: bold;
+    pointer-events:none; 
+    opacity:0.6; 
+}
 table {
     border: 1px solid #ddd;
     border-collapse: collapse;
@@ -206,7 +210,7 @@ table th {
     font-size: 11px;
     letter-spacing: .1em;
     color: #fff;
-    background-color: #7E8186;
+    background-color: #00A7F9;
 }
 /*table tbody tr{
     background-color: #E6E6FA;
@@ -335,13 +339,13 @@ table th {
     box-shadow: 0 0 1px #bbb;
 }
 .login-form-header-pagelet{
-    background-color: #B5AA9E;
+    background-color: #00A7F9;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     padding: 15px;
 }
 .login-form-body-pagelet{
-    background: #D5C8B9;
+    background: url(../images/blur-bg-blurred.jpg) center center no-repeat;
     padding: 30px;
 }
 .login-form-header-pagelet h1{
@@ -478,7 +482,7 @@ table th {
     list-style-type: none;
 }
 .home-animation-ul > li > a{
-    color: #333;
+    color: #fff;
 }
 .home-manage-supplier-anchor,.home-supplier-list-anchor,
 .home-manage-purchase-anchor,.home-purchase-list-anchor,
@@ -513,7 +517,7 @@ table th {
 /*----------------------------- Modal ----------------------------------*/
 .modal-title{
     font-size: 14px;
-    color: #333; 
+    color: #fff; 
     text-align: center;
     border-bottom: none!important;
 }
@@ -539,12 +543,12 @@ table th {
     padding: 5px 10px;
 }
 .modal-body{
-    color: #333;
+    color: #fff;
 }
 .modal-content{
     border-radius: 0;
     color: #000;
-    background: #B5AA9E;
+    background: #005989;
 }
 .modal-footer {
     padding: 10px;
@@ -568,7 +572,7 @@ table th {
     right: 0;
     bottom: 0;
     left: 0;
-    background: #7E8186;
+    background: #00A7F9;
 }
 
 .footer-bg img{
@@ -581,7 +585,6 @@ table th {
     position: relative;
     top: 20px;
     font-size: 11px;
-    color: #fff;
 }
 
 /*----------------------------- Default CSS ----------------------------------*/

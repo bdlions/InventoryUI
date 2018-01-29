@@ -1,0 +1,266 @@
+<div class="container-fluid">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h4>Search</h4>
+                </div>
+            </div>
+            <form role="form" (submit)="searchSalesOrderDetails($event)">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="product-title">Order No<span class="required">*</span></span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input id="SaleOrderNo" name="SaleOrderNo" class="form-control">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="submit" id="search-customer" class="custom-button pull-right">Generate Report</button>
+                    </div>
+                </div>
+            </form> 
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button (click)="printSalesOrderDetails($event)" type="button" class="custom-button"><i class="fa fa-print"></i> Print</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="report-layer">
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <p class="text-right">Page 1/1</p>
+                                <h1>Sales Order Details</h1>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <h4 class="report-layer-label">Report Printed: </h4>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                <h4 class="report-layer-content">January 28, 2018. </h4>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <h4 class="report-layer-category-label">Order: SO#001</h4>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <label>ITEM</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>QUANTIRY</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>UNIT PRICE</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>Discount</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>SUB TOTAL</label>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="report-layer-divider"></div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>product 1</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>50</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>0</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>product 2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>50</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>0</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>product 3</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>50</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>0</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>product 4</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>50</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>0</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>product 5</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>50</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>0</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>product 6</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>50</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>0</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>product 7</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>50</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>0</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>product 8</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>50</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>0</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>product 9</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>50</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>0</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>product 10</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>50</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>0</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>100</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="report-layer-divider"></div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
+                                   <label>TOTAL</label>
+                            </div>
+                            <div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
+                                <p>1000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

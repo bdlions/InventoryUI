@@ -79,6 +79,9 @@
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'salesordersummary' }" (click)="goSalesOrderSummary($event)" >
                             <span> Sales Order Summary</span>
                         </li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'salesorderdetails' }" (click)="goSalesOrderDetails($event)" >
+                            <span> Sales Order Details</span>
+                        </li>
                     </mat-menu>
                     <!--                    <li mat-button [ngClass]="{'active': activeMenu == 'ck' }" (click)="goCkEditor($event)">
                                             <span>CKEditor</span>

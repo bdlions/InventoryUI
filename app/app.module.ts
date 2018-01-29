@@ -40,6 +40,7 @@ import {CKEditorSample} from './CKEditorSample';
 //report
 import {SalesByProductSummary} from './report/sales/salesbyproductsummary.component';
 import {SalesOrderSummary} from './report/sales/salesordersummary.component';
+import {SalesOrderDetails} from './report/sales/salesorderdetails.component';
 
 import {
     MatAutocompleteModule,
@@ -161,6 +162,10 @@ const appRoutes: Routes = [
         component: SalesOrderSummary
     },
     {
+        path: 'salesorderdetails',
+        component: SalesOrderDetails
+    },
+    {
         path: '**',
         component: AppComponent
     },
@@ -259,6 +264,7 @@ enableProdMode();
         CKEditorSample,
         SalesByProductSummary,
         SalesOrderSummary,
+        SalesOrderDetails,
     ],
     providers: [
         NavigationManager,

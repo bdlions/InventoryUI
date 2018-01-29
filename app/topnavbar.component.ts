@@ -143,6 +143,40 @@ export class TopNavbarComponent {
         this.navigationManager.setActiveMenu("salesorderdetails");
         this.router.navigate(["salesorderdetails"]);
     }
-
-
+    goSalesOrderProfit(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("salesorderprofit");
+        this.router.navigate(["salesorderprofit"]);
+    }
+    goCustomerPaymentSummary(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("customerpaymentsummary");
+        this.router.navigate(["customerpaymentsummary"]);
+    }
+    goCustomerPaymentByOrder(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("customerpaymentbyorder");
+        this.router.navigate(["customerpaymentbyorder"]);
+    }
+    goCustomerOrderHistory(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("customerorderhistory");
+        this.router.navigate(["customerorderhistory"]);
+    }
+    goCustomerProductList(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("customerproductlist");
+        this.router.navigate(["customerproductlist"]);
+    }
+    goCustomerListReport(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("customerlistreport");
+        this.router.navigate(["customerlistreport"]);
+    }
 }

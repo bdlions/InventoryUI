@@ -6,7 +6,15 @@
                     <h4>Search</h4>
                 </div>
             </div>
-            <form role="form" (submit)="searchSalesByProductSummary($event)">
+            <form role="form" (submit)="searchCustomerOrderHistory($event)">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="product-title">Customer<span class="required">*</span></span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input id="customer" name="customer" class="form-control">
+                    </div>
+                </div>
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                         <span class="product-title">Category<span class="required">*</span></span>
@@ -16,13 +24,16 @@
                                                     <option *ngFor="let productCategory of productCategoryList" [ngValue]="productCategory">{{productCategory.title}}</option>
                                                 </select>-->
                         <select name="entityProductCategory" class="form-control" >
-                            <!--<option >{{productCategory.title}}</option>-->
+                            <option >All</option>
+                            <option >Category 1</option>
+                            <option >Category 2</option>
+                            <option >Category 3</option>
                         </select>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <button type="submit" id="search-product" class="custom-button pull-right">Generate Report</button>
+                        <button type="submit" id="search-customer" class="custom-button pull-right">Generate Report</button>
                     </div>
                 </div>
             </form> 
@@ -32,7 +43,7 @@
             <div class="row form-group">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="btn-group" role="group" aria-label="...">
-                        <button (click)="newCustomer($event)" type="button" class="custom-button"><i class="fa fa-print"></i> Print</button>
+                        <button (click)="printCustomerOrderHistory($event)" type="button" class="custom-button"><i class="fa fa-print"></i> Print</button>
                     </div>
                 </div>
             </div>
@@ -42,7 +53,7 @@
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <p class="text-right">Page 1/1</p>
-                                <h1>Sales by Product Summary</h1>
+                                <h1>Customer Order History</h1>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -58,16 +69,16 @@
                                 <label>ITEM</label>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <label>SOLD QUANTITY</label>
+                                <label>CATEGORY</label>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <label>TOTAL SALES</label>
+                                <label>ORDER</label>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <label>COST OF GOODS SOLD</label>
+                                <label>QUANTITY</label>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <label>SALES PROFIT</label>
+                                <label>AMOUNT</label>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -77,119 +88,185 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <h4 class="report-layer-category-label">Caregoty 1</h4>
+                                <p>Product 1</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>Category 1</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>10</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>500</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <p>product 1</p>
+                                <p>Product 2</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>Category 1</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>SO#0001</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>10</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>500</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <p>product 2</p>
+                                <p>Product 3</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>Category 1</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>SO#0001</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>10</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>500</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <h4 class="report-layer-category-label">Caregoty 2</h4>
+                                <p>Product 4</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>Category 1</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>10</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>500</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <p>product 3</p>
+                                <p>Product 5</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>Category 2</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>SO#0002</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>10</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>500</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <p>product 4</p>
+                                <p>Product 6</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>Category 2</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>SO#0002</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>10</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>500</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <h4 class="report-layer-category-label">Caregoty 3</h4>
+                                <p>Product 7</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>Category 2</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0002</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>10</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>500</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <p>product 5</p>
+                                <p>Product 8</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>Category 3</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>SO#0003</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>10</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>500</p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <p>product 6</p>
+                                <p>Product 9</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>Category 3</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>SO#0003</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>10</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>10.00</p>
+                                <p>500</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>Product 10</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>Category 3</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0003</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>10</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>500</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="report-layer-divider"></div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-6 col-sm-6 col-md-offset-8 col-md-2 col-lg-offset-8 col-lg-2">
+                                <p>100</p>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                                <p>5000</p>
                             </div>
                         </div>
                     </div>

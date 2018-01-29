@@ -41,6 +41,12 @@ import {CKEditorSample} from './CKEditorSample';
 import {SalesByProductSummary} from './report/sales/salesbyproductsummary.component';
 import {SalesOrderSummary} from './report/sales/salesordersummary.component';
 import {SalesOrderDetails} from './report/sales/salesorderdetails.component';
+import {SalesOrderProfit} from './report/sales/salesorderprofit.component';
+import {CustomerPaymentSummary} from './report/sales/customerpaymentsummary.component';
+import {CustomerPaymentByOrder} from './report/sales/customerpaymentbyorder.component';
+import {CustomerOrderHistory} from './report/sales/customerorderhistory.component';
+import {CustomerProductList} from './report/sales/customerproductlist.component';
+import {CustomerListReport} from './report/sales/customerlistreport.component';
 
 import {
     MatAutocompleteModule,
@@ -166,6 +172,30 @@ const appRoutes: Routes = [
         component: SalesOrderDetails
     },
     {
+        path: 'salesorderprofit',
+        component: SalesOrderProfit
+    },
+    {
+        path: 'customerpaymentsummary',
+        component: CustomerPaymentSummary
+    },
+    {
+        path: 'customerpaymentbyorder',
+        component: CustomerPaymentByOrder
+    },
+    {
+        path: 'customerorderhistory',
+        component: CustomerOrderHistory
+    },
+    {
+        path: 'customerproductlist',
+        component: CustomerProductList
+    },
+    {
+        path: 'customerlistreport',
+        component: CustomerListReport
+    },
+    {
         path: '**',
         component: AppComponent
     },
@@ -265,6 +295,12 @@ enableProdMode();
         SalesByProductSummary,
         SalesOrderSummary,
         SalesOrderDetails,
+        SalesOrderProfit,
+        CustomerPaymentSummary,
+        CustomerPaymentByOrder,
+        CustomerOrderHistory,
+        CustomerProductList,
+        CustomerListReport,
     ],
     providers: [
         NavigationManager,

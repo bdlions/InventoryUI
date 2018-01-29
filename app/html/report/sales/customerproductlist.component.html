@@ -1,0 +1,277 @@
+<div class="container-fluid">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h4>Search</h4>
+                </div>
+            </div>
+            <form role="form" (submit)="searchCustomerProductList($event)">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="product-title">Customer<span class="required">*</span></span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input id="customer" name="customer" class="form-control">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="product-title">Category<span class="required">*</span></span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <!--                        <select [(ngModel)]="dtoProduct.entityProductCategory" name="entityProductCategory" class="form-control" >
+                                                    <option *ngFor="let productCategory of productCategoryList" [ngValue]="productCategory">{{productCategory.title}}</option>
+                                                </select>-->
+                        <select name="entityProductCategory" class="form-control" >
+                            <option >All</option>
+                            <option >Category 1</option>
+                            <option >Category 2</option>
+                            <option >Category 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="submit" id="search-customer" class="custom-button pull-right">Generate Report</button>
+                    </div>
+                </div>
+            </form> 
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button (click)="printCustomerProductList($event)" type="button" class="custom-button"><i class="fa fa-print"></i> Print</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="report-layer">
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <p class="text-right">Page 1/1</p>
+                                <h1>Customer Product List</h1>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <h4 class="report-layer-label">Report Printed: </h4>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                                <h4 class="report-layer-content">January 28, 2018. </h4>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <label>ITEM</label>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>ORDER</label>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <label>CUSTOMER</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>QUANTITY SOLD</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>SALES AMOUNT</label>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="report-layer-divider"></div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>product 1</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>Nazmul Hasan</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>20</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>800</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>product 2</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>Alamgir Kabir</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>10</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>1200</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>product 3</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>Nazmul Hasan</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>20</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>800</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>product 4</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>Alamgir Kabir</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>10</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>1200</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>product 5</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>Nazmul Hasan</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>20</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>800</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>product 6</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>Alamgir Kabir</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>10</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>1200</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>product 7</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>Nazmul Hasan</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>20</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>800</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>product 8</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>Alamgir Kabir</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>10</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>1200</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>product 9</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>Nazmul Hasan</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>20</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>800</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>product 10</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>SO#0001</p>
+                            </div>
+                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                <p>Alamgir Kabir</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>10</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>1200</p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="report-layer-divider"></div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-6 col-sm-6 col-md-offset-8 col-md-2 col-lg-offset-8 col-lg-2">
+                                <p>300</p>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                                <p>10000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

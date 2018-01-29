@@ -131,6 +131,12 @@ export class TopNavbarComponent {
         this.navigationManager.setActiveMenu("salesbyproductsummary");
         this.router.navigate(["salesbyproductsummary"]);
     }
+    goSalesOrderSummary(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("salesordersummary");
+        this.router.navigate(["salesordersummary"]);
+    }
 
 
 }

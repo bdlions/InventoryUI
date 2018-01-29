@@ -39,6 +39,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
 import {CKEditorSample} from './CKEditorSample';
 //report
 import {SalesByProductSummary} from './report/sales/salesbyproductsummary.component';
+import {SalesOrderSummary} from './report/sales/salesordersummary.component';
 
 import {
     MatAutocompleteModule,
@@ -156,6 +157,10 @@ const appRoutes: Routes = [
         component: SalesByProductSummary
     },
     {
+        path: 'salesordersummary',
+        component: SalesOrderSummary
+    },
+    {
         path: '**',
         component: AppComponent
     },
@@ -253,6 +258,7 @@ enableProdMode();
         MatProgressSpinner, MatSpinner,
         CKEditorSample,
         SalesByProductSummary,
+        SalesOrderSummary,
     ],
     providers: [
         NavigationManager,

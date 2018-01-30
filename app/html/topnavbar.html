@@ -100,6 +100,23 @@
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'customerlistreport' }" (click)="goCustomerListReport($event)" >
                             <span> Customer List Report</span>
                         </li>
+                       
+                        <li class="disabled-menu" mat-menu-item><span><b>Purchase Reports</b></span></li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseordersummary' }" (click)="goPurchaseOrderSummary($event)" >
+                            <span> Purchase Order Summary</span>
+                        </li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseorderdetails' }" (click)="goPurchaseOrderDetails($event)" >
+                            <span> Purchase Order Details</span>
+                        </li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'supplierpaymentsummary' }" (click)="goSupplierPaymentSummary($event)" >
+                            <span> Supplier Payment Summary</span>
+                        </li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'supplierproductlist' }" (click)="goSupplierProductList($event)" >
+                            <span> Supplier Product List</span>
+                        </li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'supplierlistreport' }" (click)="goSupplierListReport($event)" >
+                            <span> Supplier List Report</span>
+                        </li>
                     </mat-menu>
                     <!--                    <li mat-button [ngClass]="{'active': activeMenu == 'ck' }" (click)="goCkEditor($event)">
                                             <span>CKEditor</span>

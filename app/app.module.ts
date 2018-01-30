@@ -37,7 +37,7 @@ import {LoaderService} from './webservice/loader.service'
 import {WebAPIService} from './webservice/web-api-service'
 import { CKEditorModule } from 'ng2-ckeditor';
 import {CKEditorSample} from './CKEditorSample';
-//report
+//sales report
 import {SalesByProductSummary} from './report/sales/salesbyproductsummary.component';
 import {SalesOrderSummary} from './report/sales/salesordersummary.component';
 import {SalesOrderDetails} from './report/sales/salesorderdetails.component';
@@ -47,6 +47,12 @@ import {CustomerPaymentByOrder} from './report/sales/customerpaymentbyorder.comp
 import {CustomerOrderHistory} from './report/sales/customerorderhistory.component';
 import {CustomerProductList} from './report/sales/customerproductlist.component';
 import {CustomerListReport} from './report/sales/customerlistreport.component';
+//purchase report
+import {PurchaseOrderSummary} from './report/purchase/purchaseordersummary.component';
+import {PurchaseOrderDetails} from './report/purchase/purchaseorderdetails.component';
+import {SupplierPaymentSummary} from './report/purchase/supplierpaymentsummary.component';
+import {SupplierProductList} from './report/purchase/supplierproductlist.component';
+import {SupplierListReport} from './report/purchase/supplierlistreport.component';
 
 import {
     MatAutocompleteModule,
@@ -196,6 +202,26 @@ const appRoutes: Routes = [
         component: CustomerListReport
     },
     {
+        path: 'purchaseordersummary',
+        component: PurchaseOrderSummary
+    },
+    {
+        path: 'purchaseorderdetails',
+        component: PurchaseOrderDetails
+    },
+    {
+        path: 'supplierpaymentsummary',
+        component: SupplierPaymentSummary
+    },
+    {
+        path: 'supplierproductlist',
+        component: SupplierProductList
+    },
+    {
+        path: 'supplierlistreport',
+        component: SupplierListReport
+    },
+    {
         path: '**',
         component: AppComponent
     },
@@ -301,6 +327,11 @@ enableProdMode();
         CustomerOrderHistory,
         CustomerProductList,
         CustomerListReport,
+        PurchaseOrderSummary,
+        PurchaseOrderDetails,
+        SupplierPaymentSummary,
+        SupplierProductList,
+        SupplierListReport,
     ],
     providers: [
         NavigationManager,

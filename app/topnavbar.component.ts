@@ -179,4 +179,34 @@ export class TopNavbarComponent {
         this.navigationManager.setActiveMenu("customerlistreport");
         this.router.navigate(["customerlistreport"]);
     }
+    goPurchaseOrderSummary(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("purchaseordersummary");
+        this.router.navigate(["purchaseordersummary"]);
+    }
+    goPurchaseOrderDetails(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("purchaseorderdetails");
+        this.router.navigate(["purchaseorderdetails"]);
+    }
+    goSupplierPaymentSummary(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("supplierpaymentsummary");
+        this.router.navigate(["supplierpaymentsummary"]);
+    }
+    goSupplierProductList(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("supplierproductlist");
+        this.router.navigate(["supplierproductlist"]);
+    }
+    goSupplierListReport(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("supplierlistreport");
+        this.router.navigate(["supplierlistreport"]);
+    }
 }

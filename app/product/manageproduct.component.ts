@@ -34,7 +34,6 @@ export class ManageProductComponent {
     private reqEntiryProduct: EntityProduct;
     private entityProduct: EntityProduct;
     private dtoProduct: DTOProduct;
-    //private searchEntityProduct: EntityProduct;
     private productCategoryList: EntityProductCategory[];
     private productTypeList: EntityProductType[];
     private uomList: EntityUOM[];
@@ -43,13 +42,10 @@ export class ManageProductComponent {
     private showNavBar: boolean = false;
     private activeMenu: string = "manageproduct";
 
-    //    private manageProductSuccessMessage: string;
     private manageProductErrorMessage: string;
     
     //constants & constraints
     private maxProductLeftPanel: number = 10;
-    
-    //private entityProductSupplierList: EntityProductSupplier[];
     
     private reqDTOSupplier: DTOSupplier;
     private supplierList: DTOSupplier[];
@@ -57,6 +53,11 @@ export class ManageProductComponent {
     supplierLength = 0;
     supplierPageSize = 10;
     supplierPageSizeOptions = [5, 10];
+    
+    private reqDTOProductSupplierList: DTOProduct;
+    productSupplierLength = 0;
+    productSupplierPageSize = 10;
+    productSupplierPageSizeOptions = [5, 10];
     
     private supplierUserIdToBeDeleted: number;
 
@@ -74,19 +75,20 @@ export class ManageProductComponent {
         this.webAPIService = webAPIService;
 
 
-        //this.searchEntityProduct = new EntityProduct();
         this.entityProduct = new EntityProduct();
+        
+        this.reqDTOProductSupplierList = new DTOProduct();
+        this.reqDTOProductSupplierList.entityProduct = new EntityProduct();
+        this.reqDTOProductSupplierList.limit = 10;
+        this.reqDTOProductSupplierList.offset = 0;
 
         this.dtoProduct = new DTOProduct();
         this.dtoProduct.entityProduct = new EntityProduct();
         this.dtoProduct.entityProductType = new EntityProductType();
         this.dtoProduct.entityProductCategory = new EntityProductCategory();
         this.dtoProduct.entityProductSupplierList = null;
+        this.dtoProduct.epsListToBeDeleted = Array();
 
-        //this.fetchProductCategoryList();
-        //this.fetchProductTypeList();
-        //this.fetchUOMList();
-        
         this.reqDTOSupplier = new DTOSupplier();
         this.reqDTOSupplier.entitySupplier = new EntitySupplier();
         this.reqDTOSupplier.entityUser = new EntityUser();
@@ -95,8 +97,6 @@ export class ManageProductComponent {
         this.supplierRequestId = ACTION.FETCH_SUPPLIERS;
         this.supplierList = Array();
         this.fetchSupplierList();
-        
-        
 
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
@@ -113,9 +113,8 @@ export class ManageProductComponent {
             this.dtoProduct.entityProductType = new EntityProductType();
             this.dtoProduct.entityProductCategory = new EntityProductCategory();
             this.dtoProduct.entityProductSupplierList = null;
+            this.dtoProduct.epsListToBeDeleted = Array();
             this.fetchProductCategoryList();
-            
-            //console.log(this.productId);
         });
     }
     public hideManageProductMessageDispalyModal(): void 
@@ -141,29 +140,34 @@ export class ManageProductComponent {
     {
         if (this.dtoProduct.entityProductSupplierList == null)
         {
-            let entityProduct: EntityProduct = new EntityProduct();
             if (this.dtoProduct.entityProduct.id != null && this.dtoProduct.entityProduct.id > 0)
             {
-                entityProduct.id = this.dtoProduct.entityProduct.id;
+                this.reqDTOProductSupplierList.entityProduct.id = this.dtoProduct.entityProduct.id;
             }
             else
             {
-                entityProduct.id = 0;
+                this.reqDTOProductSupplierList.entityProduct.id = 0;
             }
-            let requestBody: string = JSON.stringify(entityProduct);
-            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCT_SUPPLIER_LIST), requestBody).then(result => {
-                if (result.success) {
-                    if(result.list != null)
-                    {
-                        this.dtoProduct.entityProductSupplierList = result.list;
-                    }
-                    else
-                    {
-                        this.dtoProduct.entityProductSupplierList = Array();
-                    }
-                }
-            });
+            this.fetchProductSupplierList();            
         }
+    }
+    
+    fetchProductSupplierList()
+    {
+        let requestBody: string = JSON.stringify(this.reqDTOProductSupplierList);
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCT_SUPPLIER_LIST), requestBody).then(result => {
+            if (result.success) {
+                if(result.list != null)
+                {
+                    this.dtoProduct.entityProductSupplierList = result.list;
+                    this.productSupplierLength = result.counter;
+                }
+                else
+                {
+                    this.dtoProduct.entityProductSupplierList = Array();                    
+                }
+            }
+        });
     }
     
     public searchManageProductSupplier(event: Event) {
@@ -235,7 +239,12 @@ export class ManageProductComponent {
         });
     }
     
-    
+    onProductSupplierPaginateChange(event:PageEvent)
+    {
+        this.reqDTOProductSupplierList.limit = event.pageSize;
+        this.reqDTOProductSupplierList.offset = (event.pageIndex * event.pageSize) ;
+        this.fetchProductSupplierList();
+    }
     
     onSupplierPaginateChange(event:PageEvent)
     {
@@ -301,8 +310,18 @@ export class ManageProductComponent {
         if (isAppend)
         {
             tempEntityProductSupplierList[tempEntityProductSupplierList.length] = entityProductSupplier;
-        }  
+        }        
         this.dtoProduct.entityProductSupplierList = tempEntityProductSupplierList;
+        //if this supplier is in deleted list then remove this supplier from deleted list.
+        let tempEpsList: EntityProductSupplier[] = Array();
+        for (let counter: number = 0; counter < this.dtoProduct.epsListToBeDeleted.length; counter++)
+        {
+            if (this.dtoProduct.epsListToBeDeleted[counter].supplierUserId != supplierUserId)
+            {
+                tempEpsList[tempEpsList.length] = this.dtoProduct.epsListToBeDeleted[counter];
+            }
+        }
+        this.dtoProduct.epsListToBeDeleted = tempEpsList;
     }
     
     public showManageProductSelectedSupplierDeleteModal(event: Event, supplierUserId: number) 
@@ -319,7 +338,12 @@ export class ManageProductComponent {
         {
             if (this.dtoProduct.entityProductSupplierList[counter].supplierUserId == this.supplierUserIdToBeDeleted)
             {
-                //ignoring this supplier
+                //ignoring this supplier and add it to be delete list
+                if (this.dtoProduct.epsListToBeDeleted == null)
+                {
+                    this.dtoProduct.epsListToBeDeleted = Array();
+                }
+                this.dtoProduct.epsListToBeDeleted[this.dtoProduct.epsListToBeDeleted.length] = this.dtoProduct.entityProductSupplierList[counter];
             }
             else
             {
@@ -396,7 +420,13 @@ export class ManageProductComponent {
         this.dtoProduct.entityProduct.categoryTitle = this.dtoProduct.entityProductCategory.title;
         this.dtoProduct.entityProduct.typeId = this.dtoProduct.entityProductType.id;
         this.dtoProduct.entityProduct.typeTitle = this.dtoProduct.entityProductType.title;
-
+        
+        //we are not sending deleted supplier list if we want to add a new product.
+        if (this.dtoProduct.entityProduct.id == null || this.dtoProduct.entityProduct.id <= 0) 
+        {
+            this.dtoProduct.epsListToBeDeleted = null;
+        }
+        
         let requestBody: string = JSON.stringify(this.dtoProduct);        
         if (this.dtoProduct.entityProduct.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_PRODUCT_INFO), requestBody).then(result => {
@@ -480,6 +510,7 @@ export class ManageProductComponent {
                     }
                 }
                 this.dtoProduct.entityProductSupplierList = null;
+                this.dtoProduct.epsListToBeDeleted = Array();
                 this.setProductSupplierList(event);
             }
         }

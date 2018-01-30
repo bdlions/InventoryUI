@@ -12,5 +12,6 @@ export class DTOProduct {
     entityProductCategory: EntityProductCategory;
     entityProductType: EntityProductType;
     entityProductSupplierList: EntityProductSupplier[];
+    epsListToBeDeleted: EntityProductSupplier[];
 }
 

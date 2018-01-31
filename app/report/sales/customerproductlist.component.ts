@@ -16,11 +16,17 @@ import {Subscription} from 'rxjs';
 export class CustomerProductList {
     private webAPIService: WebAPIService;
     private subscribe: Subscription;
-    //private searchDTOCustomer: DTOCustomer;
+
+//    public showStartDatePicker: boolean = false;
+//    public showEndDatePicker: boolean = false;
+//    public fromDate: Date = new Date();
+//    public toDate: Date = new Date();
+//    public minDate: Date = void 0;
+
     private showNavBar: boolean = false;
     private activeMenu: string = "customerproductlist";
 
-    constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
+    constructor(private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
             if (mode !== null) {
                 this.showNavBar = mode;
@@ -41,11 +47,11 @@ export class CustomerProductList {
         this.subscribe = this.route.params.subscribe(params => {
         });
     }
-    searchCustomerProductList(event: Event){
-        
+    searchCustomerProductList(event: Event) {
+
     }
-    printCustomerProductList(event: Event){
-        
+    printCustomerProductList(event: Event) {
+
     }
 
 }

@@ -212,6 +212,32 @@ table td {
     padding: 5px;
     /*text-align: center;*/ 
 }
+/*datepicker*/
+.custom-datepicker{
+    position: relative;
+}
+.start-date, .end-date{
+    position: absolute;
+    z-index: 101;
+}
+.well-sm table tr td,
+.well-sm table tr th{
+    padding: 0px!important;
+}
+.well-sm table tr td .btn{
+    padding: 2px!important;
+    font-size: 12px;
+    border-radius: 0px;
+}
+.well-sm  .btn-group-sm>.btn, .btn-sm {
+    padding: 2px 7px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.well-sm {
+    padding: 0px!important;
+}
 table th {
     font-size: 11px;
     letter-spacing: .1em;
@@ -622,7 +648,7 @@ table th {
     font-size: 16px;
 }
 .report-layer-divider{
-        border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #fff;
 }
 
 .report-layer-category-label{

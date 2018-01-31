@@ -17,6 +17,32 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="product-title">From</span>
+                    </div>
+                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input name="fromDate" class="form-control input-custom-field custom-datepicker" type="text" 
+                               [ngModel]="fromDate | date:'dd-MM-yyyy'" (ngModelChange)="fromDate = $event;"
+                               (focus)="showStartDatePicker = true" >
+                               <div class="start-date" *ngIf="showStartDatePicker" >
+                            <datepicker name="showStartDatePicker" [(ngModel)]="fromDate" [minDate]="minDate" [showWeeks]="false" (selectionDone) ="showStartDatePicker = false"  ></datepicker>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="product-title">To</span>
+                    </div>
+                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input name="toDate" class="form-control input-custom-field custom-datepicker" type="text" 
+                               [ngModel]="toDate | date:'dd-MM-yyyy'" (ngModelChange)="toDate = $event;"
+                               (focus)="showEndDatePicker = true" >
+                               <div class="end-date" *ngIf="showEndDatePicker" >
+                            <datepicker name="showEndDatePicker" [(ngModel)]="toDate" [minDate]="minDate" [showWeeks]="false" (selectionDone) ="showEndDatePicker = false"  ></datepicker>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                         <span class="product-title">Category<span class="required">*</span></span>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">

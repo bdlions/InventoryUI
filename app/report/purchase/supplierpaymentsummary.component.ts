@@ -16,7 +16,13 @@ import {Subscription} from 'rxjs';
 export class SupplierPaymentSummary {
     private webAPIService: WebAPIService;
     private subscribe: Subscription;
-    //private searchDTOCustomer: DTOCustomer;
+    
+//    public showStartDatePicker: boolean = false;
+//    public showEndDatePicker: boolean = false;
+//    public fromDate: Date = new Date();
+//    public toDate: Date = new Date();
+//    public minDate: Date = void 0;
+    
     private showNavBar: boolean = false;
     private activeMenu: string = "supplierpaymentsummary";
 

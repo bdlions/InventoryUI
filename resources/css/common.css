@@ -123,6 +123,12 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-image: none;
     color: #fff;
 }
+input[type=checkbox]{
+    border: 1px solid #ccc!important;
+    padding: 2px 4px !important;
+    border-radius: 0px!important;
+    height: auto!important;
+}
 .form-control {
     color: #fff!important;
     border: 1px solid transparent!important;

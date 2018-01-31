@@ -209,4 +209,16 @@ export class TopNavbarComponent {
         this.navigationManager.setActiveMenu("supplierlistreport");
         this.router.navigate(["supplierlistreport"]);
     }
+    goManageUser(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("manageuser");
+        this.router.navigate(["manageuser"]);
+    }
+    goUserList(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("userlist");
+        this.router.navigate(["userlist"]);
+    }
 }

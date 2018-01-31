@@ -53,6 +53,9 @@ import {PurchaseOrderDetails} from './report/purchase/purchaseorderdetails.compo
 import {SupplierPaymentSummary} from './report/purchase/supplierpaymentsummary.component';
 import {SupplierProductList} from './report/purchase/supplierproductlist.component';
 import {SupplierListReport} from './report/purchase/supplierlistreport.component';
+//user
+import {ManageUserComponent} from './user/manageuser.component';
+import {UserListComponent} from './user/userlist.component';
 
 import {
     MatAutocompleteModule,
@@ -222,6 +225,14 @@ const appRoutes: Routes = [
         component: SupplierListReport
     },
     {
+        path: 'manageuser',
+        component: ManageUserComponent
+    },
+    {
+        path: 'userlist',
+        component: UserListComponent
+    },
+    {
         path: '**',
         component: AppComponent
     },
@@ -332,6 +343,8 @@ enableProdMode();
         SupplierPaymentSummary,
         SupplierProductList,
         SupplierListReport,
+        ManageUserComponent,
+        UserListComponent,
     ],
     providers: [
         NavigationManager,

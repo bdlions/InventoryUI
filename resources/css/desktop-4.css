@@ -20,6 +20,7 @@ Version: 1.0
 .purchase-list-table-height-view-point,
 .current-stock-table-height-view-point,
 .supplier-list-table-height-view-point,
+.user-list-table-height-view-point,
 .sale-list-table-height-view-point{
     height: 62vh;
     background: #fff;
@@ -28,6 +29,7 @@ Version: 1.0
 .customer-list-table-height-view-point,
 .purchase-list-table-height-view-point,
 .supplier-list-table-height-view-point,
+.user-list-table-height-view-point,
 .sale-list-table-height-view-point{
     margin-top: 32px;
 }
@@ -740,6 +742,18 @@ Version: 1.0
     .manage-sale-right-side-tabset .nav-tabs{
         margin-top: -18px;
     }
+    .manage-user-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 330px;
+        margin-top: 38px;
+    }
+    .manage-user-right-side-tab{
+        min-height: 330px;
+    }
+    .manage-user-right-side-tabset .nav-tabs{
+        margin-top: 83px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -1011,6 +1025,18 @@ Version: 1.0
     }
     .manage-sale-right-side-tabset .nav-tabs{
         margin-top: -18px;
+    }
+    .manage-user-left-side-table-height-view-point{
+        height: 66vh;
+        background: #fff;
+        min-height: 330px;
+        margin-top: 38px;
+    }
+    .manage-user-right-side-tab{
+        min-height: 330px;
+    }
+    .manage-user-right-side-tabset .nav-tabs{
+        margin-top: 83px;
     }
 }
 @media(min-width: 768px) {

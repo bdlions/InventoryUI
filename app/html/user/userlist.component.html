@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h4>Search</h4>
+        </div>
+    </div>
+    <form role="form" (submit)="searchUser($event)">
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+                <span class="product-title">Name</span>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                <input name="firstName" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+            </div>
+        </div>
+    </form>
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="user-list-table-height-view-point">
+                <div class="table-wrapper">
+                    <table class="common-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cursor-pointer" (click)="showUser($event)">
+                                <td data-label="Name"></td>
+                                <td data-label="Contact"></td>
+                                <td data-label="Phone"></td>
+                                <td data-label="Email"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <mat-paginator [length]="length"
+                        [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions"
+                        (page)="onPaginateChange($event)">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@ export class DTOSupplier {
     entityUser: EntityUser;
     entityUserRole: EntityUserRole;
     entityProductSupplierList: EntityProductSupplier[];
+    epsListToBeDeleted: EntityProductSupplier[];
 }
 
 

@@ -1,5 +1,5 @@
 <!--Web Starts-->
-<div class="row">
+<!--<div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <nav *ngIf='showNavBar' class="navbar navbar-custom navbar-default">
             <div class="navbar-header">
@@ -137,12 +137,12 @@
         </nav>
     </div>
 </div>
-<angular-loader></angular-loader>
+<angular-loader></angular-loader>-->
 <!--Web Ends-->
 
 <!--Desktop Starts-->
 
-<!--<div class="menu-wrapper">
+<div class="menu-wrapper">
     <div class="row">
         <div *ngIf='showNavBar' class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="mat-btn" mat-button (mouseover)="saleMenu.openMenu()" #saleMenu="matMenuTrigger" [matMenuTriggerFor]="saleMenuItems">
@@ -165,6 +165,9 @@
                 </div>
                 <div mat-menu-item [matMenuTriggerFor]="reportSubMenuItems">
                      <span>Report</span>
+                </div>
+                <div mat-menu-item [matMenuTriggerFor]="userSubMenuItems">
+                     <span>User </span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'logout' }" (click)="goLogout($event)">
                      <span>Logout</span>
@@ -216,53 +219,60 @@
             <mat-menu #reportSubMenuItems="matMenu" [overlapTrigger]="false" >
                 <div class="disabled-menu" mat-menu-item><span><b>Sales Reports</b></span></div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesbyproductsummary' }" (click)="goSalesByProductSummary($event)" >
-                    <span>Sales by Product Summary</span>
+                     <span>Sales by Product Summary</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesordersummary' }" (click)="goSalesOrderSummary($event)" >
-                    <span> Sales Order Summary</span>
+                     <span> Sales Order Summary</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesorderdetails' }" (click)="goSalesOrderDetails($event)" >
-                    <span> Sales Order Details</span>
+                     <span> Sales Order Details</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesorderprofit' }" (click)="goSalesOrderProfit($event)" >
-                    <span> Sales Order Profit</span>
+                     <span> Sales Order Profit</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'customerpaymentsummary' }" (click)="goCustomerPaymentSummary($event)" >
-                    <span> Customer Payment Summary</span>
+                     <span> Customer Payment Summary</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'customerpaymentbyorder' }" (click)="goCustomerPaymentByOrder($event)" >
-                    <span> Customer Payment by Order</span>
+                     <span> Customer Payment by Order</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'customerorderhistory' }" (click)="goCustomerOrderHistory($event)" >
-                    <span> Customer Order History</span>
+                     <span> Customer Order History</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'customerproductlist' }" (click)="goCustomerProductList($event)" >
-                    <span> Customer Product List</span>
+                     <span> Customer Product List</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'customerlistreport' }" (click)="goCustomerListReport($event)" >
-                    <span> Customer List Report</span>
+                     <span> Customer List Report</span>
                 </div>
 
                 <div class="disabled-menu" mat-menu-item><span><b>Purchase Reports</b></span></div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseordersummary' }" (click)="goPurchaseOrderSummary($event)" >
-                    <span> Purchase Order Summary</span>
+                     <span> Purchase Order Summary</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseorderdetails' }" (click)="goPurchaseOrderDetails($event)" >
-                    <span> Purchase Order Details</span>
+                     <span> Purchase Order Details</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'supplierpaymentsummary' }" (click)="goSupplierPaymentSummary($event)" >
-                    <span> Supplier Payment Summary</span>
+                     <span> Supplier Payment Summary</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'supplierproductlist' }" (click)="goSupplierProductList($event)" >
-                    <span> Supplier Product List</span>
+                     <span> Supplier Product List</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'supplierlistreport' }" (click)="goSupplierListReport($event)" >
-                    <span> Supplier List Report</span>
+                     <span> Supplier List Report</span>
                 </div>
             </mat-menu>
-
+            <mat-menu #userSubMenuItems="matMenu" [overlapTrigger]="false" >
+                <div mat-menu-item  [ngClass]="{'active': activeMenu == 'manageuser' }" (click)="goManageUser($event)">
+                     <span  >Manage User</span>
+                </div> 
+                <div mat-menu-item  [ngClass]="{'active': activeMenu == 'userlist' }" (click)="goUserList($event)">
+                     <span  >User List </span>
+                </div>
+            </mat-menu>
         </div>
     </div>
     <angular-loader></angular-loader>
-</div>-->
+</div>
 <!--Desktop Ends-->

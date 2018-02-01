@@ -116,6 +116,15 @@ export class PacketHeaderFactory {
                 break;
             case ACTION.FETCH_SUPPLIER_PRODUCT_LIST:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
+            case ACTION.FETCH_USER_ROLE_LIST:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
+            case ACTION.FETCH_USER_WITH_ROLES:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
+            case ACTION.FETCH_USERS:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break; 
                 
             case ACTION.ADD_PRODUCT_INFO:
@@ -132,6 +141,9 @@ export class PacketHeaderFactory {
                 break;    
             case ACTION.ADD_SALE_ORDER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
+                break; 
+            case ACTION.ADD_USER_INFO:
+                packetHeader.requestType = REQUEST_TYPE.UPDATE
                 break;    
             
             case ACTION.UPDATE_PRODUCT_INFO:
@@ -147,6 +159,9 @@ export class PacketHeaderFactory {
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
                 break; 
             case ACTION.UPDATE_SALE_ORDER_INFO:
+                packetHeader.requestType = REQUEST_TYPE.UPDATE
+                break;  
+            case ACTION.UPDATE_USER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
                 break;        
                         

@@ -5,6 +5,7 @@ import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
 import {EntityUser} from '../dto/EntityUser';
+import {DTOUser} from '../dto/DTOUser';
 import {PageEvent} from '@angular/material';
 
 @Component({
@@ -17,6 +18,8 @@ export class UserListComponent {
     private webAPIService: WebAPIService;
     private showNavBar: boolean = false;
     private activeMenu: string = "userlist";
+
+    private entityUserList: EntityUser[];
 
     private requestId: number;
 
@@ -37,35 +40,33 @@ export class UserListComponent {
             }
         });
         this.webAPIService = webAPIService;
-
-        this.requestId = ACTION.FETCH_CUSTOMERS;
+        
+        this.entityUserList = Array();
         this.fetchUserList();
     }
 
     ngOnInit() {
 
     }
-    searchUser(event: Event) {
+    
+    public fetchUserList() {
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_USERS), "{}").then(result => {
+            if (result.success) {
+                this.entityUserList = result.list;
+            }
+            else {
 
+            }
+        });
     }
-    showUser(event: Event) {
+    
+    showUser(event: Event, userId: number) {
 
         event.preventDefault();
         this.navigationManager.showNavBar(true);
         this.navigationManager.setActiveMenu("manageuser");
-        this.router.navigate(["manageuser"]);
-    }
-
-    public fetchUserList() {
-
-    }
-    public fetchUserListByName() {
-
-    }
-    
-    onPaginateChange(event: PageEvent) {
-
-    }
+        this.router.navigate(["manageuser", {userId: userId}]);
+    }    
 }
 
 

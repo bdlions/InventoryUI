@@ -120,27 +120,10 @@ export class ManageCustomerComponent {
                 console.log(result);
                 if (result.success) {
                     this.manageCustomerUpdateLeftPanel();
-                    //set success message
-                    //                    this.manageCustomerSuccessMessage = result.message;
-                    //this.manageCustomerErrorMessage = "";
-
-                    //reset customer
-                    //this.newCustomer(event);
-
-                    //update left panel customer list
-                    //this.reqDTOCustomer = new DTOCustomer();
-                    //this.reqDTOCustomer.entityCustomer = new EntityCustomer();
-                    //this.reqDTOCustomer.entityUser = new EntityUser();
-                    //this.reqDTOCustomer.entityUserRole = new EntityUserRole();
-                    //this.fetchCustomerList();
                 }
                 else {
                     
-                    //set error message
-                    //                    this.manageCustomerSuccessMessage = "";
                     this.manageCustomerErrorMessage = result.message;
-
-                    //display pop up with message
                     this.manageCustomerMessageDispalyModal.config.backdrop = false;
                     this.manageCustomerMessageDispalyModal.show();
                 }
@@ -152,19 +135,6 @@ export class ManageCustomerComponent {
                 if (result.success) {
                     this.dtoCustomer = result;
                     this.manageCustomerUpdateLeftPanel();
-                    //set success message
-                    //                    this.manageCustomerSuccessMessage = result.message;
-                    //this.manageCustomerErrorMessage = "";
-
-                    //reset customer
-                    //this.newCustomer(event);
-
-                    //update left panel customer list
-                    //this.reqDTOCustomer = new DTOCustomer();
-                    //this.reqDTOCustomer.entityCustomer = new EntityCustomer();
-                    //this.reqDTOCustomer.entityUser = new EntityUser();
-                    //this.reqDTOCustomer.entityUserRole = new EntityUserRole();
-                    //this.fetchCustomerList();
                 }
                 else {
                     //set error message

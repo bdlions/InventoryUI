@@ -34,6 +34,7 @@
                             <tr>
                                 <th>Order</th>
                                 <th>Order Date</th>
+                                <th>Entry By</th>
 <!--                                <th>Inventory Status</th>
                                 <th>Payment Status</th>-->
                                 <th>Customer</th>
@@ -50,6 +51,7 @@
                             <tr class="cursor-pointer" *ngFor="let saleOrder of saleOrderList" (click)="showSaleOrder($event, saleOrder.entitySaleOrder.orderNo)">
                                 <td data-label="Order">{{saleOrder.entitySaleOrder.orderNo}}</td>
                                 <td data-label="Order Date">{{saleOrder.orderDate}}</td>
+                                <td data-label="Entty By">{{saleOrder.entitySaleOrder.createdByUserName}}</td>
 <!--                                <td data-label="Inventory Status"></td>
                                 <td data-label="Payment Status"></td>-->
                                 <td data-label="Customer">{{saleOrder.entitySaleOrder.customerName}}</td>

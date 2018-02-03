@@ -15,4 +15,8 @@ export class EntityPurchaseOrder {
     remarks: string;
     createdOn: number;
     modifiedOn: number;
+    createdByUserId: number;
+    createdByUserName: string;
+    modifiedByUserId: number;
+    modifiedByUserName: string;
 }

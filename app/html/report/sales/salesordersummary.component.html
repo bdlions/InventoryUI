@@ -81,7 +81,10 @@
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <label>ORDER DATE</label>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>Entry By</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <label>CUSTOMER</label>
                             </div>
 <!--                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
@@ -106,7 +109,10 @@
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <p>{{saleOrder.orderDate}}</p>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>{{saleOrder.entitySaleOrder.createdByUserName}}</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <p>{{saleOrder.entitySaleOrder.customerName}}</p>
                             </div>
 <!--                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">

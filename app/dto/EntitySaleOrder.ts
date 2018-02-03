@@ -15,4 +15,8 @@ export class EntitySaleOrder {
     paid: number = 0;
     createdOn: number;
     modifiedOn: number;
+    createdByUserId: number;
+    createdByUserName: string;
+    modifiedByUserId: number;
+    modifiedByUserName: string;
 }

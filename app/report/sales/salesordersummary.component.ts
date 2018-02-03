@@ -73,8 +73,8 @@ export class SalesOrderSummary {
     }
     
     public fetchSaleOrderList() {
-        let fromDate: string = this.datepipe.transform(this.fromDate, 'yyyy-MM-dd');
-        let toDate: string = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
+        let fromDate: string = this.datepipe.transform(this.fromDate, 'dd-MM-yyyy');
+        let toDate: string = this.datepipe.transform(this.toDate, 'dd-MM-yyyy');
         //let requestBody: string = JSON.stringify(this.reqDTOSaleOrder);
         let requestBody: string = "{\"startDate\": \"" + fromDate + "\", \"endDate\": \"" + toDate + "\", \"offset\": \"" + this.offset + "\", \"limit\": \"" + this.limit + "\"}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_ORDER_SUMMARY), requestBody).then(result => {
@@ -101,6 +101,13 @@ export class SalesOrderSummary {
         this.offset = 0;
         this.limit = this.pageSize;
         this.fetchSaleOrderList();
+    }
+    
+    public showSaleOrder(event: Event, orderNo: string) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("managesale");
+        this.router.navigate(["managesale", {orderNo: orderNo}]);
     }
     
 //    printSalesOrderSummary(event: Event) 

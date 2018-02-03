@@ -99,7 +99,7 @@
                                 <div class="report-layer-divider"></div>
                             </div>
                         </div>
-                        <div *ngFor="let saleOrder of saleOrderList" class="row form-group">
+                        <div *ngFor="let saleOrder of saleOrderList" class="row form-group" (click)="showSaleOrder($event, saleOrder.entitySaleOrder.orderNo)">
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <p>{{saleOrder.entitySaleOrder.orderNo}}</p>
                             </div>

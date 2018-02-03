@@ -64,6 +64,7 @@ export class SalesOrderSummary {
         //this.reqDTOSaleOrder.limit = this.pageSize;
         this.offset = 0;
         this.limit = this.pageSize;
+        this.saleOrderList = Array();
         this.fetchSaleOrderList();
     }
 
@@ -100,6 +101,7 @@ export class SalesOrderSummary {
     {
         this.offset = 0;
         this.limit = this.pageSize;
+        this.saleOrderList = Array();
         this.fetchSaleOrderList();
     }
     

@@ -7,14 +7,14 @@
                 </div>
             </div>
             <form role="form" (submit)="searchPurchaseOrderSummary($event)">
-                <div class="row form-group">
+<!--                <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                         <span class="product-title">Supplier<span class="required">*</span></span>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                         <input id="supplier" name="supplier" class="form-control">
                     </div>
-                </div>
+                </div>-->
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                         <span class="product-title">From</span>
@@ -50,40 +50,43 @@
 
         </div>
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
-            <div class="row form-group">
+<!--            <div class="row form-group">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="btn-group" role="group" aria-label="...">
                         <button (click)="printPurchaseOrderSummary($event)" type="button" class="custom-button"><i class="fa fa-print"></i> Print</button>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="row form-group">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="report-layer">
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <p class="text-right">Page 1/1</p>
+                                <!--<p class="text-right">Page 1/1</p>-->
                                 <h1>Purchase Order Summary</h1>
                             </div>
                         </div>
-                        <div class="row form-group">
+<!--                        <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <h4 class="report-layer-label">Report Printed: </h4>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                                 <h4 class="report-layer-content">January 28, 2018. </h4>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <label>ORDER</label>
                             </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>ORDER DATE</label>
+                            </div>
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <label>SUPPLIER</label>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+<!--                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <label>SUB TOTAL</label>
-                            </div>
+                            </div>-->
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <label>TOTAL</label>
                             </div>
@@ -96,7 +99,27 @@
                                 <div class="report-layer-divider"></div>
                             </div>
                         </div>
-                        <div class="row form-group">
+                        <div *ngFor="let purchaseOrder of purchaseOrderList" class="row form-group" (click)="showPurchaseOrder($event, purchaseOrder.entityPurchaseOrder.orderNo)">
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>{{purchaseOrder.entityPurchaseOrder.orderNo}}</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>{{purchaseOrder.orderDate}}</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <p>{{purchaseOrder.entityPurchaseOrder.supplierName}}</p>
+                            </div>
+<!--                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>50.00</p>
+                            </div>-->
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>{{purchaseOrder.entityPurchaseOrder.total}}</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>{{purchaseOrder.entityPurchaseOrder.paid}}</p>
+                            </div>
+                        </div>
+<!--                        <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <p>PO#0001</p>
                             </div>
@@ -265,8 +288,13 @@
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <p>35.00</p>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
+                    <mat-paginator [length]="length"
+                        [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions"
+                        (page)="onPaginateChange($event)">
+                    </mat-paginator>
                 </div>
             </div>
         </div>

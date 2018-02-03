@@ -12,6 +12,7 @@ export class TopNavbarComponent {
     private showNavBar: boolean = true;
     private activeMenu: string = "home";
     private selectedMenu: any;
+    private isAdmin: boolean = false;
 
     constructor(private router: Router, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
@@ -26,7 +27,26 @@ export class TopNavbarComponent {
                 this.activeMenu = menuName;
             }
         });
-
+        this.navigationManager.isAdminEmitter.subscribe((mode) => {
+            // mode will be null the first time it is created, so you need to igonore it when null
+            if (mode !== null) {
+                this.isAdmin = mode;
+            }
+        });
+        /*let roleIdString = localStorage.getItem("roleIdString");
+        let roleIdArray: string[] = roleIdString.split(",");
+        if (roleIdArray != null && roleIdArray.length > 0)
+        {
+            for (let counter: number = 0; counter < roleIdArray.length; counter++)
+            {
+                if (roleIdArray[counter] == "1")
+                {
+                    this.isAdmin = true;
+                }
+            }
+        }
+        console.log(roleIdArray);
+        console.log(this.isAdmin);*/
     }
 
     goHome(event: Event) {

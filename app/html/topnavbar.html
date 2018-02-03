@@ -73,59 +73,22 @@
                     </li>
                     <mat-menu #reportMenuItems="matMenu" [overlapTrigger]="false" >
                         <li class="disabled-menu" mat-menu-item><span><b>Sales Reports</b></span></li>
-<!--                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'salesbyproductsummary' }" (click)="goSalesByProductSummary($event)" >
-                            <span>Sales by Product Summary</span>
-                        </li>-->
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'salesordersummary' }" (click)="goSalesOrderSummary($event)" >
                             <span> Sales Order Summary</span>
-                        </li>
-<!--                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'salesorderdetails' }" (click)="goSalesOrderDetails($event)" >
-                            <span> Sales Order Details</span>
-                        </li>
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'salesorderprofit' }" (click)="goSalesOrderProfit($event)" >
-                            <span> Sales Order Profit</span>
-                        </li>
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'customerpaymentsummary' }" (click)="goCustomerPaymentSummary($event)" >
-                            <span> Customer Payment Summary</span>
-                        </li>
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'customerpaymentbyorder' }" (click)="goCustomerPaymentByOrder($event)" >
-                            <span> Customer Payment by Order</span>
-                        </li>
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'customerorderhistory' }" (click)="goCustomerOrderHistory($event)" >
-                            <span> Customer Order History</span>
-                        </li>
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'customerproductlist' }" (click)="goCustomerProductList($event)" >
-                            <span> Customer Product List</span>
-                        </li>
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'customerlistreport' }" (click)="goCustomerListReport($event)" >
-                            <span> Customer List Report</span>
-                        </li>-->
-                       
+                        </li>                      
                         <li class="disabled-menu" mat-menu-item><span><b>Purchase Reports</b></span></li>
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseordersummary' }" (click)="goPurchaseOrderSummary($event)" >
                             <span> Purchase Order Summary</span>
-                        </li>
-                        <!--<li mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseorderdetails' }" (click)="goPurchaseOrderDetails($event)" >
-                            <span> Purchase Order Details</span>
-                        </li>
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'supplierpaymentsummary' }" (click)="goSupplierPaymentSummary($event)" >
-                            <span> Supplier Payment Summary</span>
-                        </li>
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'supplierproductlist' }" (click)="goSupplierProductList($event)" >
-                            <span> Supplier Product List</span>
-                        </li>
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'supplierlistreport' }" (click)="goSupplierListReport($event)" >
-                            <span> Supplier List Report</span>
-                        </li>-->
+                        </li>                        
                     </mat-menu>
-                     <li mat-button (mouseenter)="userMenu.openMenu()" #userMenu="matMenuTrigger" [matMenuTriggerFor]="userMenuItems">
+                    <li *ngIf='isAdmin' mat-button (mouseenter)="userMenu.openMenu()" #userMenu="matMenuTrigger" [matMenuTriggerFor]="userMenuItems">
                         <span>User </span>
                     </li>
                     <mat-menu #userMenuItems="matMenu" [overlapTrigger]="false" >
-                        <li mat-menu-item  [ngClass]="{'active': activeMenu == 'manageuser' }" (click)="goManageUser($event)">
+                        <li *ngIf='isAdmin'  mat-menu-item  [ngClass]="{'active': activeMenu == 'manageuser' }" (click)="goManageUser($event)">
                             <span  >Manage User</span>
                         </li> 
-                        <li mat-menu-item  [ngClass]="{'active': activeMenu == 'userlist' }" (click)="goUserList($event)">
+                        <li *ngIf='isAdmin'  mat-menu-item  [ngClass]="{'active': activeMenu == 'userlist' }" (click)="goUserList($event)">
                             <span  >User List </span>
                         </li> 
                     </mat-menu>        
@@ -165,7 +128,7 @@
                 <div mat-menu-item [matMenuTriggerFor]="reportSubMenuItems">
                      <span>Report</span>
                 </div>
-                <div mat-menu-item [matMenuTriggerFor]="userSubMenuItems">
+                <div *ngIf='isAdmin' mat-menu-item [matMenuTriggerFor]="userSubMenuItems">
                      <span>User </span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'logout' }" (click)="goLogout($event)">
@@ -217,56 +180,19 @@
 
             <mat-menu #reportSubMenuItems="matMenu" [overlapTrigger]="false" >
                 <div class="disabled-menu" mat-menu-item><span><b>Sales Reports</b></span></div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesbyproductsummary' }" (click)="goSalesByProductSummary($event)" >
-                     <span>Sales by Product Summary</span>
-                </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesordersummary' }" (click)="goSalesOrderSummary($event)" >
                      <span> Sales Order Summary</span>
                 </div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesorderdetails' }" (click)="goSalesOrderDetails($event)" >
-                     <span> Sales Order Details</span>
-                </div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesorderprofit' }" (click)="goSalesOrderProfit($event)" >
-                     <span> Sales Order Profit</span>
-                </div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'customerpaymentsummary' }" (click)="goCustomerPaymentSummary($event)" >
-                     <span> Customer Payment Summary</span>
-                </div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'customerpaymentbyorder' }" (click)="goCustomerPaymentByOrder($event)" >
-                     <span> Customer Payment by Order</span>
-                </div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'customerorderhistory' }" (click)="goCustomerOrderHistory($event)" >
-                     <span> Customer Order History</span>
-                </div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'customerproductlist' }" (click)="goCustomerProductList($event)" >
-                     <span> Customer Product List</span>
-                </div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'customerlistreport' }" (click)="goCustomerListReport($event)" >
-                     <span> Customer List Report</span>
-                </div>
-
                 <div class="disabled-menu" mat-menu-item><span><b>Purchase Reports</b></span></div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseordersummary' }" (click)="goPurchaseOrderSummary($event)" >
                      <span> Purchase Order Summary</span>
                 </div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseorderdetails' }" (click)="goPurchaseOrderDetails($event)" >
-                     <span> Purchase Order Details</span>
-                </div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'supplierpaymentsummary' }" (click)="goSupplierPaymentSummary($event)" >
-                     <span> Supplier Payment Summary</span>
-                </div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'supplierproductlist' }" (click)="goSupplierProductList($event)" >
-                     <span> Supplier Product List</span>
-                </div>
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'supplierlistreport' }" (click)="goSupplierListReport($event)" >
-                     <span> Supplier List Report</span>
-                </div>
             </mat-menu>
             <mat-menu #userSubMenuItems="matMenu" [overlapTrigger]="false" >
-                <div mat-menu-item  [ngClass]="{'active': activeMenu == 'manageuser' }" (click)="goManageUser($event)">
+                <div *ngIf='isAdmin' mat-menu-item  [ngClass]="{'active': activeMenu == 'manageuser' }" (click)="goManageUser($event)">
                      <span  >Manage User</span>
                 </div> 
-                <div mat-menu-item  [ngClass]="{'active': activeMenu == 'userlist' }" (click)="goUserList($event)">
+                <div *ngIf='isAdmin' mat-menu-item  [ngClass]="{'active': activeMenu == 'userlist' }" (click)="goUserList($event)">
                      <span  >User List </span>
                 </div>
             </mat-menu>

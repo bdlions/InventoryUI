@@ -5,6 +5,7 @@ import {UserType} from './user.type';
 import {User} from './user';
 import {FormControl} from '@angular/forms';
 import {EntityUser} from './dto/EntityUser';
+import {EntityUserRole} from './dto/EntityUserRole';
 import {WebAPIService} from './webservice/web-api-service';
 import {PacketHeaderFactory} from './webservice/PacketHeaderFactory';
 import {ACTION} from './webservice/ACTION';
@@ -98,10 +99,7 @@ export class AppComponent {
                     localStorage.setItem("username", username);
                     localStorage.setItem("password", password);
                     localStorage.setItem("sessionId", result.sessionId);
-                    
-                    this.navigationManager.showNavBar(true);
-                    this.navigationManager.setActiveMenu("home");
-                    this.router.navigate(["home"]);
+                    this.fetchRolesByUser();                    
                 }
                 else{
                     localStorage.removeItem("sessionId");
@@ -110,6 +108,49 @@ export class AppComponent {
             }
             else{
                 this.errorMessage = result.message;
+            }
+        });
+    }
+    
+    fetchRolesByUser()
+    {
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ROLES_BY_USER), "{}").then(result =>{
+            if (result != null && result.success)
+            {
+                /*let roleIdString: string = "";
+                let roles: EntityUserRole[] = result.list;
+                for (let counter: number = 0; counter < roles.length; counter++)
+                {
+                    if (counter == 0)
+                    {
+                        roleIdString = roles[counter].roleId + "";
+                    }
+                    else
+                    {
+                        roleIdString = roleIdString + "," + roles[counter].roleId;
+                    }
+                }
+                if (roleIdString != "")
+                {
+                    console.log(roleIdString);
+                    localStorage.setItem("roleIdString", roleIdString);
+                    this.navigationManager.showNavBar(true);
+                    this.navigationManager.setActiveMenu("home");
+                    this.router.navigate(["home"]);
+                }*/
+                let isAdmin: boolean = false;
+                let roles: EntityUserRole[] = result.list;
+                for (let counter: number = 0; counter < roles.length; counter++)
+                {
+                    if (roles[counter].roleId == 1)
+                    {
+                        isAdmin = true;
+                    }
+                }
+                this.navigationManager.showNavBar(true);
+                this.navigationManager.setActiveMenu("home");
+                this.navigationManager.setIsAdmin(isAdmin);
+                this.router.navigate(["home"]);
             }
         });
     }

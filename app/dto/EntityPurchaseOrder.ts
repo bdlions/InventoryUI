@@ -13,6 +13,7 @@ export class EntityPurchaseOrder {
     total: number = 0;
     paid: number = 0;
     remarks: string;
+    address: string;
     createdOn: number;
     modifiedOn: number;
     createdByUserId: number;

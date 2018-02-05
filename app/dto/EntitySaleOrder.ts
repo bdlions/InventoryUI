@@ -9,6 +9,7 @@ export class EntitySaleOrder {
     statusId: number;
     saleDate: number;
     remarks: string;
+    address: string;
     subtotal: number = 0;
     discount: number = 0;
     total: number = 0;

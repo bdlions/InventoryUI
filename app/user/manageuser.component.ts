@@ -26,6 +26,8 @@ export class ManageUserComponent {
     //    private manageUserSuccessMessage: string;
     private manageUserErrorMessage: string;
 
+    private disableSaveButton: boolean = false;
+
     //constants & constraints
     private maxUserLeftPanel: number = 10;
     
@@ -154,6 +156,7 @@ export class ManageUserComponent {
     }
 
     newUser(event: Event) {
+        this.disableSaveButton = false;
         this.dtoUser = new DTOUser();
         this.dtoUser.entityUser = new EntityUser();
         this.dtoUser.entityUserRoles = Array();
@@ -182,10 +185,13 @@ export class ManageUserComponent {
             this.manageUserMessageDispalyModal.show();
             return;
         }
+        
+        this.disableSaveButton = true;
         let requestBody: string = JSON.stringify(this.dtoUser);
         if (this.dtoUser.entityUser.id > 0)
         {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_USER_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 if (result.success) {
                     this.dtoUser.entityUser = result.entityUser;
                 }
@@ -199,6 +205,7 @@ export class ManageUserComponent {
         else
         {            
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_USER_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 if (result.success) {
                     
                 }

@@ -44,6 +44,8 @@ export class ManageProductComponent {
 
     private manageProductErrorMessage: string;
     
+    private disableSaveButton: boolean = false;
+    
     //constants & constraints
     private maxProductLeftPanel: number = 10;
     
@@ -371,6 +373,7 @@ export class ManageProductComponent {
     }
 
     newProduct(event: Event) {
+        this.disableSaveButton = false;
         this.productId = 0;
         //console.log(this.entityProduct.name);
         this.dtoProduct = new DTOProduct();
@@ -427,9 +430,11 @@ export class ManageProductComponent {
             this.dtoProduct.epsListToBeDeleted = null;
         }
         
+        this.disableSaveButton = true;
         let requestBody: string = JSON.stringify(this.dtoProduct);        
         if (this.dtoProduct.entityProduct.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_PRODUCT_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 console.log(result);
                 if (result.success) {
                     this.manageProductUpdateLeftPanel();
@@ -449,6 +454,7 @@ export class ManageProductComponent {
         }
         else {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PRODUCT_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 // console.log(result);
                 if (result.success) {
                     //setting response object from the server

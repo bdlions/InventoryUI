@@ -13,6 +13,8 @@ export class PacketHeaderFactory {
         else{
             packetHeader.sessionId = sessionId;
         }
+        
+        packetHeader.appId = 10001;
       
         packetHeader.action = action;
         packetHeader.packetId = UUID.UUID();

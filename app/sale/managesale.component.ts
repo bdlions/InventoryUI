@@ -55,6 +55,8 @@ export class ManageSaleComponent {
     
     private barcode: string = "";
     
+    private disableSaveButton: boolean = false;
+    
     //constants & constraints
     private maxSaleOrderLeftPanel: number = 10;
     
@@ -417,6 +419,7 @@ export class ManageSaleComponent {
     }
 
     public resetSaleOrder() {
+        this.disableSaveButton = false;
         this.orderNo = '';
         this.dtoSaleOrder = new DTOSaleOrder();
         this.dtoSaleOrder.entitySaleOrder = new EntitySaleOrder();
@@ -485,9 +488,11 @@ export class ManageSaleComponent {
             }
         }
       
+        this.disableSaveButton = true;
         let requestBody: string = JSON.stringify(this.dtoSaleOrder);
         if (this.dtoSaleOrder.entitySaleOrder.id == 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_SALE_ORDER_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 if (result.success) {
                     this.dtoSaleOrder.entitySaleOrder.id = result.entitySaleOrder.id;
                     this.dtoSaleOrder.entitySaleOrder.orderNo = result.entitySaleOrder.orderNo;
@@ -504,6 +509,7 @@ export class ManageSaleComponent {
         else {
             //handle to update sale order
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_SALE_ORDER_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 console.log(result);
                 if (result.success) {
                     this.manageSaleOrderUpdateLeftPanel();                    

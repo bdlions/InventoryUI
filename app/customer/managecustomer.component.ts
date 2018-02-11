@@ -31,6 +31,8 @@ export class ManageCustomerComponent {
     //    private manageCustomerSuccessMessage: string;
     private manageCustomerErrorMessage: string;
     
+    private disableSaveButton: boolean = false;
+    
     //constants & constraints
     private maxCustomerLeftPanel: number = 10;
 
@@ -95,8 +97,8 @@ export class ManageCustomerComponent {
     }
 
     newCustomer(event: Event) {
+        this.disableSaveButton = false;
         this.customerId = 0;
-        //console.log("New Customer");
         this.dtoCustomer = new DTOCustomer();
         this.dtoCustomer.entityCustomer = new EntityCustomer();
         this.dtoCustomer.entityUser = new EntityUser();
@@ -114,9 +116,12 @@ export class ManageCustomerComponent {
         }
 
         this.dtoCustomer.entityUser.password = "pass";
+        
+        this.disableSaveButton = true;
         let requestBody: string = JSON.stringify(this.dtoCustomer);
         if (this.dtoCustomer.entityCustomer.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_CUSTOMER_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 console.log(result);
                 if (result.success) {
                     this.manageCustomerUpdateLeftPanel();
@@ -131,6 +136,7 @@ export class ManageCustomerComponent {
         }
         else {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_CUSTOMER_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 console.log(result);
                 if (result.success) {
                     this.dtoCustomer = result;

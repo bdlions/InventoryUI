@@ -42,6 +42,8 @@ export class ManageSupplierComponent {
     
     private reqDTOSupplierProductList: DTOSupplier;
     
+    private disableSaveButton: boolean = false;
+    
     //constants & constraints
     private maxSupplierLeftPanel: number = 10;    
     
@@ -321,6 +323,7 @@ export class ManageSupplierComponent {
     }
 
     newSupplier(event: Event) {
+        this.disableSaveButton = false;
         this.supplierId = 0;
         this.dtoSupplier = new DTOSupplier();
         this.dtoSupplier.entitySupplier = new EntitySupplier();
@@ -344,9 +347,12 @@ export class ManageSupplierComponent {
         {
             this.dtoSupplier.epsListToBeDeleted = null;
         }
+        
+        this.disableSaveButton = true;
         let requestBody: string = JSON.stringify(this.dtoSupplier);
         if (this.dtoSupplier.entitySupplier.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_SUPPLIER_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 //console.log(result);
                 if (result.success) {                   
                     this.manageSupplierUpdateLeftPanel();
@@ -360,6 +366,7 @@ export class ManageSupplierComponent {
         }
         else {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_SUPPLIER_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 console.log(result);
                 if (result.success) {
                     //response from server contains newly created supplier id and user id

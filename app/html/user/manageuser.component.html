@@ -47,7 +47,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="btn-group" role="group" aria-label="...">
                         <button (click)="newUser($event)" type="button" class="custom-button"><i class="fa fa-file"></i> New</button>
-                        <button (click)="saveUser($event)"  type="button" class="custom-button"><i class="fa fa-floppy-o"></i> Save</button>
+                        <button [disabled]="disableSaveButton" (click)="saveUser($event)"  type="button" class="custom-button"><i class="fa fa-floppy-o"></i> Save</button>
                     </div>
                 </div>
             </div>

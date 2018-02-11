@@ -61,7 +61,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="btn-group" role="group" aria-label="...">
                         <button (click)="newProduct($event)" type="button" class="custom-button"><i class="fa fa-file"></i> New</button>
-                        <button (click)="saveProduct($event)"  type="button" class="custom-button"><i class="fa fa-floppy-o"></i> Save</button>
+                        <button [disabled]="disableSaveButton" (click)="saveProduct($event)"  type="button" class="custom-button"><i class="fa fa-floppy-o"></i> Save</button>
                         <!--<button type="button" class="btn btn-default"><i class="fa fa-paperclip"></i> Attachment</button>-->
                     </div>
                 </div>

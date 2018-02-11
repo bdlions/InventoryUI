@@ -49,7 +49,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="btn-group" role="group" aria-label="...">
                         <button (click)="newPurchaseOrder($event)" type="button" class="custom-button"><i class="fa fa-file"></i> New</button>
-                        <button (click)="savePurchaseOrder($event)"  type="button" class="custom-button"><i class="fa fa-floppy-o"></i> Save</button>
+                        <button [disabled]="disableSaveButton" (click)="savePurchaseOrder($event)"  type="button" class="custom-button"><i class="fa fa-floppy-o"></i> Save</button>
                         <button (click)="printReport($event)" type="button" class="custom-button"><i class="fa fa-print"></i>Print</button>
                     </div>
                 </div>

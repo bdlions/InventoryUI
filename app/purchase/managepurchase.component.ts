@@ -61,6 +61,8 @@ export class ManagePurchaseComponent {
     
     private barcode: string = "";
     
+    private disableSaveButton: boolean = false;
+    
     //constants & constraints
     private maxPurchaseOrderLeftPanel: number = 10;
     
@@ -485,6 +487,7 @@ export class ManagePurchaseComponent {
     }
 
     public resetPurchaseOrder() {
+        this.disableSaveButton = false;
         this.orderNo = '';
         this.dtoPurchaseOrder = new DTOPurchaseOrder();
         this.dtoPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
@@ -554,34 +557,21 @@ export class ManagePurchaseComponent {
                 return;
             }
         }
-
+        
+        this.disableSaveButton = true;
         let requestBody: string = JSON.stringify(this.dtoPurchaseOrder);
         //console.log(requestBody);
         if (this.dtoPurchaseOrder.entityPurchaseOrder.id == 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PURCHASE_ORDER_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 if (result.success) {
                     this.dtoPurchaseOrder.entityPurchaseOrder.id = result.entityPurchaseOrder.id;
                     this.dtoPurchaseOrder.entityPurchaseOrder.orderNo = result.entityPurchaseOrder.orderNo;
                     this.managePurchaseOrderUpdateLeftPanel();
-                    //set success message
-                    //                    this.managePurchaseSuccessMessage = result.message;
-                    //this.managePurchaseErrorMessage = "";
-
-                    //reset purchase order
-                    //this.resetPurchaseOrder();
-
-                    //update left panel purchase order list
-                    //this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
-                    //this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
-                    //this.reqDTOPurchaseOrder.limit = 10;
-                    //this.reqDTOPurchaseOrder.offset = 0;
-                    //this.fetchPurchaseOrderList();
                 }
-                else {
-                    //set error message
-                    //                    this.managePurchaseSuccessMessage = "";
+                else 
+                {
                     this.managePurchaseErrorMessage = result.message;
-
                     //display pop up with message
                     this.managePurchaseMessageDispalyModal.config.backdrop = false;
                     this.managePurchaseMessageDispalyModal.show();
@@ -591,28 +581,14 @@ export class ManagePurchaseComponent {
         else {
             //handle to update purchase order
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_PURCHASE_ORDER_INFO), requestBody).then(result => {
+                this.disableSaveButton = false;
                 console.log(result);
                 if (result.success) {
-                    this.managePurchaseOrderUpdateLeftPanel();
-                    //set success message
-                    //                    this.managePurchaseSuccessMessage = result.message;
-                    //this.managePurchaseErrorMessage = "";
-
-                    //reset purchase order
-                    //this.resetPurchaseOrder();
-
-                    //update left panel purchase order list
-                    //this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
-                    //this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
-                    //this.reqDTOPurchaseOrder.limit = 10;
-                    //this.reqDTOPurchaseOrder.offset = 0;
-                    //this.fetchPurchaseOrderList();
+                    this.managePurchaseOrderUpdateLeftPanel();                    
                 }
-                else {
-                    //set error message
-                    //                    this.managePurchaseSuccessMessage = "";
+                else 
+                {
                     this.managePurchaseErrorMessage = result.message;
-
                     //display pop up with message
                     this.managePurchaseMessageDispalyModal.config.backdrop = false;
                     this.managePurchaseMessageDispalyModal.show();

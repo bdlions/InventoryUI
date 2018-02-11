@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {WebAPIService} from './../webservice/web-api-service';
+import {NavigationManager} from "../services/NavigationManager";
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
 import {DTOProduct} from '../dto/DTOProduct';
@@ -20,6 +21,9 @@ export class CurrentStockComponent {
     private productList: DTOProduct[];
     private productCategoryList: EntityProductCategory[];
     
+    private showNavBar: boolean = false;
+    private activeMenu: string = "productlist";
+    
     private requestId: number;
     
     // MatPaginator Inputs
@@ -27,8 +31,19 @@ export class CurrentStockComponent {
     pageSize = 10;
     pageSizeOptions = [5, 10];
 
-    constructor(private router: Router, webAPIService: WebAPIService) {
+    constructor(private router: Router, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
+        this.navigationManager.showNavBarEmitter.subscribe((mode) => {
+            if (mode !== null) {
+                this.showNavBar = mode;
+            }
+        });
+        this.navigationManager.menuActivationEmitter.subscribe((menuName) => {
+            if (menuName !== null) {
+                this.activeMenu = menuName;
+            }
+        });
         this.webAPIService = webAPIService;
+        
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = this.pageSize;
@@ -54,6 +69,13 @@ export class CurrentStockComponent {
         //if nothing is set then get all current stocks
         this.requestId = ACTION.FETCH_CURRENT_STOCK;
         this.fetchCurrentStock();
+    }
+    
+    showProduct(event: Event, id: number) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("manageproduct");
+        this.router.navigate(["manageproduct", {productId: id}]);
     }
     
     public fetchProductCategoryList() {

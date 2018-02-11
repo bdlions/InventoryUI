@@ -44,7 +44,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="cursor-pointer" *ngFor="let product of productList">
+                            <tr class="cursor-pointer" *ngFor="let product of productList" (click)="showProduct($event, product.entityProduct.id)">
                                 <td data-label="Item">{{product.entityProduct.name}}</td>
                                 <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
                                 <td data-label="Last Supplier"></td>

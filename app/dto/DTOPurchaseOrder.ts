@@ -7,5 +7,6 @@ export class DTOPurchaseOrder {
     entityPurchaseOrder: EntityPurchaseOrder;
     dtoSupplier: DTOSupplier;
     products: Array<DTOProduct>;
+    returnProducts: Array<DTOProduct>;
     orderDate: string;
 }

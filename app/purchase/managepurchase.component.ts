@@ -34,6 +34,8 @@ export class ManagePurchaseComponent {
     @ViewChild('selectedPurchaseOrderProductDeleteModal') public selectedPurchaseOrderProductDeleteModal: ModalDirective;
     @ViewChild('addPurchaseOrderProduct') public addPurchaseOrderProduct: ModalDirective;
     @ViewChild('managePurchaseMessageDispalyModal') public managePurchaseMessageDispalyModal: ModalDirective;
+    @ViewChild('purchaseOrderPurchasedProductsModal') public purchaseOrderPurchasedProductsModal: ModalDirective;
+    @ViewChild('selectedPurchaseOrderReturnedProductDeleteModal') public selectedPurchaseOrderReturnedProductDeleteModal: ModalDirective;
     private webAPIService: WebAPIService;
     private orderNo: string;
 
@@ -55,6 +57,9 @@ export class ManagePurchaseComponent {
     //private productId: number;
     private productIdToPopupSelectProduct: number;
     private productIdToPopupDeleteProduct: number;
+    
+    private productIdToPopupSelectReturnProduct: number;
+    private productIdToPopupDeleteReturnProduct: number;
 
     //    private managePurchaseSuccessMessage: string;
     private managePurchaseErrorMessage: string;
@@ -101,6 +106,7 @@ export class ManagePurchaseComponent {
         this.dtoPurchaseOrder.dtoSupplier.entityUser = new EntityUser();
         this.dtoPurchaseOrder.dtoSupplier.entityUserRole = new EntityUserRole();
         this.dtoPurchaseOrder.products = Array();
+        this.dtoPurchaseOrder.returnProducts = Array();
 
         this.reqDTOSupplier = new DTOSupplier();
         this.reqDTOSupplier.entitySupplier = new EntitySupplier();
@@ -185,6 +191,14 @@ export class ManagePurchaseComponent {
     public hideManagePurchaseMessageDispalyModal(): void {
         this.managePurchaseMessageDispalyModal.hide();
     }
+    public hidePurchaseOrderPurchasedProductsModal(): void {
+        this.purchaseOrderPurchasedProductsModal.hide();
+    }
+    public hideSelectedPurchaseOrderReturnedProductDeleteModal(): void {
+        this.selectedPurchaseOrderReturnedProductDeleteModal.hide();
+    }
+    
+    
     public showPurchaseOrderEmptyRowProductModal(event: Event) {
         this.purchaseOrderProductModal.config.backdrop = false;
         this.purchaseOrderProductModal.show();
@@ -434,10 +448,10 @@ export class ManagePurchaseComponent {
                 if (this.dtoPurchaseOrder.products[purchasedProductCounter].entityProduct.id == this.productIdToPopupSelectProduct) {
                     if (!isOverWrite)
                     {
-                        this.dtoPurchaseOrder.products[purchasedProductCounter] = dtoProduct;
-                        tempProducts[tempProductsCounter] = this.dtoPurchaseOrder.products[purchasedProductCounter];
-                        tempProductsCounter++;
+                        this.dtoPurchaseOrder.products[purchasedProductCounter] = dtoProduct;                        
                     }
+                    tempProducts[tempProductsCounter] = this.dtoPurchaseOrder.products[purchasedProductCounter];
+                    tempProductsCounter++;
                 }
                 else
                 {
@@ -470,15 +484,24 @@ export class ManagePurchaseComponent {
     }
 
     public calculateBalance() {
-        let totalPrice: number = 0;
+        let totalPrice: number = 0;        
         let purchasedProductCounter: number;
         for (purchasedProductCounter = 0; purchasedProductCounter < this.dtoPurchaseOrder.products.length; purchasedProductCounter++) {
             let currentPrice: number = this.dtoPurchaseOrder.products[purchasedProductCounter].quantity * this.dtoPurchaseOrder.products[purchasedProductCounter].entityProduct.costPrice - (this.dtoPurchaseOrder.products[purchasedProductCounter].quantity * this.dtoPurchaseOrder.products[purchasedProductCounter].entityProduct.costPrice * this.dtoPurchaseOrder.products[purchasedProductCounter].discount / 100 );
             this.dtoPurchaseOrder.products[purchasedProductCounter].total = currentPrice;
             totalPrice = totalPrice + currentPrice;
         }
+        let totalReturnPrice: number = 0;
+        let counter: number;
+        for (counter = 0; counter < this.dtoPurchaseOrder.returnProducts.length; counter++) {
+            let currentPrice: number = this.dtoPurchaseOrder.returnProducts[counter].quantity * this.dtoPurchaseOrder.returnProducts[counter].entityProduct.costPrice - (this.dtoPurchaseOrder.returnProducts[counter].quantity * this.dtoPurchaseOrder.returnProducts[counter].entityProduct.costPrice * this.dtoPurchaseOrder.returnProducts[counter].discount / 100 );
+            this.dtoPurchaseOrder.returnProducts[counter].total = currentPrice;
+            totalReturnPrice = totalReturnPrice + currentPrice;
+        }
+        
         this.dtoPurchaseOrder.entityPurchaseOrder.subtotal = totalPrice;
-        this.dtoPurchaseOrder.entityPurchaseOrder.total = (totalPrice - this.dtoPurchaseOrder.entityPurchaseOrder.discount);
+        this.dtoPurchaseOrder.entityPurchaseOrder.totalReturn = totalReturnPrice;
+        this.dtoPurchaseOrder.entityPurchaseOrder.total = (totalPrice - totalReturnPrice - this.dtoPurchaseOrder.entityPurchaseOrder.discount);
     }
 
     //purchase add/save section
@@ -497,6 +520,7 @@ export class ManagePurchaseComponent {
         this.dtoPurchaseOrder.dtoSupplier.entityUser = new EntityUser();
         this.dtoPurchaseOrder.dtoSupplier.entityUserRole = new EntityUserRole();
         this.dtoPurchaseOrder.products = Array();
+        this.dtoPurchaseOrder.returnProducts = Array();
 
         this.reqDTOSupplier = new DTOSupplier();
         this.reqDTOSupplier.entitySupplier = new EntitySupplier();
@@ -607,6 +631,7 @@ export class ManagePurchaseComponent {
         this.dtoPurchaseOrder.dtoSupplier.entityUser = new EntityUser();
         this.dtoPurchaseOrder.dtoSupplier.entityUserRole = new EntityUserRole();
         this.dtoPurchaseOrder.products = Array();
+        this.dtoPurchaseOrder.returnProducts = Array();
 
         this.dtoSupplier = new DTOSupplier();
         this.dtoSupplier.entitySupplier = new EntitySupplier();
@@ -772,6 +797,95 @@ export class ManagePurchaseComponent {
             }
         });
     }
+    
+    //Return products section starts
+    public showPurchaseOrderPurchasedProductsModal(event: Event, productId: number) {
+        this.productIdToPopupSelectReturnProduct = productId;
+        this.purchaseOrderPurchasedProductsModal.config.backdrop = false;
+        this.purchaseOrderPurchasedProductsModal.show();
+    }
+    selectedPurchaseOrderPurchasedProductFromModalToReturn(event: Event, productId: number)
+    {
+        this.purchaseOrderPurchasedProductsModal.hide();
+        this.appendReturnedProductInPurchaseOrder(productId);
+    }
+    public appendReturnedProductInPurchaseOrder(productId: number)
+    {
+        let dtoProduct: DTOProduct = new DTOProduct();
+        dtoProduct.entityProduct = new EntityProduct();
+        let productCounter: number;
+        for (productCounter = 0; productCounter < this.dtoPurchaseOrder.products.length; productCounter++) {
+            if (this.dtoPurchaseOrder.products[productCounter].entityProduct.id == productId) {
+                dtoProduct.entityProduct = this.dtoPurchaseOrder.products[productCounter].entityProduct;
+                dtoProduct.discount = this.dtoPurchaseOrder.products[productCounter].discount;
+            }
+        }
+        let purchasedProductCounter: number;
+        if (this.productIdToPopupSelectReturnProduct == 0 && dtoProduct.entityProduct.id > 0) {
+            let isAppend: boolean = true;
+            for (purchasedProductCounter = 0; purchasedProductCounter < this.dtoPurchaseOrder.returnProducts.length; purchasedProductCounter++) {
+                if (this.dtoPurchaseOrder.returnProducts[purchasedProductCounter].entityProduct.id == dtoProduct.entityProduct.id) {
+                    //from empty cell/add button, selecting a product whish is already in product list
+                    this.dtoPurchaseOrder.returnProducts[purchasedProductCounter].quantity = (this.dtoPurchaseOrder.returnProducts[purchasedProductCounter].quantity + 1);
+                    isAppend = false;
+                    break;
+                }
+            }
+            if (isAppend)
+            {
+                this.dtoPurchaseOrder.returnProducts[this.dtoPurchaseOrder.returnProducts.length] = dtoProduct;
+            }           
+        }
+        else {
+            let tempProducts: DTOProduct[] = Array();
+            let isOverWrite: boolean = false;
+            for (purchasedProductCounter = 0; purchasedProductCounter < this.dtoPurchaseOrder.returnProducts.length; purchasedProductCounter++) {
+                if (this.dtoPurchaseOrder.returnProducts[purchasedProductCounter].entityProduct.id == dtoProduct.entityProduct.id) {
+                    this.dtoPurchaseOrder.returnProducts[purchasedProductCounter].quantity = (this.dtoPurchaseOrder.returnProducts[purchasedProductCounter].quantity + 1);
+                    isOverWrite = true;
+                    break;
+                }
+            }
+            let tempProductsCounter: number = 0;
+            for (purchasedProductCounter = 0; purchasedProductCounter < this.dtoPurchaseOrder.returnProducts.length; purchasedProductCounter++) {
+                if (this.dtoPurchaseOrder.returnProducts[purchasedProductCounter].entityProduct.id == this.productIdToPopupSelectReturnProduct) {
+                    if (!isOverWrite)
+                    {
+                        this.dtoPurchaseOrder.returnProducts[purchasedProductCounter] = dtoProduct;                        
+                    }
+                    tempProducts[tempProductsCounter] = this.dtoPurchaseOrder.returnProducts[purchasedProductCounter];
+                    tempProductsCounter++;
+                }
+                else
+                {
+                    tempProducts[tempProductsCounter] = this.dtoPurchaseOrder.returnProducts[purchasedProductCounter];
+                    tempProductsCounter++;
+                }
+            }
+            this.dtoPurchaseOrder.returnProducts = tempProducts;      
+        }
+        this.calculateBalance();
+    }
+    showSelectedPurchaseOrderReturnedProductDeleteModal(event: Event, productId: number)
+    {
+        this.productIdToPopupDeleteReturnProduct = productId;
+        this.selectedPurchaseOrderReturnedProductDeleteModal.config.backdrop = false;
+        this.selectedPurchaseOrderReturnedProductDeleteModal.show();
+    }
+    deleteSelectedReturnedProductFromPurchaseOrder(event: Event)
+    {
+        let tempDTOProductlist: DTOProduct[] = Array();
+        this.selectedPurchaseOrderReturnedProductDeleteModal.hide();
+        let purchasedProductCounter: number;
+        for (purchasedProductCounter = 0; purchasedProductCounter < this.dtoPurchaseOrder.returnProducts.length; purchasedProductCounter++) {
+            if (this.dtoPurchaseOrder.returnProducts[purchasedProductCounter].entityProduct.id != this.productIdToPopupDeleteReturnProduct) {
+                tempDTOProductlist[tempDTOProductlist.length] = this.dtoPurchaseOrder.returnProducts[purchasedProductCounter];
+            }
+        }
+        this.dtoPurchaseOrder.returnProducts = tempDTOProductlist;
+        this.calculateBalance();
+    }
+    //Return products section ends
 }
 
 

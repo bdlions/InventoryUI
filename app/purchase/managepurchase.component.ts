@@ -816,7 +816,9 @@ export class ManagePurchaseComponent {
         let productCounter: number;
         for (productCounter = 0; productCounter < this.dtoPurchaseOrder.products.length; productCounter++) {
             if (this.dtoPurchaseOrder.products[productCounter].entityProduct.id == productId) {
-                dtoProduct.entityProduct = this.dtoPurchaseOrder.products[productCounter].entityProduct;
+                dtoProduct.entityProduct.id = this.dtoPurchaseOrder.products[productCounter].entityProduct.id;
+                dtoProduct.entityProduct.name = this.dtoPurchaseOrder.products[productCounter].entityProduct.name;
+                dtoProduct.entityProduct.costPrice = this.dtoPurchaseOrder.products[productCounter].entityProduct.costPrice;
                 dtoProduct.discount = this.dtoPurchaseOrder.products[productCounter].discount;
             }
         }

@@ -147,7 +147,7 @@
                                                     <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
                                                     <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance()"></td>
                                                     <td data-label="Discount" ><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
-                                                    <td data-label="Total"><label>{{product.total}}</label></td>
+                                                    <td data-label="Total"><label>{{product.total | number:'.2-2'}}</label></td>
                                                     <td data-label="Delete" class="text-center"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedSaleOrderProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedSaleOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                 </tr>
                                             </tbody>
@@ -187,7 +187,7 @@
                                             <span class="purchase-order-title">Sub Total:</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                            <label name="subtotal">{{dtoSaleOrder.entitySaleOrder.subtotal}}</label>
+                                            <label name="subtotal">{{dtoSaleOrder.entitySaleOrder.subtotal | number:'.2-2'}}</label>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -195,7 +195,7 @@
                                             <span class="purchase-order-title">Total Return:</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                            <label name="totalReturn">{{dtoSaleOrder.entitySaleOrder.totalReturn}}</label>
+                                            <label name="totalReturn">{{dtoSaleOrder.entitySaleOrder.totalReturn | number:'.2-2'}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@
                                             <span class="purchase-order-title">Total:</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                            <label name="total">{{dtoSaleOrder.entitySaleOrder.total}}</label>
+                                            <label name="total">{{dtoSaleOrder.entitySaleOrder.total | number:'.2-2'}}</label>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -258,6 +258,7 @@
                                                 <th>Unit Price<span class="required">*</span></th>
                                                 <th>Discount(%)</th>
                                                 <th>Sub-Total</th>
+                                                <th>Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -268,6 +269,7 @@
                                                 <td data-label="Unit Price"><input class="form-control" ></td>
                                                 <td data-label="Discount"><input class="form-control"></td>
                                                 <td data-label="Sub-Total"><label></label></td>
+                                                <td data-label="Date"><label></label></td>
                                                 <td data-label="Action" class="text-center"></td>
                                             </tr>
                                         </tbody>
@@ -280,7 +282,8 @@
                                                     <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
                                                     <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance()"></td>
                                                     <td data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
-                                                    <td data-label="Sub-Total"><label>{{product.total}}</label></td>
+                                                    <td data-label="Sub-Total"><label>{{product.total | number:'.2-2'}}</label></td>
+                                                    <td data-label="Date"><label>{{product.createdOn}}</label></td>
                                                     <td data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedSaleOrderReturnedProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedSaleOrderReturnedProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                 </tr>
                                             </tbody>
@@ -290,6 +293,7 @@
                                         <tfoot>
                                             <tr class="cursor-pointer" (keypress)="showSaleOrderSoldProductsModal($event, 0)" (click)="showSaleOrderSoldProductsModal($event, 0)">
                                                 <td><i class="fa fa-plus"></i></td>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -310,7 +314,7 @@
                                             <span class="purchase-order-title">Total Return:</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                            <label name="totalReturn">{{dtoSaleOrder.entitySaleOrder.totalReturn}}</label>
+                                            <label name="totalReturn">{{dtoSaleOrder.entitySaleOrder.totalReturn | number:'.2-2'}}</label>
                                         </div>
                                     </div>
                                 </div>

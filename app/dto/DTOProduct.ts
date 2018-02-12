@@ -13,5 +13,7 @@ export class DTOProduct {
     entityProductType: EntityProductType;
     entityProductSupplierList: EntityProductSupplier[];
     epsListToBeDeleted: EntityProductSupplier[];
+    createdOn: number;
+    modifiedOn: number;
 }
 

@@ -7,5 +7,6 @@ export class DTOSaleOrder {
     entitySaleOrder: EntitySaleOrder;
     dtoCustomer: DTOCustomer;
     products: Array<DTOProduct>;
+    returnProducts: Array<DTOProduct>;
     orderDate: string;
 }

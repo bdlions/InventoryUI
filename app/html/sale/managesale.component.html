@@ -171,7 +171,7 @@
                                 <!--                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 
                                                                     </div>-->
-                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                             <span class="purchase-order-title">Remarks</span>
@@ -181,10 +181,28 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="purchase-order-title">Sub Total:</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <label name="subtotal">{{dtoSaleOrder.entitySaleOrder.subtotal}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="purchase-order-title">Total Return:</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <label name="totalReturn">{{dtoSaleOrder.entitySaleOrder.totalReturn}}</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">                                    
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                            <span class="purchase-order-title">Discount<span class="required"></span></span>
+                                            <span class="purchase-order-title">Discount:<span class="required"></span></span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                             <input (change)="calculateBalance()" [(ngModel)]="dtoSaleOrder.entitySaleOrder.discount" name="discount" class="form-control">
@@ -192,7 +210,7 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                            <span class="purchase-order-title">Total</span>
+                                            <span class="purchase-order-title">Total:</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                             <label name="total">{{dtoSaleOrder.entitySaleOrder.total}}</label>
@@ -200,7 +218,7 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                            <span class="purchase-order-title">Paid<span class="required"></span></span>
+                                            <span class="purchase-order-title">Paid:<span class="required"></span></span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                             <input [(ngModel)]="dtoSaleOrder.entitySaleOrder.paid" name="Paid" class="form-control">
@@ -212,7 +230,7 @@
                         <!--Sale Tab Ends-->
 
                         <!--Fulfill Tab Starts-->
-                        <tab class="manage-sale-right-side-tab" heading="Return">
+<!--                        <tab class="manage-sale-right-side-tab" heading="Return">
                             <div class="row form-group">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                     <div class="row form-group">
@@ -225,8 +243,80 @@
 
                                 </div>
                             </div>
-                        </tab>
+                        </tab>-->
                         <!--Fulfill Tab Ends-->
+                        
+                        <!--Return Tab Ends-->
+                        <tab class="manage-purchase-right-side-tab" heading="Return">
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <table class="common-table adjust-input">
+                                        <thead>
+                                            <tr>
+                                                <th>Item<span class="required">*</span></th>
+                                                <th>Quantity<span class="required">*</span></th>
+                                                <th>Unit Price<span class="required">*</span></th>
+                                                <th>Discount(%)</th>
+                                                <th>Sub-Total</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td data-label="Item" (keypress)="showSaleOrderSoldProductsModal($event, 0)" (click)="showSaleOrderSoldProductsModal($event, 0)"><input class="form-control" ></td>
+                                                <td data-label="Quantity"><input class="form-control" ></td>
+                                                <td data-label="Unit Price"><input class="form-control" ></td>
+                                                <td data-label="Discount"><input class="form-control"></td>
+                                                <td data-label="Sub-Total"><label></label></td>
+                                                <td data-label="Action" class="text-center"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-wrapper manage-purchase-right-side-product-table">
+                                        <table class="common-table adjust-input">
+                                            <tbody>
+                                                <tr *ngFor="let product of dtoSaleOrder.returnProducts">
+                                                    <td data-label="Item" (keypress)="showSaleOrderSoldProductsModal($event, product.entityProduct.id)" (click)="showSaleOrderSoldProductsModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
+                                                    <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
+                                                    <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance()"></td>
+                                                    <td data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
+                                                    <td data-label="Sub-Total"><label>{{product.total}}</label></td>
+                                                    <td data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedSaleOrderReturnedProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedSaleOrderReturnedProductDeleteModal($event, product.entityProduct.id)"></i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <table class="common-table">
+                                        <tfoot>
+                                            <tr class="cursor-pointer" (keypress)="showSaleOrderSoldProductsModal($event, 0)" (click)="showSaleOrderSoldProductsModal($event, 0)">
+                                                <td><i class="fa fa-plus"></i></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                    
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="purchase-order-title">Total Return:</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <label name="totalReturn">{{dtoSaleOrder.entitySaleOrder.totalReturn}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                        <!--Return Tab Ends-->
                     </tabset>
                 </div>
             </div>
@@ -458,7 +548,7 @@
             <div class="modal-header">
                 <div class="row">
                     <div class="col-xs-offset-2 col-xs-8  col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
-                        <h4 class="modal-title">Selected Purchase Product Delete</h4>
+                        <h4 class="modal-title">Selected Sale Product Delete</h4>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                         <button type="button" class="close pull-right" aria-label="Close" (click)="hideSelectedSaleOrderProductDeleteModal()">
@@ -522,3 +612,83 @@
     </div>
 </div>
 <!-- Manage Sale Message Dispaly Modal Ends-->
+
+<!--Sale Order Sold Products Modal Starts-->
+<div bsModal #saleOrderSoldProductsModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-offset-2 col-xs-8  col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+                        <h4 class="modal-title">Sold Products</h4>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideSaleOrderSoldProductsModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="table-wrapper">
+                            <table class="common-table">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Category</th>
+                                        <th>Normal Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let product of dtoSaleOrder.products" (click)="selectedSaleOrderSoldProductFromModalToReturn($event, product.entityProduct.id)">
+                                        <td data-label="Item">{{product.entityProduct.name}}</td>
+                                        <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
+                                        <td data-label="Normal Price">{{product.entityProduct.unitPrice}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Sale Order Sold Products Modal Ends-->
+<!--Sale Order Selected Returned Product Delete Modal Starts-->
+<div bsModal #selectedSaleOrderReturnedProductDeleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-offset-2 col-xs-8  col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+                        <h4 class="modal-title">Selected Sold Product to Return Delete</h4>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideSelectedSaleOrderReturnedProductDeleteModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row margin-top-10px">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="text-center">Do you want to Delete this Product? </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideSelectedSaleOrderReturnedProductDeleteModal()">No</button>
+                        <button type="button" class="custom-button" (click)="deleteSelectedReturnedProductFromSaleOrder($event)">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Sale Order Selected Returned Product Delete Modal Ends-->

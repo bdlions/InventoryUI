@@ -37,18 +37,20 @@
                         <thead>
                             <tr>
                                 <th>Item</th>
+                                <th>Type</th>
                                 <th>Category</th>
-                                <th>Last Supplier</th>
-                                <th>Location</th>
+<!--                                <th>Last Supplier</th>
+                                <th>Location</th>-->
                                 <th>Quantity</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="cursor-pointer" *ngFor="let product of productList" (click)="showProduct($event, product.entityProduct.id)">
                                 <td data-label="Item">{{product.entityProduct.name}}</td>
+                                <td data-label="Type">{{product.entityProduct.typeTitle}}</td>
                                 <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
-                                <td data-label="Last Supplier"></td>
-                                <td data-label="Location"></td>
+<!--                                <td data-label="Last Supplier"></td>
+                                <td data-label="Location"></td>-->
                                 <td data-label="Quantity">{{product.quantity}}</td>
                             </tr>
                         </tbody>

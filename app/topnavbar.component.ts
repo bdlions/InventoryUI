@@ -229,6 +229,12 @@ export class TopNavbarComponent {
         this.navigationManager.setActiveMenu("supplierlistreport");
         this.router.navigate(["supplierlistreport"]);
     }
+    goEndingStock(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("endingstock");
+        this.router.navigate(["endingstock"]);
+    }
     goManageUser(event: Event) {
         event.preventDefault();
         this.navigationManager.showNavBar(true);

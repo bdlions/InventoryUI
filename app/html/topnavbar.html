@@ -79,7 +79,11 @@
                         <li class="disabled-menu" mat-menu-item><span><b>Purchase Reports</b></span></li>
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseordersummary' }" (click)="goPurchaseOrderSummary($event)" >
                             <span> Purchase Order Summary</span>
-                        </li>                        
+                        </li>    
+                        <li class="disabled-menu" mat-menu-item><span><b>Stock Report</b></span></li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'endingstock' }" (click)="goEndingStock($event)" >
+                            <span> Ending Stock</span>
+                        </li> 
                     </mat-menu>
                     <li *ngIf='isAdmin' mat-button (mouseenter)="userMenu.openMenu()" #userMenu="matMenuTrigger" [matMenuTriggerFor]="userMenuItems">
                         <span>User </span>
@@ -186,6 +190,10 @@
                 <div class="disabled-menu" mat-menu-item><span><b>Purchase Reports</b></span></div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseordersummary' }" (click)="goPurchaseOrderSummary($event)" >
                      <span> Purchase Order Summary</span>
+                </div>
+                <div class="disabled-menu" mat-menu-item><span><b>Stock Report</b></span></div>
+                <div mat-menu-item [ngClass]="{'active': activeMenu == 'endingstock' }" (click)="goEndingStock($event)" >
+                     <span> Ending Stock</span>
                 </div>
             </mat-menu>
             <mat-menu #userSubMenuItems="matMenu" [overlapTrigger]="false" >

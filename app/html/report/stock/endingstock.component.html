@@ -1,0 +1,73 @@
+<div class="container-fluid">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h4>Search</h4>
+                </div>
+            </div>
+            <form role="form" (submit)="searchEndingStock($event)">
+                 <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="product-title">From</span>
+                    </div>
+                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input [(ngModel)]="maxStock" id="maxStock" name="maxStock" class="form-control">
+                    </div>
+                </div>                
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="submit" id="search-customer" class="custom-button pull-right">Generate Report</button>
+                    </div>
+                </div>
+            </form> 
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="report-layer">
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h1>Closing Stock List</h1>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>Item</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>Type</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>Category</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>Quantity</label>
+                            </div>                            
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="report-layer-divider"></div>
+                            </div>
+                        </div>
+                        <div *ngFor="let product of productList" class="row form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>{{product.entityProduct.name}}</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>{{product.entityProduct.typeTitle}}</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>{{product.entityProduct.categoryTitle}}</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>{{product.quantity}}</p>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

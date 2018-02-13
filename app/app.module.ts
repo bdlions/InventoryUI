@@ -53,6 +53,8 @@ import {PurchaseOrderDetails} from './report/purchase/purchaseorderdetails.compo
 import {SupplierPaymentSummary} from './report/purchase/supplierpaymentsummary.component';
 import {SupplierProductList} from './report/purchase/supplierproductlist.component';
 import {SupplierListReport} from './report/purchase/supplierlistreport.component';
+//stock report
+import {EndingStockComponent} from './report/stock/endingstock.component';
 //user
 import {ManageUserComponent} from './user/manageuser.component';
 import {UserListComponent} from './user/userlist.component';
@@ -167,6 +169,10 @@ const appRoutes: Routes = [
     {
         path: 'ck',
         component: CKEditorSample
+    },
+    {
+        path: 'endingstock',
+        component: EndingStockComponent
     },
     {
         path: 'salesbyproductsummary',
@@ -329,6 +335,7 @@ enableProdMode();
         LoaderComponent,
         MatProgressSpinner, MatSpinner,
         CKEditorSample,
+        EndingStockComponent,
         SalesByProductSummary,
         SalesOrderSummary,
         SalesOrderDetails,

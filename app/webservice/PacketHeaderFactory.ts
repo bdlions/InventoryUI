@@ -137,6 +137,9 @@ export class PacketHeaderFactory {
             case ACTION.FETCH_ROLES_BY_USER:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break; 
+            case ACTION.FETCH_ENDING_CURRENT_STOCK:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break; 
                 
             case ACTION.ADD_PRODUCT_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE

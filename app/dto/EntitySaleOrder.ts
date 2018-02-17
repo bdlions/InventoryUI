@@ -13,6 +13,7 @@ export class EntitySaleOrder {
     subtotal: number = 0;
     discount: number = 0;
     totalReturn: number = 0;
+    vat: number = 0;
     total: number = 0;
     paid: number = 0;
     createdOn: number;

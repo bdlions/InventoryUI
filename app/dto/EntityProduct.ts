@@ -2,6 +2,7 @@ export class EntityProduct {
     id: number;
     categoryId: number;
     categoryTitle: string;
+    vat: number;
     name: string;
     code: string;
     width: string;

@@ -5,6 +5,7 @@ export class EntitySaleOrderProduct {
     purchaseOrderNo: string;
     unitPrice: number;
     discount: number;
+    vat: number;
     createdOn: number;
     modifiedOn: number;
 }

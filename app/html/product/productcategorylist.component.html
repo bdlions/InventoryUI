@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h4>Search Product Category</h4>
+        </div>
+    </div>
+    <form role="form" (submit)="searchProductCategory($event)">
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+                <span class="product-title">Title</span>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                <input [(ngModel)]="searchTitle" id="name" name="name" class="form-control">
+            </div>
+        </div>
+<!--        <div class="row form-group">
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+                <span class="product-title">Vat(%)</span>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                <input id="vat" name="vat" class="form-control">
+            </div>
+        </div>-->
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+            </div>
+        </div>
+    </form>
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="product-list-table-height-view-point">
+                <div class="table-wrapper">
+                    <table class="common-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Vat(%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cursor-pointer" *ngFor="let productCategory of productCategoryList" (keypress)="showProductCategory($event, productCategory.id)" (click)="showProductCategory($event, productCategory.id)">
+                                <td data-label="Item">{{productCategory.title}}</td>
+                                <td data-label="Item">{{productCategory.vat}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -67,6 +67,18 @@ export class TopNavbarComponent {
         this.navigationManager.setActiveMenu("productlist");
         this.router.navigate(["productlist"]);
     }
+    goManageProductCategory(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("manageproductcategory");
+        this.router.navigate(["manageproductcategory", {categoryId: 0}]);
+    }
+    goProductCategoryList(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("productcategorylist");
+        this.router.navigate(["productcategorylist"]);
+    }
     goManageCustomer(event: Event) {
         event.preventDefault();
         this.navigationManager.showNavBar(true);

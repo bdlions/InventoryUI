@@ -417,11 +417,14 @@ export class ManageSaleComponent {
 
     public calculateBalance() {
         let totalPrice: number = 0;
+        let totalVat: number = 0;
         let purchasedProductCounter: number;
         for (purchasedProductCounter = 0; purchasedProductCounter < this.dtoSaleOrder.products.length; purchasedProductCounter++) {
             let currentPrice: number = this.dtoSaleOrder.products[purchasedProductCounter].quantity * this.dtoSaleOrder.products[purchasedProductCounter].entityProduct.unitPrice - (this.dtoSaleOrder.products[purchasedProductCounter].quantity * this.dtoSaleOrder.products[purchasedProductCounter].entityProduct.unitPrice * this.dtoSaleOrder.products[purchasedProductCounter].discount / 100);
+            let currentVat: number = this.dtoSaleOrder.products[purchasedProductCounter].quantity * this.dtoSaleOrder.products[purchasedProductCounter].entityProduct.unitPrice * this.dtoSaleOrder.products[purchasedProductCounter].entityProduct.vat / 100;
             this.dtoSaleOrder.products[purchasedProductCounter].total = currentPrice;
             totalPrice = totalPrice + currentPrice;
+            totalVat = totalVat + currentVat;
         }
         let totalReturnPrice: number = 0;
         let counter: number;
@@ -432,7 +435,8 @@ export class ManageSaleComponent {
         }
         this.dtoSaleOrder.entitySaleOrder.subtotal = totalPrice;
         this.dtoSaleOrder.entitySaleOrder.totalReturn = totalReturnPrice;
-        this.dtoSaleOrder.entitySaleOrder.total = (totalPrice - totalReturnPrice - this.dtoSaleOrder.entitySaleOrder.discount);
+        this.dtoSaleOrder.entitySaleOrder.vat = totalVat;
+        this.dtoSaleOrder.entitySaleOrder.total = (totalPrice + totalVat - totalReturnPrice - this.dtoSaleOrder.entitySaleOrder.discount);
     }
     //sale save/update section
     public newSaleOrder(event: Event) {

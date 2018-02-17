@@ -67,6 +67,12 @@
                         <li mat-menu-item  [ngClass]="{'active': activeMenu == 'currentstock' }" (click)="goCurrentStock($event)">
                             <span  >Current Stock</span>
                         </li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'manageproductcategory' }" (click)="goManageProductCategory($event)" >
+                            <span>New Product Category</span>
+                        </li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'productcategorylist' }" (click)="goProductCategoryList($event)">
+                            <span  >Product Category List</span>
+                        </li>
                     </mat-menu>
                     <li  mat-button (mouseenter)="reportMenu.openMenu()" #reportMenu="matMenuTrigger" [matMenuTriggerFor]="reportMenuItems">
                          <span>Report</span>
@@ -179,6 +185,12 @@
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'currentstock' }" (click)="goCurrentStock($event)">
                      <span>Current Stock</span>
+                </div>
+                <div mat-menu-item [ngClass]="{'active': activeMenu == 'manageproductcategory' }" (click)="goManageProductCategory($event)">
+                     <span>New Product Category</span>
+                </div>
+                <div mat-menu-item [ngClass]="{'active': activeMenu == 'productcategorylist' }" (click)="goProductCategoryList($event)">
+                     <span>Product Category List</span>
                 </div>
             </mat-menu>
 

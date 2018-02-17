@@ -1,0 +1,144 @@
+<div class="container-fluid">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
+            <!--Search Product Category Starts-->
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h4>Search</h4>
+                </div>
+            </div>
+            <form role="form" (submit)="searchProductCategory($event)">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="product-title">Title</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input [(ngModel)]="searchTitle" id="name" name="name" class="form-control">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="product-title">Vat(%)</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input id="vat" name="vat" class="form-control">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="submit" id="search-product" class="custom-button pull-right">Refresh</button>
+                    </div>
+                </div>
+            </form> 
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="manage-product-left-side-table-height-view-point">
+                        <div class="table-wrapper manage-product-left-side-table">
+                            <table class="common-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Vat(%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="cursor-pointer" *ngFor="let productCategory of productCategoryList" (click)="selectedProductCategory($event, productCategory.id)" [ngClass]="{'active': categoryId == productCategory.id }">
+                                        <td data-label="Title">{{productCategory.title}}</td>
+                                        <td data-label="Vat">{{productCategory.vat}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Search Product Category Ends-->
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button (click)="newProductCategory($event)" type="button" class="custom-button"><i class="fa fa-file"></i> New</button>
+                        <button [disabled]="disableSaveButton" (click)="saveProductCategory($event)"  type="button" class="custom-button"><i class="fa fa-floppy-o"></i> Save</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <tabset class="manage-product-right-side-tabset">
+                        <!--Product Info Tab Starts-->
+                        <tab class="manage-product-right-side-tab" heading="Product Category">
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <h3>Product Category Info</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="product-title">Title<span class="required">*</span></span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input [(ngModel)]="entityProductCategory.title" name="title" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="product-title">Vat(%)<span class="required"></span></span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input [(ngModel)]="entityProductCategory.vat" name="vat" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+
+                                </div>
+                            </div> 
+                        </tab>
+                        <!--Product Info Tab Ends-->
+                    </tabset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Manage Product Category Message Dispaly Modal Starts-->
+<div bsModal #manageProductCategoryMessageDispalyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-offset-2 col-xs-8  col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+                        <h4 class="modal-title">Message</h4>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideManageProductCategoryMessageDispalyModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row margin-top-10px">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <!--<p class="text-center green">{{manageProductSuccessMessage}}</p>-->
+                        <p class="text-center red">{{manageProductCategoryErrorMessage}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" class="custom-button" (click)="hideManageProductCategoryMessageDispalyModal()">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Manage Product Category Message Display Modal Ends-->

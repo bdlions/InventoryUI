@@ -19,7 +19,7 @@ export class EndingStockComponent {
     private subscribe: Subscription;
 
     
-    public maxStock: number = 10;
+    public maxStock: number = 0;
 
     private showNavBar: boolean = false;
     private activeMenu: string = "salesordersummary";
@@ -51,11 +51,23 @@ export class EndingStockComponent {
     public fetchEndingStockList() {
         let requestBody: string = "{\"maxStock\": " + this.maxStock + "}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ENDING_CURRENT_STOCK), requestBody).then(result => {
-            if(result.success)
+            if(result.success && result.list != null)
             {
                 this.productList = result.list;
+                //if we get default ending stock list then maximum stock quantity is identified and set from the result
+                if (this.maxStock == 0)
+                {
+                    let tempMaxStock: number = 0;
+                    for (let counter: number = 0; counter < this.productList.length; counter++)
+                    {
+                        if (this.productList[counter].quantity > tempMaxStock)
+                        {
+                            tempMaxStock = this.productList[counter].quantity;
+                        }
+                    }
+                    this.maxStock = tempMaxStock;
+                }                
             }
-            console.log(this.productList);
         });
     }
     

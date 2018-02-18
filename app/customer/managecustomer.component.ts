@@ -112,9 +112,8 @@ export class ManageCustomerComponent {
     }
 
     saveCustomer(event: Event) {
-        //check customer first name
+        //check customer user name
         if (this.dtoCustomer.entityUser.userName == null || this.dtoCustomer.entityUser.userName == "") {
-            //            this.manageCustomerSuccessMessage = "";
             this.manageCustomerErrorMessage = "Name is required.";
             this.manageCustomerMessageDispalyModal.config.backdrop = false;
             this.manageCustomerMessageDispalyModal.show();

@@ -486,17 +486,7 @@ export class ManageSaleComponent {
                 return;
             }
         } 
-        //if sale is executed without selecting customer then paid and total must be equal  
-        if (this.dtoSaleOrder.entitySaleOrder.customerUserId == null || this.dtoSaleOrder.entitySaleOrder.customerUserId <= 0)
-        {
-            if (this.dtoSaleOrder.entitySaleOrder.paid != this.dtoSaleOrder.entitySaleOrder.total)
-            {
-                this.manageSaleErrorMessage = "Paid amount should be equal to total amount.";
-                this.manageSaleMessageDispalyModal.config.backdrop = false;
-                this.manageSaleMessageDispalyModal.show();
-                return;
-            }
-        }     
+            
         //check product selection
         if (this.dtoSaleOrder.products == null) {
             this.manageSaleErrorMessage = "Select a product";
@@ -508,14 +498,55 @@ export class ManageSaleComponent {
         let counter: number;
         for (counter = 0; counter < this.dtoSaleOrder.products.length; counter++)
         {
-            if (this.dtoSaleOrder.products[counter].quantity <= 0)
+            if (this.dtoSaleOrder.products[counter].quantity == null || this.dtoSaleOrder.products[counter].quantity+"" == "" || this.dtoSaleOrder.products[counter].quantity <= 0)
             {
-                this.manageSaleErrorMessage = "Invalid quantity for the product : " + this.dtoSaleOrder.products[counter].entityProduct.name;
+                this.manageSaleErrorMessage = "Invalid Quantity for the product : " + this.dtoSaleOrder.products[counter].entityProduct.name;
+                this.manageSaleMessageDispalyModal.config.backdrop = false;
+                this.manageSaleMessageDispalyModal.show();
+                return;
+            }
+            if (this.dtoSaleOrder.products[counter].entityProduct.unitPrice == null || this.dtoSaleOrder.products[counter].entityProduct.unitPrice+"" == "")
+            {
+                this.manageSaleErrorMessage = "Invalid Unit Price for the product : " + this.dtoSaleOrder.products[counter].entityProduct.name;
                 this.manageSaleMessageDispalyModal.config.backdrop = false;
                 this.manageSaleMessageDispalyModal.show();
                 return;
             }
         }
+        
+        //checking valid quantity and price for purchase return product list
+        if (this.dtoSaleOrder.returnProducts != null)
+        {
+            for (counter = 0; counter < this.dtoSaleOrder.returnProducts.length; counter++)
+            {
+                if (this.dtoSaleOrder.returnProducts[counter].quantity == null || this.dtoSaleOrder.returnProducts[counter].quantity+"" == "" || this.dtoSaleOrder.returnProducts[counter].quantity <= 0)
+                {
+                    this.manageSaleErrorMessage = "Invalid Quantity for the Return product : " + this.dtoSaleOrder.returnProducts[counter].entityProduct.name;
+                    this.manageSaleMessageDispalyModal.config.backdrop = false;
+                    this.manageSaleMessageDispalyModal.show();
+                    return;
+                }
+                if (this.dtoSaleOrder.returnProducts[counter].entityProduct.unitPrice == null || this.dtoSaleOrder.returnProducts[counter].entityProduct.unitPrice+"" == "")
+                {
+                    this.manageSaleErrorMessage = "Invalid Unit Price for the Return product : " + this.dtoSaleOrder.returnProducts[counter].entityProduct.name;
+                    this.manageSaleMessageDispalyModal.config.backdrop = false;
+                    this.manageSaleMessageDispalyModal.show();
+                    return;
+                }
+            }
+        }
+        
+        //if sale is executed without selecting customer then paid and total must be equal  
+        if (this.dtoSaleOrder.entitySaleOrder.customerUserId == null || this.dtoSaleOrder.entitySaleOrder.customerUserId <= 0)
+        {
+            if (this.dtoSaleOrder.entitySaleOrder.paid != this.dtoSaleOrder.entitySaleOrder.total)
+            {
+                this.manageSaleErrorMessage = "Paid amount should be equal to total amount.";
+                this.manageSaleMessageDispalyModal.config.backdrop = false;
+                this.manageSaleMessageDispalyModal.show();
+                return;
+            }
+        } 
       
         this.disableSaveButton = true;
         let requestBody: string = JSON.stringify(this.dtoSaleOrder);

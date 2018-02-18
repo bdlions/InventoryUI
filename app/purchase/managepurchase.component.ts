@@ -556,34 +556,62 @@ export class ManagePurchaseComponent {
             }
         }
         //check supplier selection
-        if (this.dtoSupplier.entityUser.firstName == null || this.dtoSupplier.entityUser.firstName == "") {
-            //            this.managePurchaseSuccessMessage = "";
-            this.managePurchaseErrorMessage = "Select a supplier";
+        if (this.dtoSupplier.entityUser.id == null || this.dtoSupplier.entityUser.id < 0) {
+            this.managePurchaseErrorMessage = "Please select a supplier";
             this.managePurchaseMessageDispalyModal.config.backdrop = false;
             this.managePurchaseMessageDispalyModal.show();
             return;
         }
         //check product selection
         if (this.dtoPurchaseOrder.products == null) {
-            //            this.managePurchaseSuccessMessage = "";
             this.managePurchaseErrorMessage = "Select a product";
             this.managePurchaseMessageDispalyModal.config.backdrop = false;
             this.managePurchaseMessageDispalyModal.show();
             return;
         }
         
-        //checking positive quantity
+        //checking valid quantity and price for purchase product list
         let counter: number;
         for (counter = 0; counter < this.dtoPurchaseOrder.products.length; counter++)
         {
-            if (this.dtoPurchaseOrder.products[counter].quantity <= 0)
+            if (this.dtoPurchaseOrder.products[counter].quantity == null || this.dtoPurchaseOrder.products[counter].quantity+"" == "" || this.dtoPurchaseOrder.products[counter].quantity <= 0)
             {
-                this.managePurchaseErrorMessage = "Invalid quantity for the product : " + this.dtoPurchaseOrder.products[counter].entityProduct.name;
+                this.managePurchaseErrorMessage = "Invalid Quantity for the product : " + this.dtoPurchaseOrder.products[counter].entityProduct.name;
+                this.managePurchaseMessageDispalyModal.config.backdrop = false;
+                this.managePurchaseMessageDispalyModal.show();
+                return;
+            }
+            if (this.dtoPurchaseOrder.products[counter].entityProduct.costPrice == null || this.dtoPurchaseOrder.products[counter].entityProduct.costPrice+"" == "")
+            {
+                this.managePurchaseErrorMessage = "Invalid Unit Price for the product : " + this.dtoPurchaseOrder.products[counter].entityProduct.name;
                 this.managePurchaseMessageDispalyModal.config.backdrop = false;
                 this.managePurchaseMessageDispalyModal.show();
                 return;
             }
         }
+        
+        //checking valid quantity and price for purchase return product list
+        if (this.dtoPurchaseOrder.returnProducts != null)
+        {
+            for (counter = 0; counter < this.dtoPurchaseOrder.returnProducts.length; counter++)
+            {
+                if (this.dtoPurchaseOrder.returnProducts[counter].quantity == null || this.dtoPurchaseOrder.returnProducts[counter].quantity+"" == "" || this.dtoPurchaseOrder.returnProducts[counter].quantity <= 0)
+                {
+                    this.managePurchaseErrorMessage = "Invalid Quantity for the Return product : " + this.dtoPurchaseOrder.returnProducts[counter].entityProduct.name;
+                    this.managePurchaseMessageDispalyModal.config.backdrop = false;
+                    this.managePurchaseMessageDispalyModal.show();
+                    return;
+                }
+                if (this.dtoPurchaseOrder.returnProducts[counter].entityProduct.costPrice == null || this.dtoPurchaseOrder.returnProducts[counter].entityProduct.costPrice+"" == "")
+                {
+                    this.managePurchaseErrorMessage = "Invalid Unit Price for the Return product : " + this.dtoPurchaseOrder.returnProducts[counter].entityProduct.name;
+                    this.managePurchaseMessageDispalyModal.config.backdrop = false;
+                    this.managePurchaseMessageDispalyModal.show();
+                    return;
+                }
+            }
+        }
+        
         
         this.disableSaveButton = true;
         let requestBody: string = JSON.stringify(this.dtoPurchaseOrder);

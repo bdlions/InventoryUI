@@ -295,6 +295,10 @@ export class ManageProductComponent {
         let entityProductSupplier: EntityProductSupplier = new EntityProductSupplier();
         entityProductSupplier.supplierUserId = dtoSupplier.entityUser.id;
         entityProductSupplier.supplierUserName = dtoSupplier.entityUser.userName;
+        if(this.dtoProduct.entityProductSupplierList == null)
+        {
+            this.dtoProduct.entityProductSupplierList = Array();
+        }
         let isAppend: boolean = true;
         let tempEntityProductSupplierList: EntityProductSupplier[] = Array();
         for (let counter: number = 0; counter < this.dtoProduct.entityProductSupplierList.length; counter++)
@@ -386,38 +390,53 @@ export class ManageProductComponent {
     saveProduct(event: Event) {
         //check product name
         if (this.dtoProduct.entityProduct.name == null || this.dtoProduct.entityProduct.name == "") {
-            //            this.manageProductSuccessMessage = "";
             this.manageProductErrorMessage = "Enter a product name";
             this.manageProductMessageDispalyModal.config.backdrop = false;
             this.manageProductMessageDispalyModal.show();
             return;
         }
         //check product type
-        if (this.dtoProduct.entityProductType.title == null || this.dtoProduct.entityProductType.title == "") {
-            //            this.manageProductSuccessMessage = "";
+        if (this.dtoProduct.entityProductType.id == null || this.dtoProduct.entityProductType.id <= 0) {
             this.manageProductErrorMessage = "Select a product type";
             this.manageProductMessageDispalyModal.config.backdrop = false;
             this.manageProductMessageDispalyModal.show();
             return;
         }
         //check product category
-        if (this.dtoProduct.entityProductCategory.title == null || this.dtoProduct.entityProductCategory.title == "") {
-            //            this.manageProductSuccessMessage = "";
+        if (this.dtoProduct.entityProductCategory.id == null || this.dtoProduct.entityProductCategory.id <= 0) {
             this.manageProductErrorMessage = "Select a product category";
             this.manageProductMessageDispalyModal.config.backdrop = false;
             this.manageProductMessageDispalyModal.show();
             return;
         }
         //check product price
-        if (this.dtoProduct.entityProduct.unitPrice == null || this.dtoProduct.entityProduct.unitPrice < 0) {
-            //            this.manageProductSuccessMessage = "";
+        if (this.dtoProduct.entityProduct.unitPrice == null || this.dtoProduct.entityProduct.unitPrice+"" == "" || this.dtoProduct.entityProduct.unitPrice < 0) {
             this.manageProductErrorMessage = "Select a valid product price";
             this.manageProductMessageDispalyModal.config.backdrop = false;
             this.manageProductMessageDispalyModal.show();
             return;
         }
-
-        //console.log(this.dtoProduct.entityProductType);
+        
+        if (this.dtoProduct.entityProductSupplierList != null)
+        {
+            for (let counter: number = 0; counter < this.dtoProduct.entityProductSupplierList.length; counter++)
+            {
+                if (this.dtoProduct.entityProductSupplierList[counter].supplierUserId == null || this.dtoProduct.entityProductSupplierList[counter].supplierUserId < 0)
+                {
+                    this.manageProductErrorMessage = "Invalid supplier in Supplier List.";
+                    this.manageProductMessageDispalyModal.config.backdrop = false;
+                    this.manageProductMessageDispalyModal.show();
+                    return;
+                }
+                else if (this.dtoProduct.entityProductSupplierList[counter].supplierPrice == null || this.dtoProduct.entityProductSupplierList[counter].supplierPrice+"" == "" || this.dtoProduct.entityProductSupplierList[counter].supplierPrice < 0)
+                {
+                    this.manageProductErrorMessage = "In Supplier List, please assign price for the supplier " + this.dtoProduct.entityProductSupplierList[counter].supplierUserName;
+                    this.manageProductMessageDispalyModal.config.backdrop = false;
+                    this.manageProductMessageDispalyModal.show();
+                    return;
+                }
+            }
+        }
 
         this.dtoProduct.entityProduct.categoryId = this.dtoProduct.entityProductCategory.id;
         this.dtoProduct.entityProduct.categoryTitle = this.dtoProduct.entityProductCategory.title;
@@ -435,44 +454,32 @@ export class ManageProductComponent {
         if (this.dtoProduct.entityProduct.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_PRODUCT_INFO), requestBody).then(result => {
                 this.disableSaveButton = false;
-                console.log(result);
                 if (result.success) {
                     this.manageProductUpdateLeftPanel();
                 }
                 else 
                 {
-                    //set error message
-                    //                    this.manageProductSuccessMessage = "";
                     this.manageProductErrorMessage = result.message;
-                    //console.log(result);
-                    //display pop up with message
                     this.manageProductMessageDispalyModal.config.backdrop = false;
                     this.manageProductMessageDispalyModal.show();
                 }
-
             });
         }
         else {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PRODUCT_INFO), requestBody).then(result => {
                 this.disableSaveButton = false;
-                // console.log(result);
                 if (result.success) {
                     //setting response object from the server
                     this.dtoProduct.entityProduct = result;
                     this.manageProductUpdateLeftPanel();
                 }
                 else {
-                    //set error message
-                    //                    this.manageProductSuccessMessage = "";
                     this.manageProductErrorMessage = result.message;
-                    //display pop up with message
                     this.manageProductMessageDispalyModal.config.backdrop = false;
                     this.manageProductMessageDispalyModal.show();
                 }
-
             });
         }
-
     }
     
     public manageProductUpdateLeftPanel()

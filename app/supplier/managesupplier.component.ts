@@ -340,11 +340,30 @@ export class ManageSupplierComponent {
     saveSupplier(event: Event) {
         //check supplier first name
         if (this.dtoSupplier.entityUser.userName == null || this.dtoSupplier.entityUser.userName == "") {
-            //            this.manageSupplierSuccessMessage = "";
             this.manageSupplierErrorMessage = "Name is required.";
             this.manageSupplierMessageDispalyModal.config.backdrop = false;
             this.manageSupplierMessageDispalyModal.show();
             return;
+        }
+        if (this.dtoSupplier.entityProductSupplierList != null)
+        {
+            for (let counter: number = 0; counter < this.dtoSupplier.entityProductSupplierList.length; counter++)
+            {
+                if (this.dtoSupplier.entityProductSupplierList[counter].productId == null || this.dtoSupplier.entityProductSupplierList[counter].productId < 0)
+                {
+                    this.manageSupplierErrorMessage = "Invalid product in Product List.";
+                    this.manageSupplierMessageDispalyModal.config.backdrop = false;
+                    this.manageSupplierMessageDispalyModal.show();
+                    return;
+                }
+                else if (this.dtoSupplier.entityProductSupplierList[counter].supplierPrice == null || this.dtoSupplier.entityProductSupplierList[counter].supplierPrice+"" == "" || this.dtoSupplier.entityProductSupplierList[counter].supplierPrice < 0)
+                {
+                    this.manageSupplierErrorMessage = "In Product List, please assign price for the product " + this.dtoSupplier.entityProductSupplierList[counter].productName;
+                    this.manageSupplierMessageDispalyModal.config.backdrop = false;
+                    this.manageSupplierMessageDispalyModal.show();
+                    return;
+                }
+            }
         }
         //set a default password for the supplier
         this.dtoSupplier.entityUser.password = "pass";
@@ -359,7 +378,6 @@ export class ManageSupplierComponent {
         if (this.dtoSupplier.entitySupplier.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_SUPPLIER_INFO), requestBody).then(result => {
                 this.disableSaveButton = false;
-                //console.log(result);
                 if (result.success) {                   
                     this.manageSupplierUpdateLeftPanel();
                 }

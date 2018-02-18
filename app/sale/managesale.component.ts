@@ -350,6 +350,7 @@ export class ManageSaleComponent {
         for (productCounter = 0; productCounter < this.productList.length; productCounter++) {
             if (this.productList[productCounter].id == productId) {
                 dtoProduct.entityProduct = this.productList[productCounter];
+                dtoProduct.quantity = this.productList[productCounter].defaultSaleQuantity;
             }
         }
         let saleProductCounter: number;
@@ -358,7 +359,7 @@ export class ManageSaleComponent {
             for (saleProductCounter = 0; saleProductCounter < this.dtoSaleOrder.products.length; saleProductCounter++) {
                 if (this.dtoSaleOrder.products[saleProductCounter].entityProduct.id == dtoProduct.entityProduct.id) {
                     //from empty cell/add button, selecting a product whish is already in product list
-                    this.dtoSaleOrder.products[saleProductCounter].quantity = (this.dtoSaleOrder.products[saleProductCounter].quantity + 1);
+                    this.dtoSaleOrder.products[saleProductCounter].quantity = (this.dtoSaleOrder.products[saleProductCounter].quantity + this.dtoSaleOrder.products[saleProductCounter].entityProduct.defaultSaleQuantity);
                     isAppend = false;
                     break;
                 }
@@ -373,7 +374,7 @@ export class ManageSaleComponent {
             let isOverWrite: boolean = false;
             for (saleProductCounter = 0; saleProductCounter < this.dtoSaleOrder.products.length; saleProductCounter++) {
                 if (this.dtoSaleOrder.products[saleProductCounter].entityProduct.id == dtoProduct.entityProduct.id) {
-                    this.dtoSaleOrder.products[saleProductCounter].quantity = (this.dtoSaleOrder.products[saleProductCounter].quantity + 1);
+                    this.dtoSaleOrder.products[saleProductCounter].quantity = (this.dtoSaleOrder.products[saleProductCounter].quantity + this.dtoSaleOrder.products[saleProductCounter].entityProduct.defaultSaleQuantity);
                     isOverWrite = true;
                     break;
                 }

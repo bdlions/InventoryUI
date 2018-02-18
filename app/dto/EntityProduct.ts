@@ -10,6 +10,7 @@ export class EntityProduct {
     weight: string;
     costPrice: number = 0;
     unitPrice: number = 0;
+    defaultSaleQuantity: number = 1;
     length: string;
     typeId: number;
     typeTitle: string;

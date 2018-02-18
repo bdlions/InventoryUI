@@ -103,10 +103,16 @@ export class ManageSupplierComponent {
 
     ngOnInit() {
         this.subscribe = this.route.params.subscribe(params => {
-            let supplierId: number = params['supplierId'];
-            this.supplierId = supplierId;
-            this.reqDTOSupplier.entitySupplier.id = supplierId;
-            this.fetchSupplierInfo();
+            this.supplierId = params['supplierId'];            
+            if(this.supplierId != null && this.supplierId > 0)
+            {
+                let dtoSupplier: DTOSupplier = new DTOSupplier();
+                dtoSupplier.entitySupplier = new EntitySupplier();
+                dtoSupplier.entityUser = new EntityUser();
+                dtoSupplier.entityUserRole = new EntityUserRole();
+                dtoSupplier.entitySupplier.id = this.supplierId;
+                this.fetchSupplierInfo(dtoSupplier);
+            }            
         });
     }
     
@@ -422,8 +428,8 @@ export class ManageSupplierComponent {
     }
 
 
-    public fetchSupplierInfo() {
-        let requestBody: string = JSON.stringify(this.reqDTOSupplier);
+    public fetchSupplierInfo(dtoSupplier: DTOSupplier) {
+        let requestBody: string = JSON.stringify(dtoSupplier);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIER_INFO), requestBody).then(result => {
             console.log(result);
             if (result.success) {

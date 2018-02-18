@@ -141,7 +141,10 @@ export class ManagePurchaseComponent {
     ngOnInit() {
         this.subscribe = this.route.params.subscribe(params => {
             this.orderNo = params['orderNo'];
-            this.setPurchaseOrderInfo(this.orderNo);
+            if (this.orderNo != null && this.orderNo != "")
+            {
+                this.setPurchaseOrderInfo(this.orderNo);
+            }            
         });
     }
 

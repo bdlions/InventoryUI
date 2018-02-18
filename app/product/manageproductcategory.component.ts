@@ -50,8 +50,11 @@ export class ManageProductCategoryComponent {
     ngOnInit() {
         this.subscribe = this.route.params.subscribe(params => {
             this.categoryId = params['categoryId'];
-            this.entityProductCategory = new EntityProductCategory();
-            this.fetchCategoryInfo();            
+            if(this.categoryId != null && this.categoryId > 0)
+            {
+                this.entityProductCategory = new EntityProductCategory();
+                this.fetchCategoryInfo();  
+            }                      
         });
     }
     

@@ -122,7 +122,10 @@ export class ManageSaleComponent {
     ngOnInit() {
         this.subscribe = this.route.params.subscribe(params => {
             this.orderNo = params['orderNo'];
-            this.setSaleOrderInfo(this.orderNo);
+            if (this.orderNo != null && this.orderNo != "")
+            {
+                this.setSaleOrderInfo(this.orderNo);
+            }            
         });
     }
 

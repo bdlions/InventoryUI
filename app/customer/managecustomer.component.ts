@@ -70,10 +70,16 @@ export class ManageCustomerComponent {
 
     ngOnInit() {
         this.subscribe = this.route.params.subscribe(params => {
-            let customerId: number = params['customerId'];
-            this.customerId = customerId;
-            this.reqDTOCustomer.entityCustomer.id = customerId;
-            this.fetchCustomerInfo();
+            this.customerId = params['customerId'];
+            if(this.customerId != null && this.customerId > 0)
+            {
+                let dtoCustomer: DTOCustomer = new DTOCustomer();
+                dtoCustomer.entityCustomer = new EntityCustomer();
+                dtoCustomer.entityUser = new EntityUser();
+                dtoCustomer.entityUserRole = new EntityUserRole();
+                dtoCustomer.entityCustomer.id = this.customerId;
+                this.fetchCustomerInfo(dtoCustomer);
+            }            
         });
     }
     public hideManageCustomerMessageDispalyModal(): void {
@@ -187,8 +193,8 @@ export class ManageCustomerComponent {
         });
     }
 
-    public fetchCustomerInfo() {
-        let requestBody: string = JSON.stringify(this.reqDTOCustomer);
+    public fetchCustomerInfo(dtoCustomer: DTOCustomer) {
+        let requestBody: string = JSON.stringify(dtoCustomer);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMER_INFO), requestBody).then(result => {
             //console.log(result);
             if (result.success) {

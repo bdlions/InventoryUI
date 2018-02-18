@@ -145,12 +145,12 @@ export class ManageProductComponent {
             if (this.dtoProduct.entityProduct.id != null && this.dtoProduct.entityProduct.id > 0)
             {
                 this.reqDTOProductSupplierList.entityProduct.id = this.dtoProduct.entityProduct.id;
+                this.fetchProductSupplierList();   
             }
             else
             {
                 this.reqDTOProductSupplierList.entityProduct.id = 0;
-            }
-            this.fetchProductSupplierList();            
+            }                     
         }
     }
     

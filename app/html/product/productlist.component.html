@@ -15,11 +15,21 @@
         </div>
         <div class="row form-group">
             <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+                <span class="product-title">Type</span>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+                <select [(ngModel)]="selectedProductType" name="selectedProductType" class="form-control" >
+                    <option *ngFor="let productType of productTypeList" [ngValue]="productType">{{productType.title}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
                 <span class="product-title">Category</span>
             </div>
             <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
-                <select class="form-control" >
-                    <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
+                <select [(ngModel)]="selectedProductCategory" name="selectedProductCategory" class="form-control" >
+                    <option *ngFor="let productCategory of productCategoryList" [ngValue]="productCategory">{{productCategory.title}}</option>
                 </select>
             </div>
         </div>

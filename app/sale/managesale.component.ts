@@ -279,15 +279,8 @@ export class ManageSaleComponent {
     searchSaleOrderProduct(event: Event) {
         this.reqDTOProduct.limit = this.productPageSize;
         this.reqDTOProduct.offset = 0;
-        if (this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "")
-        {
-            this.productRequestId = ACTION.SEARCH_PRODUCTS_WITH_STOCKS;
-            this.searchProductsWithStocks();
-            return;
-        }
-        //if nothing is set then get all products
-        this.productRequestId = ACTION.FETCH_PRODUCTS_WITH_STOCKS;
-        this.fetchProductList();
+        this.productRequestId = ACTION.SEARCH_PRODUCTS_WITH_STOCKS;
+        this.searchProductsWithStocks();
     }
     public fetchProductCategoryList() {
         let requestBody: string = "{}";
@@ -344,8 +337,12 @@ export class ManageSaleComponent {
         {
             categoryId = this.selectedProductCategory.id;
         }
-        
-        let requestBody: string = "{\"name\": \"" + this.reqDTOProduct.entityProduct.name + "\", \"typeId\": " + typeId + ", \"categoryId\": " + categoryId + ", \"offset\": \"" + this.reqDTOProduct.offset + "\", \"limit\": \"" + this.reqDTOProduct.limit + "\"}";
+        var name: string = "";
+        if(this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "")
+        {
+            name = this.reqDTOProduct.entityProduct.name;
+        }
+        let requestBody: string = "{\"name\": \"" + name + "\", \"typeId\": " + typeId + ", \"categoryId\": " + categoryId + ", \"offset\": \"" + this.reqDTOProduct.offset + "\", \"limit\": \"" + this.reqDTOProduct.limit + "\"}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.SEARCH_PRODUCTS_WITH_STOCKS), requestBody).then(result => {
             if (result.success && result.list != null) {
                 this.dtoProductList = result.list;

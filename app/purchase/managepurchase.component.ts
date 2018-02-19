@@ -298,9 +298,12 @@ export class ManagePurchaseComponent {
     
     fetchSupplierProductList(supplierUserId: number)
     {
+        //getting entire product list of this supplier
+        let dtoSupplier: DTOSupplier = new DTOSupplier();
         let entityUser: EntityUser = new EntityUser();
         entityUser.id = supplierUserId;
-        let requestBody: string = JSON.stringify(entityUser);
+        dtoSupplier.entityUser = entityUser;        
+        let requestBody: string = JSON.stringify(dtoSupplier);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIER_PRODUCT_LIST), requestBody).then(result => {
             if (result.success) {
                 if(result.list != null)

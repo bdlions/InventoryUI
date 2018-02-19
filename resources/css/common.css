@@ -657,3 +657,53 @@ table th {
     font-size: 18px;
     font-style: italic;
 }
+/*----------------------------- Dashboard CSS ----------------------------------*/
+.dashboard-sales-order-box,
+.dashboard-purchase-order-box,
+.dashboard-product-reorder-box,
+.dashboard-work-reorder-box,
+.dashboard-count-sheet-box{
+    position: relative;
+    height: 80px;
+    width: 150px;
+    text-align: center;
+    float: left;
+    margin-right: 35px;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+.dashboard-sales-order-box span,
+.dashboard-purchase-order-box span,
+.dashboard-product-reorder-box span,
+.dashboard-work-reorder-box span,
+.dashboard-count-sheet-box span{
+    position: absolute;
+    top: 40%;
+    font-size: 20px;
+    left: 45%;
+}
+.dashboard-sales-order-box p,
+.dashboard-purchase-order-box p,
+.dashboard-product-reorder-box p,
+.dashboard-work-reorder-box p,
+.dashboard-count-sheet-box p{
+    position: relative;
+    top: 100%;
+    font-size: 14px;
+    text-align: center;
+}
+.dashboard-sales-order-box{
+    background-color: #73A693;
+}
+.dashboard-purchase-order-box{
+    background-color: #9D8E7F;
+}
+.dashboard-product-reorder-box{
+    background-color: #73A0DB;
+}
+.dashboard-work-reorder-box{
+    background-color: #72AFFF;
+}
+.dashboard-count-sheet-box{
+    background-color: #4C75B0;
+}

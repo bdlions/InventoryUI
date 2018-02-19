@@ -2,7 +2,7 @@
     <div class="row form-group">
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
             <!--Search Product Category Starts-->
-            <div class="row form-group">
+            <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <h4>Search</h4>
                 </div>
@@ -16,14 +16,14 @@
                         <input [(ngModel)]="searchTitle" id="name" name="name" class="form-control">
                     </div>
                 </div>
-                <div class="row form-group">
-                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                        <span class="product-title">Vat(%)</span>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                        <input id="vat" name="vat" class="form-control">
-                    </div>
-                </div>
+                <!--                <div class="row form-group">
+                                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                        <span class="product-title">Vat(%)</span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                        <input id="vat" name="vat" class="form-control">
+                                    </div>
+                                </div>-->
                 <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <button type="submit" id="search-product" class="custom-button pull-right">Refresh</button>
@@ -32,19 +32,19 @@
             </form> 
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="manage-product-left-side-table-height-view-point">
-                        <div class="table-wrapper manage-product-left-side-table">
+                    <div class="manage-purchase-left-side-table-height-view-point">
+                        <div class="table-wrapper manage-purchase-left-side-table">
                             <table class="common-table">
                                 <thead>
                                     <tr>
                                         <th>Title</th>
-                                        <th>Vat(%)</th>
+                                        <!--<th>Vat(%)</th>-->
                                     </tr>
                                 </thead>
-                                <tbody>
+                                 <tbody>
                                     <tr class="cursor-pointer" *ngFor="let productCategory of productCategoryList" (click)="selectedProductCategory($event, productCategory.id)" [ngClass]="{'active': categoryId == productCategory.id }">
                                         <td data-label="Title">{{productCategory.title}}</td>
-                                        <td data-label="Vat">{{productCategory.vat}}</td>
+                                        <!--<td data-label="Vat">{{productCategory.vat}}</td>-->
                                     </tr>
                                 </tbody>
                             </table>

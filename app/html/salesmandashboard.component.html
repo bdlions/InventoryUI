@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row form-group">
+        <div class="col-md-6 col-lg-6">
+            <div class="row form-group">
+                <div class="col-md-12 col-lg-12">
+                    <h4>Outstanding</h4>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-12 col-lg-12">
+                    <div class="salesman-dashboard-sales-order-box" data-toggle="tooltip" data-placement="top" title="1 Sales &#013;1 Started &#013;0 Unpaid" [ngClass]="{'active': activeMenu == 'salelist' }" (click)="goSaleList($event)"><span>1</span> <p>Sales Orders</p></div>
+                    <div class="salesman-dashboard-purchase-order-box" data-toggle="tooltip" data-placement="top" title="2 Purchase &#013;0 Started &#013;0 Unpaid" [ngClass]="{'active': activeMenu == 'purchaselist' }" (click)="goPurchaseList($event)"><span>2</span> <p>Purchase Orders</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="row form-group">
+                <div class="col-md-6 col-lg-6">
+                    <h4>Top 5 Products</h4>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <select class="selectpicker dropdown-toggle form-control margin-top-10px">
+                        <option class="dropdown-item"  value="">Top 5 Products</option>
+                        <option class="dropdown-item"  value="">Top 5 Customers</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-12 col-lg-12">
+                    <table class="common-table">
+                        <tbody>
+                            <tr>
+                                <td data-label="Serial">1.</td>
+                                <td data-label="Product">Cotrim</td>
+                                <td data-label="Value">6915.15</td>
+                            </tr>
+                            <tr>
+                                <td data-label="Serial">2.</td>
+                                <td data-label="Product">Napa</td>
+                                <td data-label="Value">5630.33</td>
+                            </tr>
+                            <tr>
+                                <td data-label="Serial">3.</td>
+                                <td data-label="Product">Ace</td>
+                                <td data-label="Value">50.15</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

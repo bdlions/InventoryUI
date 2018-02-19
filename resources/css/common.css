@@ -657,7 +657,8 @@ table th {
     font-size: 18px;
     font-style: italic;
 }
-/*----------------------------- Dashboard CSS ----------------------------------*/
+
+/*----------------------------- Admin Dashboard CSS ----------------------------------*/
 .admin-dashboard-sales-order-box,
 .admin-dashboard-purchase-order-box,
 .admin-dashboard-product-reorder-box,
@@ -706,4 +707,37 @@ table th {
 }
 .admin-dashboard-count-sheet-box{
     background-color: #4C75B0;
+}
+
+/*----------------------------- Sales Man Dashboard CSS ----------------------------------*/
+.salesman-dashboard-sales-order-box,
+.salesman-dashboard-purchase-order-box{
+    position: relative;
+    height: 80px;
+    width: 150px;
+    text-align: center;
+    float: left;
+    margin-right: 35px;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+.salesman-dashboard-sales-order-box span,
+.salesman-dashboard-purchase-order-box span{
+    position: absolute;
+    top: 40%;
+    font-size: 20px;
+    left: 45%;
+}
+.salesman-dashboard-sales-order-box p,
+.salesman-dashboard-purchase-order-box p{
+    position: relative;
+    top: 100%;
+    font-size: 14px;
+    text-align: center;
+}
+.salesman-dashboard-sales-order-box{
+    background-color: #73A693;
+}
+.salesman-dashboard-purchase-order-box{
+    background-color: #9D8E7F;
 }

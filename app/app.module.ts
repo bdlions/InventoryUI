@@ -11,7 +11,7 @@ import {APP_BASE_HREF} from '@angular/common';
 
 import {AppComponent} from './app.component';
 import {LogoutComponent} from './logout.component';
-import {DashboardComponent} from './dashboard.component';
+import {AdminDashboardComponent} from './admindashboard.component';
 import {ManageProductCategoryComponent} from './product/manageproductcategory.component';
 import {ProductCategoryListComponent} from './product/productcategorylist.component';
 import {ManageProductComponent} from './product/manageproduct.component';
@@ -118,8 +118,8 @@ const appRoutes: Routes = [
         component: HomeComponent
     },
     {
-        path: 'dashboard',
-        component: DashboardComponent
+        path: 'admindashboard',
+        component: AdminDashboardComponent
     },
     {
         path: 'manageproductcategory',
@@ -332,7 +332,7 @@ enableProdMode();
         AppComponent,
         LogoutComponent,
         HomeComponent,
-        DashboardComponent,
+        AdminDashboardComponent,
         ManageProductCategoryComponent,
         ProductCategoryListComponent,
         ManageProductComponent,

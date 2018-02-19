@@ -11,16 +11,16 @@ import {NavigationManager} from "./services/NavigationManager";
 
 @Component({
     selector: 'app',
-    templateUrl: 'app/html/dashboard.component.html'
+    templateUrl: 'app/html/admindashboard.component.html'
 })
 
-export class DashboardComponent {
+export class AdminDashboardComponent {
     public showDatePicker: boolean = false;
     public sampleDate: Date = new Date();
     public minDate: Date = void 0;
 
     private showNavBar: boolean = false;
-    private activeMenu: string = "dashboard";
+    private activeMenu: string = "admindashboard";
 
     constructor(private router: Router, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {

@@ -259,4 +259,16 @@ export class TopNavbarComponent {
         this.navigationManager.setActiveMenu("userlist");
         this.router.navigate(["userlist"]);
     }
+    goAdminDashboard(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("admindashboard");
+        this.router.navigate(["admindashboard"]);
+    }
+    goSalesmanDashboard(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("salesmandashboard");
+        this.router.navigate(["salesmandashboard"]);
+    }
 }

@@ -112,6 +112,8 @@ export class ManageSaleComponent {
         this.dtoCustomer.entityUser = new EntityUser();
         this.dtoCustomer.entityUserRole = new EntityUserRole();
 
+        this.productTypeList = Array();
+        this.productCategoryList = Array();
         this.selectedProductType = new EntityProductType();
         this.selectedProductCategory = new EntityProductCategory();
         this.fetchProductCategoryList();

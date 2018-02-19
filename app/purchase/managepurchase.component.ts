@@ -49,6 +49,9 @@ export class ManagePurchaseComponent {
 
     private productCategoryList: EntityProductCategory[];
     private productTypeList: EntityProductType[];
+    private dtoProductList: DTOProduct[];
+    private selectedProductType: EntityProductType;
+    private selectedProductCategory: EntityProductCategory;
     private reqDTOProduct: DTOProduct;
     private productList: EntityProduct[];
 
@@ -120,9 +123,10 @@ export class ManagePurchaseComponent {
         this.dtoSupplier.entityUser = new EntityUser();
         this.dtoSupplier.entityUserRole = new EntityUserRole();
 
-        //this.dtoSupplier = JSON.parse("{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":1,\"userId\":3,\"remarks\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":3,\"firstName\":\"Nazmul\",\"lastName\":\"Hasan\",\"email\":\"supplier1@gmail.com\",\"cell\":\"01612341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}");
-        //this.supplierList = JSON.parse("[{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":1,\"userId\":1,\"remarks\":0,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":1,\"firstName\":\"Nazmul\",\"lastName\":\"Hasan\",\"email\":\"supplier1@gmail.com\",\"cell\":\"01612341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true},{\"limit\":0,\"offset\":0,\"entitySupplier\":{\"id\":2,\"userId\":2,\"remarks\":10,\"balance\":0.0,\"reasonCode\":1000,\"success\":false},\"entityUser\":{\"id\":2,\"firstName\":\"Nazmul\",\"lastName\":\"Islam\",\"email\":\"supplier2@gmail.com\",\"cell\":\"01912341234\",\"password\":\"pass\",\"accountStatusId\":0,\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":false},\"entityUserRole\":{\"id\":0,\"userId\":0,\"roleId\":0},\"reasonCode\":1000,\"success\":true}]");
-
+        this.productTypeList = Array();
+        this.productCategoryList = Array();
+        this.selectedProductType = new EntityProductType();
+        this.selectedProductCategory = new EntityProductCategory();
         this.fetchProductCategoryList();
         this.fetchProductTypeList();
         
@@ -130,7 +134,8 @@ export class ManagePurchaseComponent {
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = this.productPageSize;
         this.reqDTOProduct.offset = 0;
-        this.productRequestId = ACTION.FETCH_PRODUCTS;
+        this.productRequestId = ACTION.FETCH_PRODUCTS_WITH_STOCKS;
+        this.dtoProductList = Array();
         this.fetchProductList();
 
         
@@ -329,21 +334,18 @@ export class ManagePurchaseComponent {
     public searchPurchaseOrderProduct(event: Event) {
         this.reqDTOProduct.limit = this.productPageSize;
         this.reqDTOProduct.offset = 0;
-        if (this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "")
-        {
-            this.productRequestId = ACTION.FETCH_PRODUCTS_BY_NAME;
-            this.searchProductsByName();
-            return;
-        }
-        //if nothing is set then get all products
-        this.productRequestId = ACTION.FETCH_PRODUCTS;
-        this.fetchProductList();
+        this.productRequestId = ACTION.SEARCH_PRODUCTS_WITH_STOCKS;
+        this.searchProductsWithStocks();
     }
     public fetchProductCategoryList() {
         let requestBody: string = "{}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ALL_PRODUCT_CATEGORIES), requestBody).then(result => {
             if (result.success && result.productCategories != null) {
                 this.productCategoryList = result.productCategories;
+                if (this.productCategoryList.length > 0)
+                {
+                    this.selectedProductCategory = this.productCategoryList[0];
+                }
             }
             else {
                 //console.log(result);
@@ -356,6 +358,10 @@ export class ManagePurchaseComponent {
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ALL_PRODUCT_TYPES), requestBody).then(result => {
             if (result.success && result.productTypes != null) {
                 this.productTypeList = result.productTypes;
+                if (this.productTypeList.length > 0)
+                {
+                    this.selectedProductType = this.productTypeList[0];
+                }
             }
             else {
                 //console.log(result);
@@ -364,17 +370,45 @@ export class ManagePurchaseComponent {
     }
     public fetchProductList() {
         let requestBody: string = JSON.stringify(this.reqDTOProduct);
-        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS), requestBody).then(result => {
-            //console.log(result);
-            if (result.success && result.products != null) {
-                this.productList = result.products;
-                this.productLength = result.totalProducts;
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_WITH_STOCKS), requestBody).then(result => {
+            if (result.success && result.list != null) {
+                this.dtoProductList = result.list;
+                this.productLength = result.counter;
             }
             else {
                 //console.log(result);
             }
         });
     }
+    
+    public searchProductsWithStocks() {
+        var typeId: number = 0;
+        var categoryId: number = 0;
+        if (this.selectedProductType != null)
+        {
+            typeId = this.selectedProductType.id;
+        }
+        if (this.selectedProductCategory != null)
+        {
+            categoryId = this.selectedProductCategory.id;
+        }
+        var name: string = "";
+        if(this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "")
+        {
+            name = this.reqDTOProduct.entityProduct.name;
+        }
+        let requestBody: string = "{\"name\": \"" + name + "\", \"typeId\": " + typeId + ", \"categoryId\": " + categoryId + ", \"offset\": \"" + this.reqDTOProduct.offset + "\", \"limit\": \"" + this.reqDTOProduct.limit + "\"}";
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.SEARCH_PRODUCTS_WITH_STOCKS), requestBody).then(result => {
+            if (result.success && result.list != null) {
+                this.dtoProductList = result.list;
+                this.productLength = result.counter;
+            }
+            else {
+                //console.log(result);
+            }
+        });
+    }
+    
     public searchProductsByName() {
         let requestBody: string = JSON.stringify(this.reqDTOProduct);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_BY_NAME), requestBody).then(result => {
@@ -755,13 +789,13 @@ export class ManagePurchaseComponent {
     onProductPaginateChange(event:PageEvent){
         this.reqDTOProduct.limit = event.pageSize;
         this.reqDTOProduct.offset = (event.pageIndex * event.pageSize) ;
-        if (this.productRequestId == ACTION.FETCH_PRODUCTS)
+        if (this.productRequestId == ACTION.FETCH_PRODUCTS_WITH_STOCKS)
         {
             this.fetchProductList();
         }
-        else if (this.productRequestId == ACTION.FETCH_PRODUCTS_BY_NAME)
+        else if (this.productRequestId == ACTION.SEARCH_PRODUCTS_WITH_STOCKS)
         {
-            this.searchProductsByName();
+            this.searchProductsWithStocks();
         }
     }
     

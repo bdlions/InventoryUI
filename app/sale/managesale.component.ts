@@ -50,7 +50,10 @@ export class ManageSaleComponent {
     private reqDTOProduct: DTOProduct;
     private productCategoryList: EntityProductCategory[];
     private productTypeList: EntityProductType[];
-    private productList: EntityProduct[];
+    //private productList: EntityProduct[];
+    private dtoProductList: DTOProduct[];
+    private selectedProductType: EntityProductType;
+    private selectedProductCategory: EntityProductCategory;
     private productIdToPopupSelectProduct: number;
     private productIdToPopupDeleteProduct: number;
     private productIdToPopupSelectReturnProduct: number;
@@ -109,13 +112,16 @@ export class ManageSaleComponent {
         this.dtoCustomer.entityUser = new EntityUser();
         this.dtoCustomer.entityUserRole = new EntityUserRole();
 
+        this.selectedProductType = new EntityProductType();
+        this.selectedProductCategory = new EntityProductCategory();
         this.fetchProductCategoryList();
         this.fetchProductTypeList();
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = this.productPageSize;
         this.reqDTOProduct.offset = 0;
-        this.productRequestId = ACTION.FETCH_PRODUCTS;
+        this.productRequestId = ACTION.FETCH_PRODUCTS_WITH_STOCKS;
+        this.dtoProductList = Array();
         this.fetchProductList();
     }
 
@@ -275,12 +281,12 @@ export class ManageSaleComponent {
         this.reqDTOProduct.offset = 0;
         if (this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "")
         {
-            this.productRequestId = ACTION.FETCH_PRODUCTS_BY_NAME;
-            this.searchProductsByName();
+            this.productRequestId = ACTION.SEARCH_PRODUCTS_WITH_STOCKS;
+            this.searchProductsWithStocks();
             return;
         }
         //if nothing is set then get all products
-        this.productRequestId = ACTION.FETCH_PRODUCTS;
+        this.productRequestId = ACTION.FETCH_PRODUCTS_WITH_STOCKS;
         this.fetchProductList();
     }
     public fetchProductCategoryList() {
@@ -288,6 +294,10 @@ export class ManageSaleComponent {
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ALL_PRODUCT_CATEGORIES), requestBody).then(result => {
             if (result.success && result.productCategories != null) {
                 this.productCategoryList = result.productCategories;
+                if (this.productCategoryList.length > 0)
+                {
+                    this.selectedProductCategory = this.productCategoryList[0];
+                }
             }
             else {
                 //console.log(result);
@@ -300,6 +310,10 @@ export class ManageSaleComponent {
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ALL_PRODUCT_TYPES), requestBody).then(result => {
             if (result.success && result.productTypes != null) {
                 this.productTypeList = result.productTypes;
+                if (this.productTypeList.length > 0)
+                {
+                    this.selectedProductType = this.productTypeList[0];
+                }
             }
             else {
                 //console.log(result);
@@ -308,28 +322,53 @@ export class ManageSaleComponent {
     }
     public fetchProductList() {
         let requestBody: string = JSON.stringify(this.reqDTOProduct);
-        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS), requestBody).then(result => {
-            if (result.success && result.products != null) {
-                this.productList = result.products;
-                this.productLength = result.totalProducts;
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_WITH_STOCKS), requestBody).then(result => {
+            if (result.success && result.list != null) {
+                this.dtoProductList = result.list;
+                this.productLength = result.counter;
             }
             else {
                 //console.log(result);
             }
         });
     }
-    public searchProductsByName() {
-        let requestBody: string = JSON.stringify(this.reqDTOProduct);
-        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_BY_NAME), requestBody).then(result => {
-            if (result.success && result.products != null) {
-                this.productList = result.products;
-                this.productLength = result.totalProducts;
+    
+    public searchProductsWithStocks() {
+        var typeId: number = 0;
+        var categoryId: number = 0;
+        if (this.selectedProductType != null)
+        {
+            typeId = this.selectedProductType.id;
+        }
+        if (this.selectedProductCategory != null)
+        {
+            categoryId = this.selectedProductCategory.id;
+        }
+        
+        let requestBody: string = "{\"name\": \"" + this.reqDTOProduct.entityProduct.name + "\", \"typeId\": " + typeId + ", \"categoryId\": " + categoryId + ", \"offset\": \"" + this.reqDTOProduct.offset + "\", \"limit\": \"" + this.reqDTOProduct.limit + "\"}";
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.SEARCH_PRODUCTS_WITH_STOCKS), requestBody).then(result => {
+            if (result.success && result.list != null) {
+                this.dtoProductList = result.list;
+                this.productLength = result.counter;
             }
             else {
                 //console.log(result);
             }
         });
     }
+    
+//    public searchProductsByName() {
+//        let requestBody: string = JSON.stringify(this.reqDTOProduct);
+//        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_BY_NAME), requestBody).then(result => {
+//            if (result.success && result.products != null) {
+//                this.productList = result.products;
+//                this.productLength = result.totalProducts;
+//            }
+//            else {
+//                //console.log(result);
+//            }
+//        });
+//    }
     
     public showSaleOrderProductModal(event: Event, productId: number) {
         this.productIdToPopupSelectProduct = productId;
@@ -347,10 +386,10 @@ export class ManageSaleComponent {
         let dtoProduct: DTOProduct = new DTOProduct();
         dtoProduct.entityProduct = new EntityProduct();
         let productCounter: number;
-        for (productCounter = 0; productCounter < this.productList.length; productCounter++) {
-            if (this.productList[productCounter].id == productId) {
-                dtoProduct.entityProduct = this.productList[productCounter];
-                dtoProduct.quantity = this.productList[productCounter].defaultSaleQuantity;
+        for (productCounter = 0; productCounter < this.dtoProductList.length; productCounter++) {
+            if (this.dtoProductList[productCounter].entityProduct.id == productId) {
+                dtoProduct.entityProduct = this.dtoProductList[productCounter].entityProduct;
+                dtoProduct.quantity = this.dtoProductList[productCounter].entityProduct.defaultSaleQuantity;
             }
         }
         let saleProductCounter: number;
@@ -684,13 +723,13 @@ export class ManageSaleComponent {
     onProductPaginateChange(event:PageEvent){
         this.reqDTOProduct.limit = event.pageSize;
         this.reqDTOProduct.offset = (event.pageIndex * event.pageSize) ;
-        if (this.productRequestId == ACTION.FETCH_PRODUCTS)
+        if (this.productRequestId == ACTION.FETCH_PRODUCTS_WITH_STOCKS)
         {
             this.fetchProductList();
         }
-        else if (this.productRequestId == ACTION.FETCH_PRODUCTS_BY_NAME)
+        else if (this.productRequestId == ACTION.SEARCH_PRODUCTS_WITH_STOCKS)
         {
-            this.searchProductsByName();
+            this.searchProductsWithStocks();
         }
     }
     

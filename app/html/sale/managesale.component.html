@@ -461,8 +461,8 @@
                             <span class="product-title">Type</span>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                            <select class="form-control" >
-                                <option *ngFor="let productType of productTypeList" id="{{productType.id}}" value="{{productType.title}}">{{productType.title}}</option>
+                            <select [(ngModel)]="selectedProductType" name="selectedProductType" class="form-control" >
+                                <option *ngFor="let productType of productTypeList" [ngValue]="productType">{{productType.title}}</option>
                             </select>
                         </div>
                     </div>
@@ -471,8 +471,8 @@
                             <span class="product-title">Category</span>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                            <select class="form-control" >
-                                <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
+                            <select [(ngModel)]="selectedProductCategory" name="selectedProductCategory" class="form-control" >
+                                <option *ngFor="let productCategory of productCategoryList" [ngValue]="productCategory">{{productCategory.title}}</option>
                             </select>
                         </div>
                     </div>
@@ -491,14 +491,16 @@
                                         <th>Item</th>
                                         <th>Category</th>
                                         <th>Normal Price</th>
+                                        <th>Current Stock</th>
                                         <!--<th>Details</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let product of productList" (click)="selectedSaleOrderProductFromModal($event, product.id)">
-                                        <td data-label="Item">{{product.name}}</td>
-                                        <td data-label="Category">{{product.categoryTitle}}</td>
-                                        <td data-label="Normal Price">{{product.unitPrice}}</td>
+                                    <tr *ngFor="let product of dtoProductList" (click)="selectedSaleOrderProductFromModal($event, product.entityProduct.id)">
+                                        <td data-label="Item">{{product.entityProduct.name}}</td>
+                                        <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
+                                        <td data-label="Normal Price">{{product.entityProduct.unitPrice}}</td>
+                                        <td data-label="Current Stock">{{product.quantity}}</td>
                                         <!--<td data-label="Details"><a href="#" (click)="selectedSaleOrderProduct($event, product.id)">details</a></td>-->
                                     </tr>
                                 </tbody>

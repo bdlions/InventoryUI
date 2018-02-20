@@ -150,13 +150,15 @@
                      <span>Report</span>
                 </div>
                 <div *ngIf='isAdmin' mat-menu-item [matMenuTriggerFor]="userSubMenuItems">
-                     <span>User </span>
+                    <span>User </span>
+                </div>
+                <div mat-menu-item [matMenuTriggerFor]="dashboardSubMenuItems">
+                     <span>Dashboard</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'logout' }" (click)="goLogout($event)">
                      <span>Logout</span>
                 </div>
             </mat-menu>
-
             <mat-menu #saleSubMenuItems="matMenu" [overlapTrigger]="false" >
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'managesale' }" (click)="goManageSale($event)">
                      <span>Manage Sale</span>
@@ -221,11 +223,19 @@
             </mat-menu>
             <mat-menu #userSubMenuItems="matMenu" [overlapTrigger]="false" >
                 <div *ngIf='isAdmin' mat-menu-item  [ngClass]="{'active': activeMenu == 'manageuser' }" (click)="goManageUser($event)">
-                     <span  >Manage User</span>
+                    <span  >Manage User</span>
                 </div> 
                 <div *ngIf='isAdmin' mat-menu-item  [ngClass]="{'active': activeMenu == 'userlist' }" (click)="goUserList($event)">
-                     <span  >User List </span>
+                    <span  >User List </span>
                 </div>
+            </mat-menu>
+            <mat-menu #dashboardSubMenuItems="matMenu" [overlapTrigger]="false" >
+                <div mat-menu-item [ngClass]="{'active': activeMenu == 'admindashboard' }" (click)="goAdminDashboard($event)" >
+                    <span> Admin Dashboard</span>
+                </div>                      
+                <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesmandashboard' }" (click)="goSalesmanDashboard($event)" >
+                    <span> Salesman Dashboard</span>
+                </div>  
             </mat-menu>
         </div>
     </div>

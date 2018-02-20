@@ -102,17 +102,6 @@
                             <span  >User List </span>
                         </li> 
                     </mat-menu> 
-                    <li  mat-button (mouseenter)="dashboardMenu.openMenu()" #dashboardMenu="matMenuTrigger" [matMenuTriggerFor]="dashboardMenuItems">
-                         <span>Dashboard</span>
-                    </li>
-                    <mat-menu #dashboardMenuItems="matMenu" [overlapTrigger]="false" >
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'admindashboard' }" (click)="goAdminDashboard($event)" >
-                            <span> Admin Dashboard</span>
-                        </li>                      
-                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'salesmandashboard' }" (click)="goSalesmanDashboard($event)" >
-                            <span> Salesman Dashboard</span>
-                        </li>    
-                    </mat-menu>
                     <li mat-button [ngClass]="{'active': activeMenu == 'logout' }" (click)="goLogout($event)">
                         <span>Logout</span>
                     </li>
@@ -151,9 +140,6 @@
                 </div>
                 <div *ngIf='isAdmin' mat-menu-item [matMenuTriggerFor]="userSubMenuItems">
                     <span>User </span>
-                </div>
-                <div mat-menu-item [matMenuTriggerFor]="dashboardSubMenuItems">
-                     <span>Dashboard</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'logout' }" (click)="goLogout($event)">
                      <span>Logout</span>
@@ -228,14 +214,6 @@
                 <div *ngIf='isAdmin' mat-menu-item  [ngClass]="{'active': activeMenu == 'userlist' }" (click)="goUserList($event)">
                     <span  >User List </span>
                 </div>
-            </mat-menu>
-            <mat-menu #dashboardSubMenuItems="matMenu" [overlapTrigger]="false" >
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'admindashboard' }" (click)="goAdminDashboard($event)" >
-                    <span> Admin Dashboard</span>
-                </div>                      
-                <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesmandashboard' }" (click)="goSalesmanDashboard($event)" >
-                    <span> Salesman Dashboard</span>
-                </div>  
             </mat-menu>
         </div>
     </div>

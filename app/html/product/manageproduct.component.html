@@ -4,7 +4,7 @@
             <!--Search a Product Starts-->
             <div class="row form-group">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <h4>Search</h4>
+                    <h4>Search Product</h4>
                 </div>
             </div>
             <form role="form" (submit)="searchProduct($event)">
@@ -21,8 +21,8 @@
                         <span class="product-title">Category</span>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                        <select class="form-control" >
-                            <option *ngFor="let productCategory of productCategoryList" id="{{productCategory.id}}" value="{{productCategory.title}}">{{productCategory.title}}</option>
+                        <select [(ngModel)]="selectedProductCategory" name="selectedProductCategory" class="form-control" >
+                            <option *ngFor="let productCategory of productCategoryList" [ngValue]="productCategory">{{productCategory.title}}</option>
                         </select>
                     </div>
                 </div>

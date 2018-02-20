@@ -35,6 +35,7 @@ export class ManageProductComponent {
     private entityProduct: EntityProduct;
     private dtoProduct: DTOProduct;
     private productCategoryList: EntityProductCategory[];
+    private selectedProductCategory: EntityProductCategory;
     private productTypeList: EntityProductType[];
     private uomList: EntityUOM[];
     private productList: EntityProduct[];
@@ -100,6 +101,8 @@ export class ManageProductComponent {
         this.supplierList = Array();
         this.fetchSupplierList();
 
+        this.selectedProductCategory = new EntityProductCategory();
+        
         this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = 10;
@@ -362,18 +365,21 @@ export class ManageProductComponent {
     }
     
     searchProduct(event: Event) {
+        this.reqDTOProduct.limit = 10;
+        this.reqDTOProduct.offset = 0;
+        this.searchProducts();
         //console.log(this.searchEntityProduct.name);
 
-        if (this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "") {
-            this.reqDTOProduct.limit = 10;
-            this.reqDTOProduct.offset = 0;
-            this.searchProductsByName();
-        }
-        else {
-            this.reqDTOProduct.limit = 10;
-            this.reqDTOProduct.offset = 0;
-            this.fetchProductList();
-        }
+//        if (this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "") {
+//            this.reqDTOProduct.limit = 10;
+//            this.reqDTOProduct.offset = 0;
+//            this.searchProductsByName();
+//        }
+//        else {
+//            this.reqDTOProduct.limit = 10;
+//            this.reqDTOProduct.offset = 0;
+//            this.fetchProductList();
+//        }
     }
 
     newProduct(event: Event) {
@@ -535,6 +541,10 @@ export class ManageProductComponent {
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ALL_PRODUCT_CATEGORIES), requestBody).then(result => {
             if (result.success && result.productCategories != null) {
                 this.productCategoryList = result.productCategories;
+                if (this.productCategoryList.length > 0)
+                {
+                    this.selectedProductCategory = this.productCategoryList[0];
+                }
                 this.fetchProductTypeList();
             }
             else {
@@ -584,6 +594,30 @@ export class ManageProductComponent {
             }
             else {
                 //console.log(result);
+            }
+        });
+    }
+    
+    public searchProducts() {
+        var typeId: number = 0;
+        var categoryId: number = 0;
+        if (this.selectedProductCategory != null)
+        {
+            categoryId = this.selectedProductCategory.id;
+        }
+        var name: string = "";
+        if(this.reqDTOProduct.entityProduct.name != null && this.reqDTOProduct.entityProduct.name != "")
+        {
+            name = this.reqDTOProduct.entityProduct.name;
+        }
+        
+        let requestBody: string = "{\"name\": \"" + name + "\", \"typeId\": " + typeId + ", \"categoryId\": " + categoryId + ", \"offset\": \"" + this.reqDTOProduct.offset + "\", \"limit\": \"" + this.reqDTOProduct.limit + "\"}";
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.SEARCH_PRODUCTS), requestBody).then(result => {
+            if (result.success && result.list != null) {
+                this.productList = result.list;
+            }
+            else {
+                
             }
         });
     }

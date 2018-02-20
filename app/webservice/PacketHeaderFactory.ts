@@ -71,9 +71,9 @@ export class PacketHeaderFactory {
             case ACTION.FETCH_SALE_ORDERS:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break; 
-            case ACTION.FETCH_CURRENT_STOCK:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
+//            case ACTION.FETCH_CURRENT_STOCK:
+//                packetHeader.requestType = REQUEST_TYPE.REQUEST
+//                break;
             case ACTION.FETCH_PRODUCTS_BY_NAME:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;
@@ -89,9 +89,9 @@ export class PacketHeaderFactory {
             case ACTION.FETCH_CUSTOMERS_BY_NAME:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;
-            case ACTION.FETCH_CURRENT_STOCK_BY_PRODUCT_NAME:
-                packetHeader.requestType = REQUEST_TYPE.REQUEST
-                break;
+//            case ACTION.FETCH_CURRENT_STOCK_BY_PRODUCT_NAME:
+//                packetHeader.requestType = REQUEST_TYPE.REQUEST
+//                break;
             case ACTION.FETCH_SUPPLIERS_BY_CELL:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;

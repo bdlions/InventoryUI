@@ -439,9 +439,9 @@ export class ManagePurchaseComponent {
         let dtoProduct: DTOProduct = new DTOProduct();
         dtoProduct.entityProduct = new EntityProduct();
         let productCounter: number;
-        for (productCounter = 0; productCounter < this.productList.length; productCounter++) {
-            if (this.productList[productCounter].id == productId) {
-                dtoProduct.entityProduct = this.productList[productCounter];
+        for (productCounter = 0; productCounter < this.dtoProductList.length; productCounter++) {
+            if (this.dtoProductList[productCounter].entityProduct.id == productId) {
+                dtoProduct.entityProduct = this.dtoProductList[productCounter].entityProduct;
             }
         }
         console.log(this.productList);

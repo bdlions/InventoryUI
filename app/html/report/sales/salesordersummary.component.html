@@ -119,10 +119,10 @@
                                 <p>50.00</p>
                             </div>-->
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>{{saleOrder.entitySaleOrder.total}}</p>
+                                <p>{{saleOrder.entitySaleOrder.total | number:'.2-2'}}</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <p>{{saleOrder.entitySaleOrder.paid}}</p>
+                                <p>{{saleOrder.entitySaleOrder.paid | number:'.2-2'}}</p>
                             </div>
                         </div>
 <!--                        <div class="row form-group">

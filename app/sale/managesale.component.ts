@@ -479,6 +479,7 @@ export class ManageSaleComponent {
         this.dtoSaleOrder.entitySaleOrder.totalReturn = totalReturnPrice;
         this.dtoSaleOrder.entitySaleOrder.vat = totalVat;
         this.dtoSaleOrder.entitySaleOrder.total = (totalPrice + totalVat - totalReturnPrice - this.dtoSaleOrder.entitySaleOrder.discount);
+        this.dtoSaleOrder.entitySaleOrder.paid = this.dtoSaleOrder.entitySaleOrder.total;
     }
     //sale save/update section
     public newSaleOrder(event: Event) {

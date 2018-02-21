@@ -542,6 +542,7 @@ export class ManagePurchaseComponent {
         this.dtoPurchaseOrder.entityPurchaseOrder.subtotal = totalPrice;
         this.dtoPurchaseOrder.entityPurchaseOrder.totalReturn = totalReturnPrice;
         this.dtoPurchaseOrder.entityPurchaseOrder.total = (totalPrice - totalReturnPrice - this.dtoPurchaseOrder.entityPurchaseOrder.discount);
+        this.dtoPurchaseOrder.entityPurchaseOrder.paid = this.dtoPurchaseOrder.entityPurchaseOrder.total;
     }
 
     //purchase add/save section

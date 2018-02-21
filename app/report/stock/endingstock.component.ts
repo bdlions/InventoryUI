@@ -7,6 +7,7 @@ import {PacketHeaderFactory} from './../../webservice/PacketHeaderFactory';
 import {ACTION} from './../../webservice/ACTION';
 import {NavigationManager} from "../../services/NavigationManager";
 import {Subscription} from 'rxjs';
+import {PageEvent} from '@angular/material';
 
 @Component({
     selector: 'app',
@@ -20,12 +21,19 @@ export class EndingStockComponent {
 
     
     public maxStock: number = 0;
+    public offset: number = 0;
+    public limit: number = 10;
 
     private showNavBar: boolean = false;
     private activeMenu: string = "salesordersummary";
     
     private productList: DTOProduct[];
-
+    
+    // MatPaginator Inputs
+    length = 0;
+    pageSize = 10;
+    pageSizeOptions = [5, 10];
+    
     constructor(private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
             if (mode !== null) {
@@ -49,11 +57,12 @@ export class EndingStockComponent {
     }
     
     public fetchEndingStockList() {
-        let requestBody: string = "{\"maxStock\": " + this.maxStock + "}";
+        let requestBody: string = "{\"maxStock\": " + this.maxStock + ", \"offset\": " + this.offset + ", \"limit\": " + this.limit + "}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ENDING_CURRENT_STOCK), requestBody).then(result => {
             if(result.success && result.list != null)
             {
                 this.productList = result.list;
+                this.length = result.counter;
                 //if we get default ending stock list then maximum stock quantity is identified and set from the result
                 if (this.maxStock == 0)
                 {
@@ -73,9 +82,16 @@ export class EndingStockComponent {
     
     searchEndingStock(event: Event)
     {
+        this.offset = 0;
+        this.limit = 10;
         this.fetchEndingStockList();
     }
 
+    onPaginateChange(event:PageEvent){
+        this.limit = event.pageSize;
+        this.offset = (event.pageIndex * event.pageSize) ;
+        this.fetchEndingStockList();
+    }
 }
 
 

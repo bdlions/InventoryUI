@@ -17,6 +17,9 @@
     "deploy-desktop-windows": "npm run deploy &&  electron-packager . inventory --platform=win32 --arch=x64",
     "compile": "tsc -w",
     "execute": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=resources/images/app-icon.png --prune=true --out=release-builds/mac",
+    "package-win": "electron-packager . ims --overwrite --asar=true --platform=win32 --arch=x64 --icon=resources/images/app-icon.png --prune=true --out=release-builds/win --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Inventory Management System\"",    
+    "package-linux": "electron-packager . ims --overwrite --asar=true --platform=linux --arch=x64 --icon=resources/images/app-icon.png --prune=true --out=release-builds/linux",
     "build-run": "npm run deploy && npm run execute"
   },
   "dependencies": {

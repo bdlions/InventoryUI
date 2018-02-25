@@ -3,6 +3,7 @@ export class EntitySaleOrderProduct {
     productId: number;
     saleOrderNo: string;
     purchaseOrderNo: string;
+    costPrice: number;
     unitPrice: number;
     discount: number;
     vat: number;

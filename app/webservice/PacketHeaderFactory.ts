@@ -155,6 +155,9 @@ export class PacketHeaderFactory {
             case ACTION.SEARCH_PRODUCTS:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;
+            case ACTION.SEARCH_PRODUCTS_WITH_STOCK_SUPPLIERS_PRICE:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
                 
             case ACTION.ADD_PRODUCT_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE

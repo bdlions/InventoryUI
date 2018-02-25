@@ -5,16 +5,12 @@ import {ModalDirective} from 'ngx-bootstrap';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
-import {TabsetComponent} from 'ngx-bootstrap';
-
 import {DTOPurchaseOrder} from '../dto/DTOPurchaseOrder';
 import {EntityPurchaseOrder} from '../dto/EntityPurchaseOrder';
-import {EntityProductSupplier} from "../dto/EntityProductSupplier";
 import {EntityUser} from '../dto/EntityUser';
 import {EntitySupplier} from "../dto/EntitySupplier";
 import {EntityUserRole} from "../dto/EntityUserRole";
 import {DTOSupplier} from '../dto/DTOSupplier';
-
 import {DTOProduct} from '../dto/DTOProduct';
 import {EntityProduct} from '../dto/EntityProduct';
 import {EntityProductCategory} from '../dto/EntityProductCategory';
@@ -53,18 +49,13 @@ export class ManagePurchaseComponent {
     private selectedProductType: EntityProductType;
     private selectedProductCategory: EntityProductCategory;
     private reqDTOProduct: DTOProduct;
-    private productList: EntityProduct[];
-
-    private entityProduct: EntityProduct;
-    private searchEntityProduct: EntityProduct;
-    //private productId: number;
+    
     private productIdToPopupSelectProduct: number;
     private productIdToPopupDeleteProduct: number;
     
     private productIdToPopupSelectReturnProduct: number;
     private productIdToPopupDeleteReturnProduct: number;
 
-    //    private managePurchaseSuccessMessage: string;
     private managePurchaseErrorMessage: string;
     
     private barcode: string = "";
@@ -74,10 +65,8 @@ export class ManagePurchaseComponent {
     //constants & constraints
     private maxPurchaseOrderLeftPanel: number = 10;
     
-    private productRequestId: number;
+    //private productRequestId: number;
     private supplierRequestId: number;
-    
-    private entityProductSupplierList: EntityProductSupplier[];
     
     // MatPaginator Inputs
     productLength = 0;
@@ -92,8 +81,6 @@ export class ManagePurchaseComponent {
     
     constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
-
-        this.entityProductSupplierList = Array();
 
         this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
         this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
@@ -134,13 +121,8 @@ export class ManagePurchaseComponent {
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = this.productPageSize;
         this.reqDTOProduct.offset = 0;
-        this.productRequestId = ACTION.FETCH_PRODUCTS_WITH_STOCKS;
         this.dtoProductList = Array();
         this.fetchProductList();
-
-        
-        this.searchEntityProduct = new EntityProduct();
-        this.entityProduct = JSON.parse("{\"id\":1,\"name\":\"product1\",\"code\":\"code1\",\"categoryId\":1,\"categoryTitle\":\"Product category1\",\"typeId\":1,\"typeTitle\":\"Product type1\",\"unitPrice\":10.0,\"standardUOMId\":0,\"saleUOMId\":0,\"purchaseUOMId\":0,\"length\":\"10 cm\",\"width\":\"20 cm\",\"height\":\"30 cm\",\"weight\":\"40 cm\",\"remark\":\"This is a good product...\",\"createdOn\":0,\"modifiedOn\":0,\"reasonCode\":1000,\"success\":true}");
     }
 
     ngOnInit() {
@@ -154,7 +136,6 @@ export class ManagePurchaseComponent {
     }
 
     searchPurchaseOrder(event: Event) {
-        //console.log(this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo);
         if (this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo != null && this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo != "") {
             this.reqDTOPurchaseOrder.limit = 10;
             this.reqDTOPurchaseOrder.offset = 0;
@@ -167,17 +148,15 @@ export class ManagePurchaseComponent {
         }
     }
 
-
-
     selectedPurchaseOrderSupplier(event: Event, id: number) {
-        console.log(id);
+        
     }
 
     selectedPurchaseOrderProductDetails(event: Event, id: number) {
-        console.log(id);
+        
     }
     selectedPurchaseOrderProductDelete(event: Event, id: number) {
-        console.log(id);
+        
     }
 
     public hidePurchaseOrderSupplierModal(): void {
@@ -204,17 +183,14 @@ export class ManagePurchaseComponent {
     }
     public hideSelectedPurchaseOrderReturnedProductDeleteModal(): void {
         this.selectedPurchaseOrderReturnedProductDeleteModal.hide();
-    }
-    
+    }    
     
     public showPurchaseOrderEmptyRowProductModal(event: Event) {
         this.purchaseOrderProductModal.config.backdrop = false;
         this.purchaseOrderProductModal.show();
     }
 
-
-
-    //supplier section
+    //---------------------------------supplier section starts ----------------------------------------//
     public fetchSupplierList() {
         let requestBody: string = JSON.stringify(this.reqDTOSupplier);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIERS), requestBody).then(result => {
@@ -261,8 +237,6 @@ export class ManagePurchaseComponent {
     }
 
     public searchPurchaseOrderSupplier(event: Event) {
-        //this.fetchSupplierList();
-        
         this.reqDTOSupplier.limit = this.supplierPageSize;
         this.reqDTOSupplier.offset = 0;
         if (this.reqDTOSupplier.entitySupplier.supplierName != null && this.reqDTOSupplier.entitySupplier.supplierName != "")
@@ -285,58 +259,29 @@ export class ManagePurchaseComponent {
             //if nothing is set then get all suppliers
             this.supplierRequestId = ACTION.FETCH_SUPPLIERS;
             this.fetchSupplierList();
-        }
-        
+        }        
     }
 
-    public selectedSupplier(event: Event, supplierId: number) {
+    public selectedSupplier(event: Event, supplierId: number) 
+    {
         this.purchaseOrderSupplierModal.hide();
         let supplierCounter: number;
         for (supplierCounter = 0; supplierCounter < this.supplierList.length; supplierCounter++) {
             if (this.supplierList[supplierCounter].entitySupplier.id == supplierId) {
                 this.dtoSupplier = this.supplierList[supplierCounter];
-                this.dtoPurchaseOrder.entityPurchaseOrder.supplierUserId = this.dtoSupplier.entityUser.id;
-                this.fetchSupplierProductList(this.dtoSupplier.entityUser.id);
+                this.dtoPurchaseOrder.entityPurchaseOrder.supplierUserId = this.dtoSupplier.entityUser.id;                
             }
         }
     }
+    //---------------------------------supplier section ends ----------------------------------------//
     
-    fetchSupplierProductList(supplierUserId: number)
-    {
-        //getting entire product list of this supplier
-        let dtoSupplier: DTOSupplier = new DTOSupplier();
-        let entityUser: EntityUser = new EntityUser();
-        entityUser.id = supplierUserId;
-        dtoSupplier.entityUser = entityUser;        
-        let requestBody: string = JSON.stringify(dtoSupplier);
-        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIER_PRODUCT_LIST), requestBody).then(result => {
-            if (result.success) {
-                if(result.list != null)
-                {
-                    this.entityProductSupplierList = result.list;
-                    for (let counter1: number = 0; counter1 < this.entityProductSupplierList.length; counter1++)
-                    {
-                        for (let counter2: number = 0; counter2 < this.dtoPurchaseOrder.products.length; counter2++)
-                        {
-                            if (this.entityProductSupplierList[counter1].productId == this.dtoPurchaseOrder.products[counter2].entityProduct.id)
-                            {
-                                this.dtoPurchaseOrder.products[counter2].entityProduct.costPrice = this.entityProductSupplierList[counter1].supplierPrice;
-                            }
-                        }
-                    }
-                    this.calculateBalance();
-                }
-            }
-        });
-    }
-
-    //product section
+    //------------------------------------- product section starts ---------------------------//
     public searchPurchaseOrderProduct(event: Event) {
         this.reqDTOProduct.limit = this.productPageSize;
         this.reqDTOProduct.offset = 0;
-        this.productRequestId = ACTION.SEARCH_PRODUCTS_WITH_STOCKS;
-        this.searchProductsWithStocks();
+        this.fetchProductList();
     }
+    
     public fetchProductCategoryList() {
         let requestBody: string = "{}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ALL_PRODUCT_CATEGORIES), requestBody).then(result => {
@@ -348,7 +293,7 @@ export class ManagePurchaseComponent {
                 }
             }
             else {
-                //console.log(result);
+                
             }
         });
     }
@@ -364,31 +309,19 @@ export class ManagePurchaseComponent {
                 }
             }
             else {
-                //console.log(result);
-            }
-        });
-    }
-    public fetchProductList() {
-        let requestBody: string = JSON.stringify(this.reqDTOProduct);
-        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_WITH_STOCKS), requestBody).then(result => {
-            if (result.success && result.list != null) {
-                this.dtoProductList = result.list;
-                this.productLength = result.counter;
-            }
-            else {
-                //console.log(result);
+                
             }
         });
     }
     
-    public searchProductsWithStocks() {
+    public fetchProductList() {
         var typeId: number = 0;
         var categoryId: number = 0;
-        if (this.selectedProductType != null)
+        if (this.selectedProductType != null && this.selectedProductType.id != null && this.selectedProductType.id > 0)
         {
             typeId = this.selectedProductType.id;
         }
-        if (this.selectedProductCategory != null)
+        if (this.selectedProductCategory != null && this.selectedProductCategory.id != null && this.selectedProductCategory.id > 0)
         {
             categoryId = this.selectedProductCategory.id;
         }
@@ -397,8 +330,9 @@ export class ManagePurchaseComponent {
         {
             name = this.reqDTOProduct.entityProduct.name;
         }
+        //let requestBody: string = JSON.stringify(this.reqDTOProduct);
         let requestBody: string = "{\"name\": \"" + name + "\", \"typeId\": " + typeId + ", \"categoryId\": " + categoryId + ", \"offset\": \"" + this.reqDTOProduct.offset + "\", \"limit\": \"" + this.reqDTOProduct.limit + "\"}";
-        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.SEARCH_PRODUCTS_WITH_STOCKS), requestBody).then(result => {
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.SEARCH_PRODUCTS_WITH_STOCK_SUPPLIERS_PRICE), requestBody).then(result => {
             if (result.success && result.list != null) {
                 this.dtoProductList = result.list;
                 this.productLength = result.counter;
@@ -409,20 +343,6 @@ export class ManagePurchaseComponent {
         });
     }
     
-    public searchProductsByName() {
-        let requestBody: string = JSON.stringify(this.reqDTOProduct);
-        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCTS_BY_NAME), requestBody).then(result => {
-            //console.log(result);
-            if (result.success && result.products != null) {
-                this.productList = result.products;
-                this.productLength = result.totalProducts;
-            }
-            else {
-                //console.log(result);
-            }
-        });
-    }
-
     public showPurchaseOrderProductModal(event: Event, productId: number) {
         this.productIdToPopupSelectProduct = productId;
         this.purchaseOrderProductModal.config.backdrop = false;
@@ -442,21 +362,19 @@ export class ManagePurchaseComponent {
         for (productCounter = 0; productCounter < this.dtoProductList.length; productCounter++) {
             if (this.dtoProductList[productCounter].entityProduct.id == productId) {
                 dtoProduct.entityProduct = this.dtoProductList[productCounter].entityProduct;
-            }
-        }
-        console.log(this.productList);
-        console.log(this.entityProductSupplierList);
-        if (this.entityProductSupplierList != null && this.entityProductSupplierList.length > 0)
-        {
-            for (let counter1: number = 0; counter1 < this.entityProductSupplierList.length; counter1++)
-            {
-                if (this.entityProductSupplierList[counter1].productId == dtoProduct.entityProduct.id)
+                if (this.dtoSupplier.entityUser.id > 0 && this.dtoProductList[productCounter].entityProductSupplierList != null && this.dtoProductList[productCounter].entityProductSupplierList.length > 0)
                 {
-                    dtoProduct.entityProduct.costPrice = this.entityProductSupplierList[counter1].supplierPrice;
+                    for (let counter: number = 0; counter < this.dtoProductList[productCounter].entityProductSupplierList.length; counter++)
+                    {
+                        if (this.dtoSupplier.entityUser.id == this.dtoProductList[productCounter].entityProductSupplierList[counter].supplierUserId)
+                        {
+                            dtoProduct.entityProduct.costPrice = this.dtoProductList[productCounter].entityProductSupplierList[counter].supplierPrice;
+                        }
+                    }
+                    
                 }
             }
-        }
-        console.log(dtoProduct);
+        }        
         let purchasedProductCounter: number;
         if (this.productIdToPopupSelectProduct == 0 && dtoProduct.entityProduct.id > 0) {
             let isAppend: boolean = true;
@@ -544,8 +462,9 @@ export class ManagePurchaseComponent {
         this.dtoPurchaseOrder.entityPurchaseOrder.total = (totalPrice - totalReturnPrice - this.dtoPurchaseOrder.entityPurchaseOrder.discount);
         this.dtoPurchaseOrder.entityPurchaseOrder.paid = this.dtoPurchaseOrder.entityPurchaseOrder.total;
     }
+    //------------------------------------- product section ends ---------------------------//
 
-    //purchase add/save section
+    //------------------------------------- purchase new/add/save section starts ------------------//
     public newPurchaseOrder(event: Event) {
         this.resetPurchaseOrder();
     }
@@ -577,10 +496,7 @@ export class ManagePurchaseComponent {
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = 10;
         this.reqDTOProduct.offset = 0;
-        this.productRequestId = ACTION.FETCH_PRODUCTS;
         this.fetchProductList();
-        
-        this.entityProductSupplierList = Array();
     }
 
     public savePurchaseOrder(event: Event) {
@@ -689,8 +605,9 @@ export class ManagePurchaseComponent {
             });
         }
     }
+    //------------------------------------- purchase new/add/save section ends ------------------//
 
-    //purchase search section
+    //-------------------- purchase order search and left panel section starts ------------------//
     public setPurchaseOrderInfo(orderNo: string) {
         this.dtoPurchaseOrder = new DTOPurchaseOrder();
         this.dtoPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
@@ -707,8 +624,6 @@ export class ManagePurchaseComponent {
         this.dtoSupplier.entityUser = new EntityUser();
         this.dtoSupplier.entityUserRole = new EntityUserRole();
 
-        //this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
-        //this.reqDTOPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
         this.reqDTOPurchaseOrder.entityPurchaseOrder.orderNo = orderNo;
         this.fetchPurchaseOrderInfo();
     }
@@ -781,23 +696,20 @@ export class ManagePurchaseComponent {
             }
         });
     }
+    //-------------------- purchase order search and left panel section ends ------------------//
     
+    //--------------------- print purchase order starts ------------------------------//
     printReport(event: Event)
     {
         window.printJS(window.SITE_URL +'purchasereport?order_no=' + this.dtoPurchaseOrder.entityPurchaseOrder.orderNo);
     }
+    //--------------------- print purchase order ends ------------------------------//
     
+    //--------------------- pagination change event starts ------------------------//
     onProductPaginateChange(event:PageEvent){
         this.reqDTOProduct.limit = event.pageSize;
         this.reqDTOProduct.offset = (event.pageIndex * event.pageSize) ;
-        if (this.productRequestId == ACTION.FETCH_PRODUCTS_WITH_STOCKS)
-        {
-            this.fetchProductList();
-        }
-        else if (this.productRequestId == ACTION.SEARCH_PRODUCTS_WITH_STOCKS)
-        {
-            this.searchProductsWithStocks();
-        }
+        this.fetchProductList();
     }
     
     onSupplierPaginateChange(event:PageEvent)
@@ -821,30 +733,14 @@ export class ManagePurchaseComponent {
             this.fetchSupplierListByEmail();
         }
     }
+    //--------------------- pagination change event starts ------------------------//
     
+    //--------------------- barcode event starts ------------------------//
     onBarcodeCharChange(event:Event)
     {
-        /*if (this.barcode.length == 13)
-        {
-            let productId: number = 0;
-            let productCounter: number;
-            for (productCounter = 0; productCounter < this.productList.length; productCounter++) {
-                if (this.productList[productCounter].code == this.barcode) {
-                    productId = this.productList[productCounter].id;
-                }
-            }
-            if (productId > 0)
-            {                
-                this.productIdToPopupSelectProduct = 0;
-                this.appendProductInPurchaseOrder(productId);
-                this.barcode = "";
-            }
-            //alert("Barcode:" + this.barcode);            
-        }*/ 
         clearInterval(this.barcodeScanInterval);
         this.barcodeScanInterval = setInterval(() => { this.getProductByCode(); }, 1000 * 1);
-    }
-    
+    }    
     getProductByCode()
     {
         console.log(this.barcode);
@@ -862,12 +758,13 @@ export class ManagePurchaseComponent {
                 this.barcode = "";
             }
             else {
-                //console.log(result);
+                
             }
         });
     }
+    //--------------------- barcode event starts ------------------------//
     
-    //Return products section starts
+    //--------------------------Return products section starts--------------------------------//
     public showPurchaseOrderPurchasedProductsModal(event: Event, productId: number) {
         this.productIdToPopupSelectReturnProduct = productId;
         this.purchaseOrderPurchasedProductsModal.config.backdrop = false;
@@ -956,8 +853,5 @@ export class ManagePurchaseComponent {
         this.dtoPurchaseOrder.returnProducts = tempDTOProductlist;
         this.calculateBalance();
     }
-    //Return products section ends
+    //--------------------------Return products section ends--------------------------------//
 }
-
-
-

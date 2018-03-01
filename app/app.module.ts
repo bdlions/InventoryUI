@@ -44,6 +44,8 @@ import {CKEditorSample} from './CKEditorSample';
 //sales report
 import {SalesByProductSummary} from './report/sales/salesbyproductsummary.component';
 import {SalesOrderSummary} from './report/sales/salesordersummary.component';
+import {SalesOrderProfitSummary} from './report/sales/salesorderprofitsummary.component';
+import {SaleOrderProfitComponent} from './report/sales/saleorderprofit.component';
 import {SalesOrderDetails} from './report/sales/salesorderdetails.component';
 import {SalesOrderProfit} from './report/sales/salesorderprofit.component';
 import {CustomerPaymentSummary} from './report/sales/customerpaymentsummary.component';
@@ -201,6 +203,14 @@ const appRoutes: Routes = [
     {
         path: 'salesordersummary',
         component: SalesOrderSummary
+    },
+    {
+        path: 'salesorderprofitsummary',
+        component: SalesOrderProfitSummary
+    },
+    {
+        path: 'saleorderprofit',
+        component: SaleOrderProfitComponent
     },
     {
         path: 'salesorderdetails',
@@ -362,6 +372,8 @@ enableProdMode();
         EndingStockComponent,
         SalesByProductSummary,
         SalesOrderSummary,
+        SalesOrderProfitSummary,
+        SaleOrderProfitComponent,
         SalesOrderDetails,
         SalesOrderProfit,
         CustomerPaymentSummary,

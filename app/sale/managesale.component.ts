@@ -61,7 +61,8 @@ export class ManageSaleComponent {
 
     private manageSaleErrorMessage: string;
     
-    private barcode: string = "";
+    private barcode: string;
+    private barcodeScannedEntityProduct: EntityProduct;
     
     private disableSaveButton: boolean = false;
     
@@ -84,6 +85,10 @@ export class ManageSaleComponent {
 
     constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
         this.webAPIService = webAPIService;
+        
+        this.barcode = "";
+        this.barcodeScannedEntityProduct = new EntityProduct();
+        
         this.reqDTOSaleOrder = new DTOSaleOrder();
         this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
         this.reqDTOSaleOrder.limit = 10;
@@ -391,6 +396,16 @@ export class ManageSaleComponent {
                 dtoProduct.quantity = this.dtoProductList[productCounter].entityProduct.defaultSaleQuantity;
             }
         }
+        
+        //we dont have the barcode scanned product in pop up product list
+        if (dtoProduct.entityProduct.id == null && this.barcodeScannedEntityProduct.id > 0)
+        {
+            dtoProduct.entityProduct = this.barcodeScannedEntityProduct;
+            dtoProduct.quantity = this.barcodeScannedEntityProduct.defaultSaleQuantity;
+            //after assigning the product we are resetting barcode scanned entity product info
+            this.barcodeScannedEntityProduct = new EntityProduct();
+        }
+        
         let saleProductCounter: number;
         if (this.productIdToPopupSelectProduct == 0 && dtoProduct.entityProduct.id > 0) {
             let isAppend: boolean = true;
@@ -770,6 +785,7 @@ export class ManageSaleComponent {
         let requestBody: string = JSON.stringify(entityProduct);
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCT_BY_CODE), requestBody).then(result => {
             if (result.success) {
+                this.barcodeScannedEntityProduct = result;
                 this.productIdToPopupSelectProduct = 0;
                 this.appendProductInSaleOrder(result.id);
                 this.barcode = "";

@@ -436,7 +436,7 @@
                 <form role="form" (submit)="searchPurchaseOrderProduct($event)">
                     <div class="row form-group">
                         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
-                            <span class="product-title">Name</span>
+                            <span class="product-title">Name/Code</span>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
                             <input [(ngModel)]="reqDTOProduct.entityProduct.name" id="name" name="name" class="form-control">
@@ -474,7 +474,8 @@
                             <table class="common-table">
                                 <thead>
                                     <tr>
-                                        <th>Item</th>
+                                        <th>Name</th>
+                                        <th>Code</th>
                                         <th>Category</th>
                                         <th>Cost Price</th>
                                         <th>Current Stock</th>
@@ -483,6 +484,7 @@
                                 <tbody>
                                     <tr *ngFor="let product of dtoProductList" (click)="selectedPurchaseOrderProductFromModal($event, product.entityProduct.id)">
                                         <td data-label="Item">{{product.entityProduct.name}}</td>
+                                        <td data-label="Code">{{product.entityProduct.code}}</td>
                                         <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
                                         <td data-label="Cost Price">{{product.entityProduct.costPrice}}</td>
                                         <td data-label="Current Stock">{{product.quantity}}</td>                                        
@@ -634,7 +636,8 @@
                             <table class="common-table">
                                 <thead>
                                     <tr>
-                                        <th>Item</th>
+                                        <th>Name</th>
+                                        <th>Code</th>
                                         <th>Category</th>
                                         <th>Purchase Price</th>
                                     </tr>
@@ -642,6 +645,7 @@
                                 <tbody>
                                     <tr *ngFor="let product of dtoPurchaseOrder.products" (click)="selectedPurchaseOrderPurchasedProductFromModalToReturn($event, product.entityProduct.id)">
                                         <td data-label="Item">{{product.entityProduct.name}}</td>
+                                        <td data-label="Code">{{product.entityProduct.code}}</td>
                                         <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
                                         <td data-label="Purchase Price">{{product.entityProduct.costPrice}}</td>
                                     </tr>

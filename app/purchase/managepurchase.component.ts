@@ -460,7 +460,11 @@ export class ManagePurchaseComponent {
         this.dtoPurchaseOrder.entityPurchaseOrder.subtotal = totalPrice;
         this.dtoPurchaseOrder.entityPurchaseOrder.totalReturn = totalReturnPrice;
         this.dtoPurchaseOrder.entityPurchaseOrder.total = (totalPrice - totalReturnPrice - this.dtoPurchaseOrder.entityPurchaseOrder.discount);
-        this.dtoPurchaseOrder.entityPurchaseOrder.paid = this.dtoPurchaseOrder.entityPurchaseOrder.total;
+        //for a new purchase order we are assuming whole payment is paid to supplier
+        if (this.dtoPurchaseOrder.entityPurchaseOrder.orderNo == null || this.dtoPurchaseOrder.entityPurchaseOrder.orderNo == "")
+        {
+            this.dtoPurchaseOrder.entityPurchaseOrder.paid = this.dtoPurchaseOrder.entityPurchaseOrder.total;
+        }        
     }
     //------------------------------------- product section ends ---------------------------//
 

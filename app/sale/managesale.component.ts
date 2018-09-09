@@ -494,7 +494,11 @@ export class ManageSaleComponent {
         this.dtoSaleOrder.entitySaleOrder.totalReturn = totalReturnPrice;
         this.dtoSaleOrder.entitySaleOrder.vat = totalVat;
         this.dtoSaleOrder.entitySaleOrder.total = (totalPrice + totalVat - totalReturnPrice - this.dtoSaleOrder.entitySaleOrder.discount);
-        this.dtoSaleOrder.entitySaleOrder.paid = this.dtoSaleOrder.entitySaleOrder.total;
+        //for a new sale order we are assuming whole payment is paid by customer
+        if (this.dtoSaleOrder.entitySaleOrder.orderNo == null || this.dtoSaleOrder.entitySaleOrder.orderNo == "")
+        {
+            this.dtoSaleOrder.entitySaleOrder.paid = this.dtoSaleOrder.entitySaleOrder.total;
+        }        
     }
     //sale save/update section
     public newSaleOrder(event: Event) {

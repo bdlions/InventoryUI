@@ -174,21 +174,129 @@
                         <!--Product List Tab Ends-->
                         
                         <!--Supplier Extra Info Tab Starts-->
-<!--                        <tab class="manage-supplier-right-side-tab" heading="Extra Info">
+                        <tab  class="manage-supplier-right-side-tab"  heading="Extra Info">
                             <div class="row form-group">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <h3>Preferences</h3>
+                                            <h3>Other Info</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="supplier-title">Previous Due</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input [(ngModel)]="dtoSupplier.entitySupplier.previousBalance" name="previousBalance" class="form-control">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
+                                    
                                 </div>
-                            </div>
-                        </tab>-->
+                            </div> 
+                        </tab>
                         <!--Supplier Extra Info Tab Ends-->
+                        <!--Supplier Payment List Tab Starts-->
+                        <tab  class="manage-supplier-right-side-tab"  heading="Payment List">
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <h3>Payments</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="report-layer">
+                                                <div class="row form-group">
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <label>Amount</label>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <label>Description</label>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <label>Payment Date</label>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <label>Date</label>
+                                                    </div>                            
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="report-layer-divider"></div>
+                                                    </div>
+                                                </div>
+                                                <div (click)="setEntityPurchaseOrderPayment($event, payment.entityPurchaseOrderPayment)" *ngFor="let payment of purchaseOrderPaymentList" class="row form-group" [ngClass]="{'row-active': payment.entityPurchaseOrderPayment.id == entityPurchaseOrderPayment.id }">
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <p>{{payment.entityPurchaseOrderPayment.amountOut}}</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <p>{{payment.entityPurchaseOrderPayment.description}}</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <p>{{payment.entityPurchaseOrderPayment.paymentDate}}</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <p>{{payment.createdDate}}</p>
+                                                    </div>                            
+                                                </div>
+                                            </div>
+                                            <mat-paginator [length]="paymentLength"
+                                                [pageSize]="paymentPageSize"
+                                                [pageSizeOptions]="paymentPageSizeOptions"
+                                                (page)="onPaymentPaginateChange($event)">
+                                            </mat-paginator>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <form role="form" (submit)="savePurchasePayment($event)">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Paurchase Payment</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Amount<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="entityPurchaseOrderPayment.amountOut" name="amountOut" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Description</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="entityPurchaseOrderPayment.description" name="description" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Payment Date</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input name="paymentDate" class="form-control input-custom-field custom-datepicker" type="text" 
+                                                   [ngModel]="paymentDate | date:'dd-MM-yyyy'" (ngModelChange)="paymentDate = $event;"
+                                                   (focus)="showPaymentDatePicker = true" >
+                                                <div class="start-date" *ngIf="showPaymentDatePicker" >
+                                                    <datepicker name="showPaymentDatePicker" [(ngModel)]="paymentDate" [minDate]="minDate" [showWeeks]="false" (selectionDone) ="showPaymentDatePicker = false"  ></datepicker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <button [disabled]="disablePaymentSaveButton" type="submit" id="save-purchase-payment" class="custom-button pull-right">Save</button>
+                                            </div>
+                                        </div>
+                                    </form> 
+                                </div>
+                            </div> 
+                        </tab>
+                        <!--Supplier Payment List Tab Ends-->
                     </tabset>
                 </div>
             </div>

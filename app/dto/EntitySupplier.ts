@@ -5,5 +5,6 @@ export class EntitySupplier {
     email: string;
     cell: string;
     remarks: string;
-    balance: number;
+    balance: number = 0;
+    previousBalance: number = 0;
 }

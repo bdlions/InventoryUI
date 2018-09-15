@@ -244,6 +244,9 @@ table th {
     color: #fff;
     background-color: #00A7F9;
 }
+div.row-active {
+    background-color: deepskyblue;
+}
 /*table tbody tr{
     background-color: #E6E6FA;
 }*/

@@ -13,6 +13,8 @@ import {EntityUserRole} from "../dto/EntityUserRole";
 import {DTOSupplier} from '../dto/DTOSupplier';
 import {DTOProduct} from '../dto/DTOProduct';
 import {EntityProduct} from '../dto/EntityProduct';
+import {EntityPurchaseOrderPayment} from "../dto/EntityPurchaseOrderPayment";
+import {DTOPurchaseOrderPayment} from "../dto/DTOPurchaseOrderPayment";
 import {NavigationManager} from "../services/NavigationManager";
 import {PageEvent} from '@angular/material';
 
@@ -31,6 +33,16 @@ export class ManageSupplierComponent {
     private reqDTOSupplier: DTOSupplier;
     private dtoSupplier: DTOSupplier;
     private supplierList: DTOSupplier[];
+    
+    public showPaymentDatePicker: boolean = false;
+    public paymentDate: Date = new Date();
+    public minDate: Date = void 0;
+    private entityPurchaseOrderPayment: EntityPurchaseOrderPayment;
+    private purchaseOrderPaymentList: DTOPurchaseOrderPayment[];
+    private paymentOrdersLimit: number = 10;
+    private paymentOrdersOffset: number = 0;
+    
+    
     //private searchDTOSupplier: DTOSupplier;
     private showNavBar: boolean = false;
     private activeMenu: string = "managesupplier";
@@ -43,6 +55,7 @@ export class ManageSupplierComponent {
     private reqDTOSupplierProductList: DTOSupplier;
     
     private disableSaveButton: boolean = false;
+    private disablePaymentSaveButton: boolean = false;
     
     //constants & constraints
     private maxSupplierLeftPanel: number = 10;    
@@ -58,6 +71,10 @@ export class ManageSupplierComponent {
     productLength = 0;
     productPageSize = 10;
     productPageSizeOptions = [5, 10];
+    
+    paymentLength = 0;
+    paymentPageSize = 10;
+    paymentPageSizeOptions = [5, 10];
 
     constructor(private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
@@ -99,6 +116,9 @@ export class ManageSupplierComponent {
         this.productList = Array();
         this.productRequestId = ACTION.FETCH_PRODUCTS;
         this.fetchProductList();
+        
+        this.entityPurchaseOrderPayment = new EntityPurchaseOrderPayment();
+        this.purchaseOrderPaymentList = Array();
     }
 
     ngOnInit() {
@@ -311,6 +331,12 @@ export class ManageSupplierComponent {
             this.searchProductsByName();
         }
     }
+    onPaymentPaginateChange(event:PageEvent)
+    {
+        this.paymentOrdersLimit = event.pageSize;
+        this.paymentOrdersOffset = (event.pageIndex * event.pageSize) ;
+        this.searchSupplierPayments(null);
+    }
     //Product List Management Ends
     
     searchSupplier(event: Event) 
@@ -335,6 +361,8 @@ export class ManageSupplierComponent {
         this.dtoSupplier.entitySupplier = new EntitySupplier();
         this.dtoSupplier.entityUser = new EntityUser();
         this.dtoSupplier.entityUserRole = new EntityUserRole();
+        this.entityPurchaseOrderPayment = new EntityPurchaseOrderPayment();
+        this.purchaseOrderPaymentList = Array();
     }
 
     saveSupplier(event: Event) {
@@ -378,7 +406,8 @@ export class ManageSupplierComponent {
         if (this.dtoSupplier.entitySupplier.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_SUPPLIER_INFO), requestBody).then(result => {
                 this.disableSaveButton = false;
-                if (result.success) {                   
+                if (result.success) { 
+                    this.dtoSupplier = result;                  
                     this.manageSupplierUpdateLeftPanel();
                 }
                 else {
@@ -417,6 +446,8 @@ export class ManageSupplierComponent {
                 this.dtoSupplier.entityProductSupplierList = null;
                 this.dtoSupplier.epsListToBeDeleted = Array();
                 this.setSupplierProductList(event);
+                this.searchSupplierPayments(null);
+                this.entityPurchaseOrderPayment = new EntityPurchaseOrderPayment();
             }
         }
     }
@@ -454,6 +485,8 @@ export class ManageSupplierComponent {
                 this.dtoSupplier = result;
                 this.dtoSupplier.entityProductSupplierList = null;
                 this.dtoSupplier.epsListToBeDeleted = Array();
+                this.searchSupplierPayments(null);
+                this.entityPurchaseOrderPayment = new EntityPurchaseOrderPayment();
             }
         });
     }
@@ -474,6 +507,102 @@ export class ManageSupplierComponent {
             }
         }
         this.supplierList = tempSupplierList;
+    }
+    
+    savePurchasePayment(event: Event) 
+    {
+        //you must create a supplier before saving supplier payment
+        if (this.dtoSupplier.entitySupplier.userId == null || this.dtoSupplier.entitySupplier.userId == 0) {
+            this.manageSupplierErrorMessage = "Please create/select a supplier first before saving payment.";
+            this.manageSupplierMessageDispalyModal.config.backdrop = false;
+            this.manageSupplierMessageDispalyModal.show();
+            return;
+        }
+        //payment amount is required
+        if (this.entityPurchaseOrderPayment.amountOut == null) {
+            this.manageSupplierErrorMessage = "Amount is required.";
+            this.manageSupplierMessageDispalyModal.config.backdrop = false;
+            this.manageSupplierMessageDispalyModal.show();
+            return;
+        }
+        
+        this.entityPurchaseOrderPayment.supplierUserId = this.dtoSupplier.entitySupplier.userId;
+        this.entityPurchaseOrderPayment.supplierName = this.dtoSupplier.entityUser.userName;
+        this.disablePaymentSaveButton = true;
+        let requestBody: string = JSON.stringify(this.entityPurchaseOrderPayment);
+        if (this.entityPurchaseOrderPayment.id == null || this.entityPurchaseOrderPayment.id == 0) {
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PURCHASE_ORDER_PAYMENT), requestBody).then(result => {
+                this.disablePaymentSaveButton = false;
+                if (result.success) 
+                {
+                    this.entityPurchaseOrderPayment = result;
+                    //fetch supplier payment list
+                    this.searchSupplierPayments(null);
+                    //fetch supplier due
+                    this.fetchEntitySupplierInfo();                    
+                }
+                else
+                {
+                    this.manageSupplierErrorMessage = result.message;
+                    this.manageSupplierMessageDispalyModal.config.backdrop = false;
+                    this.manageSupplierMessageDispalyModal.show();
+                }
+            });
+        }
+        else {
+            //update supplier payment here
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_PURCHASE_ORDER_PAYMENT), requestBody).then(result => {
+                this.disablePaymentSaveButton = false;
+                if (result.success) 
+                {
+                    //fetch supplier payment list
+                    this.searchSupplierPayments(null);
+                    //fetch supplier due
+                    this.fetchEntitySupplierInfo();                    
+                }
+                else
+                {
+                    this.manageSupplierErrorMessage = result.message;
+                    this.manageSupplierMessageDispalyModal.config.backdrop = false;
+                    this.manageSupplierMessageDispalyModal.show();
+                }
+            });
+        }
+    }
+    
+    searchSupplierPayments(event: Event) 
+    {
+        if(this.dtoSupplier.entitySupplier.userId != null && this.dtoSupplier.entitySupplier.userId > 0)
+        {
+            let supplierUserId: number = this.dtoSupplier.entitySupplier.userId;
+            let paymentTypeId : number = 3;
+            let requestBody: string = "{\"supplierUserId\": " + supplierUserId + ", \"paymentTypeId\": " + paymentTypeId + ", \"offset\": " + this.paymentOrdersOffset + ", \"limit\": " + this.paymentOrdersLimit + "}";
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PURCHASE_ORDER_PAYMENT_SUMMARY), requestBody).then(result => {
+                if (result.success && result.list != null) {
+                    this.purchaseOrderPaymentList = result.list;
+                    this.paymentLength = result.counter;
+                }
+                else {
+
+                }
+            });
+        }
+        
+    }
+    
+    fetchEntitySupplierInfo()
+    {
+        let requestBody: string = "{\"supplierUserId\": " + this.dtoSupplier.entitySupplier.userId + "}";
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ENTITY_SUPPLIER_INFO), requestBody).then(result => {
+            if (result.success) {
+                this.dtoSupplier.entitySupplier = result;
+            }
+        });
+    }
+    
+    setEntityPurchaseOrderPayment(event: Event, selectedEntityPurchaseOrderPayment: EntityPurchaseOrderPayment)
+    {
+        this.entityPurchaseOrderPayment = selectedEntityPurchaseOrderPayment;
     }
 }
 

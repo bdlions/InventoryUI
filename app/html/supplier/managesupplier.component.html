@@ -80,7 +80,7 @@
                                             <span class="supplier-title">Balance</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                            <input [(ngModel)]="dtoSupplier.entitySupplier.balance" name="balance" class="form-control">
+                                            {{dtoSupplier.entitySupplier.balance}}
                                         </div>
                                     </div>
                                 </div>
@@ -236,7 +236,7 @@
                                                         <p>{{payment.entityPurchaseOrderPayment.description}}</p>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                                        <p>{{payment.entityPurchaseOrderPayment.paymentDate}}</p>
+                                                        <p>{{payment.entityPurchaseOrderPayment.paymentDate | date: 'dd-MM-yyyy'}}</p>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                                         <p>{{payment.createdDate}}</p>

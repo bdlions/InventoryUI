@@ -82,9 +82,6 @@
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'salesordersummary' }" (click)="goSalesOrderSummary($event)" >
                             <span> Sales Order Summary</span>
                         </li>
-                        <li *ngIf='isAdmin' mat-menu-item [ngClass]="{'active': activeMenu == 'salesorderprofitsummary' }" (click)="goSalesOrderProfitSummary($event)" >
-                            <span> Sales Order Profit</span>
-                        </li>
                         <li class="disabled-menu" mat-menu-item><span><b>Purchase Reports</b></span></li>
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseordersummary' }" (click)="goPurchaseOrderSummary($event)" >
                             <span> Purchase Order Summary</span>
@@ -200,9 +197,6 @@
                 <div class="disabled-menu" mat-menu-item><span><b>Sales Reports</b></span></div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesordersummary' }" (click)="goSalesOrderSummary($event)" >
                      <span> Sales Order Summary</span>
-                </div>
-                <div *ngIf='isAdmin' mat-menu-item [ngClass]="{'active': activeMenu == 'salesorderprofitsummary' }" (click)="goSalesOrderProfitSummary($event)" >
-                     <span> Sales Order Profit</span>
                 </div>
                 <div class="disabled-menu" mat-menu-item><span><b>Purchase Reports</b></span></div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseordersummary' }" (click)="goPurchaseOrderSummary($event)" >

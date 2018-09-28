@@ -613,8 +613,9 @@ export class ManageSaleComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_SALE_ORDER_INFO), requestBody).then(result => {
                 this.disableSaveButton = false;
                 if (result.success) {
-                    this.dtoSaleOrder.entitySaleOrder.id = result.entitySaleOrder.id;
-                    this.dtoSaleOrder.entitySaleOrder.orderNo = result.entitySaleOrder.orderNo;
+                    //this.dtoSaleOrder.entitySaleOrder.id = result.entitySaleOrder.id;
+                    this.dtoSaleOrder.entitySaleOrder = result.entitySaleOrder;
+                    //this.dtoSaleOrder.entitySaleOrder.orderNo = result.entitySaleOrder.orderNo;
                     this.manageSaleOrderUpdateLeftPanel();
                 }
                 else 

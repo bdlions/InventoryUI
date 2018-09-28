@@ -82,6 +82,9 @@
                                 <label>ORDER DATE</label>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <label>INVOICE DATE</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <label>Entry By</label>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
@@ -90,10 +93,10 @@
 <!--                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <label>SUB TOTAL</label>
                             </div>-->
-                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                            <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
                                 <label>TOTAL</label>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                            <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
                                 <label>PAID</label>
                             </div>
                         </div>
@@ -110,6 +113,9 @@
                                 <p>{{purchaseOrder.orderDate}}</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                <p>{{purchaseOrder.invoiceDate}}</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <p>{{purchaseOrder.entityPurchaseOrder.createdByUserName}}</p>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
@@ -118,10 +124,10 @@
 <!--                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <p>50.00</p>
                             </div>-->
-                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                            <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
                                 <p>{{purchaseOrder.entityPurchaseOrder.total | number:'.2-2'}}</p>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                            <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
                                 <p>{{purchaseOrder.entityPurchaseOrder.paid | number:'.2-2'}}</p>
                             </div>
                         </div>

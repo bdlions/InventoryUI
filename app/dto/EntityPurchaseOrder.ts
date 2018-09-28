@@ -6,7 +6,7 @@ export class EntityPurchaseOrder {
     supplierName: string;
     cell: string;
     email: string;
-    orderDate: number;
+    invoiceOn: number;
     requestedShipDate: number;
     subtotal: number = 0;
     discount: number = 0;

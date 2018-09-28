@@ -2,6 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ModalDirective} from 'ngx-bootstrap';
+import { DatePipe } from '@angular/common';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
@@ -21,13 +22,14 @@ import {PageEvent} from '@angular/material';
 @Component({
     selector: 'app',
     templateUrl: 'app/html/supplier/managesupplier.component.html',
-    providers: [WebAPIService]
+    providers: [WebAPIService, DatePipe]
 })
 
 export class ManageSupplierComponent {
     @ViewChild('manageSupplierProductModal') public manageSupplierProductModal: ModalDirective;
     @ViewChild('manageSupplierSelectedProductDeleteModal') public manageSupplierSelectedProductDeleteModal: ModalDirective;
     @ViewChild('manageSupplierMessageDispalyModal') public manageSupplierMessageDispalyModal: ModalDirective;
+    private datePipe: DatePipe;
     private webAPIService: WebAPIService;
     private subscribe: Subscription;
     private reqDTOSupplier: DTOSupplier;
@@ -76,7 +78,7 @@ export class ManageSupplierComponent {
     paymentPageSize = 10;
     paymentPageSizeOptions = [5, 10];
 
-    constructor(private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
+    constructor(private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager, public datepipe: DatePipe) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
             if (mode !== null) {
                 this.showNavBar = mode;
@@ -87,6 +89,7 @@ export class ManageSupplierComponent {
                 this.activeMenu = menuName;
             }
         });
+        this.datePipe = datepipe;
         this.webAPIService = webAPIService;
         this.reqDTOSupplier = new DTOSupplier();
         this.reqDTOSupplier.entitySupplier = new EntitySupplier();
@@ -528,6 +531,7 @@ export class ManageSupplierComponent {
         
         this.entityPurchaseOrderPayment.supplierUserId = this.dtoSupplier.entitySupplier.userId;
         this.entityPurchaseOrderPayment.supplierName = this.dtoSupplier.entityUser.userName;
+        this.entityPurchaseOrderPayment.paymentDate = this.datepipe.transform(this.paymentDate, 'yyyy-MM-dd');
         this.disablePaymentSaveButton = true;
         let requestBody: string = JSON.stringify(this.entityPurchaseOrderPayment);
         if (this.entityPurchaseOrderPayment.id == null || this.entityPurchaseOrderPayment.id == 0) {
@@ -603,7 +607,9 @@ export class ManageSupplierComponent {
     setEntityPurchaseOrderPayment(event: Event, selectedEntityPurchaseOrderPayment: EntityPurchaseOrderPayment)
     {
         this.entityPurchaseOrderPayment = selectedEntityPurchaseOrderPayment;
+        this.paymentDate = new Date(this.entityPurchaseOrderPayment.paymentDate);
     }
+    
 }
 
 

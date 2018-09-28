@@ -9,4 +9,5 @@ export class DTOPurchaseOrder {
     products: Array<DTOProduct>;
     returnProducts: Array<DTOProduct>;
     orderDate: string;
+    invoiceDate: string;
 }

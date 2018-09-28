@@ -2,6 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ModalDirective} from 'ngx-bootstrap';
+import { DatePipe } from '@angular/common';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
@@ -20,7 +21,7 @@ import {PageEvent} from '@angular/material';
 @Component({
     selector: 'app',
     templateUrl: 'app/html/purchase/managepurchase.component.html',
-    providers: [WebAPIService]
+    providers: [WebAPIService, DatePipe]
 })
 
 export class ManagePurchaseComponent {
@@ -32,8 +33,13 @@ export class ManagePurchaseComponent {
     @ViewChild('managePurchaseMessageDispalyModal') public managePurchaseMessageDispalyModal: ModalDirective;
     @ViewChild('purchaseOrderPurchasedProductsModal') public purchaseOrderPurchasedProductsModal: ModalDirective;
     @ViewChild('selectedPurchaseOrderReturnedProductDeleteModal') public selectedPurchaseOrderReturnedProductDeleteModal: ModalDirective;
+    private datePipe: DatePipe;
     private webAPIService: WebAPIService;
     private orderNo: string;
+    
+    public showInvoiceDatePicker: boolean = false;
+    public invoiceDate: Date = new Date();
+    public minDate: Date = void 0;
 
     private reqDTOPurchaseOrder: DTOPurchaseOrder;
     private purchaseOrderList: DTOPurchaseOrder[];
@@ -79,7 +85,8 @@ export class ManagePurchaseComponent {
     
     barcodeScanInterval;
     
-    constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService) {
+    constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, public datepipe: DatePipe) {
+        this.datePipe = datepipe;
         this.webAPIService = webAPIService;
 
         this.reqDTOPurchaseOrder = new DTOPurchaseOrder();
@@ -459,12 +466,7 @@ export class ManagePurchaseComponent {
         
         this.dtoPurchaseOrder.entityPurchaseOrder.subtotal = totalPrice;
         this.dtoPurchaseOrder.entityPurchaseOrder.totalReturn = totalReturnPrice;
-        this.dtoPurchaseOrder.entityPurchaseOrder.total = (totalPrice - totalReturnPrice - this.dtoPurchaseOrder.entityPurchaseOrder.discount);
-        //for a new purchase order we are assuming whole payment is paid to supplier
-        if (this.dtoPurchaseOrder.entityPurchaseOrder.orderNo == null || this.dtoPurchaseOrder.entityPurchaseOrder.orderNo == "")
-        {
-            this.dtoPurchaseOrder.entityPurchaseOrder.paid = this.dtoPurchaseOrder.entityPurchaseOrder.total;
-        }        
+        this.dtoPurchaseOrder.entityPurchaseOrder.total = (totalPrice - totalReturnPrice - this.dtoPurchaseOrder.entityPurchaseOrder.discount);       
     }
     //------------------------------------- product section ends ---------------------------//
 
@@ -570,6 +572,7 @@ export class ManagePurchaseComponent {
             }
         }
         
+        this.dtoPurchaseOrder.invoiceDate = this.datepipe.transform(this.invoiceDate, 'yyyy-MM-dd');
         
         this.disableSaveButton = true;
         let requestBody: string = JSON.stringify(this.dtoPurchaseOrder);
@@ -578,8 +581,9 @@ export class ManagePurchaseComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PURCHASE_ORDER_INFO), requestBody).then(result => {
                 this.disableSaveButton = false;
                 if (result.success) {
-                    this.dtoPurchaseOrder.entityPurchaseOrder.id = result.entityPurchaseOrder.id;
-                    this.dtoPurchaseOrder.entityPurchaseOrder.orderNo = result.entityPurchaseOrder.orderNo;
+                    //this.dtoPurchaseOrder.entityPurchaseOrder.id = result.entityPurchaseOrder.id;
+                    this.dtoPurchaseOrder.entityPurchaseOrder = result.entityPurchaseOrder;
+                    //this.dtoPurchaseOrder.entityPurchaseOrder.orderNo = result.entityPurchaseOrder.orderNo;
                     this.managePurchaseOrderUpdateLeftPanel();
                 }
                 else 
@@ -648,6 +652,7 @@ export class ManagePurchaseComponent {
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PURCHASE_ORDER_INFO), requestBody).then(result => {
             if (result.success) {
                 this.dtoPurchaseOrder = result;
+                this.invoiceDate = new Date(this.dtoPurchaseOrder.invoiceDate);
                 this.calculateBalance();
                 this.reqDTOSupplier.entitySupplier.userId = this.dtoPurchaseOrder.entityPurchaseOrder.supplierUserId;
                 this.fetchSupplierInfo();

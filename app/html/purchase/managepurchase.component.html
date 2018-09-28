@@ -108,6 +108,19 @@
                             <input [(ngModel)]="barcode" (ngModelChange)="onBarcodeCharChange($event)" name="code" class="form-control">
                         </div>
                     </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            <span class="supplier-title">Invoice Date</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            <input name="invoiceDate" class="form-control input-custom-field custom-datepicker" type="text" 
+                               [ngModel]="invoiceDate | date:'dd-MM-yyyy'" (ngModelChange)="invoiceDate = $event;"
+                               (focus)="showInvoiceDatePicker = true" >
+                            <div class="start-date" *ngIf="showInvoiceDatePicker" >
+                                <datepicker name="showInvoiceDatePicker" [(ngModel)]="invoiceDate" [minDate]="minDate" [showWeeks]="false" (selectionDone) ="showInvoiceDatePicker = false"  ></datepicker>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row form-group">

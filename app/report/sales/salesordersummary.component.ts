@@ -74,8 +74,8 @@ export class SalesOrderSummary {
     }
     
     public fetchSaleOrderList() {
-        let fromDate: string = this.datepipe.transform(this.fromDate, 'dd-MM-yyyy');
-        let toDate: string = this.datepipe.transform(this.toDate, 'dd-MM-yyyy');
+        let fromDate: string = this.datepipe.transform(this.fromDate, 'yyyy-MM-dd');
+        let toDate: string = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
         //let requestBody: string = JSON.stringify(this.reqDTOSaleOrder);
         let requestBody: string = "{\"startDate\": \"" + fromDate + "\", \"endDate\": \"" + toDate + "\", \"offset\": \"" + this.offset + "\", \"limit\": \"" + this.limit + "\"}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_ORDER_SUMMARY), requestBody).then(result => {

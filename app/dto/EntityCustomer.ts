@@ -5,4 +5,5 @@ export class EntityCustomer {
     email: string;
     cell: string;
     balance: number;
+    previousBalance: number;
 }

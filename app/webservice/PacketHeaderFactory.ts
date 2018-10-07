@@ -164,6 +164,12 @@ export class PacketHeaderFactory {
             case ACTION.FETCH_ENTITY_SUPPLIER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;
+            case ACTION.FETCH_SALE_ORDER_PAYMENT_SUMMARY:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
+            case ACTION.FETCH_ENTITY_CUSTOMER_INFO:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
                 
             case ACTION.ADD_PRODUCT_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
@@ -187,6 +193,9 @@ export class PacketHeaderFactory {
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
                 break;   
             case ACTION.ADD_PURCHASE_ORDER_PAYMENT:
+                packetHeader.requestType = REQUEST_TYPE.UPDATE
+                break;  
+            case ACTION.ADD_SALE_ORDER_PAYMENT:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
                 break;    
             
@@ -212,6 +221,9 @@ export class PacketHeaderFactory {
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
                 break;
             case ACTION.UPDATE_PURCHASE_ORDER_PAYMENT:
+                packetHeader.requestType = REQUEST_TYPE.UPDATE
+                break;
+            case ACTION.UPDATE_SALE_ORDER_PAYMENT:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE
                 break;        
                         

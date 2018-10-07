@@ -85,7 +85,7 @@
                                             <span class="supplier-title">Balance</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                                            <input [(ngModel)]="dtoCustomer.entityCustomer.balance" id="{{dtoCustomer.entityCustomer.id}}" name="{{dtoCustomer.entityCustomer.id}}" class="form-control">
+                                            {{dtoCustomer.entityCustomer.balance}}
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -142,23 +142,132 @@
 
                         </tab>
                         <!--Customer Info Tab Ends-->
-                        <!--Extra Info Tab Starts-->
-<!--                        <tab class="manage-customer-right-side-tab" heading="Extra Info">
+
+                        <!--Customer Extra Info Tab Starts-->
+                        <tab  class="manage-supplier-right-side-tab"  heading="Extra Info">
                             <div class="row form-group">
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <h3>Preferences</h3>
+                                            <h3>Other Info</h3>
                                         </div>
                                     </div>
-
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="supplier-title">Previous Due</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <input [(ngModel)]="dtoCustomer.entityCustomer.previousBalance" name="previousBalance" class="form-control">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
+                                    
                                 </div>
-                            </div>
-                        </tab>-->
-                        <!--Extra Info Tab Ends-->
+                            </div> 
+                        </tab>
+                        <!--Customer Extra Info Tab Ends-->
+                        
+                        <!--Customer Payment List Tab Starts-->
+                        <tab  class="manage-supplier-right-side-tab"  heading="Payment List">
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <h3>Payments</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="report-layer">
+                                                <div class="row form-group">
+                                                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                                        <label>Amount</label>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <label>Description</label>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <label>Payment Date</label>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                        <label>Date</label>
+                                                    </div>                            
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="report-layer-divider"></div>
+                                                    </div>
+                                                </div>
+                                                <div (click)="setEntitySaleOrderPayment($event, payment.entitySaleOrderPayment)" *ngFor="let payment of saleOrderPaymentList" class="row form-group" [ngClass]="{'row-active': payment.entitySaleOrderPayment.id == entitySaleOrderPayment.id }">
+                                                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                                        <p>{{payment.entitySaleOrderPayment.amountOut}}</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <p>{{payment.entitySaleOrderPayment.description}}</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <p>{{payment.entitySaleOrderPayment.paymentDate | date: 'dd-MM-yyyy'}}</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                        <p>{{payment.createdDate}}</p>
+                                                    </div>                            
+                                                </div>
+                                            </div>
+                                            <mat-paginator [length]="paymentLength"
+                                                [pageSize]="paymentPageSize"
+                                                [pageSizeOptions]="paymentPageSizeOptions"
+                                                (page)="onPaymentPaginateChange($event)">
+                                            </mat-paginator>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <form role="form" (submit)="saveSalePayment($event)">
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <h3>Sale Payment</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Amount<span class="required">*</span></span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="entitySaleOrderPayment.amountOut" name="amountOut" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Description</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input [(ngModel)]="entitySaleOrderPayment.description" name="description" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                                <span class="supplier-title">Payment Date</span>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                                <input name="paymentDate" class="form-control input-custom-field custom-datepicker" type="text" 
+                                                   [ngModel]="paymentDate | date:'dd-MM-yyyy'" (ngModelChange)="paymentDate = $event;"
+                                                   (focus)="showPaymentDatePicker = true" >
+                                                <div class="start-date" *ngIf="showPaymentDatePicker" >
+                                                    <datepicker name="showPaymentDatePicker" [(ngModel)]="paymentDate" [minDate]="minDate" [showWeeks]="false" (selectionDone) ="showPaymentDatePicker = false"  ></datepicker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <button [disabled]="disablePaymentSaveButton" type="submit" id="save-purchase-payment" class="custom-button pull-right">Save</button>
+                                            </div>
+                                        </div>
+                                    </form> 
+                                </div>
+                            </div> 
+                        </tab>
+                        <!--Supplier Payment List Tab Ends-->
                     </tabset>
                 </div>
             </div>

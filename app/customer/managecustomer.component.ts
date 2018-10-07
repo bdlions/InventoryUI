@@ -1,24 +1,29 @@
 import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalDirective} from 'ngx-bootstrap';
+import { DatePipe } from '@angular/common';
 import {WebAPIService} from './../webservice/web-api-service';
 import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
 import {EntityCustomer} from '../dto/EntityCustomer';
 import {DTOCustomer} from '../dto/DTOCustomer';
 import {EntityUser} from '../dto/EntityUser';
+import {EntitySaleOrderPayment} from "../dto/EntitySaleOrderPayment";
+import {DTOSaleOrderPayment} from "../dto/DTOSaleOrderPayment";
 import {EntityUserRole} from "../dto/EntityUserRole";
 import {NavigationManager} from "../services/NavigationManager";
 import {Subscription} from 'rxjs';
+import {PageEvent} from '@angular/material';
 
 @Component({
     selector: 'app',
     templateUrl: 'app/html/customer/managecustomer.component.html',
-    providers: [WebAPIService]
+    providers: [WebAPIService, DatePipe]
 })
 
 export class ManageCustomerComponent {
     @ViewChild('manageCustomerMessageDispalyModal') public manageCustomerMessageDispalyModal: ModalDirective;
+    private datePipe: DatePipe;
     private webAPIService: WebAPIService;
     private subscribe: Subscription;
     private reqDTOCustomer: DTOCustomer;
@@ -32,11 +37,24 @@ export class ManageCustomerComponent {
     private manageCustomerErrorMessage: string;
     
     private disableSaveButton: boolean = false;
+    private disablePaymentSaveButton: boolean = false;
     
     //constants & constraints
     private maxCustomerLeftPanel: number = 10;
+    
+    public showPaymentDatePicker: boolean = false;
+    public paymentDate: Date = new Date();
+    public minDate: Date = void 0;
+    private entitySaleOrderPayment: EntitySaleOrderPayment;
+    private saleOrderPaymentList: DTOSaleOrderPayment[];
+    private paymentOrdersLimit: number = 10;
+    private paymentOrdersOffset: number = 0;
+    
+    paymentLength = 0;
+    paymentPageSize = 10;
+    paymentPageSizeOptions = [5, 10];
 
-    constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager) {
+    constructor( private router: Router, public route: ActivatedRoute, webAPIService: WebAPIService, private navigationManager: NavigationManager, public datepipe: DatePipe) {
         this.navigationManager.showNavBarEmitter.subscribe((mode) => {
             if (mode !== null) {
                 this.showNavBar = mode;
@@ -47,6 +65,7 @@ export class ManageCustomerComponent {
                 this.activeMenu = menuName;
             }
         });
+        this.datePipe = datepipe;
         this.webAPIService = webAPIService;
         //this.searchDTOCustomer = new DTOCustomer();
         //this.searchDTOCustomer.entityUser = new EntityUser();
@@ -66,6 +85,9 @@ export class ManageCustomerComponent {
         this.reqDTOCustomer.limit = 10;
         this.reqDTOCustomer.offset = 0;
         this.fetchCustomerList();
+        
+        this.entitySaleOrderPayment = new EntitySaleOrderPayment();
+        this.saleOrderPaymentList = Array();
     }
 
     ngOnInit() {
@@ -110,6 +132,33 @@ export class ManageCustomerComponent {
         this.dtoCustomer.entityUser = new EntityUser();
         this.dtoCustomer.entityUserRole = new EntityUserRole();
     }
+    
+    onPaymentPaginateChange(event:PageEvent)
+    {
+        this.paymentOrdersLimit = event.pageSize;
+        this.paymentOrdersOffset = (event.pageIndex * event.pageSize) ;
+        this.searchCustomerPayments(null);
+    }
+    
+    searchCustomerPayments(event: Event) 
+    {
+        if(this.dtoCustomer.entityCustomer.userId != null && this.dtoCustomer.entityCustomer.userId > 0)
+        {
+            let customerUserId: number = this.dtoCustomer.entityCustomer.userId;
+            let paymentTypeId : number = 3;
+            let requestBody: string = "{\"customerUserId\": " + customerUserId + ", \"paymentTypeId\": " + paymentTypeId + ", \"offset\": " + this.paymentOrdersOffset + ", \"limit\": " + this.paymentOrdersLimit + "}";
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_ORDER_PAYMENT_SUMMARY), requestBody).then(result => {
+                if (result.success && result.list != null) {
+                    this.saleOrderPaymentList = result.list;
+                    this.paymentLength = result.counter;
+                }
+                else {
+
+                }
+            });
+        }
+        
+    }
 
     saveCustomer(event: Event) {
         //check customer user name
@@ -127,8 +176,9 @@ export class ManageCustomerComponent {
         if (this.dtoCustomer.entityCustomer.id > 0) {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_CUSTOMER_INFO), requestBody).then(result => {
                 this.disableSaveButton = false;
-                console.log(result);
+                //console.log(result);
                 if (result.success) {
+                    this.dtoCustomer = result;    
                     this.manageCustomerUpdateLeftPanel();
                 }
                 else {
@@ -142,7 +192,7 @@ export class ManageCustomerComponent {
         else {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_CUSTOMER_INFO), requestBody).then(result => {
                 this.disableSaveButton = false;
-                console.log(result);
+                //console.log(result);
                 if (result.success) {
                     this.dtoCustomer = result;
                     this.manageCustomerUpdateLeftPanel();
@@ -160,6 +210,85 @@ export class ManageCustomerComponent {
         }
         //reset this customer, fetch customer list again
     }
+    
+    saveSalePayment(event: Event) 
+    {
+        //you must create a customer before saving customer payment
+        if (this.dtoCustomer.entityCustomer.userId == null || this.dtoCustomer.entityCustomer.userId == 0) {
+            this.manageCustomerErrorMessage = "Please create/select a customer first before saving payment.";
+            this.manageCustomerMessageDispalyModal.config.backdrop = false;
+            this.manageCustomerMessageDispalyModal.show();
+            return;
+        }
+        //payment amount is required
+        if (this.entitySaleOrderPayment.amountOut == null) {
+            this.manageCustomerErrorMessage = "Amount is required.";
+            this.manageCustomerMessageDispalyModal.config.backdrop = false;
+            this.manageCustomerMessageDispalyModal.show();
+            return;
+        }
+        
+        this.entitySaleOrderPayment.customerUserId = this.dtoCustomer.entityCustomer.userId;
+        this.entitySaleOrderPayment.customerName = this.dtoCustomer.entityUser.userName;
+        this.entitySaleOrderPayment.paymentDate = this.datepipe.transform(this.paymentDate, 'yyyy-MM-dd');
+        this.disablePaymentSaveButton = true;
+        let requestBody: string = JSON.stringify(this.entitySaleOrderPayment);
+        if (this.entitySaleOrderPayment.id == null || this.entitySaleOrderPayment.id == 0) {
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_SALE_ORDER_PAYMENT), requestBody).then(result => {
+                this.disablePaymentSaveButton = false;
+                if (result.success) 
+                {
+                    this.entitySaleOrderPayment = result;
+                    //fetch supplier payment list
+                    this.searchCustomerPayments(null);
+                    //fetch supplier due
+                    this.fetchEntityCustomerInfo();                    
+                }
+                else
+                {
+                    this.manageCustomerErrorMessage = result.message;
+                    this.manageCustomerMessageDispalyModal.config.backdrop = false;
+                    this.manageCustomerMessageDispalyModal.show();
+                }
+            });
+        }
+        else {
+            //update customer payment here
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.UPDATE_SALE_ORDER_PAYMENT), requestBody).then(result => {
+                this.disablePaymentSaveButton = false;
+                if (result.success) 
+                {
+                    //fetch supplier payment list
+                    this.searchCustomerPayments(null);
+                    //fetch supplier due
+                    this.fetchEntityCustomerInfo();                    
+                }
+                else
+                {
+                    this.manageCustomerErrorMessage = result.message;
+                    this.manageCustomerMessageDispalyModal.config.backdrop = false;
+                    this.manageCustomerMessageDispalyModal.show();
+                }
+            });
+        }
+    }
+    
+    fetchEntityCustomerInfo()
+    {
+        let requestBody: string = "{\"customerUserId\": " + this.dtoCustomer.entityCustomer.userId + "}";
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ENTITY_CUSTOMER_INFO), requestBody).then(result => {
+            if (result.success) {
+                this.dtoCustomer.entityCustomer = result;
+            }
+        });
+    }
+    
+    setEntitySaleOrderPayment(event: Event, selectedEntitySaleOrderPayment: EntitySaleOrderPayment)
+    {
+        this.entitySaleOrderPayment = selectedEntitySaleOrderPayment;
+        this.paymentDate = new Date(this.entitySaleOrderPayment.paymentDate);
+    }
+    
     selectedCustomer(event: Event, customerId: number) {
         event.preventDefault();
         this.customerId = customerId;
@@ -168,6 +297,8 @@ export class ManageCustomerComponent {
         for (customerCounter = 0; customerCounter < this.customerList.length; customerCounter++) {
             if (this.customerList[customerCounter].entityCustomer.id == customerId) {
                 this.dtoCustomer = this.customerList[customerCounter];
+                this.searchCustomerPayments(null);
+                this.entitySaleOrderPayment = new EntitySaleOrderPayment();
             }
         }
     }
@@ -198,6 +329,8 @@ export class ManageCustomerComponent {
             //console.log(result);
             if (result.success) {
                 this.dtoCustomer = result;
+                this.searchCustomerPayments(null);
+                this.entitySaleOrderPayment = new EntitySaleOrderPayment();
             }
         });
     }

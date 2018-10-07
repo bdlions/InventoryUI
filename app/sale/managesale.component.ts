@@ -279,6 +279,7 @@ export class ManageSaleComponent {
             if (this.customerList[customerCounter].entityCustomer.id == customerId) {
                 this.dtoCustomer = this.customerList[customerCounter];
                 this.dtoSaleOrder.entitySaleOrder.customerUserId = this.dtoCustomer.entityUser.id;
+                this.dtoSaleOrder.entitySaleOrder.address = this.dtoCustomer.entityUser.address;
             }
         }
     }

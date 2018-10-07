@@ -7,5 +7,6 @@ export class EntityUser {
     lastName: string;
     img: string;
     cell: string;
+    address: string;
     accountStatusId: number;
 }

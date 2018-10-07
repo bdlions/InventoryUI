@@ -276,7 +276,8 @@ export class ManagePurchaseComponent {
         for (supplierCounter = 0; supplierCounter < this.supplierList.length; supplierCounter++) {
             if (this.supplierList[supplierCounter].entitySupplier.id == supplierId) {
                 this.dtoSupplier = this.supplierList[supplierCounter];
-                this.dtoPurchaseOrder.entityPurchaseOrder.supplierUserId = this.dtoSupplier.entityUser.id;                
+                this.dtoPurchaseOrder.entityPurchaseOrder.supplierUserId = this.dtoSupplier.entityUser.id;  
+                this.dtoPurchaseOrder.entityPurchaseOrder.address = this.dtoSupplier.entityUser.address;              
             }
         }
     }

@@ -489,21 +489,24 @@ export class ManagePurchaseComponent {
         this.dtoPurchaseOrder.products = Array();
         this.dtoPurchaseOrder.returnProducts = Array();
 
-        this.reqDTOSupplier = new DTOSupplier();
+        //previsouly searched supplier is not reset
+        /*this.reqDTOSupplier = new DTOSupplier();
         this.reqDTOSupplier.entitySupplier = new EntitySupplier();
         this.reqDTOSupplier.entityUser = new EntityUser();
         this.reqDTOSupplier.limit = 10;
-        this.reqDTOSupplier.offset = 0;
+        this.reqDTOSupplier.offset = 0;*/
+        
         this.dtoSupplier = new DTOSupplier();
         this.dtoSupplier.entitySupplier = new EntitySupplier();
         this.dtoSupplier.entityUser = new EntityUser();
         this.dtoSupplier.entityUserRole = new EntityUserRole();
 
-        this.reqDTOProduct = new DTOProduct();
+        //previsouly searched product is not reset
+        /*this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = 10;
         this.reqDTOProduct.offset = 0;
-        this.fetchProductList();
+        this.fetchProductList();*/
     }
 
     public savePurchaseOrder(event: Event) {
@@ -586,6 +589,7 @@ export class ManagePurchaseComponent {
                     this.dtoPurchaseOrder.entityPurchaseOrder = result.entityPurchaseOrder;
                     //this.dtoPurchaseOrder.entityPurchaseOrder.orderNo = result.entityPurchaseOrder.orderNo;
                     this.managePurchaseOrderUpdateLeftPanel();
+                    this.fetchProductList();
                 }
                 else 
                 {
@@ -602,7 +606,8 @@ export class ManagePurchaseComponent {
                 this.disableSaveButton = false;
                 console.log(result);
                 if (result.success) {
-                    this.managePurchaseOrderUpdateLeftPanel();                    
+                    this.managePurchaseOrderUpdateLeftPanel(); 
+                    this.fetchProductList();                   
                 }
                 else 
                 {

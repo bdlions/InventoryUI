@@ -519,20 +519,23 @@ export class ManageSaleComponent {
         this.dtoSaleOrder.products = Array();
         this.dtoSaleOrder.returnProducts = Array();
 
-        this.reqDTOCustomer = new DTOCustomer();
+        //previsouly searched customer is not reset
+        /*this.reqDTOCustomer = new DTOCustomer();
         this.reqDTOCustomer.entityCustomer = new EntityCustomer();
         this.reqDTOCustomer.entityUser = new EntityUser();
         this.reqDTOCustomer.limit = 10;
-        this.reqDTOCustomer.offset = 0;
+        this.reqDTOCustomer.offset = 0;*/
+        
         this.dtoCustomer = new DTOCustomer();
         this.dtoCustomer.entityCustomer = new EntityCustomer();
         this.dtoCustomer.entityUser = new EntityUser();
         this.dtoCustomer.entityUserRole = new EntityUserRole();
 
-        this.reqDTOProduct = new DTOProduct();
+        //previsouly searched product is not reset
+        /*this.reqDTOProduct = new DTOProduct();
         this.reqDTOProduct.entityProduct = new EntityProduct();
         this.reqDTOProduct.limit = 10;
-        this.reqDTOProduct.offset = 0;
+        this.reqDTOProduct.offset = 0;*/
     }
 
     saveSaleOrder(event: Event) {
@@ -618,6 +621,7 @@ export class ManageSaleComponent {
                     this.dtoSaleOrder.entitySaleOrder = result.entitySaleOrder;
                     //this.dtoSaleOrder.entitySaleOrder.orderNo = result.entitySaleOrder.orderNo;
                     this.manageSaleOrderUpdateLeftPanel();
+                    this.searchProductsWithStocks();
                 }
                 else 
                 {
@@ -633,7 +637,8 @@ export class ManageSaleComponent {
                 this.disableSaveButton = false;
                 console.log(result);
                 if (result.success) {
-                    this.manageSaleOrderUpdateLeftPanel();                    
+                    this.manageSaleOrderUpdateLeftPanel(); 
+                    this.searchProductsWithStocks();             
                 }
                 else {
                     this.manageSaleErrorMessage = result.message;

@@ -134,18 +134,18 @@
                                     <table class="common-table adjust-input">
                                         <thead>
                                             <tr>
-                                                <th>Product<span class="required">*</span></th>
-                                                <th>Price<span class="required">*</span></th>
-                                                <th>Product Code<span class="required"></span></th>
-                                                <th>Action<span class="required"></span></th>
+                                                <th width="40%">Product<span class="required">*</span></th>
+                                                <th width="20%">Price<span class="required">*</span></th>
+                                                <th width="20%">Product Code<span class="required"></span></th>
+                                                <th width="20%">Action<span class="required"></span></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td data-label="Product" (keypress)="showManageSupplierProductModal($event, 0)" (click)="showManageSupplierProductModal($event, 0)"><input class="form-control" ></td>
-                                                <td data-label="Price"><input class="form-control" ></td>
-                                                <td data-label="Product Code"><input class="form-control" ></td>
-                                                <td data-label="Action" class="text-center"></td>
+                                                <td width="40%" data-label="Product" (keypress)="showManageSupplierProductModal($event, 0)" (click)="showManageSupplierProductModal($event, 0)"><input class="form-control" ></td>
+                                                <td width="20%" data-label="Price"><input class="form-control" ></td>
+                                                <td width="20%" data-label="Product Code"><input class="form-control" ></td>
+                                                <td width="20%" data-label="Action" class="text-center"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -153,10 +153,10 @@
                                         <table class="common-table adjust-input">
                                             <tbody>
                                                 <tr *ngFor="let entityProductSupplier of dtoSupplier.entityProductSupplierList">
-                                                    <td data-label="Product" (keypress)="showManageSupplierProductModal($event, entityProductSupplier.productId)" (click)="showManageSupplierProductModal($event, entityProductSupplier.productId)"><input class="form-control" value="{{entityProductSupplier.productName}}"></td>
-                                                    <td data-label="Price"><input class="form-control" [(ngModel)]="entityProductSupplier.supplierPrice"></td>
-                                                    <td data-label="Product Code"><input class="form-control" [(ngModel)]="entityProductSupplier.supplierProductCode"></td>
-                                                    <td data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showManageSupplierSelectedProductDeleteModal($event, entityProductSupplier.productId)" (click)="showManageSupplierSelectedProductDeleteModal($event, entityProductSupplier.productId)"></i></td>
+                                                    <td width="40%" data-label="Product" (keypress)="showManageSupplierProductModal($event, entityProductSupplier.productId)" (click)="showManageSupplierProductModal($event, entityProductSupplier.productId)"><input class="form-control" value="{{entityProductSupplier.productName}}"></td>
+                                                    <td width="20%" data-label="Price"><input class="form-control" [(ngModel)]="entityProductSupplier.supplierPrice"></td>
+                                                    <td width="20%" data-label="Product Code"><input class="form-control" [(ngModel)]="entityProductSupplier.supplierProductCode"></td>
+                                                    <td width="20%" data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showManageSupplierSelectedProductDeleteModal($event, entityProductSupplier.productId)" (click)="showManageSupplierSelectedProductDeleteModal($event, entityProductSupplier.productId)"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -164,10 +164,10 @@
                                     <table class="common-table">
                                         <tfoot>
                                             <tr class="cursor-pointer" (keypress)="showManageSupplierProductModal($event, 0)" (click)="showManageSupplierProductModal($event, 0)">
-                                                <td><i class="fa fa-plus"></i></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td width="40%"><i class="fa fa-plus"></i></td>
+                                                <td width="20%"></td>
+                                                <td width="20%"></td>
+                                                <td width="20%"></td>
                                             </tr>
                                         </tfoot>
                                     </table>

@@ -133,22 +133,22 @@
                                     <table class="common-table adjust-input">
                                         <thead>
                                             <tr>
-                                                <th>Item<span class="required">*</span></th>
-                                                <th>Quantity<span class="required">*</span></th>
-                                                <th>Unit Price<span class="required">*</span></th>
-                                                <th>Discount(%)</th>
-                                                <th>Sub-Total</th>
-                                                <th>Action</th>
+                                                <th width="30%">Item<span class="required">*</span></th>
+                                                <th width="15%">Quantity<span class="required">*</span></th>
+                                                <th width="15%">Unit Price<span class="required">*</span></th>
+                                                <th width="15%">Discount(%)</th>
+                                                <th width="15%">Sub-Total</th>
+                                                <th width="10%">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td data-label="Item" (keypress)="showPurchaseOrderProductModal($event, 0)" (click)="showPurchaseOrderProductModal($event, 0)"><input class="form-control" ></td>
-                                                <td data-label="Quantity"><input class="form-control" ></td>
-                                                <td data-label="Unit Price"><input class="form-control" ></td>
-                                                <td data-label="Discount"><input class="form-control"></td>
-                                                <td data-label="Sub-Total"><label></label></td>
-                                                <td data-label="Action" class="text-center"></td>
+                                                <td width="30%" data-label="Item" (keypress)="showPurchaseOrderProductModal($event, 0)" (click)="showPurchaseOrderProductModal($event, 0)"><input class="form-control" ></td>
+                                                <td width="15%" data-label="Quantity"><input class="form-control" ></td>
+                                                <td width="15%" data-label="Unit Price"><input class="form-control" ></td>
+                                                <td width="15%" data-label="Discount"><input class="form-control"></td>
+                                                <td width="15%" data-label="Sub-Total"><label></label></td>
+                                                <td width="10%" data-label="Action" class="text-center"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -156,12 +156,12 @@
                                         <table class="common-table adjust-input">
                                             <tbody>
                                                 <tr *ngFor="let product of dtoPurchaseOrder.products">
-                                                    <td data-label="Item" (keypress)="showPurchaseOrderProductModal($event, product.entityProduct.id)" (click)="showPurchaseOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
-                                                    <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
-                                                    <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.costPrice" (change)="calculateBalance()"></td>
-                                                    <td data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
-                                                    <td data-label="Sub-Total"><label>{{product.total | number:'.2-2'}}</label></td>
-                                                    <td data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
+                                                    <td width="30%" data-label="Item" (keypress)="showPurchaseOrderProductModal($event, product.entityProduct.id)" (click)="showPurchaseOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
+                                                    <td width="15%" data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
+                                                    <td width="15%" data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.costPrice" (change)="calculateBalance()"></td>
+                                                    <td width="15%" data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
+                                                    <td width="15%" data-label="Sub-Total"><label>{{product.total | number:'.2-2'}}</label></td>
+                                                    <td width="10%" data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedPurchaseOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -169,12 +169,12 @@
                                     <table class="common-table">
                                         <tfoot>
                                             <tr class="cursor-pointer" (keypress)="showPurchaseOrderProductModal($event, 0)" (click)="showPurchaseOrderProductModal($event, 0)">
-                                                <td><i class="fa fa-plus"></i></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td width="10%"><i class="fa fa-plus"></i></td>
+                                                <td width="20%"></td>
+                                                <td width="20%"></td>
+                                                <td width="20%"></td>
+                                                <td width="20%"></td>
+                                                <td width="10%"></td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -260,24 +260,24 @@
                                     <table class="common-table adjust-input">
                                         <thead>
                                             <tr>
-                                                <th>Item<span class="required">*</span></th>
-                                                <th>Quantity<span class="required">*</span></th>
-                                                <th>Unit Price<span class="required">*</span></th>
-                                                <th>Discount(%)</th>
-                                                <th>Sub-Total</th>
-                                                <th>Date</th>
-                                                <th>Action</th>
+                                                <th width="30%">Item<span class="required">*</span></th>
+                                                <th width="12%">Quantity<span class="required">*</span></th>
+                                                <th width="12%">Unit Price<span class="required">*</span></th>
+                                                <th width="12%">Discount(%)</th>
+                                                <th width="12%">Sub-Total</th>
+                                                <th width="12%">Date</th>
+                                                <th width="10%">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td data-label="Item" (keypress)="showPurchaseOrderPurchasedProductsModal($event, 0)" (click)="showPurchaseOrderPurchasedProductsModal($event, 0)"><input class="form-control" ></td>
-                                                <td data-label="Quantity"><input class="form-control" ></td>
-                                                <td data-label="Unit Price"><input class="form-control" ></td>
-                                                <td data-label="Discount"><input class="form-control"></td>
-                                                <td data-label="Sub-Total"><label></label></td>
-                                                <td data-label="Date"><label></label></td>
-                                                <td data-label="Action" class="text-center"></td>
+                                                <td width="30%" data-label="Item" (keypress)="showPurchaseOrderPurchasedProductsModal($event, 0)" (click)="showPurchaseOrderPurchasedProductsModal($event, 0)"><input class="form-control" ></td>
+                                                <td width="12%" data-label="Quantity"><input class="form-control" ></td>
+                                                <td width="12%" data-label="Unit Price"><input class="form-control" ></td>
+                                                <td width="12%" data-label="Discount"><input class="form-control"></td>
+                                                <td width="12%" data-label="Sub-Total"><label></label></td>
+                                                <td width="12%" data-label="Date"><label></label></td>
+                                                <td width="10%" data-label="Action" class="text-center"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -285,13 +285,13 @@
                                         <table class="common-table adjust-input">
                                             <tbody>
                                                 <tr *ngFor="let product of dtoPurchaseOrder.returnProducts">
-                                                    <td data-label="Item" (keypress)="showPurchaseOrderPurchasedProductsModal($event, product.entityProduct.id)" (click)="showPurchaseOrderPurchasedProductsModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
-                                                    <td data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
-                                                    <td data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.costPrice" (change)="calculateBalance()"></td>
-                                                    <td data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
-                                                    <td data-label="Sub-Total"><label>{{product.total | number:'.2-2'}}</label></td>
-                                                    <td data-label="Date"><label>{{product.createdOn}}</label></td>
-                                                    <td data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedPurchaseOrderReturnedProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedPurchaseOrderReturnedProductDeleteModal($event, product.entityProduct.id)"></i></td>
+                                                    <td width="30%" data-label="Item" (keypress)="showPurchaseOrderPurchasedProductsModal($event, product.entityProduct.id)" (click)="showPurchaseOrderPurchasedProductsModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
+                                                    <td width="12%" data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
+                                                    <td width="12%" data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.costPrice" (change)="calculateBalance()"></td>
+                                                    <td width="12%" data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
+                                                    <td width="12%" data-label="Sub-Total"><label>{{product.total | number:'.2-2'}}</label></td>
+                                                    <td width="12%" data-label="Date"><label>{{product.createdOn}}</label></td>
+                                                    <td width="10%" data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedPurchaseOrderReturnedProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedPurchaseOrderReturnedProductDeleteModal($event, product.entityProduct.id)"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -299,13 +299,13 @@
                                     <table class="common-table">
                                         <tfoot>
                                             <tr class="cursor-pointer" (keypress)="showPurchaseOrderPurchasedProductsModal($event, 0)" (click)="showPurchaseOrderPurchasedProductsModal($event, 0)">
-                                                <td><i class="fa fa-plus"></i></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td width="10%" ><i class="fa fa-plus"></i></td>
+                                                <td width="17%"></td>
+                                                <td width="17%"></td>
+                                                <td width="17%"></td>
+                                                <td width="17%"></td>
+                                                <td width="17%"></td>
+                                                <td width="10%"></td>
                                             </tr>
                                         </tfoot>
                                     </table>

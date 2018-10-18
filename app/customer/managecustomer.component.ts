@@ -42,6 +42,8 @@ export class ManageCustomerComponent {
     //constants & constraints
     private maxCustomerLeftPanel: number = 10;
     
+    private totalPaymentAmount: number;
+    
     public showPaymentDatePicker: boolean = false;
     public paymentDate: Date = new Date();
     public minDate: Date = void 0;
@@ -65,6 +67,7 @@ export class ManageCustomerComponent {
                 this.activeMenu = menuName;
             }
         });
+        this.totalPaymentAmount = 0;
         this.datePipe = datepipe;
         this.webAPIService = webAPIService;
         //this.searchDTOCustomer = new DTOCustomer();
@@ -148,9 +151,10 @@ export class ManageCustomerComponent {
             let paymentTypeId : number = 3;
             let requestBody: string = "{\"customerUserId\": " + customerUserId + ", \"paymentTypeId\": " + paymentTypeId + ", \"offset\": " + this.paymentOrdersOffset + ", \"limit\": " + this.paymentOrdersLimit + "}";
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_ORDER_PAYMENT_SUMMARY), requestBody).then(result => {
-                if (result.success && result.list != null) {
-                    this.saleOrderPaymentList = result.list;
-                    this.paymentLength = result.counter;
+                if (result.success && result.saleOrderPayments != null) {
+                    this.saleOrderPaymentList = result.saleOrderPayments;
+                    this.paymentLength = result.totalSaleOrderPayments;
+                    this.totalPaymentAmount = result.totalPaymentAmount;
                 }
                 else {
 
@@ -242,7 +246,8 @@ export class ManageCustomerComponent {
                     //fetch supplier payment list
                     this.searchCustomerPayments(null);
                     //fetch supplier due
-                    this.fetchEntityCustomerInfo();                    
+                    this.fetchEntityCustomerInfo();  
+                    this.searchCustomerPayments(null);                  
                 }
                 else
                 {
@@ -261,7 +266,8 @@ export class ManageCustomerComponent {
                     //fetch supplier payment list
                     this.searchCustomerPayments(null);
                     //fetch supplier due
-                    this.fetchEntityCustomerInfo();                    
+                    this.fetchEntityCustomerInfo(); 
+                    this.searchCustomerPayments(null);                      
                 }
                 else
                 {

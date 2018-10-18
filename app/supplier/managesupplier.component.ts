@@ -36,6 +36,8 @@ export class ManageSupplierComponent {
     private dtoSupplier: DTOSupplier;
     private supplierList: DTOSupplier[];
     
+    private totalPaymentAmount:number;
+    
     public showPaymentDatePicker: boolean = false;
     public paymentDate: Date = new Date();
     public minDate: Date = void 0;
@@ -89,6 +91,7 @@ export class ManageSupplierComponent {
                 this.activeMenu = menuName;
             }
         });
+        this.totalPaymentAmount = 0;
         this.datePipe = datepipe;
         this.webAPIService = webAPIService;
         this.reqDTOSupplier = new DTOSupplier();
@@ -543,7 +546,8 @@ export class ManageSupplierComponent {
                     //fetch supplier payment list
                     this.searchSupplierPayments(null);
                     //fetch supplier due
-                    this.fetchEntitySupplierInfo();                    
+                    this.fetchEntitySupplierInfo();    
+                    this.searchSupplierPayments(null);                
                 }
                 else
                 {
@@ -562,7 +566,8 @@ export class ManageSupplierComponent {
                     //fetch supplier payment list
                     this.searchSupplierPayments(null);
                     //fetch supplier due
-                    this.fetchEntitySupplierInfo();                    
+                    this.fetchEntitySupplierInfo();   
+                    this.searchSupplierPayments(null);                    
                 }
                 else
                 {
@@ -582,9 +587,10 @@ export class ManageSupplierComponent {
             let paymentTypeId : number = 3;
             let requestBody: string = "{\"supplierUserId\": " + supplierUserId + ", \"paymentTypeId\": " + paymentTypeId + ", \"offset\": " + this.paymentOrdersOffset + ", \"limit\": " + this.paymentOrdersLimit + "}";
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PURCHASE_ORDER_PAYMENT_SUMMARY), requestBody).then(result => {
-                if (result.success && result.list != null) {
-                    this.purchaseOrderPaymentList = result.list;
-                    this.paymentLength = result.counter;
+                if (result.success && result.purchaseOrderPayments != null) {
+                    this.purchaseOrderPaymentList = result.purchaseOrderPayments;
+                    this.paymentLength = result.totalPurchaseOrderPayments;
+                    this.totalPaymentAmount = result.totalPaymentAmount;
                 }
                 else {
 

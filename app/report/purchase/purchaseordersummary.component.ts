@@ -31,6 +31,7 @@ export class PurchaseOrderSummary {
     private activeMenu: string = "purchaseordersummary";
     
     private purchaseOrderList: DTOPurchaseOrder[];
+    private totalPurchaseAmount: number;
     
     private offset: number;
     private limit: number;
@@ -54,6 +55,7 @@ export class PurchaseOrderSummary {
         this.webAPIService = webAPIService;
         this.datePipe = datepipe;
         
+        this.totalPurchaseAmount = 0;
         this.offset = 0;
         this.limit = this.pageSize;
         this.purchaseOrderList = Array();
@@ -70,9 +72,10 @@ export class PurchaseOrderSummary {
         let toDate: string = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
         let requestBody: string = "{\"startDate\": \"" + fromDate + "\", \"endDate\": \"" + toDate + "\", \"offset\": \"" + this.offset + "\", \"limit\": \"" + this.limit + "\"}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PURCHASE_ORDER_SUMMARY), requestBody).then(result => {
-            if (result.success && result.list != null) {
-                this.purchaseOrderList = result.list;
-                this.length = result.counter;
+            if (result.success && result.purchaseOrders != null) {
+                this.purchaseOrderList = result.purchaseOrders;
+                this.length = result.totalPurchaseOrders;
+                this.totalPurchaseAmount = result.totalPurchaseAmount;
             }
             else {
                 

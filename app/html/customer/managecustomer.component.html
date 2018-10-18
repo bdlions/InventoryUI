@@ -180,12 +180,12 @@
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="report-layer">
-                                                <div class="row form-group">
-                                                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                                        <label>Amount</label>
-                                                    </div>
+                                                <div class="row form-group">                                                    
                                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                                         <label>Description</label>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                                        <label>Amount</label>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                                         <label>Payment Date</label>
@@ -200,17 +200,31 @@
                                                     </div>
                                                 </div>
                                                 <div (click)="setEntitySaleOrderPayment($event, payment.entitySaleOrderPayment)" *ngFor="let payment of saleOrderPaymentList" class="row form-group" [ngClass]="{'row-active': payment.entitySaleOrderPayment.id == entitySaleOrderPayment.id }">
-                                                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                                        <p>{{payment.entitySaleOrderPayment.amountOut}}</p>
-                                                    </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                                         <p>{{payment.entitySaleOrderPayment.description}}</p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                                        <p>{{payment.entitySaleOrderPayment.amountOut}}</p>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                                         <p>{{payment.entitySaleOrderPayment.paymentDate | date: 'dd-MM-yyyy'}}</p>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                                         <p>{{payment.createdDate}}</p>
+                                                    </div>                            
+                                                </div>
+                                                <div class="row form-group">                                                    
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <label>Total : </label>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                                        <label>{{totalPaymentAmount}}</label>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                                        <label></label>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                                        <label></label>
                                                     </div>                            
                                                 </div>
                                             </div>

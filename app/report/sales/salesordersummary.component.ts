@@ -33,6 +33,7 @@ export class SalesOrderSummary {
     
     //private reqDTOSaleOrder: DTOSaleOrder;
     private saleOrderList: DTOSaleOrder[];
+    private totalSaleAmount: number;
     
     private offset: number;
     private limit: number;
@@ -62,6 +63,7 @@ export class SalesOrderSummary {
         //this.reqDTOSaleOrder.entitySaleOrder = new EntitySaleOrder();
         //this.reqDTOSaleOrder.offset = 0;
         //this.reqDTOSaleOrder.limit = this.pageSize;
+        this.totalSaleAmount = 0;
         this.offset = 0;
         this.limit = this.pageSize;
         this.saleOrderList = Array();
@@ -79,9 +81,10 @@ export class SalesOrderSummary {
         //let requestBody: string = JSON.stringify(this.reqDTOSaleOrder);
         let requestBody: string = "{\"startDate\": \"" + fromDate + "\", \"endDate\": \"" + toDate + "\", \"offset\": \"" + this.offset + "\", \"limit\": \"" + this.limit + "\"}";
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_ORDER_SUMMARY), requestBody).then(result => {
-            if (result.success && result.list != null) {
-                this.saleOrderList = result.list;
-                this.length = result.counter;
+            if (result.success && result.saleOrders != null) {
+                this.saleOrderList = result.saleOrders;
+                this.length = result.totalSaleOrders;
+                this.totalSaleAmount = result.totalSaleAmount;
             }
             else {
                 

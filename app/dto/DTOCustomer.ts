@@ -7,6 +7,8 @@ export class DTOCustomer {
     entityCustomer: EntityCustomer;
     entityUser: EntityUser;
     entityUserRole: EntityUserRole;
+    totalSaleAmount: number = 0;
+    totalPaymentAmount: number = 0;
 }
 
 

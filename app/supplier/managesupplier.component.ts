@@ -341,6 +341,7 @@ export class ManageSupplierComponent {
     {
         this.paymentOrdersLimit = event.pageSize;
         this.paymentOrdersOffset = (event.pageIndex * event.pageSize) ;
+        this.entityPurchaseOrderPayment = new EntityPurchaseOrderPayment();
         this.searchSupplierPayments(null);
     }
     //Product List Management Ends
@@ -453,6 +454,7 @@ export class ManageSupplierComponent {
                 this.dtoSupplier.epsListToBeDeleted = Array();
                 this.setSupplierProductList(event);
                 this.searchSupplierPayments(null);
+                this.fetchSupplierPurchaseAndPaymentAmount();  
                 this.entityPurchaseOrderPayment = new EntityPurchaseOrderPayment();
             }
         }
@@ -492,6 +494,7 @@ export class ManageSupplierComponent {
                 this.dtoSupplier.entityProductSupplierList = null;
                 this.dtoSupplier.epsListToBeDeleted = Array();
                 this.searchSupplierPayments(null);
+                this.fetchSupplierPurchaseAndPaymentAmount();
                 this.entityPurchaseOrderPayment = new EntityPurchaseOrderPayment();
             }
         });
@@ -546,7 +549,8 @@ export class ManageSupplierComponent {
                     //fetch supplier payment list
                     this.searchSupplierPayments(null);
                     //fetch supplier due
-                    this.fetchEntitySupplierInfo();    
+                    this.fetchEntitySupplierInfo();  
+                    this.fetchSupplierPurchaseAndPaymentAmount();  
                     this.searchSupplierPayments(null);                
                 }
                 else
@@ -567,6 +571,7 @@ export class ManageSupplierComponent {
                     this.searchSupplierPayments(null);
                     //fetch supplier due
                     this.fetchEntitySupplierInfo();   
+                    this.fetchSupplierPurchaseAndPaymentAmount();  
                     this.searchSupplierPayments(null);                    
                 }
                 else
@@ -584,8 +589,10 @@ export class ManageSupplierComponent {
         if(this.dtoSupplier.entitySupplier.userId != null && this.dtoSupplier.entitySupplier.userId > 0)
         {
             let supplierUserId: number = this.dtoSupplier.entitySupplier.userId;
-            let paymentTypeId : number = 3;
-            let requestBody: string = "{\"supplierUserId\": " + supplierUserId + ", \"paymentTypeId\": " + paymentTypeId + ", \"offset\": " + this.paymentOrdersOffset + ", \"limit\": " + this.paymentOrdersLimit + "}";
+            //PURCHASE_ORDER_PAYMENT_TYPE_ID_PURCHASE_PAYMENT_OUT = 2
+            //PURCHASE_ORDER_PAYMENT_TYPE_ID_ADD_NEW_PAYMENT_OUT = 3
+            let paymentTypeIds : string = "2,3";
+            let requestBody: string = "{\"supplierUserId\": " + supplierUserId + ", \"paymentTypeIds\":\"" + paymentTypeIds + "\", \"offset\": " + this.paymentOrdersOffset + ", \"limit\": " + this.paymentOrdersLimit + "}";
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PURCHASE_ORDER_PAYMENT_SUMMARY), requestBody).then(result => {
                 if (result.success && result.purchaseOrderPayments != null) {
                     this.purchaseOrderPaymentList = result.purchaseOrderPayments;
@@ -606,6 +613,17 @@ export class ManageSupplierComponent {
         this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_ENTITY_SUPPLIER_INFO), requestBody).then(result => {
             if (result.success) {
                 this.dtoSupplier.entitySupplier = result;
+            }
+        });
+    }
+    
+    fetchSupplierPurchaseAndPaymentAmount()
+    {
+        let requestBody: string = "{\"supplierUserId\": " + this.dtoSupplier.entitySupplier.userId + "}";
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SUPPLIER_PURCHASE_AND_PAYMENT_AMOUNT), requestBody).then(result => {
+            if (result.success) {
+                this.dtoSupplier.totalPurchaseAmount = result.totalPurchaseAmount;
+                this.dtoSupplier.totalPaymentAmount = result.totalPaymentAmount;
             }
         });
     }

@@ -140,6 +140,7 @@ export class ManageCustomerComponent {
     {
         this.paymentOrdersLimit = event.pageSize;
         this.paymentOrdersOffset = (event.pageIndex * event.pageSize) ;
+        this.entitySaleOrderPayment = new EntitySaleOrderPayment();
         this.searchCustomerPayments(null);
     }
     
@@ -148,8 +149,10 @@ export class ManageCustomerComponent {
         if(this.dtoCustomer.entityCustomer.userId != null && this.dtoCustomer.entityCustomer.userId > 0)
         {
             let customerUserId: number = this.dtoCustomer.entityCustomer.userId;
-            let paymentTypeId : number = 3;
-            let requestBody: string = "{\"customerUserId\": " + customerUserId + ", \"paymentTypeId\": " + paymentTypeId + ", \"offset\": " + this.paymentOrdersOffset + ", \"limit\": " + this.paymentOrdersLimit + "}";
+            //SALE_ORDER_PAYMENT_TYPE_ID_SALE_PAYMENT_OUT = 2
+            //SALE_ORDER_PAYMENT_TYPE_ID_ADD_NEW_PAYMENT_OUT = 3
+            let paymentTypeIds : string = "2,3";
+            let requestBody: string = "{\"customerUserId\": " + customerUserId + ", \"paymentTypeIds\":\"" + paymentTypeIds + "\", \"offset\": " + this.paymentOrdersOffset + ", \"limit\": " + this.paymentOrdersLimit + "}";
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_ORDER_PAYMENT_SUMMARY), requestBody).then(result => {
                 if (result.success && result.saleOrderPayments != null) {
                     this.saleOrderPaymentList = result.saleOrderPayments;
@@ -247,6 +250,7 @@ export class ManageCustomerComponent {
                     this.searchCustomerPayments(null);
                     //fetch supplier due
                     this.fetchEntityCustomerInfo();  
+                    this.fetchCustomerSaleAndPaymentAmount();
                     this.searchCustomerPayments(null);                  
                 }
                 else
@@ -267,6 +271,7 @@ export class ManageCustomerComponent {
                     this.searchCustomerPayments(null);
                     //fetch supplier due
                     this.fetchEntityCustomerInfo(); 
+                    this.fetchCustomerSaleAndPaymentAmount();
                     this.searchCustomerPayments(null);                      
                 }
                 else
@@ -304,6 +309,7 @@ export class ManageCustomerComponent {
             if (this.customerList[customerCounter].entityCustomer.id == customerId) {
                 this.dtoCustomer = this.customerList[customerCounter];
                 this.searchCustomerPayments(null);
+                this.fetchCustomerSaleAndPaymentAmount();
                 this.entitySaleOrderPayment = new EntitySaleOrderPayment();
             }
         }
@@ -336,7 +342,19 @@ export class ManageCustomerComponent {
             if (result.success) {
                 this.dtoCustomer = result;
                 this.searchCustomerPayments(null);
+                this.fetchCustomerSaleAndPaymentAmount();
                 this.entitySaleOrderPayment = new EntitySaleOrderPayment();
+            }
+        });
+    }
+    
+    fetchCustomerSaleAndPaymentAmount()
+    {
+        let requestBody: string = "{\"customerUserId\": " + this.dtoCustomer.entityCustomer.userId + "}";
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_CUSTOMER_SALE_AND_PAYMENT_AMOUNT), requestBody).then(result => {
+            if (result.success) {
+                this.dtoCustomer.totalSaleAmount = result.totalSaleAmount;
+                this.dtoCustomer.totalPaymentAmount = result.totalPaymentAmount;
             }
         });
     }

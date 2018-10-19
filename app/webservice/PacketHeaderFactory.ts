@@ -170,6 +170,12 @@ export class PacketHeaderFactory {
             case ACTION.FETCH_ENTITY_CUSTOMER_INFO:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;
+            case ACTION.FETCH_SUPPLIER_PURCHASE_AND_PAYMENT_AMOUNT:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
+            case ACTION.FETCH_CUSTOMER_SALE_AND_PAYMENT_AMOUNT:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
                 
             case ACTION.ADD_PRODUCT_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE

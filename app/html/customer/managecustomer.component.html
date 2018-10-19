@@ -82,12 +82,37 @@
                                     </div>-->
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-                                            <span class="supplier-title">Balance</span>
+                                            <span class="supplier-title">Previous Balance</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            {{dtoCustomer.entityCustomer.previousBalance}}
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="supplier-title">Total Sale Amount</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            {{dtoCustomer.totalSaleAmount}}
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="supplier-title">Total Payment Amount</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            {{dtoCustomer.totalPaymentAmount}}
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="supplier-title">Current Due</span>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
                                             {{dtoCustomer.entityCustomer.balance}}
                                         </div>
                                     </div>
+                                    
                                     <div class="row form-group">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <h3>Remarks</h3>
@@ -201,7 +226,7 @@
                                                 </div>
                                                 <div (click)="setEntitySaleOrderPayment($event, payment.entitySaleOrderPayment)" *ngFor="let payment of saleOrderPaymentList" class="row form-group" [ngClass]="{'row-active': payment.entitySaleOrderPayment.id == entitySaleOrderPayment.id }">
                                                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                                                        <p>{{payment.entitySaleOrderPayment.description}}</p>
+                                                        <p>{{payment.entitySaleOrderPayment.reference == null ? payment.entitySaleOrderPayment.description : payment.entitySaleOrderPayment.reference}}</p>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                                         <p>{{payment.entitySaleOrderPayment.amountOut}}</p>

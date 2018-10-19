@@ -10,6 +10,8 @@ export class DTOSupplier {
     entityUserRole: EntityUserRole;
     entityProductSupplierList: EntityProductSupplier[];
     epsListToBeDeleted: EntityProductSupplier[];
+    totalPurchaseAmount: number = 0;
+    totalPaymentAmount: number = 0;
 }
 
 

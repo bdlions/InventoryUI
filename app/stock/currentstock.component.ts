@@ -169,6 +169,12 @@ export class CurrentStockComponent {
             this.searchProductsWithStocks();
         }
     }
+    
+    //--------------------- print entire current stock ------------------------------//
+    printCurrentStocks(event: Event)
+    {
+        window.printJS(window.SITE_URL +'currentstockreport');
+    }
 }
 
 

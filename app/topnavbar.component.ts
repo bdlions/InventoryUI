@@ -133,6 +133,12 @@ export class TopNavbarComponent {
         this.navigationManager.setActiveMenu("currentstock");
         this.router.navigate(["currentstock"]);
     }
+    goAdjustStock(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("adjuststock");
+        this.router.navigate(["adjuststock"]);
+    }
     goProduct(event: Event) {
         event.preventDefault();
         this.navigationManager.showNavBar(true);

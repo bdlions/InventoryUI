@@ -26,6 +26,7 @@ import {PurchaseListComponent} from './purchase/purchaselist.component';
 import {ManageSaleComponent} from './sale/managesale.component';
 import {SaleListComponent} from './sale/salelist.component';
 import {CurrentStockComponent} from './stock/currentstock.component';
+import {AdjustStockComponent} from './stock/adjuststock.component';
 import {HomeComponent} from './home.component';
 import {ProductComponent} from './product.component';
 import {ProfileComponent} from './profile.component';
@@ -179,6 +180,10 @@ const appRoutes: Routes = [
     {
         path: 'currentstock',
         component: CurrentStockComponent
+    },
+    {
+        path: 'adjuststock',
+        component: AdjustStockComponent
     },
     {
         path: 'products',
@@ -362,6 +367,7 @@ enableProdMode();
         ManageSaleComponent,
         SaleListComponent,
         CurrentStockComponent,
+        AdjustStockComponent,
         ProductComponent,
         ProfileComponent,
         TopNavbarComponent,

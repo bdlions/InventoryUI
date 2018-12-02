@@ -67,6 +67,9 @@
                         <li mat-menu-item  [ngClass]="{'active': activeMenu == 'currentstock' }" (click)="goCurrentStock($event)">
                             <span  >Current Stock</span>
                         </li>
+                        <li mat-menu-item  [ngClass]="{'active': activeMenu == 'adjuststock' }" (click)="gojAdjustStock($event)">
+                            <span  >Adjust Stock</span>
+                        </li>
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'manageproductcategory' }" (click)="goManageProductCategory($event)" >
                             <span>New Product Category</span>
                         </li>
@@ -184,6 +187,9 @@
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'currentstock' }" (click)="goCurrentStock($event)">
                      <span>Current Stock</span>
+                </div>
+                <div mat-menu-item [ngClass]="{'active': activeMenu == 'adjuststock' }" (click)="goAdjustStock($event)">
+                     <span>Adjust Stock</span>
                 </div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'manageproductcategory' }" (click)="goManageProductCategory($event)">
                      <span>New Product Category</span>

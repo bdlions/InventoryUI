@@ -1,0 +1,413 @@
+<div class="container-fluid">
+    <div class="row form-group">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 form-group">
+            <!--Search a Adjust Stock Order Starts-->
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h4>Search Adjust Stock Order</h4>
+                </div>
+            </div>
+            <form role="form" (submit)="searchAdjustStockOrder($event)">
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                        <span class="purchase-order-title">Order</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                        <input [(ngModel)]="reqDTOAdjustStockOrder.entityAdjustStockOrder.orderNo" name="orderNo" id="orderNo" class="form-control">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="submit" id="search-product" class="custom-button pull-right">Refresh</button>
+                    </div>
+                </div>
+            </form> 
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="manage-purchase-left-side-table-height-view-point">
+                        <div class="table-wrapper manage-purchase-left-side-table">
+                            <table class="common-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="cursor-pointer" *ngFor="let adjustStockOrder of adjustStockOrderList" (click)="selectedAdjustStockOrder($event, adjustStockOrder.entityAdjustStockOrder.orderNo)" [ngClass]="{'active': orderNo == adjustStockOrder.entityAdjustStockOrder.orderNo }">
+                                        <td data-label="Name" id="{{adjustStockOrder.entityAdjustStockOrder.id}}">{{adjustStockOrder.entityAdjustStockOrder.orderNo}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Search a Adjust Stock Order Ends-->
+        </div>
+        
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button (click)="newAdjustStockOrder($event)" type="button" class="custom-button"><i class="fa fa-file"></i> New</button>
+                        <button [disabled]="disableSaveButton" (click)="saveAdjustStockOrder($event)"  type="button" class="custom-button"><i class="fa fa-floppy-o"></i> Save</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            <span class="purchase-order-title">&nbsp;<span class="required"></span></span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            <span class="purchase-order-title">&nbsp;<span class="required"></span></span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            <span class="purchase-order-title">Order<span class="required"></span></span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            <input [(ngModel)]="dtoAdjustStockOrder.entityAdjustStockOrder.orderNo" name="orderNo" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                            <span class="supplier-title">Date</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                            <input name="adjustDate" class="form-control input-custom-field custom-datepicker" type="text" 
+                               [ngModel]="adjustDate | date:'dd-MM-yyyy'" (ngModelChange)="adjustDate = $event;"
+                               (focus)="showAdjustStockDatePicker = true" >
+                            <div class="start-date" *ngIf="showAdjustStockDatePicker" >
+                                <datepicker name="showAdjustStockDatePicker" [(ngModel)]="adjustDate" [minDate]="minDate" [showWeeks]="false" (selectionDone) ="showAdjustStockDatePicker = false"  ></datepicker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <tabset class="manage-purchase-right-side-tabset">
+                        <!--Adjust Stock Tab Starts-->
+                        <tab class="manage-purchase-right-side-tab" heading="Adjust Stock">
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <table class="common-table adjust-input">
+                                        <thead>
+                                            <tr>
+                                                <th width="30%">Item<span class="required">*</span></th>
+                                                <th width="15%">Description<span class="required">*</span></th>
+                                                <th width="15%">New Quantity<span class="required">*</span></th>
+                                                <th width="15%">Old Quantity</th>
+                                                <th width="15%">Difference</th>
+                                                <th width="10%">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td width="30%" data-label="Item" (keypress)="showAdjustStockOrderProductModal($event, 0)" (click)="showAdjustStockOrderProductModal($event, 0)"><input class="form-control" ></td>
+                                                <td width="15%" data-label="Description"><input class="form-control" ></td>
+                                                <td width="15%" data-label="New Quantity"><input class="form-control" ></td>
+                                                <td width="15%" data-label="Old Quantity"><input class="form-control"></td>
+                                                <td width="15%" data-label="Difference"><label></label></td>
+                                                <td width="10%" data-label="Action" class="text-center"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-wrapper manage-purchase-right-side-product-table">
+                                        <table class="common-table adjust-input">
+                                            <tbody>
+                                                <tr *ngFor="let product of dtoAdjustStockOrder.products">
+                                                    <td width="30%" data-label="Item" (keypress)="showAdjustStockOrderProductModal($event, product.entityProduct.id)" (click)="showAdjustStockOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
+                                                    <td width="15%" data-label="Description"><input class="form-control" [(ngModel)]="product.description"></td>
+                                                    <td width="15%" data-label="New Quantity"><input class="form-control" [(ngModel)]="product.newQuantity"></td>
+                                                    <td width="15%" data-label="Old Quantity"><input readonly="readonly" class="form-control" [(ngModel)]="product.oldQuantity"></td>
+                                                    <td width="15%" data-label="Difference"><label>{{product.newQuantity-product.oldQuantity}}</label></td>
+                                                    <td width="10%" data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedAdjustStockOrderProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedAdjustStockOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <table class="common-table">
+                                        <tfoot>
+                                            <tr class="cursor-pointer" (keypress)="showAdjustStockOrderProductModal($event, 0)" (click)="showAdjustStockOrderProductModal($event, 0)">
+                                                <td width="10%"><i class="fa fa-plus"></i></td>
+                                                <td width="20%"></td>
+                                                <td width="20%"></td>
+                                                <td width="20%"></td>
+                                                <td width="20%"></td>
+                                                <td width="10%"></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            <span class="purchase-order-title">Remarks</span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            <textarea class="form-control" rows="3" [(ngModel)]="dtoAdjustStockOrder.entityAdjustStockOrder.remarks" name="remarks"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                        <!--Adjust Stock Tab Ends-->
+                        
+                    </tabset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Adjust Stock Order Product Modal Starts-->
+<div bsModal #adjustStockProductModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-offset-2 col-xs-8  col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+                        <h4 class="modal-title">Product</h4>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideAdjustStockOrderProductModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4>Search</h4>
+                    </div>
+                </div>
+                <form role="form" (submit)="searchAdjustStockOrderProduct($event)">
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Name/Code</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <input [(ngModel)]="reqDTOProduct.entityProduct.name" id="name" name="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Type</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <select [(ngModel)]="selectedProductType" name="selectedProductType" class="form-control" >
+                                <option *ngFor="let productType of productTypeList" [ngValue]="productType">{{productType.title}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                            <span class="product-title">Category</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                            <select [(ngModel)]="selectedProductCategory" name="selectedProductCategory" class="form-control" >
+                                <option *ngFor="let productCategory of productCategoryList" [ngValue]="productCategory">{{productCategory.title}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="table-wrapper">
+                            <table class="common-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Code</th>
+                                        <th>Category</th>
+                                        <th>Cost Price</th>
+                                        <th>Current Stock</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let product of dtoProductList" (click)="selectedAdjustStockOrderProductFromModal($event, product.entityProduct.id)">
+                                        <td data-label="Item">{{product.entityProduct.name}}</td>
+                                        <td data-label="Code">{{product.entityProduct.code}}</td>
+                                        <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
+                                        <td data-label="Cost Price">{{product.entityProduct.costPrice}}</td>
+                                        <td data-label="Current Stock">{{product.quantity}}</td>                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <mat-paginator [length]="productLength"
+                                [pageSize]="productPageSize"
+                                [pageSizeOptions]="productPageSizeOptions"
+                                (page)="onProductPaginateChange($event)">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Adjust Stock Order Product Modal Ends-->
+
+<!--Selected Adjust Stock Order Product Delete Modal Starts-->
+<div bsModal #selectedAdjustStockOrderProductDeleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-offset-2 col-xs-8  col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+                        <h4 class="modal-title">Selected Adjust Stock Product Delete</h4>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideSelectedAdjustStockOrderProductDeleteModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row margin-top-10px">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="text-center">Do you want to Delete this Product? </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" class="custom-red-button" data-dismiss="modal" (click)="hideSelectedAdjustStockOrderProductDeleteModal()">No</button>
+                        <button type="button" class="custom-button" (click)="deleteAdjustStockOrderSelectedProductFromModal($event)">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Selected Adjust Stock Order Product Delete Modal Ends-->
+
+<!-- Manage Adjust Stock Order Message Dispaly Modal Starts-->
+<div bsModal #manageAdjustStockOrderMessageDispalyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-offset-2 col-xs-8  col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+                        <h4 class="modal-title">Message</h4>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideManageAdjustStockOrderMessageDispalyModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row margin-top-10px">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="text-center red">{{manageAdjustStockOrderErrorMessage}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button type="button" class="custom-button" (click)="hideManageAdjustStockOrderMessageDispalyModal()">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Manage Adjust Stock Order Message Dispaly Modal Ends-->

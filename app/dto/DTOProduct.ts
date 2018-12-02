@@ -8,6 +8,9 @@ export class DTOProduct {
     quantity: number = 1;
     discount: number = 0;
     total: number = 0;
+    oldQuantity: number = 0;
+    newQuantity: number = 0;
+    description: string;
     entityProduct: EntityProduct;
     entityProductCategory: EntityProductCategory;
     entityProductType: EntityProductType;

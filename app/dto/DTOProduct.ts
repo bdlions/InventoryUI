@@ -3,6 +3,8 @@ import {EntityProductCategory} from "./EntityProductCategory";
 import {EntityProductType} from "./EntityProductType";
 import {EntityProductSupplier} from "./EntityProductSupplier";
 export class DTOProduct {
+    id: number;
+    stockId: number;
     limit: number;
     offset: number;
     quantity: number = 1;

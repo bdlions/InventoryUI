@@ -375,8 +375,23 @@ export class ManageSaleComponent {
 //        });
 //    }
     
-    public showSaleOrderProductModal(event: Event, productId: number) {
-        this.productIdToPopupSelectProduct = productId;
+    public showSaleOrderProductModal(event: Event, tempDTOProduct: DTOProduct) {
+        if (tempDTOProduct == null)
+        {
+            tempDTOProduct = new DTOProduct();
+            tempDTOProduct.entityProduct = new EntityProduct();
+            tempDTOProduct.entityProduct.id = 0;
+        }
+        if (tempDTOProduct.id > 0)
+        {
+            //show proper error message
+            this.manageSaleErrorMessage = "Please click on Return tab and return this product with sale quantity insteal of selecting a different product.";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;
+            this.manageSaleMessageDispalyModal.show();
+            return;
+        }
+        
+        this.productIdToPopupSelectProduct = tempDTOProduct.entityProduct.id;
         this.saleOrderProductModal.config.backdrop = false;
         this.saleOrderProductModal.show();
     }
@@ -454,8 +469,16 @@ export class ManageSaleComponent {
         this.calculateBalance();
     }
 
-    public showSelectedSaleOrderProductDeleteModal(event: Event, productId: number) {
-        this.productIdToPopupDeleteProduct = productId;
+    public showSelectedSaleOrderProductDeleteModal(event: Event, tempDTOProduct: DTOProduct) {
+        if (tempDTOProduct.id > 0)
+        {
+            //show proper error message
+            this.manageSaleErrorMessage = "Please click on Return tab and return this product with sale quantity insteal of deleting it.";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;
+            this.manageSaleMessageDispalyModal.show();
+            return;
+        }
+        this.productIdToPopupDeleteProduct = tempDTOProduct.entityProduct.id;
         this.selectedSaleOrderProductDeleteModal.config.backdrop = false;
         this.selectedSaleOrderProductDeleteModal.show();
     }
@@ -809,8 +832,23 @@ export class ManageSaleComponent {
     //barCode logic section ends
     
     //Return products section starts
-    public showSaleOrderSoldProductsModal(event: Event, productId: number) {
-        this.productIdToPopupSelectReturnProduct = productId;
+    public showSaleOrderSoldProductsModal(event: Event, tempDTOProduct: DTOProduct) {
+        if (tempDTOProduct == null)
+        {
+            tempDTOProduct = new DTOProduct();
+            tempDTOProduct.entityProduct = new EntityProduct();
+            tempDTOProduct.entityProduct.id = 0;
+        }
+        if (tempDTOProduct.id > 0)
+        {
+            //show proper error message
+            this.manageSaleErrorMessage = "Please set quantity to 0 insteal of selecting a different product.";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;
+            this.manageSaleMessageDispalyModal.show();
+            return;
+        }
+        
+        this.productIdToPopupSelectReturnProduct = tempDTOProduct.entityProduct.id;
         this.saleOrderSoldProductsModal.config.backdrop = false;
         this.saleOrderSoldProductsModal.show();
     }
@@ -878,9 +916,17 @@ export class ManageSaleComponent {
         }
         this.calculateBalance();
     }
-    showSelectedSaleOrderReturnedProductDeleteModal(event: Event, productId: number)
+    showSelectedSaleOrderReturnedProductDeleteModal(event: Event, tempDTOProduct: DTOProduct)
     {
-        this.productIdToPopupDeleteReturnProduct = productId;
+        if (tempDTOProduct.id > 0)
+        {
+            //show proper error message
+            this.manageSaleErrorMessage = "Please set quantity to 0 insteal of deleting it.";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;
+            this.manageSaleMessageDispalyModal.show();
+            return;
+        }
+        this.productIdToPopupDeleteReturnProduct = tempDTOProduct.entityProduct.id;
         this.selectedSaleOrderReturnedProductDeleteModal.config.backdrop = false;
         this.selectedSaleOrderReturnedProductDeleteModal.show();
     }

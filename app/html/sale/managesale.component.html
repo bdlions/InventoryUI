@@ -130,7 +130,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td width="30%" data-label="Item" (keypress)="showSaleOrderProductModal($event, 0)"  (click)="showSaleOrderProductModal($event, 0)"><input class="form-control"></td>
+                                                <td width="30%" data-label="Item" (keypress)="showSaleOrderProductModal($event, null)"  (click)="showSaleOrderProductModal($event, null)"><input class="form-control"></td>
                                                 <td width="15%" data-label="Quantity"><input class="form-control"></td>
                                                 <td width="15%" data-label="Unit Price"><input class="form-control"></td>
                                                 <td width="15%" data-label="Discount"><input class="form-control"></td>
@@ -143,19 +143,19 @@
                                         <table class="common-table adjust-input">
                                             <tbody>
                                                 <tr class="cursor-pointer" *ngFor="let product of dtoSaleOrder.products" >
-                                                    <td width="30%" data-label="Item" (keypress)="showSaleOrderProductModal($event, product.entityProduct.id)" (click)="showSaleOrderProductModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
+                                                    <td width="30%" data-label="Item" (keypress)="showSaleOrderProductModal($event, product)" (click)="showSaleOrderProductModal($event, product)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
                                                     <td width="15%" data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
                                                     <td width="15%" data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance()"></td>
                                                     <td width="15%" data-label="Discount" ><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
                                                     <td width="15%" data-label="Total"><label>{{product.total | number:'.2-2'}}</label></td>
-                                                    <td width="10%" data-label="Delete" class="text-center"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedSaleOrderProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedSaleOrderProductDeleteModal($event, product.entityProduct.id)"></i></td>
+                                                    <td width="10%" data-label="Delete" class="text-center"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedSaleOrderProductDeleteModal($event, product)" (click)="showSelectedSaleOrderProductDeleteModal($event, product)"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                     <table class="common-table">
                                         <tfoot>
-                                            <tr class="cursor-pointer table-row-border-adjust" (keypress)="showSaleOrderProductModal($event, 0)" (click)="showSaleOrderProductModal($event, 0)">
+                                            <tr class="cursor-pointer table-row-border-adjust" (keypress)="showSaleOrderProductModal($event, null)" (click)="showSaleOrderProductModal($event, null)">
                                                 <td width="10%"><i class="fa fa-plus"></i></td>
                                                 <td width="20%"></td>
                                                 <td width="20%"></td>
@@ -272,7 +272,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td width="30%" data-label="Item" (keypress)="showSaleOrderSoldProductsModal($event, 0)" (click)="showSaleOrderSoldProductsModal($event, 0)"><input class="form-control" ></td>
+                                                <td width="30%" data-label="Item" (keypress)="showSaleOrderSoldProductsModal($event, null)" (click)="showSaleOrderSoldProductsModal($event, null)"><input class="form-control" ></td>
                                                 <td width="12%" data-label="Quantity"><input class="form-control" ></td>
                                                 <td width="12%" data-label="Unit Price"><input class="form-control" ></td>
                                                 <td width="12%" data-label="Discount"><input class="form-control"></td>
@@ -286,20 +286,20 @@
                                         <table class="common-table adjust-input">
                                             <tbody>
                                                 <tr *ngFor="let product of dtoSaleOrder.returnProducts">
-                                                    <td width="30%" data-label="Item" (keypress)="showSaleOrderSoldProductsModal($event, product.entityProduct.id)" (click)="showSaleOrderSoldProductsModal($event, product.entityProduct.id)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
+                                                    <td width="30%" data-label="Item" (keypress)="showSaleOrderSoldProductsModal($event, product)" (click)="showSaleOrderSoldProductsModal($event, product)"><input class="form-control" value="{{product.entityProduct.name}}"></td>
                                                     <td width="12%" data-label="Quantity"><input class="form-control" [(ngModel)]="product.quantity" (change)="calculateBalance()"></td>
                                                     <td width="12%" data-label="Unit Price"><input class="form-control" [(ngModel)]="product.entityProduct.unitPrice" (change)="calculateBalance()"></td>
                                                     <td width="12%" data-label="Discount"><input class="form-control" [(ngModel)]="product.discount" (change)="calculateBalance()"></td>
                                                     <td width="12%" data-label="Sub-Total"><label>{{product.total | number:'.2-2'}}</label></td>
                                                     <td width="12%" data-label="Date"><label>{{product.createdOn}}</label></td>
-                                                    <td width="10%" data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedSaleOrderReturnedProductDeleteModal($event, product.entityProduct.id)" (click)="showSelectedSaleOrderReturnedProductDeleteModal($event, product.entityProduct.id)"></i></td>
+                                                    <td width="10%" data-label="Action"><i class="cursor-pointer fa fa-times" (keypress)="showSelectedSaleOrderReturnedProductDeleteModal($event, product)" (click)="showSelectedSaleOrderReturnedProductDeleteModal($event, product)"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                     <table class="common-table">
                                         <tfoot>
-                                            <tr class="cursor-pointer" (keypress)="showSaleOrderSoldProductsModal($event, 0)" (click)="showSaleOrderSoldProductsModal($event, 0)">
+                                            <tr class="cursor-pointer" (keypress)="showSaleOrderSoldProductsModal($event, null)" (click)="showSaleOrderSoldProductsModal($event, null)">
                                                 <td width="10%"><i class="fa fa-plus"></i></td>
                                                 <td width="17%"></td>
                                                 <td width="17%"></td>

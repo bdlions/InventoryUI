@@ -185,6 +185,9 @@ export class PacketHeaderFactory {
             case ACTION.SEARCH_ADJUST_STOCK_ORDERS:
                 packetHeader.requestType = REQUEST_TYPE.REQUEST
                 break;
+            case ACTION.FETCH_PRODUCT_MOVEMENT_HISTORY:
+                packetHeader.requestType = REQUEST_TYPE.REQUEST
+                break;
                 
             case ACTION.ADD_PRODUCT_INFO:
                 packetHeader.requestType = REQUEST_TYPE.UPDATE

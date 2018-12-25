@@ -309,6 +309,42 @@
                             </div>
                         </tab>
                         <!--Supplier List Tab Ends-->
+                        
+                        <!--Movement History Tab Starts-->
+                        <tab (select)="setMovementHistoryList()" class="manage-product-right-side-tab" heading="Movement History">
+                            <div class="row form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <table class="common-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Transaction Type</th>
+                                                <th>Date</th>
+                                                <th>Order No</th>
+                                                <th>Qty Before</th>
+                                                <th>Quantity</th>
+                                                <th>Qty After</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let productMovement of productMovementHistory">
+                                                <td data-label="TransactionType">{{productMovement.transactionType}}</td>
+                                                <td data-label="Date">{{productMovement.date}}</td>
+                                                <td data-label="OrderNo">{{productMovement.orderNo}}</td>
+                                                <td data-label="QuantityBefore">{{productMovement.quantityBefore}}</td>
+                                                <td data-label="Quantity">{{productMovement.quantity}}</td>     
+                                                <td data-label="QuantityAfter">{{productMovement.quantityAfter}}</td>     
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <mat-paginator [length]="movementLength"
+                                        [pageSize]="movementPageSize"
+                                        [pageSizeOptions]="movementPageSizeOptions"
+                                        (page)="onProductMovementHistoryPaginateChange($event)">
+                                    </mat-paginator>
+                                </div>                                
+                            </div>
+                        </tab>
+                        <!--Movement History Tab Ends-->
                     </tabset>
                 </div>
             </div>

@@ -8,6 +8,7 @@ import {PacketHeaderFactory} from './../webservice/PacketHeaderFactory';
 import {ACTION} from './../webservice/ACTION';
 import {TabsetComponent} from 'ngx-bootstrap';
 import {DTOProduct} from '../dto/DTOProduct';
+import {DTOProductMovement} from '../dto/DTOProductMovement';
 import {DTOSupplier} from '../dto/DTOSupplier';
 import {EntityUser} from '../dto/EntityUser';
 import {EntitySupplier} from "../dto/EntitySupplier";
@@ -39,6 +40,8 @@ export class ManageProductComponent {
     private productTypeList: EntityProductType[];
     private uomList: EntityUOM[];
     private productList: EntityProduct[];
+    private productMovementHistory: DTOProduct[];
+    private reqDTOProductMovement: DTOProduct;
     private productId: number;
     private showNavBar: boolean = false;
     private activeMenu: string = "manageproduct";
@@ -56,6 +59,10 @@ export class ManageProductComponent {
     supplierLength = 0;
     supplierPageSize = 10;
     supplierPageSizeOptions = [5, 10];
+    
+    movementLength = 0;
+    movementPageSize = 10;
+    movementPageSizeOptions = [5, 10];
     
     private reqDTOProductSupplierList: DTOProduct;
     productSupplierLength = 0;
@@ -91,6 +98,10 @@ export class ManageProductComponent {
         this.dtoProduct.entityProductCategory = new EntityProductCategory();
         this.dtoProduct.entityProductSupplierList = null;
         this.dtoProduct.epsListToBeDeleted = Array();
+        
+        this.reqDTOProductMovement = new DTOProduct;
+        this.reqDTOProductMovement.offset = 0;
+        this.reqDTOProductMovement.limit = this.movementPageSize;
 
         this.reqDTOSupplier = new DTOSupplier();
         this.reqDTOSupplier.entitySupplier = new EntitySupplier();
@@ -155,6 +166,23 @@ export class ManageProductComponent {
                 this.reqDTOProductSupplierList.entityProduct.id = 0;
             }                     
         }
+    }
+    
+    setMovementHistoryList()
+    {
+        if (this.dtoProduct.entityProduct.id > 0)
+        {
+            let requestBody: string = "{\"productId\": \"" + this.dtoProduct.entityProduct.id + "\",\"offset\": \"" + this.reqDTOProductMovement.offset + "\", \"limit\": \"" + this.reqDTOProductMovement.limit + "\"}";
+            this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PRODUCT_MOVEMENT_HISTORY), requestBody).then(result => {
+                if (result.success && result.list != null) {
+                    this.productMovementHistory = result.list;
+                    this.movementLength = result.counter;
+                }
+                else {
+                    //console.log(result);
+                }
+            });            
+        }        
     }
     
     fetchProductSupplierList()
@@ -271,6 +299,13 @@ export class ManageProductComponent {
         {
             this.fetchSupplierListByEmail();
         }
+    }
+    
+    onProductMovementHistoryPaginateChange(event:PageEvent)
+    {
+        this.reqDTOProductMovement.limit = event.pageSize;
+        this.reqDTOProductMovement.offset = (event.pageIndex * event.pageSize) ;
+        this.setMovementHistoryList();
     }
     
     public selectedSupplier(event: Event, supplierUserId: number) 
@@ -390,7 +425,9 @@ export class ManageProductComponent {
         this.dtoProduct.entityProduct = new EntityProduct();
         this.dtoProduct.entityProductCategory = new EntityProductCategory();
         this.dtoProduct.entityProductType = new EntityProductType();  
-        this.dtoProduct.entityProductSupplierList = Array();      
+        this.dtoProduct.entityProductSupplierList = Array(); 
+        this.productMovementHistory = Array();
+        this.movementLength = 0;     
 
     }
     saveProduct(event: Event) {
@@ -512,6 +549,9 @@ export class ManageProductComponent {
         this.productId = productId;
         //event.preventDefault();
         //this.router.navigate(["manageproduct", {productId: productId}]);
+
+        this.productMovementHistory = Array();
+        this.movementLength = 0;
 
         let productCounter: number;
         for (productCounter = 0; productCounter < this.productList.length; productCounter++) {

@@ -380,6 +380,13 @@ export class ManageSupplierComponent {
             this.manageSupplierMessageDispalyModal.show();
             return;
         }
+        //check supplier first name
+        if (this.dtoSupplier.entitySupplier.previousBalance == null || this.dtoSupplier.entitySupplier.previousBalance+"" == "") {
+            this.manageSupplierErrorMessage = "Invalid Supplier previous due amount. Previous due amount can not be empty.";
+            this.manageSupplierMessageDispalyModal.config.backdrop = false;
+            this.manageSupplierMessageDispalyModal.show();
+            return;
+        }
         if (this.dtoSupplier.entityProductSupplierList != null)
         {
             for (let counter: number = 0; counter < this.dtoSupplier.entityProductSupplierList.length; counter++)
@@ -527,9 +534,24 @@ export class ManageSupplierComponent {
             this.manageSupplierMessageDispalyModal.show();
             return;
         }
-        //payment amount is required
-        if (this.entityPurchaseOrderPayment.amountOut == null) {
-            this.manageSupplierErrorMessage = "Amount is required.";
+        //checking validation of payment amount
+        if (this.entityPurchaseOrderPayment.amountOut == null || this.entityPurchaseOrderPayment.amountOut+"" == "") {
+            this.manageSupplierErrorMessage = "Invalid supplier payment amount. Payment amount can not be empty.";
+            this.manageSupplierMessageDispalyModal.config.backdrop = false;
+            this.manageSupplierMessageDispalyModal.show();
+            return;
+        }
+        //checking whether given amount is higher than 0 or not
+        if (this.entityPurchaseOrderPayment.amountOut <= 0) {
+            this.manageSupplierErrorMessage = "Please assign a positive payment amount higher than 0.";
+            this.manageSupplierMessageDispalyModal.config.backdrop = false;
+            this.manageSupplierMessageDispalyModal.show();
+            return;
+        }
+        
+        //checking validation of payment date
+        if (this.paymentDate == null || this.paymentDate.toString() == "") {
+            this.manageSupplierErrorMessage = "Invalid supplier payment date. Payment date can not be empty.";
             this.manageSupplierMessageDispalyModal.config.backdrop = false;
             this.manageSupplierMessageDispalyModal.show();
             return;

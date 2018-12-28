@@ -452,9 +452,23 @@ export class ManageProductComponent {
             this.manageProductMessageDispalyModal.show();
             return;
         }
+        //check product cost
+        if (this.dtoProduct.entityProduct.costPrice == null || this.dtoProduct.entityProduct.costPrice+"" == "" || this.dtoProduct.entityProduct.costPrice < 0) {
+            this.manageProductErrorMessage = "Assign valid product cost price";
+            this.manageProductMessageDispalyModal.config.backdrop = false;
+            this.manageProductMessageDispalyModal.show();
+            return;
+        }
         //check product price
         if (this.dtoProduct.entityProduct.unitPrice == null || this.dtoProduct.entityProduct.unitPrice+"" == "" || this.dtoProduct.entityProduct.unitPrice < 0) {
-            this.manageProductErrorMessage = "Select a valid product price";
+            this.manageProductErrorMessage = "Assign valid product price";
+            this.manageProductMessageDispalyModal.config.backdrop = false;
+            this.manageProductMessageDispalyModal.show();
+            return;
+        }
+        //check product Default Sale Quantity
+        if (this.dtoProduct.entityProduct.defaultSaleQuantity == null || this.dtoProduct.entityProduct.defaultSaleQuantity+"" == "" || this.dtoProduct.entityProduct.defaultSaleQuantity < 0) {
+            this.manageProductErrorMessage = "Assign valid Default Sale Quantity.";
             this.manageProductMessageDispalyModal.config.backdrop = false;
             this.manageProductMessageDispalyModal.show();
             return;

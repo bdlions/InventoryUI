@@ -542,22 +542,22 @@ export class ManagePurchaseComponent {
                 return;
             }
         }
-        //check supplier selection
+        //checking supplier selection
         if (this.dtoSupplier.entityUser.id == null || this.dtoSupplier.entityUser.id < 0) {
             this.managePurchaseErrorMessage = "Please select a supplier";
             this.managePurchaseMessageDispalyModal.config.backdrop = false;
             this.managePurchaseMessageDispalyModal.show();
             return;
         }
-        //check product selection
-        if (this.dtoPurchaseOrder.products == null) {
-            this.managePurchaseErrorMessage = "Select a product";
+        //checking product selection
+        if (this.dtoPurchaseOrder.products == null || this.dtoPurchaseOrder.products.length == 0) {
+            this.managePurchaseErrorMessage = "Please Select a product";
             this.managePurchaseMessageDispalyModal.config.backdrop = false;
             this.managePurchaseMessageDispalyModal.show();
             return;
         }
         
-        //checking valid quantity and price for purchase product list
+        //checking valid quantity, price and discount for purchase product list
         let counter: number;
         for (counter = 0; counter < this.dtoPurchaseOrder.products.length; counter++)
         {
@@ -575,9 +575,16 @@ export class ManagePurchaseComponent {
                 this.managePurchaseMessageDispalyModal.show();
                 return;
             }
+            if (this.dtoPurchaseOrder.products[counter].discount == null || this.dtoPurchaseOrder.products[counter].discount+"" == "")
+            {
+                this.managePurchaseErrorMessage = "Invalid discount for the product : " + this.dtoPurchaseOrder.products[counter].entityProduct.name;
+                this.managePurchaseMessageDispalyModal.config.backdrop = false;
+                this.managePurchaseMessageDispalyModal.show();
+                return;
+            }
         }
         
-        //checking valid quantity and price for purchase return product list
+        //checking valid quantity, price and discount for purchase return product list
         if (this.dtoPurchaseOrder.returnProducts != null)
         {
             for (counter = 0; counter < this.dtoPurchaseOrder.returnProducts.length; counter++)
@@ -596,8 +603,33 @@ export class ManagePurchaseComponent {
                     this.managePurchaseMessageDispalyModal.show();
                     return;
                 }
+                if (this.dtoPurchaseOrder.returnProducts[counter].discount == null || this.dtoPurchaseOrder.returnProducts[counter].discount+"" == "")
+                {
+                    this.managePurchaseErrorMessage = "Invalid discount for the Return product : " + this.dtoPurchaseOrder.returnProducts[counter].entityProduct.name;
+                    this.managePurchaseMessageDispalyModal.config.backdrop = false;
+                    this.managePurchaseMessageDispalyModal.show();
+                    return;
+                }
             }
         }
+        //checking valid discount on total purchase price
+        if (this.dtoPurchaseOrder.entityPurchaseOrder.discount == null || this.dtoPurchaseOrder.entityPurchaseOrder.discount+"" == "")
+        {
+            this.managePurchaseErrorMessage = "Invalid Discount amount. Discount amount can not be empty.";
+            this.managePurchaseMessageDispalyModal.config.backdrop = false;
+            this.managePurchaseMessageDispalyModal.show();
+            return;
+        }
+        //checking valid paid amount
+        if (this.dtoPurchaseOrder.entityPurchaseOrder.paid == null || this.dtoPurchaseOrder.entityPurchaseOrder.paid+"" == "")
+        {
+            this.managePurchaseErrorMessage = "Invalid Paid amount. Paid amount can not be empty.";
+            this.managePurchaseMessageDispalyModal.config.backdrop = false;
+            this.managePurchaseMessageDispalyModal.show();
+            return;
+        }
+        
+        //if higher quantity is returned than purchased quantity then that validation is checked at server side
         
         this.dtoPurchaseOrder.invoiceDate = this.datepipe.transform(this.invoiceDate, 'yyyy-MM-dd');
         

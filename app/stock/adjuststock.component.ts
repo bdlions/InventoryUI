@@ -187,6 +187,19 @@ export class AdjustStockComponent {
             return;
         }
         
+        //checking valid new quantity to adjust products
+        let counter: number;
+        for (counter = 0; counter < this.dtoAdjustStockOrder.products.length; counter++)
+        {
+            if (this.dtoAdjustStockOrder.products[counter].newQuantity == null || this.dtoAdjustStockOrder.products[counter].newQuantity+"" == "")
+            {
+                this.manageAdjustStockOrderErrorMessage = "Invalid Quantity for the product : " + this.dtoAdjustStockOrder.products[counter].entityProduct.name;
+                this.manageAdjustStockOrderMessageDispalyModal.config.backdrop = false;
+                this.manageAdjustStockOrderMessageDispalyModal.show();
+                return;
+            }
+        }
+        
         this.dtoAdjustStockOrder.adjustDate = this.datepipe.transform(this.adjustDate, 'yyyy-MM-dd');
         
         this.disableSaveButton = true;

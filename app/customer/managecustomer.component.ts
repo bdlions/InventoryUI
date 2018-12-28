@@ -168,9 +168,17 @@ export class ManageCustomerComponent {
     }
 
     saveCustomer(event: Event) {
-        //check customer user name
+        //checking customer user name
         if (this.dtoCustomer.entityUser.userName == null || this.dtoCustomer.entityUser.userName == "") {
             this.manageCustomerErrorMessage = "Name is required.";
+            this.manageCustomerMessageDispalyModal.config.backdrop = false;
+            this.manageCustomerMessageDispalyModal.show();
+            return;
+        }
+        
+        //checking validation of customer previous due
+        if (this.dtoCustomer.entityCustomer.previousBalance == null || this.dtoCustomer.entityCustomer.previousBalance+"" == "") {
+            this.manageCustomerErrorMessage = "Invalid Customer previous due amount. Previous due amount can not be empty.";
             this.manageCustomerMessageDispalyModal.config.backdrop = false;
             this.manageCustomerMessageDispalyModal.show();
             return;
@@ -227,9 +235,24 @@ export class ManageCustomerComponent {
             this.manageCustomerMessageDispalyModal.show();
             return;
         }
-        //payment amount is required
-        if (this.entitySaleOrderPayment.amountOut == null) {
-            this.manageCustomerErrorMessage = "Amount is required.";
+        //checking validation of payment amount
+        if (this.entitySaleOrderPayment.amountOut == null || this.entitySaleOrderPayment.amountOut+"" == "") {
+            this.manageCustomerErrorMessage = "Invalid customer payment amount. Payment amount can not be empty.";
+            this.manageCustomerMessageDispalyModal.config.backdrop = false;
+            this.manageCustomerMessageDispalyModal.show();
+            return;
+        }
+        //checking whether given amount is higher than 0 or not
+        if (this.entitySaleOrderPayment.amountOut <= 0) {
+            this.manageCustomerErrorMessage = "Please assign a positive payment amount higher than 0.";
+            this.manageCustomerMessageDispalyModal.config.backdrop = false;
+            this.manageCustomerMessageDispalyModal.show();
+            return;
+        }
+        
+        //checking validation of payment date
+        if (this.paymentDate == null || this.paymentDate.toString() == "") {
+            this.manageCustomerErrorMessage = "Invalid customer payment date. Payment date can not be empty.";
             this.manageCustomerMessageDispalyModal.config.backdrop = false;
             this.manageCustomerMessageDispalyModal.show();
             return;

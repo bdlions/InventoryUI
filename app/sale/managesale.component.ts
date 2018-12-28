@@ -519,10 +519,10 @@ export class ManageSaleComponent {
         this.dtoSaleOrder.entitySaleOrder.vat = totalVat;
         this.dtoSaleOrder.entitySaleOrder.total = (totalPrice + totalVat - totalReturnPrice - this.dtoSaleOrder.entitySaleOrder.discount);
         //for a new sale order we are assuming whole payment is paid by customer
-        if (this.dtoSaleOrder.entitySaleOrder.orderNo == null || this.dtoSaleOrder.entitySaleOrder.orderNo == "")
-        {
-            this.dtoSaleOrder.entitySaleOrder.paid = this.dtoSaleOrder.entitySaleOrder.total;
-        }        
+        //if (this.dtoSaleOrder.entitySaleOrder.orderNo == null || this.dtoSaleOrder.entitySaleOrder.orderNo == "")
+        //{
+        //    this.dtoSaleOrder.entitySaleOrder.paid = this.dtoSaleOrder.entitySaleOrder.total;
+        //}        
     }
     //sale save/update section
     public newSaleOrder(event: Event) {
@@ -573,14 +573,14 @@ export class ManageSaleComponent {
             }
         } 
             
-        //check product selection
-        if (this.dtoSaleOrder.products == null) {
-            this.manageSaleErrorMessage = "Select a product";
+        //checking product selection
+        if (this.dtoSaleOrder.products == null || this.dtoSaleOrder.products.length == 0) {
+            this.manageSaleErrorMessage = "Please Select a product";
             this.manageSaleMessageDispalyModal.config.backdrop = false;
             this.manageSaleMessageDispalyModal.show();
             return;
         }
-        //checking positive quantity
+        //checking positive quantity, unit price and discount
         let counter: number;
         for (counter = 0; counter < this.dtoSaleOrder.products.length; counter++)
         {
@@ -598,9 +598,16 @@ export class ManageSaleComponent {
                 this.manageSaleMessageDispalyModal.show();
                 return;
             }
+            if (this.dtoSaleOrder.products[counter].discount == null || this.dtoSaleOrder.products[counter].discount+"" == "")
+            {
+                this.manageSaleErrorMessage = "Invalid discount for the product : " + this.dtoSaleOrder.products[counter].entityProduct.name;
+                this.manageSaleMessageDispalyModal.config.backdrop = false;
+                this.manageSaleMessageDispalyModal.show();
+                return;
+            }
         }
         
-        //checking valid quantity and price for purchase return product list
+        //checking valid quantity, unit price and discount for purchase return product list
         if (this.dtoSaleOrder.returnProducts != null)
         {
             for (counter = 0; counter < this.dtoSaleOrder.returnProducts.length; counter++)
@@ -619,7 +626,31 @@ export class ManageSaleComponent {
                     this.manageSaleMessageDispalyModal.show();
                     return;
                 }
+                if (this.dtoSaleOrder.returnProducts[counter].discount == null || this.dtoSaleOrder.returnProducts[counter].discount+"" == "")
+                {
+                    this.manageSaleErrorMessage = "Invalid discount for the Return product : " + this.dtoSaleOrder.returnProducts[counter].entityProduct.name;
+                    this.manageSaleMessageDispalyModal.config.backdrop = false;
+                    this.manageSaleMessageDispalyModal.show();
+                    return;
+                }
             }
+        }
+        
+        //checking valid discount on total sale amount
+        if (this.dtoSaleOrder.entitySaleOrder.discount == null || this.dtoSaleOrder.entitySaleOrder.discount+"" == "")
+        {
+            this.manageSaleErrorMessage = "Invalid Discount amount. Discount amount can not be empty.";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;
+            this.manageSaleMessageDispalyModal.show();
+            return;
+        }
+        //checking valid paid amount
+        if (this.dtoSaleOrder.entitySaleOrder.paid == null || this.dtoSaleOrder.entitySaleOrder.paid+"" == "")
+        {
+            this.manageSaleErrorMessage = "Invalid Paid amount. Paid amount can not be empty.";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;
+            this.manageSaleMessageDispalyModal.show();
+            return;
         }
         
         //if sale is executed without selecting customer then paid and total must be equal  
@@ -633,7 +664,9 @@ export class ManageSaleComponent {
                 return;
             }
         } 
-      
+
+        //if higher quantity is returned than sold quantity then that validation is checked at server side
+             
         this.disableSaveButton = true;
         let requestBody: string = JSON.stringify(this.dtoSaleOrder);
         if (this.dtoSaleOrder.entitySaleOrder.id == 0) {

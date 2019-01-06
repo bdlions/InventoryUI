@@ -70,6 +70,7 @@ export class ManagePurchaseComponent {
     
     //constants & constraints
     private maxPurchaseOrderLeftPanel: number = 10;
+    private isUpdateLeftPanel: boolean = false;
     
     //private productRequestId: number;
     private supplierRequestId: number;
@@ -137,6 +138,8 @@ export class ManagePurchaseComponent {
             this.orderNo = params['orderNo'];
             if (this.orderNo != null && this.orderNo != "")
             {
+                //setting this purchase order at top of left panel
+                this.isUpdateLeftPanel = true;
                 this.setPurchaseOrderInfo(this.orderNo);
             }            
         });
@@ -640,11 +643,20 @@ export class ManagePurchaseComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_PURCHASE_ORDER_INFO), requestBody).then(result => {
                 this.disableSaveButton = false;
                 if (result.success) {
+                    //setting this purchase order at top of left panel
+                    this.isUpdateLeftPanel = true;
+                    //we need to call to set purchase order info other wise we have to set all types of id from database
+                    //inserted primary key id into server side
+                    this.setPurchaseOrderInfo(result.entityPurchaseOrder.orderNo);
+                    //we need to call it because current available stock is changed
+                    this.fetchProductList();
+                    
+                    /*
                     //this.dtoPurchaseOrder.entityPurchaseOrder.id = result.entityPurchaseOrder.id;
                     this.dtoPurchaseOrder.entityPurchaseOrder = result.entityPurchaseOrder;
                     //this.dtoPurchaseOrder.entityPurchaseOrder.orderNo = result.entityPurchaseOrder.orderNo;
                     this.managePurchaseOrderUpdateLeftPanel();
-                    this.fetchProductList();
+                    this.fetchProductList();*/
                 }
                 else 
                 {
@@ -661,8 +673,16 @@ export class ManagePurchaseComponent {
                 this.disableSaveButton = false;
                 console.log(result);
                 if (result.success) {
-                    this.managePurchaseOrderUpdateLeftPanel(); 
-                    this.fetchProductList();                   
+                    //setting this purchase order at top of left panel
+                    this.isUpdateLeftPanel = true;
+                    //we need to call to set purchase order info other wise we have to set all types of id from database
+                    //inserted primary key id into server side
+                    this.setPurchaseOrderInfo(this.dtoPurchaseOrder.entityPurchaseOrder.orderNo);
+                    //we need to call it because current available stock is changed
+                    this.fetchProductList();
+                    
+                    /*this.managePurchaseOrderUpdateLeftPanel(); 
+                    this.fetchProductList();*/                   
                 }
                 else 
                 {
@@ -678,6 +698,7 @@ export class ManagePurchaseComponent {
 
     //-------------------- purchase order search and left panel section starts ------------------//
     public setPurchaseOrderInfo(orderNo: string) {
+        this.orderNo = orderNo;
         this.dtoPurchaseOrder = new DTOPurchaseOrder();
         this.dtoPurchaseOrder.entityPurchaseOrder = new EntityPurchaseOrder();
         this.dtoPurchaseOrder.entityPurchaseOrder.id = 0;
@@ -717,6 +738,11 @@ export class ManagePurchaseComponent {
                 this.calculateBalance();
                 this.reqDTOSupplier.entitySupplier.userId = this.dtoPurchaseOrder.entityPurchaseOrder.supplierUserId;
                 this.fetchSupplierInfo();
+                if (this.isUpdateLeftPanel)
+                {
+                    this.managePurchaseOrderUpdateLeftPanel();
+                    this.isUpdateLeftPanel = false;
+                }                
             }
             else {
 

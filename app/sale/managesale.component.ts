@@ -68,6 +68,7 @@ export class ManageSaleComponent {
     
     //constants & constraints
     private maxSaleOrderLeftPanel: number = 10;
+    private isUpdateLeftPanel: boolean = false;
     
     private productRequestId: number;
     private customerRequestId: number;
@@ -137,6 +138,8 @@ export class ManageSaleComponent {
             this.orderNo = params['orderNo'];
             if (this.orderNo != null && this.orderNo != "")
             {
+                //setting this sale order at top of left panel
+                this.isUpdateLeftPanel = true;
                 this.setSaleOrderInfo(this.orderNo);
             }            
         });
@@ -673,11 +676,20 @@ export class ManageSaleComponent {
             this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.ADD_SALE_ORDER_INFO), requestBody).then(result => {
                 this.disableSaveButton = false;
                 if (result.success) {
+                    //setting this sale order at top of left panel
+                    this.isUpdateLeftPanel = true;
+                    //we need to call to set sale order info other wise we have to set all types of id from database
+                    //inserted primary key id into server side
+                    this.setSaleOrderInfo(result.entitySaleOrder.orderNo);
+                    //we need to call it because current available stock is changed
+                    this.searchProductsWithStocks();
+                    
+                    /*
                     //this.dtoSaleOrder.entitySaleOrder.id = result.entitySaleOrder.id;
                     this.dtoSaleOrder.entitySaleOrder = result.entitySaleOrder;
                     //this.dtoSaleOrder.entitySaleOrder.orderNo = result.entitySaleOrder.orderNo;
                     this.manageSaleOrderUpdateLeftPanel();
-                    this.searchProductsWithStocks();
+                    this.searchProductsWithStocks();*/
                 }
                 else 
                 {
@@ -693,7 +705,12 @@ export class ManageSaleComponent {
                 this.disableSaveButton = false;
                 console.log(result);
                 if (result.success) {
-                    this.manageSaleOrderUpdateLeftPanel(); 
+                    //setting this sale order at top of left panel
+                    this.isUpdateLeftPanel = true;
+                    //we need to call to set sale order info other wise we have to set all types of id from database
+                    //inserted primary key id into server side
+                    this.setSaleOrderInfo(this.dtoSaleOrder.entitySaleOrder.orderNo);
+                    //we need to call it because current available stock is changed
                     this.searchProductsWithStocks();             
                 }
                 else {
@@ -733,6 +750,11 @@ export class ManageSaleComponent {
                 this.calculateBalance();
                 this.reqDTOCustomer.entityCustomer.userId = this.dtoSaleOrder.entitySaleOrder.customerUserId;
                 this.fetchCustomerInfo();
+                if (this.isUpdateLeftPanel)
+                {
+                    this.manageSaleOrderUpdateLeftPanel();
+                    this.isUpdateLeftPanel = false;
+                }
             }
             else {
 

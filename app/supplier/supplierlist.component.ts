@@ -19,6 +19,7 @@ export class SupplierListComponent {
     private webAPIService: WebAPIService;
     private reqDTOSupplier: DTOSupplier;
     private supplierList: DTOSupplier[];
+    private totalDue: number = 0;
     //private searchDTOSupplier: DTOSupplier;
     private showNavBar: boolean = false;
     private activeMenu: string = "supplierlist";
@@ -86,6 +87,7 @@ export class SupplierListComponent {
             if (result.success && result.suppliers != null) {
                 this.supplierList = result.suppliers;
                 this.length = result.totalSuppliers;
+                this.totalDue = result.totalDue;
             }
         });
     }
@@ -113,6 +115,12 @@ export class SupplierListComponent {
             this.fetchSupplierListByName();
         }
     }
+    
+    //--------------------- print entire supplier list ------------------------------//
+    printSupplierList(event: Event)
+    {
+        window.printJS(window.SITE_URL +'supplierreport');
+    }  
 }
 
 

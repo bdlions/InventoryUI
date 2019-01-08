@@ -19,6 +19,7 @@ export class CustomerListComponent {
     private webAPIService: WebAPIService;
     private reqDTOCustomer: DTOCustomer;
     private customerList: DTOCustomer[];
+    private totalDue: number = 0;
     //private searchDTOCustomer: DTOCustomer;
     private showNavBar: boolean = false;
     private activeMenu: string = "customerlist";
@@ -91,6 +92,7 @@ export class CustomerListComponent {
             if (result.success && result.customers != null) {
                 this.customerList = result.customers;
                 this.length = result.totalCustomers;
+                this.totalDue = result.totalDue;
             }
         });
     }
@@ -118,7 +120,13 @@ export class CustomerListComponent {
             this.fetchCustomerListByName();
         }
         
-    }    
+    } 
+    
+    //--------------------- print entire customer list ------------------------------//
+    printCustomerList(event: Event)
+    {
+        window.printJS(window.SITE_URL +'customerreport');
+    }   
 }
 
 

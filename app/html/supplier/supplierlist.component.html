@@ -14,7 +14,10 @@
             </div>
         </div>
         <div class="row form-group">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <button (click)="printSupplierList($event)" type="button" class="custom-button pull-left"><i class="fa fa-print"></i>Print Supplier List</button>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <button type="submit" id="search-product-btn" class="custom-button pull-right">Refresh</button>
             </div>
         </div>
@@ -30,6 +33,7 @@
                                 <th>Contact</th>
                                 <th>Phone</th>
                                 <th>Email</th>
+                                <th>Due</th>
 <!--                                <th>Website</th>
                                 <th>Address</th>
                                 <th>City</th>
@@ -43,11 +47,19 @@
                                 <td data-label="Contact">{{supplier.entityUser.firstName}}</td>
                                 <td data-label="Phone">{{supplier.entityUser.cell}}</td>
                                 <td data-label="Email">{{supplier.entityUser.email}}</td>
+                                <td data-label="Due">{{supplier.entitySupplier.balance}}</td>
 <!--                                <td data-label="Website"></td>
                                 <td data-label="Address"></td>
                                 <td data-label="City"></td>
                                 <td data-label="Zip/Postal Code"></td>
                                 <td data-label="Discount"></td>-->
+                            </tr>
+                            <tr class="cursor-pointer">
+                                <td data-label="Name"></td>
+                                <td data-label="Contact"></td>
+                                <td data-label="Phone"></td>
+                                <td data-label="Email"></td>
+                                <td data-label="Due">Total Due : {{totalDue}}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -16,6 +16,7 @@ export class EntitySaleOrder {
     vat: number = 0;
     total: number = 0;
     paid: number = 0;
+    cash: number = 0;
     createdOn: number;
     modifiedOn: number;
     createdByUserId: number;

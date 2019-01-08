@@ -631,6 +631,14 @@ export class ManagePurchaseComponent {
             this.managePurchaseMessageDispalyModal.show();
             return;
         }
+        //checking valid cash amount
+        if (this.dtoPurchaseOrder.entityPurchaseOrder.cash == null || this.dtoPurchaseOrder.entityPurchaseOrder.cash+"" == "")
+        {
+            this.managePurchaseErrorMessage = "Invalid Cash amount. Cash amount can not be empty.";
+            this.managePurchaseMessageDispalyModal.config.backdrop = false;
+            this.managePurchaseMessageDispalyModal.show();
+            return;
+        }
         
         //if higher quantity is returned than purchased quantity then that validation is checked at server side
         

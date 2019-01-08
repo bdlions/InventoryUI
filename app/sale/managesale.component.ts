@@ -656,6 +656,15 @@ export class ManageSaleComponent {
             return;
         }
         
+        //checking valid cash amount
+        if (this.dtoSaleOrder.entitySaleOrder.cash == null || this.dtoSaleOrder.entitySaleOrder.cash+"" == "")
+        {
+            this.manageSaleErrorMessage = "Invalid Cash amount. Cash amount can not be empty.";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;
+            this.manageSaleMessageDispalyModal.show();
+            return;
+        }
+        
         //if sale is executed without selecting customer then paid and total must be equal  
         if (this.dtoSaleOrder.entitySaleOrder.customerUserId == null || this.dtoSaleOrder.entitySaleOrder.customerUserId <= 0)
         {

@@ -527,6 +527,37 @@ export class ManageSaleComponent {
         //    this.dtoSaleOrder.entitySaleOrder.paid = this.dtoSaleOrder.entitySaleOrder.total;
         //}        
     }
+    
+    public onChangeCash() 
+    {
+        if (this.dtoSaleOrder.entitySaleOrder.cash <= this.dtoSaleOrder.entitySaleOrder.total)
+        {
+            this.dtoSaleOrder.entitySaleOrder.paid = this.dtoSaleOrder.entitySaleOrder.cash;
+            this.dtoSaleOrder.entitySaleOrder.cashReturn = 0;
+        }
+        else
+        {
+            this.dtoSaleOrder.entitySaleOrder.paid = this.dtoSaleOrder.entitySaleOrder.total;
+            this.dtoSaleOrder.entitySaleOrder.cashReturn = this.dtoSaleOrder.entitySaleOrder.cash - this.dtoSaleOrder.entitySaleOrder.paid;
+        }
+    }
+    
+    public onChangePaid() 
+    {
+        if (this.dtoSaleOrder.entitySaleOrder.paid > this.dtoSaleOrder.entitySaleOrder.cash)
+        {
+            //show error and return
+            this.manageSaleErrorMessage = "Paid amount can't be higher than Cash amount.";
+            this.manageSaleMessageDispalyModal.config.backdrop = false;
+            this.manageSaleMessageDispalyModal.show();
+            return;
+        }
+        else
+        {
+            this.dtoSaleOrder.entitySaleOrder.cashReturn = this.dtoSaleOrder.entitySaleOrder.cash - this.dtoSaleOrder.entitySaleOrder.paid;
+        }
+    }
+    
     //sale save/update section
     public newSaleOrder(event: Event) {
         this.resetSaleOrder();

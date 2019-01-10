@@ -14,6 +14,7 @@ export class EntityPurchaseOrder {
     total: number = 0;
     paid: number = 0;
     cash: number = 0;
+    cashReturn: number = 0;
     remarks: string;
     address: string;
     createdOn: number;

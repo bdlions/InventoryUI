@@ -495,6 +495,36 @@ export class ManagePurchaseComponent {
         this.dtoPurchaseOrder.entityPurchaseOrder.totalReturn = totalReturnPrice;
         this.dtoPurchaseOrder.entityPurchaseOrder.total = (totalPrice - totalReturnPrice - this.dtoPurchaseOrder.entityPurchaseOrder.discount);       
     }
+    
+    public onChangeCash() 
+    {
+        if (this.dtoPurchaseOrder.entityPurchaseOrder.cash <= this.dtoPurchaseOrder.entityPurchaseOrder.total)
+        {
+            this.dtoPurchaseOrder.entityPurchaseOrder.paid = this.dtoPurchaseOrder.entityPurchaseOrder.cash;
+            this.dtoPurchaseOrder.entityPurchaseOrder.cashReturn = 0;
+        }
+        else
+        {
+            this.dtoPurchaseOrder.entityPurchaseOrder.paid = this.dtoPurchaseOrder.entityPurchaseOrder.total;
+            this.dtoPurchaseOrder.entityPurchaseOrder.cashReturn = this.dtoPurchaseOrder.entityPurchaseOrder.cash - this.dtoPurchaseOrder.entityPurchaseOrder.paid;
+        }
+    }
+    
+    public onChangePaid() 
+    {
+        if (this.dtoPurchaseOrder.entityPurchaseOrder.paid > this.dtoPurchaseOrder.entityPurchaseOrder.cash)
+        {
+            //show error and return
+            this.managePurchaseErrorMessage = "Paid amount can't be higher than Cash amount.";
+            this.managePurchaseMessageDispalyModal.config.backdrop = false;
+            this.managePurchaseMessageDispalyModal.show();
+            return;
+        }
+        else
+        {
+            this.dtoPurchaseOrder.entityPurchaseOrder.cashReturn = this.dtoPurchaseOrder.entityPurchaseOrder.cash - this.dtoPurchaseOrder.entityPurchaseOrder.paid;
+        }
+    }
     //------------------------------------- product section ends ---------------------------//
 
     //------------------------------------- purchase new/add/save section starts ------------------//

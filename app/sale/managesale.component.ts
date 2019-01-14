@@ -789,7 +789,11 @@ export class ManageSaleComponent {
                 this.dtoSaleOrder = result;
                 this.calculateBalance();
                 this.reqDTOCustomer.entityCustomer.userId = this.dtoSaleOrder.entitySaleOrder.customerUserId;
-                this.fetchCustomerInfo();
+                //if sale order has customer, then we are getting customer info
+                if(this.reqDTOCustomer.entityCustomer.userId > 0)
+                {
+                    this.fetchCustomerInfo();
+                }                
                 if (this.isUpdateLeftPanel)
                 {
                     this.manageSaleOrderUpdateLeftPanel();

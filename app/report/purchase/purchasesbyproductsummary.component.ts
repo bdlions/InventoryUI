@@ -15,16 +15,16 @@ import {PageEvent} from '@angular/material';
 
 @Component({
     selector: 'app',
-    templateUrl: 'app/html/report/sales/salesbyproductsummary.component.html',
+    templateUrl: 'app/html/report/purchase/purchasesbyproductsummary.component.html',
     providers: [WebAPIService, DatePipe]
 })
 
-export class SalesByProductSummary {
+export class PurchasesByProductSummary {
     private datePipe: DatePipe;
     private webAPIService: WebAPIService;
     private subscribe: Subscription;
     
-    @ViewChild('saleByProductModal') public saleByProductModal: ModalDirective;
+    @ViewChild('purchaseByProductModal') public purchaseByProductModal: ModalDirective;
 
     public showStartDatePicker: boolean = false;
     public showEndDatePicker: boolean = false;
@@ -33,10 +33,10 @@ export class SalesByProductSummary {
     public minDate: Date = void 0;
 
     private showNavBar: boolean = false;
-    private activeMenu: string = "salesbyproductsummary";
+    private activeMenu: string = "purchasesbyproductsummary";
     
     private productList: DTOProduct[];    
-    private totalSaleAmount: number;
+    private totalPurchaseAmount: number;
     
     private dtoProduct: DTOProduct;
     private productRequestId: number;
@@ -79,7 +79,7 @@ export class SalesByProductSummary {
         this.webAPIService = webAPIService;
         this.datePipe = datepipe;
         
-        this.totalSaleAmount = 0;
+        this.totalPurchaseAmount = 0;
         this.offset = 0;
         this.limit = this.pageSize;
         this.productList = Array();
@@ -106,7 +106,7 @@ export class SalesByProductSummary {
         });
     }
     
-    public fetchSaleByProductList() {
+    public fetchPurchaseByProductList() {
         let fromDate: string = this.datepipe.transform(this.fromDate, 'yyyy-MM-dd');
         let toDate: string = this.datepipe.transform(this.toDate, 'yyyy-MM-dd');
         let productId: number = 0;
@@ -115,11 +115,11 @@ export class SalesByProductSummary {
             productId = this.dtoProduct.entityProduct.id;
         }
         let requestBody: string = "{\"startDate\": \"" + fromDate + "\", \"endDate\": \"" + toDate + "\", \"productId\": \"" + productId + "\", \"offset\": \"" + this.offset + "\", \"limit\": \"" + this.limit + "\"}";
-        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_SALE_BY_PRODUCT_SUMMARY), requestBody).then(result => {
+        this.webAPIService.getResponse(PacketHeaderFactory.getHeader(ACTION.FETCH_PURCHASE_BY_PRODUCT_SUMMARY), requestBody).then(result => {
             if (result.success && result.products != null) {
                 this.productList = result.products;
                 this.length = result.totalProducts;
-                this.totalSaleAmount = result.totalAmount;
+                this.totalPurchaseAmount = result.totalAmount;
             }
             else {
                 
@@ -130,15 +130,15 @@ export class SalesByProductSummary {
     onPaginateChange(event:PageEvent){
         this.offset = (event.pageIndex * event.pageSize) ;
         this.limit = event.pageSize;
-        this.fetchSaleByProductList();
+        this.fetchPurchaseByProductList();
     }
     
-    searchSaleByProduct(event: Event) 
+    searchPurchaseByProduct(event: Event) 
     {
         this.offset = 0;
         this.limit = this.pageSize;
         this.productList = Array();
-        this.fetchSaleByProductList();
+        this.fetchPurchaseByProductList();
     }
 
     
@@ -222,8 +222,8 @@ export class SalesByProductSummary {
         });
     }
     
-    public selectedSaleOrderProductFromModal(event: Event, productId: number) {
-        this.saleByProductModal.hide();
+    public selectedPurchaseOrderProductFromModal(event: Event, productId: number) {
+        this.purchaseByProductModal.hide();
         let productCounter: number;
         for (productCounter = 0; productCounter < this.dtoProductList.length; productCounter++) {
             if (this.dtoProductList[productCounter].entityProduct.id == productId) {
@@ -233,13 +233,13 @@ export class SalesByProductSummary {
         }
     }
     
-    public hideSaleByProductModal(): void {
-        this.saleByProductModal.hide();
+    public hidePurchaseByProductModal(): void {
+        this.purchaseByProductModal.hide();
     }
     
-    public showSaleByProductModal(event: Event) {
-        this.saleByProductModal.config.backdrop = false;
-        this.saleByProductModal.show();
+    public showPurchaseByProductModal(event: Event) {
+        this.purchaseByProductModal.config.backdrop = false;
+        this.purchaseByProductModal.show();
     }
     onProductPaginateChange(event:PageEvent){
         this.reqDTOProduct.limit = event.pageSize;
@@ -255,4 +255,5 @@ export class SalesByProductSummary {
     }
     //product modal related methods end
 }
+
 

@@ -229,6 +229,12 @@ export class TopNavbarComponent {
         this.navigationManager.setActiveMenu("purchaseordersummary");
         this.router.navigate(["purchaseordersummary"]);
     }
+    goPurchasesByProductSummary(event: Event) {
+        event.preventDefault();
+        this.navigationManager.showNavBar(true);
+        this.navigationManager.setActiveMenu("purchasesbyproductsummary");
+        this.router.navigate(["purchasesbyproductsummary"]);
+    }
     goPurchaseOrderDetails(event: Event) {
         event.preventDefault();
         this.navigationManager.showNavBar(true);

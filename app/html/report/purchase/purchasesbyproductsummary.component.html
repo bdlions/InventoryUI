@@ -6,7 +6,7 @@
                     <h4>Search</h4>
                 </div>
             </div>
-            <form role="form" (submit)="searchSaleByProduct($event)">
+            <form role="form" (submit)="searchPurchaseByProduct($event)">
                  <div class="row form-group">
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                         <span class="product-title">From</span>
@@ -38,7 +38,7 @@
                         <span class="purchase-order-title">Product<span class="required"></span></span>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8">
-                        <input [(ngModel)]="dtoProduct.entityProduct.name" (keypress)="showSaleByProductModal($event)" name="productName" class="form-control" (click)="showSaleByProductModal($event)">
+                        <input [(ngModel)]="dtoProduct.entityProduct.name" (keypress)="showPurchaseByProductModal($event)" name="productName" class="form-control" (click)="showPurchaseByProductModal($event)">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -55,7 +55,7 @@
                     <div class="report-layer">
                         <div class="row form-group">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <h1>Sale By Product Summary</h1>
+                                <h1>Purchase By Product Summary</h1>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -123,7 +123,7 @@
                                 <label></label>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                                <label>{{totalSaleAmount | number:'.2-2'}}</label>
+                                <label>{{totalPurchaseAmount | number:'.2-2'}}</label>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <label></label>
@@ -144,8 +144,8 @@
     </div>
 </div>
 
-<!--Sale By Product Modal Starts-->
-<div bsModal #saleByProductModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<!--Purchase By Product Modal Starts-->
+<div bsModal #purchaseByProductModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -154,7 +154,7 @@
                         <h4 class="modal-title">Product</h4>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="hideSaleByProductModal()">
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="hidePurchaseByProductModal()">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -215,7 +215,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let product of dtoProductList" (click)="selectedSaleOrderProductFromModal($event, product.entityProduct.id)">
+                                    <tr *ngFor="let product of dtoProductList" (click)="selectedPurchaseOrderProductFromModal($event, product.entityProduct.id)">
                                         <td data-label="Item">{{product.entityProduct.name}}</td>
                                         <td data-label="Code">{{product.entityProduct.code}}</td>
                                         <td data-label="Category">{{product.entityProduct.categoryTitle}}</td>
@@ -236,4 +236,4 @@
         </div>
     </div>
 </div>
-<!--Sale By Product Modal Ends-->
+<!--Purchase By Product Modal Ends-->

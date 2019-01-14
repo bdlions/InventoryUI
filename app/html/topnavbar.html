@@ -85,10 +85,16 @@
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'salesordersummary' }" (click)="goSalesOrderSummary($event)" >
                             <span> Sales Order Summary</span>
                         </li>
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'salesbyproductsummary' }" (click)="goSalesByProductSummary($event)" >
+                            <span> Sales By Product Summary</span>
+                        </li>
                         <li class="disabled-menu" mat-menu-item><span><b>Purchase Reports</b></span></li>
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseordersummary' }" (click)="goPurchaseOrderSummary($event)" >
                             <span> Purchase Order Summary</span>
-                        </li>    
+                        </li>   
+                        <li mat-menu-item [ngClass]="{'active': activeMenu == 'purchasesbyproductsummary' }" (click)="goPurchasesByProductSummary($event)" >
+                            <span> Purchases By Product Summary</span>
+                        </li>
                         <li class="disabled-menu" mat-menu-item><span><b>Stock Report</b></span></li>
                         <li mat-menu-item [ngClass]="{'active': activeMenu == 'endingstock' }" (click)="goEndingStock($event)" >
                             <span> Ending Stock</span>
@@ -204,9 +210,15 @@
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesordersummary' }" (click)="goSalesOrderSummary($event)" >
                      <span> Sales Order Summary</span>
                 </div>
+                <div mat-menu-item [ngClass]="{'active': activeMenu == 'salesbyproductsummary' }" (click)="goSalesByProductSummary($event)" >
+                     <span> Sales By Product Summary</span>
+                </div>
                 <div class="disabled-menu" mat-menu-item><span><b>Purchase Reports</b></span></div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'purchaseordersummary' }" (click)="goPurchaseOrderSummary($event)" >
                      <span> Purchase Order Summary</span>
+                </div>
+                <div mat-menu-item [ngClass]="{'active': activeMenu == 'purchasesbyproductsummary' }" (click)="goPurchasesByProductSummary($event)" >
+                     <span> Purchases By Product Summary</span>
                 </div>
                 <div class="disabled-menu" mat-menu-item><span><b>Stock Report</b></span></div>
                 <div mat-menu-item [ngClass]="{'active': activeMenu == 'endingstock' }" (click)="goEndingStock($event)" >

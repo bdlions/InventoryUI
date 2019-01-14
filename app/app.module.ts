@@ -56,6 +56,7 @@ import {CustomerProductList} from './report/sales/customerproductlist.component'
 import {CustomerListReport} from './report/sales/customerlistreport.component';
 //purchase report
 import {PurchaseOrderSummary} from './report/purchase/purchaseordersummary.component';
+import {PurchasesByProductSummary} from './report/purchase/purchasesbyproductsummary.component';
 import {PurchaseOrderDetails} from './report/purchase/purchaseorderdetails.component';
 import {SupplierPaymentSummary} from './report/purchase/supplierpaymentsummary.component';
 import {SupplierProductList} from './report/purchase/supplierproductlist.component';
@@ -250,6 +251,10 @@ const appRoutes: Routes = [
         component: PurchaseOrderSummary
     },
     {
+        path: 'purchasesbyproductsummary',
+        component: PurchasesByProductSummary
+    },
+    {
         path: 'purchaseorderdetails',
         component: PurchaseOrderDetails
     },
@@ -388,6 +393,7 @@ enableProdMode();
         CustomerProductList,
         CustomerListReport,
         PurchaseOrderSummary,
+        PurchasesByProductSummary,
         PurchaseOrderDetails,
         SupplierPaymentSummary,
         SupplierProductList,
